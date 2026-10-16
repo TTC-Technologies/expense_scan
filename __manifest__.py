@@ -4,8 +4,40 @@
 {
     'name': "Expense Receipt Scanner",
     'version': '20.0.3.1.0',
-    'summary': "Expense receipt scanner with local OCR: photograph a receipt and an AI on your own server fills in "
-               "the expense (merchant, date, total, VAT, category). No API key, no fee per scan.",
+    'summary': "Scan receipts with local OCR and AI: photograph a receipt and the expense is filled in on your own "
+               "server (merchant, date, total, VAT, category). No API key, no fee per scan.",
+    'description': """
+Expense Receipt Scanner: scan receipts with local OCR and AI
+============================================================
+
+Receipt scanner for Odoo expenses. Photograph a receipt with your phone, or upload a
+photo or a PDF, and the expense is filled in: merchant, date, total, currency, VAT and
+category. The employee reviews the expense side by side with the image of the receipt.
+
+The scan runs on your own Odoo server. A neural network for optical character
+recognition (PP-OCR, run by ONNX Runtime) reads the text, and a parser written for this
+module turns it into an expense. No API key, no account, no fee per scan, and the
+receipts never leave the server.
+
+* One button ("Scan" on a phone, "Upload" on a computer) opens the camera or the photo
+  library; several receipts can be scanned at once.
+* The receipt is cropped and straightened before it is read; a manual retouch is there
+  for the difficult ones.
+* Doubtful fields carry a hint; the module never approves an expense by itself.
+* Expense category recognition, receipts in several pieces, hotel nights, projects and
+  re-invoicing to the customer, expense sheets (PDF and Excel), expense rules and
+  policies, exchange rates of the European Central Bank, 11 interface languages.
+
+Requirements: the Python packages opencv-python-headless, rapidocr, onnxruntime,
+pdf2image and openpyxl, and the poppler-utils package; about 285 MB on disk with the
+OCR models (47.5 MB, downloaded once). Not for Odoo Online.
+
+Network access: the OCR models are downloaded once; the public reference rates of the
+European Central Bank are downloaded daily (one switch in the settings). Nothing is
+sent out and no data of yours leaves the server.
+
+Free module, LGPL-3.
+""",
     'author': "T.T.C. SAS",
     'support': "ttc@green-engine.eu",
     'category': 'Human Resources/Expenses',
