@@ -129,6 +129,10 @@ class HrExpense(models.Model):
     #: its address.
     expense_scan_main_mimetype = fields.Char(compute='_compute_expense_scan_main_file')
     expense_scan_main_checksum = fields.Char(compute='_compute_expense_scan_main_file')
+    #: Receipt of a large upload that the request had no time to read: the
+    #: scheduled task reads it at once instead of waiting a few minutes.
+    expense_scan_queued = fields.Boolean(string="Scan waiting for its turn", readonly=True,
+                                         copy=False)
     # Fields entered by hand before the scan (comma-separated list): a new
     # scan does not replace them either.
     expense_scan_manual_fields = fields.Char(string="Fields entered by hand", readonly=True,
@@ -354,11 +358,16 @@ class HrExpense(models.Model):
     # the tax tags, but no longer sets the amount.
     # ------------------------------------------------------------------
 
+    # Without a tax on the expense, the entry carries no tax line: the amount
+    # read stays on the receipt line (and "Tax (none on the category)" asks
+    # for a tax), but it is neither deducted nor taken out of the untaxed
+    # amount, which feeds the project budget.
+
     @api.depends('total_amount_currency', 'tax_ids', 'scan_tax_amount')
     def _compute_tax_amount_currency(self):
         super()._compute_tax_amount_currency()
         for expense in self:
-            if expense.scan_tax_amount:
+            if expense.scan_tax_amount and expense.tax_ids:
                 expense.tax_amount_currency = expense.scan_tax_amount
                 expense.untaxed_amount_currency = (
                     expense.total_amount_currency - expense.scan_tax_amount)
@@ -368,7 +377,7 @@ class HrExpense(models.Model):
     def _compute_tax_amount(self):
         super()._compute_tax_amount()
         for expense in self:
-            if not expense.scan_tax_amount:
+            if not (expense.scan_tax_amount and expense.tax_ids):
                 continue
             rate = expense.currency_rate or 1.0
             company_tax = expense.company_currency_id.round(expense.scan_tax_amount / rate)
@@ -667,8 +676,43 @@ class HrExpense(models.Model):
                     # (action_expense_scan_start).
                     expenses.write({'scan_state': 'running'})
                 else:
-                    expenses._expense_scan_run()
+                    expenses._expense_scan_run_within_budget()
         return expense_ids
+
+    #: CPU seconds a request may spend reading receipts before it hands the
+    #: rest over to the scheduled task. Odoo's default limit is 60 s per
+    #: request (``limit_time_cpu``), and the OCR runs several threads whose
+    #: time adds up: a batch of forty receipts would otherwise get its worker
+    #: killed, and every receipt would be lost with it.
+    SCAN_REQUEST_CPU_SECONDS = 25.0
+    #: Seconds of reading after which the scheduled task starts itself again
+    #: for the receipts that remain, instead of running past its own limit.
+    SCAN_CRON_SECONDS = 90.0
+
+    def _expense_scan_run_within_budget(self):
+        """Read the receipts one after the other, as far as the budget allows.
+
+        Those left are marked as waiting and picked up at once by the
+        scheduled task, or by their form if the user opens it first.
+        """
+        started = time.process_time()
+        later = self.browse()
+        for expense in self:
+            if later or time.process_time() - started > self.SCAN_REQUEST_CPU_SECONDS:
+                later |= expense
+                continue
+            expense._expense_scan_run()
+        if later:
+            later.write({'scan_state': 'running', 'expense_scan_queued': True})
+            self._expense_scan_trigger_pending()
+
+    @api.model
+    def _expense_scan_trigger_pending(self):
+        """Start the scheduled task that reads the pending receipts now."""
+        cron = self.env.ref('expense_scan.ir_cron_expense_scan_pending',
+                            raise_if_not_found=False)
+        if cron:
+            cron.sudo()._trigger()
 
     # ------------------------------------------------------------------
     # Scan started by the form, with its progress
@@ -780,8 +824,14 @@ class HrExpense(models.Model):
         limit = fields.Datetime.subtract(fields.Datetime.now(), minutes=self.PENDING_SCAN_MINUTES)
         running = self.search([('scan_state', '=', 'running')])
         running -= running._expense_scan_expire()
-        pending = running.filtered(lambda e: e.write_date < limit)
+        # Waiting receipts of a large upload are read at once; the others
+        # once the form has had its chance to start the scan.
+        pending = running.filtered(lambda e: e.expense_scan_queued or e.write_date < limit)
+        started = time.monotonic()
         for expense in pending:
+            if time.monotonic() - started > self.SCAN_CRON_SECONDS:
+                self._expense_scan_trigger_pending()  # the rest, in a run of its own
+                break
             expense._expense_scan_run(force=True)
             if not odoo_module.current_test:
                 self.env.cr.commit()  # a finished scan is not lost with the next one
@@ -1392,6 +1442,8 @@ class HrExpense(models.Model):
                 continue
             if not force and expense.scan_state in ('done', 'partial'):
                 continue
+            if expense.expense_scan_queued:
+                expense.expense_scan_queued = False
             try:
                 # Writing the values is protected too: a model constraint must
                 # not make the photo upload fail, and the user has no control

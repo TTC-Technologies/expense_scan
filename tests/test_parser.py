@@ -759,6 +759,18 @@ ADRIA SANT ALCAMPO
         self.assertEqual(lidl_new.value('total'), 18.28)
         self.assertEqual(lidl_new.value('tax_amount'), 0.87)
 
+    def test_austrian_tax_rows(self):
+        # Base then tax of a rate that is not printed: the two amounts give it.
+        rows = self.parse("BILLA\nSumme EUR 13,28\nNetto 2,98 MWSt 0,30\nNetto 10,00 MwSt 0,00")
+        self.assertEqual(rows.value('tax_amount'), 0.30)
+        # "Steuer" with its rate.
+        steuer = self.parse("SPAR\nTotal EUR 24,20\nNetto EUR 21,98\nA: Steuer 10.00 % EUR 2,22")
+        self.assertEqual(steuer.value('tax_amount'), 2.22)
+        self.assertEqual(steuer.value('tax_rate'), 10.0)
+        # "Steuernummer" is no tax line.
+        self.assertIsNone(self.parse("SPAR\nSteuernummer 12 345/678\nTotal EUR 4,20")
+                          .value('tax_amount'))
+
     def test_croatian_and_lost_letter_totals(self):
         self.assertEqual(self.parse("KONZUM\nUkupno 20,02\nPDV 2,03\nZa platitj EUR 22,05")
                          .value('total'), 22.05)

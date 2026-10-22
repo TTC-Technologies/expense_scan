@@ -290,6 +290,20 @@ class TestVatAudit(VatAuditCase):
         self.assertMoney(self.balance(move), 1.0)
         self.assertMoney(expense.expense_scan_recoverable_vat, 1.0)
 
+    def test_a_tax_read_without_a_tax_on_the_expense_is_not_deducted(self):
+        """No tax selected: the entry has no tax line, so the amounts say so."""
+        expense = self.expense(self.tax20, 20.0, post=False)
+        expense.scan_tax_amount = 1.0
+        self.assertMoney(expense.tax_amount_currency, 1.0)
+        expense.tax_ids = False
+        self.assertMoney(expense.tax_amount_currency, 0.0)
+        self.assertMoney(expense.untaxed_amount_currency, 20.0)
+        self.assertMoney(expense.tax_amount, 0.0)
+        self.assertMoney(expense.scan_tax_amount, 1.0)  # still shown as read on the receipt
+        expense.tax_ids = self.tax20
+        self.assertMoney(expense.tax_amount_currency, 1.0)
+        self.assertMoney(expense.untaxed_amount_currency, 19.0)
+
     def test_another_amount_may_still_reach_the_rate(self):
         expense = self.receipt(20.0, 1.0)
         self.correct(expense, 'amount', amount=3.33)

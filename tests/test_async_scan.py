@@ -4,12 +4,15 @@
 """Scan started by the form: the expense exists before it is read."""
 import base64
 import json
+import time
+import types
 
 from unittest.mock import patch
 
 from odoo.exceptions import AccessError, UserError
 from odoo.tests import common, tagged
 
+from ..models import hr_expense
 from ..ocr import parser, preprocess
 from .test_parser import words_from_text
 from .test_sheet import png
@@ -44,6 +47,65 @@ class TestAsyncScan(common.TransactionCase):
         with patch.object(type(self.Expense), '_expense_scan_run', autospec=True) as run:
             self.upload()
         run.assert_called_once()
+
+    def upload_many(self, count):
+        attachments = self.env['ir.attachment'].create([{
+            'name': "ticket%s.png" % index, 'raw': png(), 'res_model': 'hr.expense', 'res_id': 0}
+            for index in range(count)])
+        ids = self.Expense.with_context(
+            default_employee_id=self.employee.id
+        ).create_expense_from_attachments(attachments.ids, 'list')
+        return self.Expense.browse(ids)
+
+    def test_a_large_upload_is_read_within_the_cpu_budget(self):
+        """The request stops reading when its CPU budget is spent: the rest waits."""
+        clock = {'now': 0.0}
+        fake_time = types.SimpleNamespace(**{
+            name: getattr(time, name) for name in dir(time) if not name.startswith('_')})
+        fake_time.process_time = lambda: clock['now']
+
+        def read(records, **kwargs):
+            clock['now'] += 20.0  # CPU seconds of one receipt
+
+        cron = self.env.ref('expense_scan.ir_cron_expense_scan_pending')
+        triggers = self.env['ir.cron.trigger'].sudo()
+        before = triggers.search_count([('cron_id', '=', cron.id)])
+        with patch.object(hr_expense, 'time', fake_time), \
+                patch.object(type(self.Expense), '_expense_scan_run', autospec=True,
+                             side_effect=read) as run:
+            expenses = self.upload_many(4)
+        self.assertEqual(run.call_count, 2)  # 0 s and 20 s are within 25 s, 40 s is not
+        waiting = expenses.filtered('expense_scan_queued')
+        self.assertEqual(len(waiting), 2)
+        self.assertEqual(set(waiting.mapped('scan_state')), {'running'})
+        self.assertEqual(triggers.search_count([('cron_id', '=', cron.id)]), before + 1)
+
+    def test_a_small_upload_is_read_whole(self):
+        with patch.object(type(self.Expense), '_expense_scan_run', autospec=True) as run:
+            expenses = self.upload_many(3)
+        self.assertEqual(run.call_count, 3)
+        self.assertFalse(expenses.filtered('expense_scan_queued'))
+
+    def test_a_waiting_receipt_is_read_at_once_by_the_scheduled_task(self):
+        """Not after the few minutes a form is given to start its own scan."""
+        with patch.object(type(self.Expense), '_expense_scan_run', autospec=True):
+            fresh = self.upload(expense_scan_async=True)
+            waiting = self.upload(expense_scan_async=True)
+        waiting.expense_scan_queued = True
+        with patch.object(type(self.Expense), '_expense_scan_run', autospec=True) as run:
+            self.Expense._cron_expense_scan_pending()
+        run.assert_called_once()
+        self.assertEqual(run.call_args[0][0], waiting)
+        self.assertEqual(fresh.scan_state, 'running')
+
+    def test_the_scan_takes_a_waiting_receipt_off_the_queue(self):
+        with patch.object(type(self.Expense), '_expense_scan_run', autospec=True):
+            expense = self.upload(expense_scan_async=True)
+        expense.expense_scan_queued = True
+        with patch.object(type(self.Expense), '_expense_scan_process',
+                          side_effect=RuntimeError("stop")):
+            expense._expense_scan_run(force=True)
+        self.assertFalse(expense.expense_scan_queued)
 
     def test_the_form_starts_the_analysis_once(self):
         with patch.object(type(self.Expense), '_expense_scan_run', autospec=True):
