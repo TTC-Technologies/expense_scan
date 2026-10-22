@@ -325,6 +325,13 @@ on the same list of positioned words.
 - **Limits**: a receipt over 25 MB is refused; an image over 50 megapixels is
   scaled down while decoding (over 250 Mpx, refused); a PDF is rendered at a
   resolution that fits within the same limit, with a 30 s timeout.
+- **Large uploads**: a request reads receipts for about 25 seconds of
+  processor time at most (Odoo kills a worker at 60 s by default). The rest
+  of a large batch stays "running" and is read by the scheduled task, which
+  starts at once, or by its form if the user opens it first.
+- **Odoo Enterprise**: not tried next to Enterprise's own expense
+  digitization (`hr_expense_extract`). If both are installed, each reads the
+  receipt on its own: use one of them.
 - **Interrupted scan**: a scan "running" for more than 15 minutes — a receipt
   that got its worker killed — is no longer picked up; the expense goes to
   error and is entered by hand.
