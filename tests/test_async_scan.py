@@ -11,6 +11,7 @@ from unittest.mock import patch
 
 from odoo.exceptions import AccessError, UserError
 from odoo.tests import common, tagged
+from odoo.tools import mute_logger
 
 from ..models import hr_expense
 from ..ocr import parser, preprocess
@@ -102,8 +103,9 @@ class TestAsyncScan(common.TransactionCase):
         with patch.object(type(self.Expense), '_expense_scan_run', autospec=True):
             expense = self.upload(expense_scan_async=True)
         expense.expense_scan_queued = True
-        with patch.object(type(self.Expense), '_expense_scan_process',
-                          side_effect=RuntimeError("stop")):
+        with mute_logger('odoo.addons.expense_scan.models.hr_expense'), \
+                patch.object(type(self.Expense), '_expense_scan_process',
+                             side_effect=RuntimeError("stop")):
             expense._expense_scan_run(force=True)
         self.assertFalse(expense.expense_scan_queued)
 
