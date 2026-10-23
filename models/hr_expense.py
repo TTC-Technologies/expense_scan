@@ -32,6 +32,9 @@ PDF_MIMETYPE = 'application/pdf'
 #: a multi-page invoice carries it at the foot of the last one. Capped, like
 #: the other input limits, to bound the processing time.
 PDF_MAX_PAGES_READ = 5
+#: Fields that tell how much a reading found (see _expense_scan_found).
+MAIN_FIELDS = ('total', 'date', 'tax_amount', 'merchant')
+FOUND_FIELDS = len(MAIN_FIELDS)
 #: Resolution of a PDF rendered for the phone preview: readable on a narrow
 #: screen, light to transfer.
 PDF_PREVIEW_DPI = 110
@@ -1316,8 +1319,7 @@ class HrExpense(models.Model):
     def _expense_scan_found(words):
         """How many of the main fields a reading gives: total, date, tax, merchant."""
         result = parser.parse(words)
-        return sum(1 for name in ('total', 'date', 'tax_amount', 'merchant')
-                   if result.value(name) is not None)
+        return sum(1 for name in MAIN_FIELDS if result.value(name) is not None)
 
     def _expense_scan_check_scannable(self):
         """A scan rewrites the figures: not once the expense is approved."""
@@ -1568,11 +1570,13 @@ class HrExpense(models.Model):
         # _expense_scan_straighten).
         words = engine.recognize(image)
         timer.lap('read')
-        if info.cropped and not manual and preprocess.text_cut_at_edges(words, image):
+        if info.cropped and not manual and preprocess.text_cut_at_edges(words, image) \
+                and self._expense_scan_found(words) < FOUND_FIELDS:
             # Text running off the side: the crop may have gone through the
             # receipt (a fold taken for its edge), or the receipt prints to
             # the edge of its paper. The photo as taken is read too, and the
-            # reading that finds more is kept.
+            # reading that finds more is kept. A first reading that already
+            # finds every field cannot be beaten: the second one is spared.
             whole, whole_info = preprocess.prepare(
                 data, autocrop=False, deskew=company.expense_scan_deskew)
             whole_words = engine.recognize(whole)
@@ -1623,8 +1627,8 @@ class HrExpense(models.Model):
             # Fallback: most PDFs give their total on the first page, the
             # only one read so far. A multi-page invoice sometimes carries it
             # at the foot of the last one.
-            words = self._expense_scan_extra_pdf_pages(attachment, engine, words, timer)
-            result = parser.parse(words, **parse_kwargs)
+            words, result = self._expense_scan_extra_pdf_pages(
+                attachment, engine, words, timer, parse_kwargs)
         result.engine = getattr(engine, 'description', engine.label)
         result.duration = duration
         result.preprocess = info
@@ -1637,25 +1641,30 @@ class HrExpense(models.Model):
         result.timer = timer
         return result
 
-    def _expense_scan_extra_pdf_pages(self, attachment, engine, words, timer):
+    def _expense_scan_extra_pdf_pages(self, attachment, engine, words, timer, parse_kwargs):
         """Add the words of the following pages of a PDF to those read.
 
         Called when the first page gives no total: a multi-page invoice
-        often carries it at the foot of the last one. The added pages do not
-        get the treatments reserved for the displayed image (straightening,
-        cropping): they are not hand-held photos, and they only serve the
-        scan, not the preview.
+        often carries it at the foot of the last one. The pages are read
+        from the last one back, and the reading stops at the first that
+        brings the total: a long invoice is not read whole for a total on
+        its last page. The added pages do not get the treatments reserved
+        for the displayed image (straightening, cropping): they are not
+        hand-held photos, and they only serve the scan, not the preview.
+
+        Returns ``(words, result)``.
         """
         self.ensure_one()
         data = binary_bytes(attachment.raw)
         count = preprocess.pdf_page_count(data)
+        result = parser.parse(words, **parse_kwargs)
         if count <= 1:
-            return words
+            return words, result
         # Large vertical offset per page: the words of two pages must not mix
-        # into a line of the other.
+        # into a line of the other. The pages keep their order in the text.
         step = max((word.bottom for word in words), default=0.0) + 1000.0
-        combined = list(words)
-        for page in range(2, min(count, PDF_MAX_PAGES_READ) + 1):
+        pages = {}
+        for page in range(min(count, PDF_MAX_PAGES_READ), 1, -1):
             page_bytes = preprocess.pdf_page_to_image_bytes(data, page)
             if not page_bytes:
                 continue
@@ -1664,10 +1673,15 @@ class HrExpense(models.Model):
             except Exception:  # noqa: BLE001 (an unreadable page does not stop the others)
                 _logger.warning("PDF page %s unreadable", page, exc_info=True)
                 continue
-            page_words = engine.recognize(page_image)
-            combined.extend(preprocess.shift_words(page_words, step * (page - 1)))
+            pages[page] = preprocess.shift_words(engine.recognize(page_image), step * (page - 1))
+            combined = list(words) + [word for number in sorted(pages) for word in pages[number]]
+            result = parser.parse(combined, **parse_kwargs)
+            if not parser.fields_to_check(result, names=('total',)):
+                break
         timer.lap('extra_pages')
-        return combined
+        if not pages:
+            return words, result
+        return combined, result
 
     #: Median word height (engine working pixels) below which reading gets
     #: worse: receipt photographed from far away, full A4 page of dense text.

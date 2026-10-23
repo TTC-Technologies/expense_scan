@@ -101,6 +101,31 @@
                 </div>
             </xpath>
 
+            <!-- Mileage by route: from a place to another, the distance from the road. -->
+            <xpath expr="//field[@name='price_unit'][@widget='monetary']" position="before">
+                <field name="expense_scan_mileage" invisible="1"/>
+                <field name="expense_scan_route_from_id" invisible="not expense_scan_mileage"
+                       readonly="not is_editable" placeholder="Home, customer, station, address..."
+                       context="{'default_company_id': company_id}" options="{'no_open': True}"/>
+                <field name="expense_scan_route_to_id" invisible="not expense_scan_mileage"
+                       readonly="not is_editable" placeholder="Home, customer, station, address..."
+                       context="{'default_company_id': company_id}" options="{'no_open': True}"/>
+                <field name="expense_scan_round_trip" invisible="not expense_scan_mileage"
+                       readonly="not is_editable" widget="boolean_toggle"/>
+                <field name="expense_scan_route_km" invisible="1" force_save="1"/>
+                <field name="expense_scan_route_minutes" invisible="1" force_save="1"/>
+                <field name="expense_scan_route_estimated" invisible="1" force_save="1"/>
+                <field name="expense_scan_route_name" invisible="1" force_save="1"/>
+                <field name="expense_scan_route_path" invisible="1" force_save="1"/>
+                <div colspan="2" class="text-muted small mb-2"
+                     invisible="not expense_scan_mileage or not expense_scan_route_summary">
+                    <field name="expense_scan_route_summary" class="d-inline"/>
+                    <button name="action_expense_scan_route_map" type="object" string="View the map"
+                            class="btn-link p-0 ms-2 align-baseline" icon="fa-map-o"
+                            invisible="not id"/>
+                </div>
+            </xpath>
+
             <!-- Unit price editable for flat rates with a variable scale (mileage). -->
             <xpath expr="//field[@name='price_unit'][@widget='monetary']" position="attributes">
                 <attribute name="readonly">not is_editable</attribute>

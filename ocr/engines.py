@@ -207,6 +207,12 @@ class RapidOcrEngine(ScanEngine):
             params["Rec.ocr_version"] = OCRVersion(ocr_version)
             params["Rec.model_type"] = ModelType(self.options.get("model_type", "mobile"))
             params["Rec.lang_type"] = LangRec(lang)
+        elif self.options.get("model_size") == "tiny":
+            # The smallest PP-OCRv6 models: about three times faster, and a
+            # few receipts less read right (measured on 437 receipts: 3 to 7
+            # totals in 100 lost). For a slow server.
+            params["Det.model_type"] = ModelType.TINY
+            params["Rec.model_type"] = ModelType.TINY
         return params
 
     def _load(self):

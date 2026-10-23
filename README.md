@@ -78,7 +78,10 @@ what is missing:
 - **Team**: managers enter expenses for their team members.
 - **E-mail**: receipts sent from an employee's private address are
   recognised; the subject becomes the description.
-- **Mileage**: a mileage rate per employee.
+- **Mileage by route**: pick where the trip starts and ends (home, office,
+  a customer, a station, an airport, any address) and whether it is a
+  return trip; the road distance fills the kilometres, the employee's rate
+  the price, and the picture of the route becomes the receipt.
 - **Foreign receipts**: the currency printed on the receipt is recorded (and
   activated in Odoo if needed); a tax paid abroad (German MwSt for a French
   company, Italian IVA for a German one...) is not carried as deductible VAT.
@@ -154,8 +157,9 @@ are gathered under *Receipt scanner: advanced options*.
   default. *Exchange rates from the European Central Bank* is on by default:
   a daily task adds the reference rates of the last ninety days for the
   active currencies, and the rate of its day for an older receipt. Apart from
-  the one-time download of the OCR models, it is the only network request of
-  the module: a public file, never during a scan, and nothing leaves the server. The default category is the one given to a
+  the one-time download of the OCR models and the routes of mileage expenses
+  (see *Mileage by route*), it is the only network request of the module: a
+  public file, never during a scan, and nothing leaves the server. The default category is the one given to a
   receipt that names none.
 - **Expense rules and sheets**: links to the rules and to the Excel
   templates.
@@ -164,9 +168,13 @@ Under *Receipt scanner: advanced options*:
 
 - **Reading engine**: `Automatic` uses RapidOCR (the PP-OCR neural networks,
   the more accurate of the two) if available, otherwise AI Tesseract, its
-  neural-network fallback. *Threads per worker* is 4 by default: Odoo already runs several
-  workers; letting ONNX open one thread per core in each of them lowers the
-  throughput instead of raising it.
+  neural-network fallback. *Reading models*: "Precise" (default) or "Fast",
+  the smallest PP-OCRv6 models, about three times faster for a few more
+  receipts to correct (3 to 7 totals in 100 on the module's test receipts).
+  *Threads per worker* is 4 by default: 4 threads read a receipt about 1.8
+  times faster than one, for twice the processor time. Odoo already runs
+  several workers; letting ONNX open one thread per core in each of them
+  lowers the throughput instead of raising it.
 - **Photo processing**: crop, straighten, turn sideways receipts upright, keep
   the original photo, and *Receipt beside the form on narrower screens*
   (from 768 px wide, which Odoo otherwise leaves without a preview).
@@ -255,6 +263,33 @@ and its own requirements.
   of a selection in the list.
 
 ---
+
+## Mileage by route
+
+On a category counted in kilometres or miles, the expense asks for a **From**
+and a **To**, and offers a **Return trip** switch.
+
+- **Places**: the employee's home (from the private address held by HR,
+  offered to that employee only, and shown elsewhere by its name and town),
+  the office, the customers
+  (type their name: the contact's address is used), and the places of
+  *Configuration → Places* (airports, stations, sites). Anything else typed
+  is looked up on the map and kept for the next times.
+- **Distance**: the road route between the two places, from an OSRM server;
+  the kilometres stay editable for a detour made for the job. When no route
+  service answers, the straight line lengthened by a quarter, marked as an
+  estimate.
+- **Receipt**: a picture of the route, with both places, the distance and
+  the date, is attached to the expense; *View the map* opens the route on
+  openstreetmap.org.
+- **Services** (*Settings → Mileage by route*): OpenStreetMap's public servers
+  by default (Nominatim for addresses, as Odoo uses to place contacts, and
+  the OSRM demo server for routes). They are meant for light use: a company
+  entering many routes points these settings to its own servers. A map
+  background can be drawn from a tile server of your choice; OpenStreetMap's
+  own tiles may not be used this way, so the route is drawn on a plain
+  background by default. These requests are the only ones the module makes
+  besides the exchange rates and the OCR models.
 
 ## Country specifics
 
@@ -362,6 +397,13 @@ task erases it from submitted expenses older than **Keep the text read for**
 Commercial Code, art. L123-22; 0 = never). The image of the receipt stays:
 it is the accounting record.
 
+A mileage route sends the coordinates of its two places to the route service,
+and a place typed for the first time its text to the address search: the
+public OpenStreetMap servers by default, your own when set (*Settings →
+Mileage by route*). An employee's home is offered to that employee only;
+the expense and its route picture show it by its name and town, its address
+stays with HR.
+
 ---
 
 ## Development
@@ -403,6 +445,9 @@ LGPL-3, like Odoo Community.
   only downloaded when an administrator loads it.
 - **Exchange rates** (optional): the euro reference rates of the European
   Central Bank, free to reuse with the source quoted.
+- **Routes** (optional): addresses found by Nominatim and road distances
+  from OSRM, both on OpenStreetMap data, © OpenStreetMap contributors (ODbL);
+  the route picture says so.
 - The category icons are drawn for the module, in the style of Odoo's own.
 
 ## Supporting the project

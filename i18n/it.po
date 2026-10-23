@@ -53,9 +53,45 @@ msgid "\"%(value)s\" cannot go in %(where)s (%(cell)s)."
 msgstr "\"%(value)s\" non può andare in %(where)s (%(cell)s)."
 
 #. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/expense_scan_place.py:0
+msgid "\"%s\" was not found on the map: write its address more fully (street, town), or pick a place in the list."
+msgstr "«%s» non si trova sulla mappa: scrivere l'indirizzo in modo più completo (via, città), o scegliere un luogo dall'elenco."
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/expense_scan_place.py:0
+msgid "\"%s\" was not found on the map: write its address more fully (street, town)."
+msgstr "«%s» non si trova sulla mappa: scrivere l'indirizzo in modo più completo (via, città)."
+
+#. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "\"My Expenses\" and \"Expenses to Process\" start with the \"Current month\" filter."
 msgstr "\"Le mie spese\" e \"spese da elaborare\" si aprono con il filtro \"Mese corrente\"."
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "%(km)s km"
+msgstr "%(km)s km"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "%(km)s km one way"
+msgstr "%(km)s km solo andata"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "%(km)s km one way, %(total)s km there and back"
+msgstr "%(km)s km solo andata, %(total)s km andata e ritorno"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "%(km)s km × 2 = %(total)s km"
+msgstr "%(km)s km × 2 = %(total)s km"
 
 #. module: expense_scan
 #. odoo-python
@@ -70,14 +106,78 @@ msgid "%s covers read: for a business meal, choose its category and write the na
 msgstr "%s coperti letti: per un pasto di lavoro, sceglierne la categoria e indicare nelle note nomi e aziende degli ospiti."
 
 #. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "%s per trip"
+msgstr "%s a tratta"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "%s, return trip"
+msgstr "%s, andata e ritorno"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
+msgid "0 means 4. More threads read faster but use more processor time."
+msgstr "0 vale 4. Più thread leggono più velocemente ma usano più tempo di processore."
+
+#. module: expense_scan
+#: model:ir.model.constraint,message:expense_scan.constraint_expense_scan_place_check_coordinates
+msgid "A latitude lies between -90 and 90, a longitude between -180 and 180."
+msgstr "Una latitudine è compresa tra -90 e 90, una longitudine tra -180 e 180."
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_needaction
 msgid "Action Needed"
 msgstr "Azione richiesta"
 
 #. module: expense_scan
+#: model_terms:ir.actions.act_window,help:expense_scan.expense_scan_place_action
+msgid "Add the places your team travels to"
+msgstr "Aggiungere i luoghi in cui si reca il team"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__address
+msgid "Address"
+msgstr "Indirizzo"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_res_company__expense_scan_geocoder_url
+#: model:ir.model.fields,field_description:expense_scan.field_res_config_settings__expense_scan_geocoder_url
+msgid "Address search"
+msgstr "Ricerca indirizzi"
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__outcome
 msgid "After the scan"
 msgstr "Dopo la scansione"
+
+#. module: expense_scan
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_place__kind__airport
+msgid "Airport"
+msgstr "Aeroporto"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_place_view_search
+msgid "Airports and stations"
+msgstr "Aeroporti e stazioni"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
+msgid ""
+"Airports, stations, sites: the places offered as start or end.\n"
+"                            Homes and offices are added from the employees' addresses."
+msgstr "Aeroporti, stazioni, sedi: i luoghi proposti come partenza o arrivo. Abitazioni e uffici provengono dagli indirizzi dei dipendenti."
+
+#. module: expense_scan
+#: model_terms:ir.actions.act_window,help:expense_scan.expense_scan_place_action
+msgid ""
+"Airports, stations, sites: they are offered as the start or the end\n"
+"               of a mileage expense. Homes and offices come from the employees'\n"
+"               addresses, customers from their contacts, and a place typed in an\n"
+"               expense is kept here."
+msgstr "Aeroporti, stazioni, sedi: sono proposti come partenza o arrivo di una spesa chilometrica. Abitazioni e uffici provengono dagli indirizzi dei dipendenti, i clienti dai loro contatti, e un luogo digitato in una spesa viene conservato qui."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__reinvoice_mode
@@ -311,11 +411,6 @@ msgid "%s s"
 msgstr "%s s"
 
 #. module: expense_scan
-#: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
-msgid "0 means 4. More threads do not read a receipt faster."
-msgstr "0 equivale a 4. Più thread non leggono una ricevuta più velocemente."
-
-#. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
 msgid "<em>(flat rate)</em>"
 msgstr "<em>(forfait)</em>"
@@ -418,6 +513,7 @@ msgstr "Oltre un limite delle regole, giustificato o no."
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_export_template__active
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy__active
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__active
 msgid "Active"
 msgstr "Attivo"
 
@@ -511,6 +607,7 @@ msgstr "Spese approvate e spese da approvare, in percentuale del budget."
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_export_template_view_search
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_policy_view_form
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_policy_view_search
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_place_view_search
 msgid "Archived"
 msgstr "Archiviato"
 
@@ -669,6 +766,11 @@ msgid "Category recognised"
 msgstr "Categoria riconosciuta"
 
 #. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__partner_id
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: expense_scan
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_correction__outcome__corrected
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_search
 msgid "Corrected"
@@ -685,6 +787,16 @@ msgid "Covers read"
 msgstr "Coperti letti"
 
 #. module: expense_scan
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_place__kind__customer
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_estimated
+msgid "Estimated distance"
+msgstr "Distanza stimata"
+
+#. module: expense_scan
 #: model_terms:ir.actions.act_window,help:expense_scan.expense_scan_sheet_archive_action
 msgid ""
 "Every sheet generated is kept here with its files, as it was\n"
@@ -697,9 +809,29 @@ msgid "Expense Scan Hint Notes"
 msgstr "Indicazione sotto le note"
 
 #. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_minutes
+msgid "Expense Scan Route Minutes"
+msgstr "Durata del percorso"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_name
+msgid "Expense Scan Route Name"
+msgstr "Nome del percorso"
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__expense_count
 msgid "Expense count"
 msgstr "Numero di spese"
+
+#. module: expense_scan
+#: model:ir.model.fields.selection,name:expense_scan.selection__res_company__expense_scan_model_size__tiny
+msgid "Fast"
+msgstr "Veloce"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
+msgid "Fast: about three times faster, a few more receipts to correct."
+msgstr "Veloce: circa tre volte più rapido, qualche ricevuta in più da correggere."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__field
@@ -735,6 +867,11 @@ msgid ""
 "               expenses where a person had to change it: the receipts the\n"
 "               reading gets wrong, by category or by employee."
 msgstr "Per ogni campo compilato dalla scansione, la quota di spese inviate in cui una persona ha dovuto modificarlo: le ricevute che la lettura capisce male, per categoria o per dipendente."
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_place__address
+msgid "Full address, as found on the map."
+msgstr "Indirizzo completo, come trovato sulla mappa."
 
 #. module: expense_scan
 #: model:ir.actions.act_window,name:expense_scan.expense_scan_sheet_archive_action
@@ -775,6 +912,28 @@ msgid "Has Message"
 msgstr "Contiene messaggio"
 
 #. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/expense_scan_place.py:0
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_place__kind__home
+msgid "Home"
+msgstr "Abitazione"
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_place__employee_id
+msgid "Home of this employee: offered to them only, and read by HR."
+msgstr "Abitazione di questo dipendente: proposta solo a lui, e letta dalle risorse umane."
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
+msgid "Home, customer, station, address..."
+msgstr "Abitazione, cliente, stazione, indirizzo..."
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_place_view_search
+msgid "Homes"
+msgstr "Abitazioni"
+
+#. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_sheet_archive__message_needaction
 msgid "If checked, new messages require your attention."
 msgstr "Se selezionata, nuovi messaggi richiedono attenzione."
@@ -801,6 +960,39 @@ msgid "Kept: the value read is the final one. Corrected: a person changed it. Fi
 msgstr "Mantenuto: il valore letto è quello definitivo. Corretto: una persona lo ha modificato. Inserito: non è stato letto nulla, una persona lo ha inserito."
 
 #. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__kind
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_place_view_search
+msgid "Kind"
+msgstr "Tipo"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__last_used
+msgid "Last used"
+msgstr "Ultimo uso"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__latitude
+msgid "Latitude"
+msgstr "Latitudine"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__longitude
+msgid "Longitude"
+msgstr "Longitudine"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_res_company__expense_scan_map_tiles_url
+#: model:ir.model.fields,field_description:expense_scan.field_res_config_settings__expense_scan_map_tiles_url
+msgid "Map background"
+msgstr "Sfondo della mappa"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "Map data © OpenStreetMap contributors"
+msgstr "Dati della mappa © contributori di OpenStreetMap"
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_error
 msgid "Message Delivery error"
 msgstr "Errore di consegna messaggio"
@@ -809,6 +1001,16 @@ msgstr "Errore di consegna messaggio"
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_ids
 msgid "Messages"
 msgstr "Messaggi"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_mileage
+msgid "Mileage"
+msgstr "Chilometraggio"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
+msgid "Mileage by route"
+msgstr "Chilometraggio per percorso"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_search
@@ -821,9 +1023,20 @@ msgid "No expense sheet generated yet"
 msgstr "Ancora nessuna nota spese generata"
 
 #. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_route_estimated
+msgid "No route service answered: the distance is the straight line lengthened by a quarter. Check it."
+msgstr "Nessun servizio di percorso ha risposto: la distanza è la linea retta allungata di un quarto. Verificarla."
+
+#. module: expense_scan
 #: model_terms:ir.actions.act_window,help:expense_scan.expense_scan_correction_action
 msgid "No submitted scanned expense yet"
 msgstr "Ancora nessuna spesa scansionata inviata"
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_geocoder_url
+#: model:ir.model.fields,help:expense_scan.field_res_config_settings__expense_scan_geocoder_url
+msgid "Nominatim server that finds a typed address on the map, as Odoo itself does to place contacts. Empty: only the places already known can be picked."
+msgstr "Server Nominatim che trova sulla mappa un indirizzo digitato, come fa Odoo stesso per collocare i contatti. Vuoto: si possono scegliere solo i luoghi già noti."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_needaction_counter
@@ -851,15 +1064,103 @@ msgid "Number of messages with delivery error"
 msgstr "Numero di messaggi con errore di consegna"
 
 #. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_threads
+#: model:ir.model.fields,help:expense_scan.field_res_config_settings__expense_scan_threads
+msgid "Number of threads each Odoo worker gives to OCR. 0 means 4. More threads read a receipt a little faster but cost more processor time in all (4 threads: about 1.8 times faster than one, for twice the time): they overload the CPU when several scans arrive at once and increase the memory reserved by each worker."
+msgstr "Numero di thread che ogni worker di Odoo dedica all'OCR. 0 vale 4. Più thread leggono una ricevuta un po' più velocemente ma costano più tempo di processore in totale (4 thread: circa 1,8 volte più veloce di uno, per il doppio del tempo): sovraccaricano il processore quando arrivano più scansioni insieme e aumentano la memoria riservata da ogni worker."
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_route_url
+#: model:ir.model.fields,help:expense_scan.field_res_config_settings__expense_scan_route_url
+msgid "OSRM server that gives the road distance of a mileage expense. The public one is meant for light use: a company with many routes runs its own. Empty: the straight line, lengthened by a quarter."
+msgstr "Server OSRM che fornisce la distanza stradale di una spesa chilometrica. Quello pubblico è pensato per un uso leggero: un'azienda con molti percorsi usa il proprio. Vuoto: la linea retta, allungata di un quarto."
+
+#. module: expense_scan
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_place__kind__work
+msgid "Office"
+msgstr "Ufficio"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_km
+msgid "One way (km)"
+msgstr "Solo andata (km)"
+
+#. module: expense_scan
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_place__kind__other
+msgid "Other"
+msgstr "Altro"
+
+#. module: expense_scan
+#: model:ir.model,name:expense_scan.model_expense_scan_place
+msgid "Place of a route"
+msgstr "Luogo di un percorso"
+
+#. module: expense_scan
+#: model:ir.actions.act_window,name:expense_scan.expense_scan_place_action
+#: model:ir.ui.menu,name:expense_scan.menu_expense_scan_places
+#: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
+msgid "Places"
+msgstr "Luoghi"
+
+#. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/expense_sheet_archive.py:0
 msgid "Please find attached the expense sheet %s."
 msgstr "In allegato la nota spese %s."
 
 #. module: expense_scan
+#: model:ir.model.fields.selection,name:expense_scan.selection__res_company__expense_scan_model_size__small
+msgid "Precise"
+msgstr "Preciso"
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_model_size
+#: model:ir.model.fields,help:expense_scan.field_res_config_settings__expense_scan_model_size
+msgid "Precise: the models that read best. Fast: smaller models, about three times faster, which misread a few more receipts (3 to 7 totals in 100 on the module's test receipts). For a slow server or large batches."
+msgstr "Preciso: i modelli che leggono meglio. Veloce: modelli più piccoli, circa tre volte più rapidi, che leggono male qualche ricevuta in più (da 3 a 7 totali su 100 sulle ricevute di prova del modulo). Per un server lento o grandi lotti."
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__rating_ids
 msgid "Ratings"
 msgstr "Valutazioni"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_res_company__expense_scan_model_size
+#: model:ir.model.fields,field_description:expense_scan.field_res_config_settings__expense_scan_model_size
+msgid "Reading models"
+msgstr "Modelli di lettura"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_round_trip
+msgid "Return trip"
+msgstr "Andata e ritorno"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_summary
+msgid "Route"
+msgstr "Percorso"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_path
+msgid "Route path"
+msgstr "Tracciato del percorso"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_attachment_id
+msgid "Route picture"
+msgstr "Immagine del percorso"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_res_company__expense_scan_route_url
+#: model:ir.model.fields,field_description:expense_scan.field_res_config_settings__expense_scan_route_url
+msgid "Route service"
+msgstr "Servizio di percorso"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "Route: OSRM · map data © OpenStreetMap contributors"
+msgstr "Percorso: OSRM · dati della mappa © contributori di OpenStreetMap"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_sms_error
@@ -973,6 +1274,7 @@ msgstr "Aziende"
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_export_column__value__societe
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__company_id
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__company_id
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__company_id
 msgid "Company"
 msgstr "Azienda"
 
@@ -1038,6 +1340,7 @@ msgstr "Crea comunque la fattura"
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__create_uid
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__create_uid
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__create_uid
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__create_uid
 msgid "Created by"
 msgstr "Creato da"
 
@@ -1049,6 +1352,7 @@ msgstr "Creato da"
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__create_date
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__create_date
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__create_date
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__create_date
 msgid "Created on"
 msgstr "Creato il"
 
@@ -1107,6 +1411,7 @@ msgstr "Fattura cliente che include questa spesa, in bozza o registrata. Cancell
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy__partner_ids
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_place_view_search
 msgid "Customers"
 msgstr "Clienti"
 
@@ -1253,6 +1558,7 @@ msgstr "Cena"
 #: model:ir.model.fields,field_description:expense_scan.field_res_currency_rate__display_name
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__display_name
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__display_name
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__display_name
 msgid "Display Name"
 msgstr "Nome visualizzato"
 
@@ -1276,6 +1582,7 @@ msgstr "Durata (s)"
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_export_column__value__salarie
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__employee_id
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_search
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__employee_id
 msgid "Employee"
 msgstr "Dipendente"
 
@@ -1789,6 +2096,7 @@ msgstr "Modulo libero, sviluppato nel tempo libero del suo autore"
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__date_from
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__date_from
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_from_id
 msgid "From"
 msgstr "Dal"
 
@@ -1865,6 +2173,7 @@ msgstr "Ho verificato con il mio commercialista"
 #: model:ir.model.fields,field_description:expense_scan.field_res_currency_rate__id
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__id
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__id
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__id
 msgid "ID"
 msgstr "ID"
 
@@ -1941,6 +2250,7 @@ msgstr "Portatili, tablet e finestre a mezzo schermo: da 768 px di larghezza inv
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__write_uid
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__write_uid
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__write_uid
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__write_uid
 msgid "Last Updated by"
 msgstr "Ultimo aggiornamento di"
 
@@ -1952,6 +2262,7 @@ msgstr "Ultimo aggiornamento di"
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__write_date
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__write_date
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__write_date
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__write_date
 msgid "Last Updated on"
 msgstr "Ultimo aggiornamento il"
 
@@ -2126,6 +2437,7 @@ msgstr "Spese del mio team"
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_export_template__name
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy__name
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__name
 msgid "Name"
 msgstr "Nome"
 
@@ -2315,12 +2627,6 @@ msgstr "Numero di notti pagate con questa ricevuta."
 #: model:ir.model.fields,field_description:expense_scan.field_product_template__expense_scan_nights_required
 msgid "Number of nights required"
 msgstr "Numero di notti obbligatorio"
-
-#. module: expense_scan
-#: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_threads
-#: model:ir.model.fields,help:expense_scan.field_res_config_settings__expense_scan_threads
-msgid "Number of threads each Odoo worker gives to OCR. 0 means 4. More threads do not read a receipt faster: they overload the CPU when several scans arrive at once and increase the memory reserved by each worker."
-msgstr "Numero di thread che ogni worker di Odoo dedica all'OCR. 0 significa 4. Più thread non leggono una ricevuta più in fretta: sovraccaricano il processore quando arrivano più scansioni insieme e aumentano la memoria riservata da ogni worker."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_res_company__expense_scan_engine
@@ -3099,6 +3405,7 @@ msgstr "Spese selezionate"
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_export_template__sequence
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy_rule__sequence
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__sequence
 msgid "Sequence"
 msgstr "Sequenza"
 
@@ -3159,10 +3466,20 @@ msgid ""
 msgstr "Partite dal \"Modello di base\" fornito con il modulo: scaricate la sua cartella, adattatela e caricatela di nuovo. Indicate le righe riservate alle spese e quale colonna riceve quale valore; i vecchi dati della cartella vengono sostituiti a ogni esportazione."
 
 #. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_route_from_id
+msgid "Start of the route: type a place, a customer or an address, or pick one in the list."
+msgstr "Partenza del percorso: digitare un luogo, un cliente o un indirizzo, o sceglierne uno dall'elenco."
+
+#. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/expense_sheet.py:0
 msgid "Statement of selected expenses"
 msgstr "Elenco delle spese selezionate"
+
+#. module: expense_scan
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_place__kind__station
+msgid "Station"
+msgstr "Stazione"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_res_company__expense_scan_deskew
@@ -3175,6 +3492,11 @@ msgstr "Raddrizza la ricevuta"
 #: code:addons/expense_scan/static/src/js/scan_progress.js:0
 msgid "Straightening and cropping"
 msgstr "Raddrizzamento e ritaglio"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_place_view_list
+msgid "Street, postcode, town"
+msgstr "Via, CAP, città"
 
 #. module: expense_scan
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_export_column__value__total_ht
@@ -3213,9 +3535,29 @@ msgid "Tap \"Scan\" to photograph a receipt, or \"New\" to enter an expense by h
 msgstr "Toccate «Acquisisci» per fotografare una ricevuta, o «Nuovo» per inserire una spesa a mano."
 
 #. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_mileage
+msgid "The category is counted in kilometres or miles."
+msgstr "La categoria si conta in chilometri o miglia."
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_place__partner_id
+msgid "The customer or the office this place stands for."
+msgstr "Il cliente o l'ufficio rappresentato da questo luogo."
+
+#. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "The delivered \"Good practice\" rules are on: open the list to adjust them or to switch them off."
 msgstr "Le regole «Buone pratiche» fornite sono attive: aprite l'elenco per modificarle o disattivarle."
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_round_trip
+msgid "The distance counts twice: there and back."
+msgstr "La distanza conta due volte: andata e ritorno."
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
+msgid "The distance of a mileage expense from its start and its end, with the route picture as the receipt"
+msgstr "La distanza di una spesa chilometrica dalla sua partenza e dal suo arrivo, con l'immagine del percorso come giustificativo"
 
 #. module: expense_scan
 #. odoo-python
@@ -3576,6 +3918,12 @@ msgstr "Le spese selezionate non hanno tutte la stessa risposta. Quale devono pr
 
 #. module: expense_scan
 #. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "The start and the end of the route are the same place."
+msgstr "La partenza e l'arrivo del percorso sono lo stesso luogo."
+
+#. module: expense_scan
+#. odoo-python
 #: code:addons/expense_scan/models/hr_expense_project.py:0
 msgid "The task %(task)s is not a task of the project %(project)s."
 msgstr "L'attività %(task)s non è un'attività del progetto %(project)s."
@@ -3694,8 +4042,15 @@ msgid "Tick the box to confirm that you checked with your accountant."
 msgstr "Spuntate la casella per confermare di aver verificato con il vostro commercialista."
 
 #. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_map_tiles_url
+#: model:ir.model.fields,help:expense_scan.field_res_config_settings__expense_scan_map_tiles_url
+msgid "Tile server drawn under the route picture, as https://.../{z}/{x}/{y}.png. Empty: the route on a plain background. OpenStreetMap's own tiles may not be used this way."
+msgstr "Server di tile disegnato sotto l'immagine del percorso, come https://.../{z}/{x}/{y}.png. Vuoto: il percorso su uno sfondo uniforme. Le tile di OpenStreetMap stesse non possono essere usate così."
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__date_to
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__date_to
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_to_id
 msgid "To"
 msgstr "Al"
 
@@ -3907,6 +4262,11 @@ msgid "Value"
 msgstr "Valore"
 
 #. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
+msgid "View the map"
+msgstr "Vedi la mappa"
+
+#. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "Warnings on expenses that go beyond your rules, and Excel templates for the expense sheet"
 msgstr "Avvisi sulle spese che superano le vostre regole e modelli Excel per la nota spese"
@@ -4064,6 +4424,33 @@ msgstr "predefinito: scelta di Odoo (riferimento EXP_GEN)"
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "default: Odoo's data directory"
 msgstr "predefinito: directory dati di Odoo"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
+msgid "empty: known places only"
+msgstr "vuoto: solo luoghi noti"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
+msgid "empty: plain background"
+msgstr "vuoto: sfondo uniforme"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
+msgid "empty: straight line + 25 %"
+msgstr "vuoto: linea retta + 25 %"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "estimated distance"
+msgstr "distanza stimata"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "estimated, no route found"
+msgstr "stimata, nessun percorso trovato"
 
 #. module: expense_scan
 #. odoo-python

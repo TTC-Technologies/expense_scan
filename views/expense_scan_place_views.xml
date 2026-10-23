@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2026 T.T.C. SAS
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0). -->
+<odoo>
+
+    <!-- The places offered as start or end of a mileage expense. -->
+    <record id="expense_scan_place_view_list" model="ir.ui.view">
+        <field name="name">expense.scan.place.list</field>
+        <field name="model">expense.scan.place</field>
+        <field name="arch" type="xml">
+            <list editable="bottom" decoration-muted="not active">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="kind"/>
+                <field name="address" placeholder="Street, postcode, town"/>
+                <field name="partner_id" optional="hide" options="{'no_create': True}"/>
+                <field name="employee_id" optional="hide" readonly="1"/>
+                <field name="latitude" optional="hide"/>
+                <field name="longitude" optional="hide"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="expense_scan_place_view_search" model="ir.ui.view">
+        <field name="name">expense.scan.place.search</field>
+        <field name="model">expense.scan.place</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="address"/>
+                <filter string="Airports and stations" name="transport"
+                        domain="[('kind', 'in', ('airport', 'station'))]"/>
+                <filter string="Customers" name="customers" domain="[('kind', '=', 'customer')]"/>
+                <filter string="Homes" name="homes" domain="[('kind', '=', 'home')]"/>
+                <separator/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <group>
+                    <filter string="Kind" name="by_kind" context="{'group_by': 'kind'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="expense_scan_place_action" model="ir.actions.act_window">
+        <field name="name">Places</field>
+        <field name="res_model">expense.scan.place</field>
+        <field name="view_mode">list</field>
+        <field name="search_view_id" ref="expense_scan_place_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Add the places your team travels to</p>
+            <p>Airports, stations, sites: they are offered as the start or the end
+               of a mileage expense. Homes and offices come from the employees'
+               addresses, customers from their contacts, and a place typed in an
+               expense is kept here.</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_expense_scan_places"
+              name="Places"
+              parent="hr_expense.menu_hr_expense_configuration"
+              action="expense_scan_place_action"
+              groups="hr_expense.group_hr_expense_manager"
+              sequence="33"/>
+
+</odoo>

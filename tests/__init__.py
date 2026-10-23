@@ -31,3 +31,4 @@ from . import test_ergonomie
 from . import test_review_fixes
 from . import test_guests
 from . import test_corrections
+from . import test_mileage_route
