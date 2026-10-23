@@ -1,5 +1,10 @@
 # Changelog
 
+## 19.0.3.4.1 — 2026-10-23
+
+- Mileage by route: a new expense named after its category in another language ("[KM] Kilométrage")
+  takes the name of its route too.
+
 ## 19.0.3.4.0 — 2026-10-23
 
 - Mileage by route: on a mileage category, *From* and *To* places and a *Return trip* switch. The road
