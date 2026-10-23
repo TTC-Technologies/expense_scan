@@ -632,6 +632,11 @@ msgid "Category recognised"
 msgstr "Igenkänd kategori"
 
 #. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_queued
+msgid "Scan waiting for its turn"
+msgstr "Skanning väntar på sin tur"
+
+#. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "Simplifications of Odoo's display, for every company. Off unless you choose them"
 msgstr "Förenklingar av hur Odoo visas, för alla företag. Av tills du väljer dem"

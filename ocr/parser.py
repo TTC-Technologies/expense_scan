@@ -935,7 +935,12 @@ TVA_LINE_RE = re.compile(
     r"|\bB\.?T\.?W\b|\bDPH\b|\bMOMS\b|\bMVA\b|\bPODATEK\b|\bSTEUERSUMME\b|\bTAXES?\s*TOTALES?\b"
     r"|\bSALES\s*TAX\b"
     # Carrefour Polska: "Kwota A 23,00% 3,22", the tax of rate A.
-    r"|\bKWOTA\s+[A-G]\b")
+    r"|\bKWOTA\s+[A-G]\b"
+    # "A: Steuer 10.00 % EUR 2,22" (Austria): the tax of a rate, when the rate is there.
+    r"|\bSTEUER\b(?=[^%]*%)")
+#: "Netto 2,98 MWSt 0,30": the base then the tax of a rate that is not printed.
+NET_THEN_TAX_RE = re.compile(
+    r"\bNETTO\b\D*(\d+[.,]\d{2})\s*(?:EUR)?\s*(?:MWST|UST)\b\D*(\d+[.,]\d{2})")
 #: "TVA:D", "(c° tva: 2)": rate code referring to the table, without a tax
 #: amount. A single digit only counts if it does not start an amount
 #: ("TVA: 5,50").
@@ -1379,6 +1384,15 @@ def _extract_taxes_by_line(lines):
         text = normalize(line.text)
         if not TVA_LINE_RE.search(text):
             continue
+        paired = NET_THEN_TAX_RE.search(text)
+        if paired:
+            # "Netto 2,98 MWSt 0,30": the base then the tax of one rate, the rate
+            # itself is not printed: it is the one the two amounts give.
+            base, tax = (float(paired.group(i).replace(",", ".")) for i in (1, 2))
+            rate = _closest_known_rate(round(tax / base * 100.0, 1)) if base else None
+            if rate is not None and abs(base * rate / 100.0 - tax) <= 0.03:
+                entries.append((rate, tax, line.text, line.score))
+                continue
         base_of = re.match(r"\s*PTU\s+([A-G])\b", text)
         if base_of and base_of.group(1) in kwota_letters and not RATE_RE.search(text):
             continue

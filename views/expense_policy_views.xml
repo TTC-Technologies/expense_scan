@@ -66,7 +66,48 @@
                         the ℹ︎ signs, a justification the ⚠ signs. Without a
                         family or a category, it applies to every expense.
                     </div>
-                    <field name="rule_ids">
+                    <!-- On a phone the table of rules is wider than the screen: the
+                         lines become cards, opened in a form. -->
+                    <field name="rule_ids" mode="list,kanban">
+                        <kanban>
+                            <field name="rule_type"/>
+                            <templates>
+                                <t t-name="card">
+                                    <div class="d-flex justify-content-between align-items-baseline">
+                                        <field name="name" class="fw-bold"/>
+                                        <field name="rule_type" widget="badge"/>
+                                    </div>
+                                    <div class="text-muted">
+                                        <field name="family"/>
+                                        <span t-if="record.rule_type.raw_value in ['max_amount', 'daily_max']">
+                                            <field name="amount"/>
+                                        </span>
+                                    </div>
+                                </t>
+                            </templates>
+                        </kanban>
+                        <form>
+                            <group>
+                                <group>
+                                    <field name="name"/>
+                                    <field name="family" placeholder="all"/>
+                                    <field name="product_ids" widget="many2many_tags"/>
+                                    <field name="rule_type"/>
+                                </group>
+                                <group>
+                                    <field name="meal_period"
+                                           invisible="rule_type not in ('max_amount', 'daily_max')"/>
+                                    <field name="amount"
+                                           invisible="rule_type not in ('max_amount', 'daily_max')"/>
+                                    <field name="per_night" invisible="rule_type != 'max_amount'"/>
+                                    <field name="extra_amount" invisible="rule_type != 'max_amount'"/>
+                                    <field name="extra_cities" invisible="rule_type != 'max_amount'"
+                                           placeholder="Paris, Lyon, Marseille"/>
+                                    <field name="words" invisible="rule_type != 'forbidden_words'"
+                                           placeholder="One word per line"/>
+                                </group>
+                            </group>
+                        </form>
                         <list editable="bottom">
                             <field name="sequence" widget="handle"/>
                             <field name="name"/>

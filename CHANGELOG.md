@@ -1,5 +1,18 @@
 # Changelog
 
+## 20.0.3.2.0 — 2026-10-23
+
+- A large upload no longer risks getting its worker killed: a request reads receipts for about 25 seconds of
+  processor time at most (Odoo's limit is 60 s), the rest of the batch stays "running" and is read by the scheduled
+  task, which starts at once, or by its form if the user opens it first.
+- A tax read on the receipt while the expense has no tax is no longer counted as deducted nor taken out of the
+  untaxed amount (the project budget): the entry has no tax line. The amount stays shown as read, and "Tax (none on
+  the category)" still asks for a tax.
+- Expense rules on a phone: the lines are cards opened in a form, instead of a table wider than the screen.
+- Austrian receipts: "Netto 2,98 MWSt 0,30" rows and "A: Steuer 10.00 %" lines give their tax.
+- README: limits of large uploads, and a note on Odoo Enterprise's own expense digitization.
+- Port of 19.0.3.2.0 to Odoo 20.
+
 ## 20.0.3.1.0 — 2026-10-06
 
 Port of 19.0.3.1.0 to Odoo 20, merged with the 20.0.3.0.1 port below: the same receipts PDF fix, the new summary and
