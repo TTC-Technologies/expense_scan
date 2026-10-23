@@ -114,9 +114,11 @@ class TestMileageRoute(common.TransactionCase):
             form.expense_scan_route_from_id = self.station
             form.expense_scan_route_to_id = self.albi
             self.assertEqual(form.quantity, 75.4)
+            self.assertEqual(form.name, "Gare Matabiau – Albi")
             form.expense_scan_round_trip = True
             self.assertEqual(form.quantity, 150.8)
-            self.assertEqual(form.name, "Gare Matabiau – Albi, return trip")
+            # "return trip" in the language of the database.
+            self.assertTrue(form.name.startswith("Gare Matabiau – Albi, "), form.name)
             expense = form.save()
         self.assertAlmostEqual(expense.total_amount, 75.4)
         picture = expense.expense_scan_route_attachment_id
