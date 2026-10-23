@@ -48,8 +48,16 @@ class ResConfigSettings(models.TransientModel):
             settings.expense_scan_sales = installed
     expense_scan_set_vendor = fields.Boolean(
         related='company_id.expense_scan_set_vendor', readonly=False)
+    expense_scan_model_size = fields.Selection(
+        related='company_id.expense_scan_model_size', readonly=False)
     expense_scan_ecb_rates = fields.Boolean(
         related='company_id.expense_scan_ecb_rates', readonly=False)
+    expense_scan_route_url = fields.Char(
+        related='company_id.expense_scan_route_url', readonly=False)
+    expense_scan_geocoder_url = fields.Char(
+        related='company_id.expense_scan_geocoder_url', readonly=False)
+    expense_scan_map_tiles_url = fields.Char(
+        related='company_id.expense_scan_map_tiles_url', readonly=False)
     expense_scan_limit_projects = fields.Boolean(
         related='company_id.expense_scan_limit_projects', readonly=False)
     expense_scan_product_id = fields.Many2one(

@@ -13,3 +13,5 @@ access_expense_scan_vat_wizard_manager,expense.scan.vat.wizard.manager,model_exp
 access_expense_scan_correction_manager,expense.scan.correction.manager,model_expense_scan_correction,hr_expense.group_hr_expense_manager,1,0,0,0
 access_expense_scan_sheet_archive_user,expense.scan.sheet.archive.user,model_expense_scan_sheet_archive,base.group_user,1,1,1,0
 access_expense_scan_sheet_archive_manager,expense.scan.sheet.archive.manager,model_expense_scan_sheet_archive,hr_expense.group_hr_expense_manager,1,1,1,1
+access_expense_scan_place_user,expense.scan.place.user,model_expense_scan_place,base.group_user,1,1,1,0
+access_expense_scan_place_manager,expense.scan.place.manager,model_expense_scan_place,hr_expense.group_hr_expense_manager,1,1,1,1

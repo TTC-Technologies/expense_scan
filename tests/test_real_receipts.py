@@ -308,8 +308,8 @@ class TestPdfExtraPages(common.TransactionCase):
     def test_a_single_page_pdf_is_left_alone(self):
         engine = self._FakeEngine()
         with patch.object(preprocess, 'pdf_page_count', return_value=1):
-            words = self.expense._expense_scan_extra_pdf_pages(
-                self.attachment, engine, self.page1_words, Stopwatch())
+            words, _result = self.expense._expense_scan_extra_pdf_pages(
+                self.attachment, engine, self.page1_words, Stopwatch(), {})
         self.assertEqual(words, self.page1_words)
         self.assertFalse(engine.calls)
 
@@ -318,8 +318,8 @@ class TestPdfExtraPages(common.TransactionCase):
         with patch.object(preprocess, 'pdf_page_count', return_value=2), \
              patch.object(preprocess, 'pdf_page_to_image_bytes', return_value=b'\x89PNG'), \
              patch.object(preprocess, 'load_image', return_value="page-2-image"):
-            words = self.expense._expense_scan_extra_pdf_pages(
-                self.attachment, engine, self.page1_words, Stopwatch())
+            words, _result = self.expense._expense_scan_extra_pdf_pages(
+                self.attachment, engine, self.page1_words, Stopwatch(), {})
         self.assertEqual(len(words), 2)
         self.assertEqual(words[0], self.page1_words[0])
         added = words[1]
@@ -336,7 +336,7 @@ class TestPdfExtraPages(common.TransactionCase):
              patch.object(preprocess, 'pdf_page_to_image_bytes', return_value=b'\x89PNG'), \
              patch.object(preprocess, 'load_image', return_value="image"):
             self.expense._expense_scan_extra_pdf_pages(
-                self.attachment, engine, self.page1_words, Stopwatch())
+                self.attachment, engine, self.page1_words, Stopwatch(), {})
         # One less than the limit: the first page is already read, before
         # this method is called.
         self.assertEqual(len(engine.calls), PDF_MAX_PAGES_READ - 1)
@@ -350,12 +350,31 @@ class TestPdfExtraPages(common.TransactionCase):
         with patch.object(preprocess, 'pdf_page_count', return_value=3), \
              patch.object(preprocess, 'pdf_page_to_image_bytes', side_effect=convert), \
              patch.object(preprocess, 'load_image', return_value="image"):
-            words = self.expense._expense_scan_extra_pdf_pages(
-                self.attachment, engine, self.page1_words, Stopwatch())
+            words, _result = self.expense._expense_scan_extra_pdf_pages(
+                self.attachment, engine, self.page1_words, Stopwatch(), {})
         # Page 1 (already there) and page 3 (read); page 2, unreadable, is
         # missing without making the others fail.
         self.assertEqual(len(words), 2)
         self.assertEqual(len(engine.calls), 1)
+
+    def test_the_last_page_with_the_total_ends_the_reading(self):
+        """Read from the last page back: a total found there spares the pages before."""
+
+        class TotalEngine(self._FakeEngine):
+            def recognize(self, image):
+                self.calls.append(image)
+                return [OcrWord(text="TOTAL TTC 120,00 EUR", score=0.95,
+                                left=0.0, top=0.0, right=300.0, bottom=20.0)]
+
+        engine = TotalEngine()
+        with patch.object(preprocess, 'pdf_page_count', return_value=4), \
+             patch.object(preprocess, 'pdf_page_to_image_bytes', return_value=b'\x89PNG'), \
+             patch.object(preprocess, 'load_image', side_effect=lambda data: "image"):
+            words, result = self.expense._expense_scan_extra_pdf_pages(
+                self.attachment, engine, self.page1_words, Stopwatch(), {})
+        self.assertEqual(len(engine.calls), 1, "page 4 gave the total: pages 3 and 2 are not read")
+        self.assertEqual(result.value('total'), 120.0)
+        self.assertEqual(len(words), 2)
 
 
 # PDF quote laid out in columns: the net total and the VAT share lines, and

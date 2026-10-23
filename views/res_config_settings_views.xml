@@ -69,6 +69,37 @@
                     </div>
                 </setting>
 
+                <setting id="expense_scan_mileage_setting" string="Mileage by route"
+                         company_dependent="1"
+                         help="The distance of a mileage expense from its start and its end, with the route picture as the receipt">
+                    <div class="content-group">
+                        <div class="row mt-2">
+                            <label for="expense_scan_route_url" class="col-lg-4 o_light_label"/>
+                            <field name="expense_scan_route_url" class="col-lg-8"
+                                   placeholder="empty: straight line + 25 %"/>
+                        </div>
+                        <div class="row">
+                            <label for="expense_scan_geocoder_url" class="col-lg-4 o_light_label"/>
+                            <field name="expense_scan_geocoder_url" class="col-lg-8"
+                                   placeholder="empty: known places only"/>
+                        </div>
+                        <div class="row">
+                            <label for="expense_scan_map_tiles_url" class="col-lg-4 o_light_label"/>
+                            <field name="expense_scan_map_tiles_url" class="col-lg-8"
+                                   placeholder="empty: plain background"/>
+                        </div>
+                        <div>
+                            <button name="%(expense_scan.expense_scan_place_action)d"
+                                    type="action" string="Places"
+                                    class="btn-link ps-0" icon="oi-arrow-right"/>
+                        </div>
+                        <div class="text-muted small ps-4">
+                            Airports, stations, sites: the places offered as start or end.
+                            Homes and offices are added from the employees' addresses.
+                        </div>
+                    </div>
+                </setting>
+
                 <setting id="expense_scan_sheet_setting" string="Expense rules and sheets"
                          help="Warnings on expenses that go beyond your rules, and Excel templates for the expense sheet">
                     <div class="content-group">
@@ -113,10 +144,16 @@
                                 <field name="expense_scan_tesseract_lang"/>
                                 <div class="text-muted small">Language codes joined with "+", for example eng+fra.</div>
                             </div>
+                            <div class="row" invisible="expense_scan_engine == 'tesseract'">
+                                <label for="expense_scan_model_size" class="col-lg-4 o_light_label"/>
+                                <field name="expense_scan_model_size" widget="radio"
+                                       options="{'horizontal': true}"/>
+                                <div class="text-muted small">Fast: about three times faster, a few more receipts to correct.</div>
+                            </div>
                             <div class="row">
                                 <label for="expense_scan_threads" class="col-lg-4 o_light_label"/>
                                 <field name="expense_scan_threads"/>
-                                <div class="text-muted small">0 means 4. More threads do not read a receipt faster.</div>
+                                <div class="text-muted small">0 means 4. More threads read faster but use more processor time.</div>
                             </div>
                             <div class="row" invisible="expense_scan_engine == 'tesseract'">
                                 <label for="expense_scan_model_dir" class="col-lg-4 o_light_label"/>

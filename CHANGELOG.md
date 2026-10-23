@@ -1,5 +1,25 @@
 # Changelog
 
+## 19.0.3.4.0 — 2026-10-23
+
+- Mileage by route: on a mileage category, *From* and *To* places and a *Return trip* switch. The road
+  distance (OSRM) fills the kilometres, still editable, and the picture of the route, with both
+  places, the distance and the date, becomes the receipt. Without an answer from the route service,
+  the straight line lengthened by a quarter, marked as an estimate.
+- Places: the employee's home (from HR's private address, offered to that employee only and shown
+  elsewhere by its name and town), the office, the customers (typed by name, from their contact), and
+  the airports, stations and sites of *Configuration → Places*. Any other place typed is looked up on
+  the map (Nominatim) and kept.
+- Settings: the route service, the address search and an optional map background, all replaceable by
+  one's own servers.
+- Reading speed: a photo whose crop cut text is no longer read a second time when the first reading
+  already found the total, the date, the tax and the merchant; the following pages of a PDF are read
+  from the last one back, stopping at the page that gives the total (a five-page invoice: 9 s → 2 s).
+- *Reading models*: "Fast" uses the smallest PP-OCRv6 models, about three times faster, for a slow
+  server or large batches; "Precise", the default, keeps the models that read best. The help of the
+  threads per worker now says what they cost: 4 threads read about 1.8 times faster than one, for
+  twice the processor time.
+
 ## 19.0.3.3.0 — 2026-10-23
 
 - Business meals: the covers printed on a restaurant bill are read ("Couverts : 2", "Gäste: 2",

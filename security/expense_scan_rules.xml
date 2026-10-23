@@ -46,4 +46,23 @@
         <field name="domain_force">[(1, '=', 1)]</field>
         <field name="groups" eval="[(4, ref('hr_expense.group_hr_expense_manager'))]"/>
     </record>
+    <!-- Places of the routes: an employee's home is seen by that employee and HR only, like the
+         private address it comes from. Expenses show it by its name. -->
+    <record id="expense_scan_place_company_rule" model="ir.rule">
+        <field name="name">Places: multi-company</field>
+        <field name="model_id" ref="model_expense_scan_place"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="expense_scan_place_own_rule" model="ir.rule">
+        <field name="name">Places: homes are private</field>
+        <field name="model_id" ref="model_expense_scan_place"/>
+        <field name="domain_force">['|', ('employee_id', '=', False), ('employee_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+    <record id="expense_scan_place_approver_rule" model="ir.rule">
+        <field name="name">Places: all, for HR</field>
+        <field name="model_id" ref="model_expense_scan_place"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('hr.group_hr_user'))]"/>
+    </record>
 </odoo>

@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 # Copyright 2026 T.T.C. SAS
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
-"""Mileage rate per employee.
+"""Mileage rate per employee, and their home and office among the places.
 
 Official mileage scales often depend on the vehicle and the yearly distance:
 a single rate on the "Mileage" category does not fit everyone.
 """
-from odoo import fields, models
+from odoo import api, fields, models
+
+#: Fields whose change moves the employee's home or office.
+ADDRESS_FIELDS = {'private_street', 'private_street2', 'private_zip', 'private_city',
+                  'private_country_id', 'private_state_id', 'address_id', 'company_id'}
 
 
 class HrEmployee(models.Model):
@@ -29,3 +33,15 @@ class HrEmployee(models.Model):
              "lost: official scales often have three, an in-house rate may "
              "have more.",
     )
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        employees = super().create(vals_list)
+        employees.env['expense.scan.place']._expense_scan_sync_employees(employees)
+        return employees
+
+    def write(self, vals):
+        result = super().write(vals)
+        if ADDRESS_FIELDS & set(vals):
+            self.env['expense.scan.place']._expense_scan_sync_employees(self)
+        return result

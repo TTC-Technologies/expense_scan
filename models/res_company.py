@@ -27,13 +27,24 @@ class ResCompany(models.Model):
         string="OCR engine",
         default='auto',
     )
+    expense_scan_model_size = fields.Selection(
+        selection=[('small', "Precise"), ('tiny', "Fast")],
+        string="Reading models",
+        default='small',
+        help="Precise: the models that read best. Fast: smaller models, about "
+             "three times faster, which misread a few more receipts (3 to 7 "
+             "totals in 100 on the module's test receipts). For a slow server "
+             "or large batches.",
+    )
     expense_scan_threads = fields.Integer(
         string="Threads per worker",
         default=4,
         help="Number of threads each Odoo worker gives to OCR. 0 means 4. "
-             "More threads do not read a receipt faster: they overload the "
-             "CPU when several scans arrive at once and increase the memory "
-             "reserved by each worker.",
+             "More threads read a receipt a little faster but cost more "
+             "processor time in all (4 threads: about 1.8 times faster than "
+             "one, for twice the time): they overload the CPU when several "
+             "scans arrive at once and increase the memory reserved by each "
+             "worker.",
     )
     expense_scan_tesseract_lang = fields.Char(
         string="Tesseract language",
@@ -119,6 +130,26 @@ class ResCompany(models.Model):
              "and cannot link another one. A project manager and an "
              "administrator always see every project.",
     )
+    expense_scan_route_url = fields.Char(
+        string="Route service",
+        default="https://router.project-osrm.org",
+        help="OSRM server that gives the road distance of a mileage expense. The "
+             "public one is meant for light use: a company with many routes "
+             "runs its own. Empty: the straight line, lengthened by a quarter.",
+    )
+    expense_scan_geocoder_url = fields.Char(
+        string="Address search",
+        default="https://nominatim.openstreetmap.org",
+        help="Nominatim server that finds a typed address on the map, as Odoo "
+             "itself does to place contacts. Empty: only the places already "
+             "known can be picked.",
+    )
+    expense_scan_map_tiles_url = fields.Char(
+        string="Map background",
+        help="Tile server drawn under the route picture, as "
+             "https://.../{z}/{x}/{y}.png. Empty: the route on a plain "
+             "background. OpenStreetMap's own tiles may not be used this way.",
+    )
     expense_scan_product_id = fields.Many2one(
         comodel_name='product.product',
         string="Default category",
@@ -190,6 +221,7 @@ class ResCompany(models.Model):
         """Engine options derived from the company settings."""
         self.ensure_one()
         return {
+            'model_size': self.expense_scan_model_size or 'small',
             'threads': self.expense_scan_threads or 0,
             'lang': self.expense_scan_tesseract_lang or 'eng',
             'model_dir': self._expense_scan_model_dir(),
