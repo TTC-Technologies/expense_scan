@@ -264,6 +264,19 @@ ADDED_KEYWORDS = {
         'meal': ["gastro", "tisch"],
         'fuel': ["senza piombo", "pompa", "stazione di servizio", "erogatore"],
     },
+    # Car sharing paid online, car rentals booked through an agency (whose
+    # brand is a hotel one), airport car parks whose receipt names the
+    # airport rather than the car park.
+    '19.0.3.3.0': {
+        'taxi': ["blablacar", "covoiturage", "au conducteur", "mobigo", "chauffeur"],
+        'car_rental': ["restitution", "date de restitution", "lieu de prise en charge",
+                       "date de prise en charge", "société de location", "prix de la location",
+                       "location de voitures", "retourner la voiture", "ritiro veicolo",
+                       "riconsegna", "car rental", "rental agreement", "mietvertrag"],
+        'toll_parking': ["parc auto", "parcs autos", "proxiparc", "pkg", "parch",
+                         "length of stay", "durée de stationnement", "durata", "parkdauer",
+                         "parc p1", "parc p2", "parc p3"],
+    },
 }
 #: Words removed from one version to the next, same form. The migration only
 #: removes these words: the rest of each record is left unchanged.
@@ -300,17 +313,22 @@ FAMILY_HINTS = [
               "pasti", "comida", "posilk", "maaltijd", "refeic", "maltid")),
     ('telecom', ("communication", "comm", "telecom", "telephon")),
 ]
-#: Categories no family claims: flat allowances, and business meals, which
-#: nothing on the receipt tells apart from an ordinary meal.
-FAMILY_EXCLUDED = ("igd", "bareme", "forfait", "invit", "affaire", "kilomet", "mileage",
+#: Start of the names of a business meal category, in the module's languages:
+#: "Invitation", "Repas d'affaires", "Business meal", "Bewirtung", "Spese di
+#: rappresentanza", "Gastos de representación", "Zakelijke lunch"...
+INVITATION_HINTS = ("invit", "affaire", "business", "bewirt", "represent", "rappresent",
+                    "reprezent", "repraesent", "entertain", "zakelijk")
+#: ...or a meal with a customer: "Repas client", "Customer meals", "Pasti
+#: clienti". Within a word too: "Kundenbewirtung".
+CUSTOMER_HINTS = ("client", "customer", "kunde", "klant", "klient")
+#: Categories no family claims: flat allowances. Business meals are left out
+#: too (see is_invitation): the receipt only tells them apart from an
+#: ordinary meal by its covers.
+FAMILY_EXCLUDED = ("igd", "bareme", "forfait", "kilomet", "mileage",
                    "pauschal", "verpflegungsmehr")
 
 
-def family_of(*labels):
-    """Expense family of a category, from its name and reference."""
-    words = fold(" ".join(label for label in labels if label)).split()
-    if any(word.startswith(excluded) for word in words for excluded in FAMILY_EXCLUDED):
-        return None
+def _family_of_words(words):
     for family, hints in FAMILY_HINTS:
         for hint in hints:
             # Short clue: whole word, plural allowed ("Meals", Odoo's own
@@ -320,6 +338,24 @@ def family_of(*labels):
                    for word in words):
                 return family
     return None
+
+
+def is_invitation(*labels):
+    """Tell whether a category is the one of business meals, from its names."""
+    words = fold(" ".join(label for label in labels if label)).split()
+    if any(hint in word for word in words for hint in INVITATION_HINTS):
+        return True
+    return any(hint in word for word in words for hint in CUSTOMER_HINTS) \
+        and _family_of_words(words) == 'meal'
+
+
+def family_of(*labels):
+    """Expense family of a category, from its name and reference."""
+    words = fold(" ".join(label for label in labels if label)).split()
+    if any(word.startswith(excluded) for word in words for excluded in FAMILY_EXCLUDED) \
+            or is_invitation(*labels):
+        return None
+    return _family_of_words(words)
 
 
 # ---------------------------------------------------------------------------
@@ -689,6 +725,23 @@ FUEL_UNIT_RE = re.compile(
 def fuel_unit(lines):
     """The line carrying a price per litre or per kWh, if there is one."""
     return next((line for line in lines if FUEL_UNIT_RE.search(line)), None)
+
+
+#: Entry and exit of a toll or a car park: "Entree TARBES/OUEST" and
+#: "Sortie ST SELVE", "Einfahrt" and "Ausfahrt", "Entrata" and "Uscita". A
+#: menu has a starter ("Entrée") but no exit.
+ENTRY_RE = re.compile(r"\b(?:ENTREE|ENTRY|EINFAHRT|ENTRATA|INGRESSO|ENTRADA|INFART|INDKORSEL"
+                      r"|WJAZD)\b", re.IGNORECASE)
+EXIT_RE = re.compile(r"\b(?:SORTIE|EXIT|AUSFAHRT|USCITA|SALIDA|SAIDA|UTFART|UDKORSEL"
+                     r"|WYJAZD)\b", re.IGNORECASE)
+
+
+def entry_and_exit(lines):
+    """The exit line of a toll or a car park ticket that also prints its entry."""
+    folded = [fold(line) for line in lines]
+    if not any(ENTRY_RE.search(line) for line in folded):
+        return None
+    return next((line for line, text in zip(lines, folded) if EXIT_RE.search(text)), None)
 
 
 def brand_family(lines, max_lines=HEADER_LINES, max_words=4):

@@ -28,8 +28,13 @@ BRAND_WEIGHT = 3.0
 #: a supermarket charger ("ALDI") is still a charge.
 UNIT_WEIGHT = 3.0
 
+#: Weight of an entry and an exit printed on the same ticket: that of a
+#: brand. A toll receipt seldom prints the word "toll".
+ENTRY_EXIT_WEIGHT = 3.0
+
 #: Kinds of clue, as returned by :func:`score`.
-WORDS, ACTIVITY, SIRET, UNIT, BRAND = 'words', 'activity', 'siret', 'unit', 'brand'
+WORDS, ACTIVITY, SIRET, UNIT, BRAND, ENTRY_EXIT = (
+    'words', 'activity', 'siret', 'unit', 'brand', 'entry_exit')
 
 
 def score(lines, keyword_categories, family_keys, activity=None, naf_of=None):
@@ -66,6 +71,8 @@ def score(lines, keyword_categories, family_keys, activity=None, naf_of=None):
 
     if lexicon.fuel_unit(lines):
         add('fuel', UNIT_WEIGHT, (UNIT, None))
+    if lexicon.entry_and_exit(lines):
+        add('toll_parking', ENTRY_EXIT_WEIGHT, (ENTRY_EXIT, None))
 
     brand_family, brand = lexicon.brand_family(lines)
     if brand_family:

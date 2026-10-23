@@ -7,7 +7,7 @@ The parser uses neither the database nor OpenCV: the tests give it
 positioned words directly, which covers special cases (subtotal, several VAT
 rates, warranty date) without a real photo.
 """
-from datetime import date, timedelta
+from datetime import date, time as dtime, timedelta
 
 from odoo.tests import common, tagged
 
@@ -879,6 +879,37 @@ ADRIA SANT ALCAMPO
                            today=date(2026, 9, 29))
         self.assertEqual(dated.value('nights'), 3)
         self.assertIsNone(self.parse("CAFE\nTOTAL 3,00 EUR").value('nights'))
+
+    def test_covers_of_a_restaurant_bill(self):
+        covers = lambda text: self.parse(text + "\nTOTAL 54,00 EUR").value('covers')  # noqa: E731
+        self.assertEqual(covers("LE BISTROT\nTable 12  Couverts : 2"), 2)
+        self.assertEqual(covers("LE BISTROT\nNb couverts 3"), 3)
+        self.assertEqual(covers("LE BISTROT\n4 couverts"), 4)
+        self.assertEqual(covers("THE GRILL\nCovers: 2"), 2)
+        self.assertEqual(covers("THE GRILL\nGuests 3"), 3)
+        self.assertEqual(covers("ZUR POST\nTisch 4 Gäste: 2"), 2)
+        self.assertEqual(covers("ZUR POST\n3 Personen"), 3)
+        self.assertEqual(covers("TRATTORIA\n2 x Coperto 5,00"), 2)
+        self.assertEqual(covers("TRATTORIA\nCoperti 4"), 4)
+        self.assertEqual(covers("CASA PEPE\nComensales: 3"), 3)
+        self.assertEqual(covers("POD LIPA\nLiczba osób 2"), 2)
+        self.assertEqual(covers("KROGEN\nAntal gäster 2"), 2)
+        self.assertEqual(covers("KROEN\nGæster: 5"), 5)
+        # The price of the cover charge, a table number, an amount: no covers.
+        self.assertIsNone(covers("TRATTORIA\nCoperto 2,50"))
+        self.assertIsNone(covers("LE BISTROT\nTable 12"))
+        self.assertIsNone(covers("CAFE\nPersonnel 2"))
+        self.assertIsNone(covers("LE BISTROT\nCouverts 120"))
+
+    def test_time_with_am_or_pm(self):
+        time_of = lambda text: self.parse(  # noqa: E731
+            "DINER\n" + text + "\nTOTAL 12.00 USD").value('time')
+        self.assertEqual(time_of("05/12/2026 10:35PM"), dtime(22, 35))
+        self.assertEqual(time_of("05/12/2026 10:35 AM"), dtime(10, 35))
+        self.assertEqual(time_of("05/12/2026 12:05 a.m."), dtime(0, 5))
+        self.assertEqual(time_of("05/12/2026 12:05 PM"), dtime(12, 5))
+        self.assertEqual(time_of("05/12/2026 15:10 PM"), dtime(15, 10))
+        self.assertEqual(time_of("12.05.2026 19:42"), dtime(19, 42))
 
     def test_norwegian_sum_of_items_beats_the_vat_table(self):
         result = self.parse("KIWI\nOrg.nr 979 443 137 MVA\nSum 3 varer 22,00\n"

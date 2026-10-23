@@ -115,9 +115,9 @@ class ResCompany(models.Model):
         string="Limit the projects to the employee's own",
         default=True,
         help="With re-invoicing, an employee is offered the projects they "
-             "manage, have a task on or are assigned to, not the whole list. "
-             "A project manager and an administrator always see every project. "
-             "Only the choice offered in the form is limited.",
+             "manage, have a task on or are assigned to, not the whole list, "
+             "and cannot link another one. A project manager and an "
+             "administrator always see every project.",
     )
     expense_scan_product_id = fields.Many2one(
         comodel_name='product.product',

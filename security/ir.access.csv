@@ -14,3 +14,8 @@ expense_scan_policy_company_rule,Expense rules: multi-company,expense.scan.polic
 expense_scan_policy_rule_company_rule,Expense rule lines: multi-company,expense.scan.policy.rule,,crud,"['|', ('policy_id.company_id', '=', False), ('policy_id.company_id', 'in', company_ids)]"
 expense_scan_export_template_company_rule,Excel export templates: multi-company,expense.scan.export.template,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
 expense_scan_export_column_company_rule,Excel export columns: multi-company,expense.scan.export.column,,crud,"['|', ('template_id.company_id', '=', False), ('template_id.company_id', 'in', company_ids)]"
+access_expense_scan_correction_manager,expense.scan.correction.manager,expense.scan.correction,hr_expense.group_hr_expense_manager,r,
+expense_scan_correction_company_rule,Scan corrections: multi-company,expense.scan.correction,,crud,"[('company_id', 'in', company_ids)]"
+access_expense_scan_sheet_archive_user,Generated expense sheets: one's own,expense.scan.sheet.archive,base.group_user,cru,"['|', ('user_id', '=', user.id), ('employee_ids.user_id', '=', user.id)]"
+access_expense_scan_sheet_archive_manager,Generated expense sheets: all,expense.scan.sheet.archive,hr_expense.group_hr_expense_manager,crud,
+expense_scan_sheet_archive_company_rule,Generated expense sheets: multi-company,expense.scan.sheet.archive,,crud,"[('company_id', 'in', company_ids)]"

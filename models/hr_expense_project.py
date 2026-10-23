@@ -214,7 +214,10 @@ class HrExpense(models.Model):
         """
         if self._expense_scan_project_unrestricted():
             return
-        for employee, expenses in self.filtered('project_id').grouped('employee_id').items():
+        # Without the limit, an employee may link any project, as the form offers.
+        limited = self.filtered(lambda expense: expense.project_id and (
+            expense.company_id or self.env.company).expense_scan_limit_projects)
+        for employee, expenses in limited.grouped('employee_id').items():
             allowed = set(self._expense_scan_employee_project_ids(employee))
             forbidden = expenses.sudo().project_id.filtered(lambda p: p.id not in allowed)
             if forbidden:

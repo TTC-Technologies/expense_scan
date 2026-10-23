@@ -44,8 +44,10 @@ AMOUNT_RE = re.compile(
 # A VAT rate: "20 %", "5,50%", "TVA 10.0"
 # Never from the middle of a number: "10.0000%" is 10 %, not "00%".
 RATE_RE = re.compile(r"(?<![\d.,])(\d{1,2}(?:[.,]\d{1,4})?)\s*%")
-# The time may follow the year without a space: "13/06/202616:30:16".
-TIME_RE = re.compile(r"(?:\b|(?<=[12]\d{3}))([01]?\d|2[0-3])\s*[:hH]\s*([0-5]\d)\b")
+# The time may follow the year without a space: "13/06/202616:30:16", and
+# be followed by AM or PM without one: "10:35PM".
+TIME_RE = re.compile(r"(?:\b|(?<=[12]\d{3}))([01]?\d|2[0-3])\s*[:hH]\s*([0-5]\d)(?!\d)"
+                     r"(?:\s*([AP])\.?\s?M\b\.?)?")
 VAT_NUMBER_RE = re.compile(r"\bFR\s?([0-9A-Z]{2})\s?(\d{3})\s?(\d{3})\s?(\d{3})\b")
 
 # Plausibility ceiling: beyond it, it is a number (SIRET, card, code) read as
@@ -1694,6 +1696,14 @@ def extract_time(lines, date_source=""):
         text = normalize(line.text)
         for match in TIME_RE.finditer(text):
             hour, minute = int(match.group(1)), int(match.group(2))
+            if match.group(3):
+                # 12 AM is midnight, 12 PM noon; "15:10 PM" stays 15:10.
+                if hour > 12:
+                    pass
+                elif match.group(3) == "P":
+                    hour = hour % 12 + 12
+                else:
+                    hour %= 12
             if not (0 <= hour <= 23 and 0 <= minute <= 59):
                 continue
             weight = 0.9 if date_source and line.text == date_source else 0.7
@@ -1901,6 +1911,38 @@ def extract_nights(lines, today=None, order="dmy"):
     return ExtractedField(value=None, confidence=0.0)
 
 
+#: Number of covers of a restaurant bill: "Couverts : 2", "Nb couverts 3",
+#: "2 couverts", "Covers 4", "Gäste: 2", "Coperti 2", "2 x Coperto",
+#: "Comensales: 3", "Liczba osób 2", "Antal gäster 2". The number must not
+#: be the start of an amount ("Coperto 2,50" is the cover charge).
+COVERS_WORDS = (r"COUVERTS?|COUV|COVERS?|GUESTS?|PAX|GAESTE|GASTE|PERSONEN|PERSONNES?|PERS"
+                r"|COPERTI|COPERTO|COMENSALES|CUBIERTOS|PERSONAS|PESSOAS|GASTEN|OSOBY|OSOB"
+                r"|GOSCI|GASTER|GAESTER|GJESTER|PERSONER")
+COVERS_AFTER_RE = re.compile(
+    r"\b(?:NB|NBRE|NOMBRE DE|ANZ|ANZAHL|NO|NUM|LICZBA|ANTAL|AANTAL)?\.?\s*(?:" + COVERS_WORDS
+    + r")\b\s*[:.=#]?\s*(?:X\s*)?(\d{1,2})(?![.,]?\d|\s*%)")
+COVERS_BEFORE_RE = re.compile(
+    r"(?<![\d.,])(\d{1,2})\s*(?:X\s*)?(?:" + COVERS_WORDS + r")\b")
+#: More covers than this on one bill is a misreading (or a banquet).
+MAX_COVERS = 40
+
+
+def extract_covers(lines):
+    """Number of covers printed on a restaurant bill, if any.
+
+    Two covers or more make a meal with guests: a business meal, whose
+    guests must be named.
+    """
+    for line in lines:
+        text = normalize(line.text)
+        for pattern in (COVERS_AFTER_RE, COVERS_BEFORE_RE):
+            match = pattern.search(text)
+            if match and 0 < int(match.group(1)) <= MAX_COVERS:
+                return ExtractedField(value=int(match.group(1)), confidence=0.8,
+                                      source=line.text)
+    return ExtractedField(value=None, confidence=0.0)
+
+
 def extract_vat_number(lines):
     """Return the intra-community VAT number, useful to find the supplier."""
     for line in lines:
@@ -2046,6 +2088,7 @@ def parse(words, today=None, max_age_days=730, default_currency="EUR", buyers=()
         "country_clues": ExtractedField(value=extract_country_clues(lines) or None,
                                         confidence=0.0),
         "nights": extract_nights(lines, today=today, order="mdy" if month_first else "dmy"),
+        "covers": extract_covers(lines),
     }
     _rate_from_items(fields, lines)
     _swap_total_and_tax(fields)

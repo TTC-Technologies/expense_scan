@@ -152,15 +152,25 @@ class AccountMove(models.Model):
         candidates = Expense._expense_scan_counted(projects, self.company_id, sale_line.order_id).filtered(
             lambda e: not e.expense_scan_invoice_id or e.expense_scan_invoice_id == self
         ).sorted(lambda e: (e.date or fields.Date.today(), e.id))
+        company_currency = self.company_id.currency_id
         left = line.price_subtotal
-        if self.currency_id != self.company_id.currency_id:
+        # Half a cent of slack for the sum of the expenses.
+        margin = company_currency.rounding / 2
+        if self.currency_id != company_currency:
             # Same rate date as the order line, which was computed from the expenses at that date.
-            left = self.currency_id._convert(
-                left, self.company_id.currency_id, self.company_id,
-                sale_line.order_id.date_order or self.invoice_date or fields.Date.context_today(self))
+            moment = (sale_line.order_id.date_order or self.invoice_date
+                      or fields.Date.context_today(self))
+            left = self.currency_id._convert(left, company_currency, self.company_id, moment,
+                                             round=False)
+            # The line was rounded to the cent of the invoice currency: back in
+            # the company currency, that cent may be worth several of its own
+            # (100.00 PLN invoiced as 23.20 EUR come back as 99.99 PLN).
+            margin += self.currency_id._convert(self.currency_id.rounding, company_currency,
+                                                self.company_id, moment, round=False)
         covered = Expense
         for expense in candidates:
-            if float_compare(expense.total_amount, left + 0.005, precision_digits=2) <= 0:
+            if float_compare(expense.total_amount, left + margin,
+                             precision_rounding=company_currency.rounding) <= 0:
                 covered |= expense
                 left -= expense.total_amount
         return covered

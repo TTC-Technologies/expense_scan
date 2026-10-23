@@ -237,6 +237,30 @@ class TestExpenseSheet(common.TransactionCase):
         self.assertEqual(wizard.selected_count, 2)
         wizard.action_generate()
         self.assertTrue(wizard.result_name.endswith(".zip"))
+        # Kept with its files, one per employee.
+        archive = self.env["expense.scan.sheet.archive"].search(
+            [("expense_ids", "in", mine.ids)], limit=1)
+        self.assertEqual(archive.expense_ids, mine | theirs)
+        self.assertEqual(len(archive.attachment_ids), 2)
+        self.assertEqual(archive.employee_ids, mine.employee_id | other)
+
+    def test_wizard_sends_the_sheet_by_email(self):
+        expense = self.expense("A envoyer", 1)
+        self.attach(expense, png(), "t.png", "image/png")
+        wizard = self.env["expense.scan.sheet.wizard"].with_context(
+            active_model="hr.expense", active_ids=expense.ids).create(
+                {"summary": False, "receipts": True})
+        action = wizard.action_send()
+        self.assertEqual(action["res_model"], "mail.compose.message")
+        archive = self.env["expense.scan.sheet.archive"].browse(
+            action["context"]["default_res_ids"])
+        self.assertEqual(action["context"]["default_attachment_ids"][0][2],
+                         archive.attachment_ids.ids)
+        composer = self.env["mail.compose.message"].with_context(action["context"]).create(
+            {"partner_ids": [(6, 0, self.env.user.partner_id.ids)]})
+        composer._action_send_mail()
+        message = archive.message_ids.filtered(lambda m: m.message_type == "comment")
+        self.assertEqual(message.attachment_ids, archive.attachment_ids)
 
     def test_wizard_counts_while_editing(self):
         """Choosing a project in the dialog counts its expenses at once."""

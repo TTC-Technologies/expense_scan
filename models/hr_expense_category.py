@@ -33,6 +33,7 @@ import re
 from collections import Counter
 
 from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 from odoo.tools import file_open
 
 from ..ocr import categorize, lexicon, parser
@@ -88,7 +89,8 @@ class ProductTemplate(models.Model):
 
     def write(self, vals):
         result = super().write(vals)
-        if {'name', 'default_code', 'can_be_expensed'} & set(vals)                 and self.filtered('can_be_expensed'):
+        if {'name', 'default_code', 'can_be_expensed'} & set(vals) \
+                and self.filtered('can_be_expensed'):
             self.sudo()._expense_scan_seed_keywords()
         return result
 
@@ -118,7 +120,7 @@ class ProductTemplate(models.Model):
                     'toll_parking': 'toll_parking', 'telecom': 'telecom'}.get(family)
         words = lexicon.fold(" ".join(label for label in labels if label)).split()
         starts = lambda prefixes: any(w.startswith(p) for w in words for p in prefixes)  # noqa: E731
-        if starts(('invit', 'affaire')):
+        if lexicon.is_invitation(*labels):
             return 'invitation'
         if starts(('igd', 'bareme', 'forfait')):
             if starts(('logement', 'hebergement', 'nuit')):
@@ -251,6 +253,13 @@ class HrExpense(models.Model):
         readonly=True,
         copy=False,
     )
+    expense_scan_covers = fields.Integer(
+        string="Covers read",
+        readonly=True,
+        copy=False,
+        help="Number of covers printed on the restaurant bill. Two or more "
+             "make a business meal, whose guests are named in the notes.",
+    )
 
     @api.depends('expense_scan_merchant')
     def _compute_expense_scan_merchant_key(self):
@@ -349,6 +358,34 @@ class HrExpense(models.Model):
             distances |= self.env.ref(xmlid, raise_if_not_found=False) or distances
         return product.uom_id not in distances
 
+    def _expense_scan_category_labels(self, product):
+        """Reference and names of a category, in every installed language."""
+        template = product.product_tmpl_id
+        installed = [code for code, _name in self.env['res.lang'].get_installed()]
+        return [template.default_code, template.name] + [
+            template.with_context(lang=code).name for code in installed]
+
+    def _expense_scan_is_meal(self, product):
+        """Tell whether a category is an ordinary meal one."""
+        return bool(product) and lexicon.family_of(
+            *self._expense_scan_category_labels(product)) == 'meal'
+
+    def _expense_scan_is_invitation(self, product):
+        """Tell whether a category is the business meal one."""
+        return bool(product) and lexicon.is_invitation(
+            *self._expense_scan_category_labels(product))
+
+    def _expense_scan_invitation_product(self, company):
+        """The business meal category, or an empty recordset."""
+        templates = self.env['product.template'].sudo().search(
+            [('can_be_expensed', '=', True)], order='sequence, id')
+        for template in templates:
+            product = template.product_variant_id
+            if self._expense_scan_guessable(product, company) \
+                    and self._expense_scan_is_invitation(product):
+                return product.with_env(self.env)
+        return self.env['product.product']
+
     def _expense_scan_keyword_categories(self, company):
         """``{category id: folded words}`` of the categories that declare or learnt words."""
         products = self.env['product.product'].sudo().search([
@@ -433,6 +470,19 @@ class HrExpense(models.Model):
                 cron.sudo()._trigger()
         return result
 
+    def action_submit(self):
+        # A business meal is justified by its guests: the receipt counts the
+        # covers, the notes name the people invited.
+        for expense in self:
+            if expense.expense_scan_covers >= 2 \
+                    and expense._expense_scan_is_invitation(expense.product_id) \
+                    and not (expense.description or '').strip():
+                raise UserError(_(
+                    "\"%(expense)s\" is a business meal for %(covers)s covers: write the "
+                    "names and companies of the guests in the notes before submitting it.",
+                    expense=expense.name, covers=expense.expense_scan_covers))
+        return super().action_submit()
+
     def _expense_scan_reason(self, reason, number=None):
         """Sentence explaining the category clue that was kept.
 
@@ -445,6 +495,8 @@ class HrExpense(models.Model):
             return _("from SIRET %(number)s (activity %(naf)s)", number=number, naf=detail)
         if kind == categorize.UNIT:
             return _("from a price per litre or per kWh")
+        if kind == categorize.ENTRY_EXIT:
+            return _("from the entry and the exit printed on the ticket")
         if kind == categorize.BRAND:
             return _("from the brand \"%s\"", detail)
         return _("from the words of the receipt")
@@ -534,7 +586,16 @@ class HrExpense(models.Model):
             # Without a readable merchant, the previous automatic reading is
             # cleared.
             values['expense_scan_merchant'] = merchant or False
+        covers = result.value('covers') or 0
+        values['expense_scan_covers'] = covers
         if self._expense_scan_category_is_free(company):
+            if covers >= 2 and self._expense_scan_is_meal(product or self.product_id):
+                # A meal with guests: the business meal category, when the
+                # company has one.
+                invitation = self._expense_scan_invitation_product(company)
+                if invitation:
+                    product = invitation
+                    reason = _("from the %s covers read", covers)
             if product:
                 values.update({
                     'product_id': product.id,

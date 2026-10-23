@@ -3,6 +3,8 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
 """Expense rules: general good practice and customer requirements."""
 from datetime import date
+from unittest.mock import patch
+
 
 from odoo.tests import common, tagged
 
@@ -81,6 +83,28 @@ class TestExpensePolicy(common.TransactionCase):
         for meal in breakfast | lunch | dinner:
             self.assertIn("Journée 60", meal.expense_scan_policy_alert)
         self.assertIn("Déjeuner 20", lunch.expense_scan_policy_alert)
+
+    def test_many_expenses_on_one_day_are_checked_in_one_pass(self):
+        """Thirty meals on one day: the categories are read once per pass, not
+        once per pair of expenses."""
+        Template = type(self.env['product.template'])
+        calls = []
+        original = Template._expense_scan_family_templates
+
+        def counted(model):
+            calls.append(1)
+            return original(model)
+        meals = self.env['hr.expense'].create([{
+            'name': "Repas midi %d" % index, 'employee_id': self.employee.id,
+            'product_id': self.meal.id, 'project_id': self.project.id,
+            'reinvoice_mode': 'project', 'date': date(2026, 9, 2),
+            'total_amount_currency': 5.0} for index in range(30)])
+        self.assertIn("Journée 60", meals[0].expense_scan_policy_alert)
+        with patch.object(Template, '_expense_scan_family_templates', counted):
+            meals[0].total_amount_currency = 4.0
+            meals.invalidate_recordset(['expense_scan_policy_alert'])
+            self.assertIn("Journée 60", meals[-1].expense_scan_policy_alert)
+        self.assertLessEqual(len(calls), 3)
 
     def test_dinner_within_its_ceiling(self):
         dinner = self.expense("Repas soir", 35.0)
