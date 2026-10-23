@@ -135,9 +135,27 @@ class HrExpense(models.Model):
         self.expense_scan_route_path = self._expense_scan_path_json(route)
         if self.expense_scan_mileage:
             self.quantity = round(route.km, 1) * factor
-        if self._expense_scan_name_is_automatic() or (
-                self.name and self.name == self.expense_scan_route_name):
+        if self._expense_scan_route_may_rename():
             self.name = self.expense_scan_route_name = self._expense_scan_route_name()
+
+    def _expense_scan_route_may_rename(self):
+        """Whether the description is still one the module or Odoo wrote.
+
+        Odoo names a new expense after its category, in the language of the
+        one who entered it: "[KM] Kilométrage" counts as automatic too.
+        """
+        self.ensure_one()
+        name = (self.name or '').strip()
+        if not name or name == self.expense_scan_route_name or self._expense_scan_name_is_automatic():
+            return True
+        product = self.product_id
+        if not product:
+            return False
+        labels = set()
+        for code, _label in self.env['res.lang'].get_installed():
+            translated = product.with_context(lang=code)
+            labels |= {translated.display_name, translated.name}
+        return name in labels
 
     def _expense_scan_route_name(self):
         self.ensure_one()

@@ -3,7 +3,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
 {
     'name': "Expense Receipt Scanner",
-    'version': '20.0.3.4.0',
+    'version': '20.0.3.4.1',
     'summary': "Scan receipts with local OCR and AI: photograph a receipt and the expense is filled in on your own "
                "server (merchant, date, total, VAT, category). No API key, no fee per scan.",
     'description': """
