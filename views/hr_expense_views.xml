@@ -268,6 +268,10 @@
                 <field name="expense_scan_hint_category" nolabel="1" colspan="2" readonly="1"
                        invisible="not expense_scan_hint_category" class="o_expense_scan_hint"/>
             </xpath>
+            <xpath expr="//field[@name='description']" position="before">
+                <field name="expense_scan_hint_notes" readonly="1"
+                       invisible="not expense_scan_hint_notes" class="o_expense_scan_hint d-block"/>
+            </xpath>
 
             <xpath expr="//field[@name='nb_attachment']" position="after">
                 <field name="expense_scan_todo_unplaced" invisible="1"/>
@@ -296,6 +300,8 @@
                            invisible="not expense_scan_category_reason"/>
                     <field name="scan_detected_tax" readonly="1"
                            invisible="not scan_detected_tax"/>
+                    <field name="expense_scan_covers" readonly="1"
+                           invisible="not expense_scan_covers"/>
                     <!-- Without a printed time, the timestamp would show midnight. -->
                     <field name="scan_time" invisible="1"/>
                     <field name="scan_datetime" readonly="1"

@@ -1,5 +1,27 @@
 # Changelog
 
+## 19.0.3.3.0 — 2026-10-23
+
+- Business meals: the covers printed on a restaurant bill are read ("Couverts : 2", "Gäste: 2",
+  "2 x Coperto"...). Two or more file the bill in the business meal category, when there is one, and
+  the names and companies of the guests are asked in the notes: the expense cannot be submitted
+  without them.
+- Scan corrections (Reporting): per field (date, total, category, currency, merchant), the share of
+  submitted expenses where a person changed what the scan read.
+- Expense sheets: every sheet generated is kept with its files (*My Expenses → Generated Sheets*) and
+  can be sent by e-mail, from the dialog or from the sheet.
+- Categories: tolls and car parks are recognised by an entry and an exit printed on the ticket; new
+  words for car sharing, rentals booked through an agency and airport car parks (on the private
+  bench: 142 → 156 categories right out of 184). Existing categories receive the new words.
+- Times printed with AM or PM ("10:35PM") are read on the 24-hour clock.
+- Expense rules: dozens of expenses on the same day are checked in one pass, without reading the
+  others again for each one.
+- Projects: without the "limit the projects" option, an employee may save any project, as the form
+  offers.
+- Re-invoicing in another currency: the cent lost to the rounding of the invoice line no longer
+  leaves the last expense uncovered.
+- French typography of the last texts, and the sources and licences of the data in the README.
+
 ## 19.0.3.2.0 — 2026-10-22
 
 - A large upload no longer risks getting its worker killed: a request reads receipts for about 25 seconds of

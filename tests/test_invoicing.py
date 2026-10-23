@@ -144,6 +144,32 @@ class TestInvoicing(common.TransactionCase):
         for expense in first | second:
             self.assertEqual(expense.state, 'posted', "the invoice posts the expenses it covers")
 
+    def test_an_invoice_in_another_currency_covers_its_expenses(self):
+        """100.00 invoiced 23.20 in the order currency come back 99.99: the
+        cent lost to the rounding does not leave the expense out."""
+        company_currency = self.company.currency_id
+        other = self.env.ref('base.EUR' if company_currency.name != 'EUR' else 'base.CHF')
+        other.active = True
+        self.env['res.currency.rate'].search([('currency_id', '=', other.id)]).unlink()
+        self.env['res.currency.rate'].create({
+            'currency_id': other.id, 'name': '2020-01-01', 'rate': 0.232019,
+            'company_id': self.company.id})
+        pricelist = self.env['product.pricelist'].create(
+            {'name': "Liste devise Zz", 'currency_id': other.id})
+        order = self.env['sale.order'].create({
+            'partner_id': self.partner.id, 'pricelist_id': pricelist.id,
+            'order_line': [Command.create({'product_id': self.expense_product.id,
+                                           'product_uom_qty': 1.0, 'price_unit': 1.0})],
+        })
+        order.action_confirm()
+        project = self.env['project.project'].create(
+            {'name': "Mission devise Zz", 'reinvoiced_sale_order_id': order.id})
+        expense = self.expense(100.0, project_id=project.id)
+        self.approve(expense)
+        invoice = order._create_invoices()
+        self.assertEqual(invoice.currency_id, other)
+        self.assertEqual(expense.expense_scan_invoice_id, invoice)
+
     def test_next_invoice_only_takes_what_is_new(self):
         first = self.expense(100.0)
         self.approve(first)

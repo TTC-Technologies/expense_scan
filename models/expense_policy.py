@@ -183,11 +183,14 @@ class HrExpense(models.Model):
 
     @api.depends(*POLICY_FIELDS, 'expense_scan_policy_seen')
     def _compute_expense_scan_policy(self):
+        # Read once for the whole pass: dozens of expenses on the same day
+        # would otherwise each read the others, and the categories, again.
+        known = PolicyPass(self)
         for expense in self:
             # The text is stored: it is written in the employee's language,
             # whoever triggers the check (a manager, a module update).
             findings = expense.with_context(
-                lang=expense._expense_scan_policy_lang())._expense_scan_policy_findings()
+                lang=expense._expense_scan_policy_lang())._expense_scan_policy_findings(known)
             lines = [(breach, "%s %s" % (BREACH_SIGN if breach else CHECK_SIGN, message))
                      for breach, message in findings]
             seen = expense._expense_scan_policy_seen_lines()
@@ -298,10 +301,11 @@ class HrExpense(models.Model):
         domain += ['|', ('company_id', '=', False), ('company_id', '=', company.id)]
         return self.env['expense.scan.policy'].sudo().search(domain)
 
-    def _expense_scan_family(self):
+    def _expense_scan_family(self, known=None):
         self.ensure_one()
         template = self.product_id.product_tmpl_id
-        families = self.env['product.template'].sudo()._expense_scan_family_templates()
+        families = known.families if known else \
+            self.env['product.template'].sudo()._expense_scan_family_templates()
         return families.get(template)
 
     def _expense_scan_meal_period(self):
@@ -331,7 +335,7 @@ class HrExpense(models.Model):
         # Neither family nor category: the rule applies to every expense.
         return not rule.family or rule.family == family
 
-    def _expense_scan_policy_findings(self):
+    def _expense_scan_policy_findings(self, known=None):
         """``[(breach, message)]`` of the rules that concern this expense."""
         self.ensure_one()
         if not self.product_id:
@@ -339,7 +343,8 @@ class HrExpense(models.Model):
         policies = self._expense_scan_policies()
         if not policies:
             return []
-        family = self._expense_scan_family()
+        known = known or PolicyPass(self)
+        family = self._expense_scan_family(known)
         period = self._expense_scan_meal_period()
         amount = self.total_amount
         currency = self.company_currency_id
@@ -366,7 +371,7 @@ class HrExpense(models.Model):
             applicable -= amount_rules
         daily_rules = applicable.filtered(lambda rule: rule.rule_type == 'daily_max')
         day_within_limit = bool(daily_rules) and all(
-            (total := self._expense_scan_daily_total(rule, family)) is None
+            (total := self._expense_scan_daily_total(rule, family, known)) is None
             or currency.compare_amounts(total, rule.amount) <= 0
             for rule in daily_rules)
 
@@ -394,7 +399,7 @@ class HrExpense(models.Model):
                         rule=rule.name, value=money(value),
                         unit=_(" per night") if rule.per_night else "", limit=money(limit))))
             elif rule.rule_type == 'daily_max':
-                total = self._expense_scan_daily_total(rule, family)
+                total = self._expense_scan_daily_total(rule, family, known)
                 if total is not None and currency.compare_amounts(total, rule.amount) > 0:
                     findings.append((True, _(
                         "%(rule)s - %(value)s on that day for %(limit)s allowed.",
@@ -457,27 +462,73 @@ class HrExpense(models.Model):
                      self.currency_id.name)
         return False
 
-    def _expense_scan_daily_total(self, rule, family):
+    def _expense_scan_daily_total(self, rule, family, known=None):
         """Total of the day's meals covered by the rule, or ``None``."""
+        known = known or PolicyPass(self)
         periods = ('lunch', 'dinner') if rule.meal_period == 'lunch_dinner' else None
         if periods and self._expense_scan_meal_period() not in periods:
             return None
-        same_day = self.sudo().search([
-            ('employee_id', '=', self.employee_id.id),
-            ('date', '=', self.date),
-            ('id', '!=', self._origin.id or 0),  # 0: expense not created yet
-            ('state', '!=', 'refused'),
-        ])
         total = self.total_amount
-        for other in same_day:
-            if not other._expense_scan_rule_applies(rule, other._expense_scan_family()):
+        for other in known.same_day(self):
+            if not other._expense_scan_rule_applies(rule, known.family(other)):
                 continue
-            if periods and other._expense_scan_meal_period() not in periods:
+            if periods and known.period(other) not in periods:
                 continue
-            if other._expense_scan_unconverted_note():
+            if known.unconverted(other):
                 continue  # not comparable, reported on that expense
             total += other.total_amount
         return total
+
+
+class PolicyPass:
+    """What one check of the rules reads once for all the expenses it checks.
+
+    The categories of each family and, per employee and day, the other
+    expenses with their family, meal and conversion.
+    """
+
+    def __init__(self, expenses):
+        self.expenses = expenses
+        self.families = expenses.env['product.template'].sudo()._expense_scan_family_templates()
+        self._days = None
+        self._memo = {}
+
+    def same_day(self, expense):
+        """Other expenses, not refused, of the employee on the day of ``expense``."""
+        if self._days is None:
+            self._days = {}
+            pairs = {(e.employee_id.id, e.date) for e in self.expenses
+                     if e.employee_id and e.date}
+            if pairs:
+                domain = ['|'] * (len(pairs) - 1)
+                for employee, day in pairs:
+                    domain += ['&', ('employee_id', '=', employee), ('date', '=', day)]
+                for other in self.expenses.sudo().search(
+                        [('state', '!=', 'refused')] + domain):
+                    self._days.setdefault((other.employee_id.id, other.date), []).append(other)
+        key = (expense.employee_id.id, expense.date)
+        if key not in self._days:
+            # An expense outside the pass (a form being edited).
+            self._days[key] = list(expense.sudo().search([
+                ('employee_id', '=', expense.employee_id.id), ('date', '=', expense.date),
+                ('state', '!=', 'refused')]))
+        own = expense._origin.id or 0  # 0: expense not created yet
+        return [other for other in self._days[key] if other.id != own]
+
+    def _remember(self, name, expense, compute):
+        key = (name, expense.id)
+        if key not in self._memo:
+            self._memo[key] = compute()
+        return self._memo[key]
+
+    def family(self, expense):
+        return self._remember('family', expense, lambda: expense._expense_scan_family(self))
+
+    def period(self, expense):
+        return self._remember('period', expense, expense._expense_scan_meal_period)
+
+    def unconverted(self, expense):
+        return self._remember('unconverted', expense, expense._expense_scan_unconverted_note)
 
 
 class ResCurrencyRate(models.Model):

@@ -36,6 +36,12 @@ msgstr "« %(cell)s » : une lettre de colonne (B) ou une cellule (K4)."
 
 #. module: expense_scan
 #. odoo-python
+#: code:addons/expense_scan/models/hr_expense_category.py:0
+msgid "\"%(expense)s\" is a business meal for %(covers)s covers: write the names and companies of the guests in the notes before submitting it."
+msgstr "« %(expense)s » est une invitation pour %(covers)s couverts : indiquez les noms et sociétés des invités dans les notes avant de la soumettre."
+
+#. module: expense_scan
+#. odoo-python
 #: code:addons/expense_scan/models/hr_expense_nights.py:0
 msgid "\"%(expense)s\" is in the \"%(category)s\" category, which requires the number of nights. Enter it before saving."
 msgstr "« %(expense)s » relève de la catégorie « %(category)s », qui demande le nombre de nuitées. Indiquez-le avant d'enregistrer."
@@ -50,6 +56,28 @@ msgstr "« %(value)s » ne peut pas aller en %(where)s (%(cell)s)."
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "\"My Expenses\" and \"Expenses to Process\" start with the \"Current month\" filter."
 msgstr "« Mes dépenses » et « Dépenses à traiter » démarrent avec le filtre « Mois en cours »."
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense.py:0
+msgid "%s covers read: a business meal. Write the names and companies of the guests in the notes."
+msgstr "%s couverts lus : une invitation. Indiquez les noms et sociétés des invités dans les notes."
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense.py:0
+msgid "%s covers read: for a business meal, choose its category and write the names and companies of the guests in the notes."
+msgstr "%s couverts lus : pour une invitation, choisissez sa catégorie et indiquez les noms et sociétés des invités dans les notes."
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_needaction
+msgid "Action Needed"
+msgstr "Nécessite une action"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__outcome
+msgid "After the scan"
+msgstr "Après le scan"
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__reinvoice_mode
@@ -329,6 +357,7 @@ msgstr "<span class=\"o_stat_text\">Dépenses</span>"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_wizard_view_form
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_form
 msgid "<span>to</span>"
 msgstr "<span>au</span>"
 
@@ -491,6 +520,11 @@ msgid "Attachment"
 msgstr "Pièce jointe"
 
 #. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_attachment_count
+msgid "Attachment Count"
+msgstr "Nombre de pièces jointes"
+
+#. module: expense_scan
 #: model:ir.model.fields.selection,name:expense_scan.selection__res_company__expense_scan_engine__auto
 msgid "Automatic (best available)"
 msgstr "Automatique (le meilleur disponible)"
@@ -599,6 +633,9 @@ msgstr "Catégories"
 #: code:addons/expense_scan/models/hr_expense.py:0
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_export_column__value__categorie
 #: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__product_id
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_correction__field__product_id
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_search
 msgid "Category"
 msgstr "Catégorie"
 
@@ -632,9 +669,227 @@ msgid "Category recognised"
 msgstr "Catégorie reconnue"
 
 #. module: expense_scan
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_correction__outcome__corrected
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_search
+msgid "Corrected"
+msgstr "Corrigé"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__corrected_rate
+msgid "Corrected (%)"
+msgstr "Corrigé (%)"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_covers
+msgid "Covers read"
+msgstr "Couverts lus"
+
+#. module: expense_scan
+#: model_terms:ir.actions.act_window,help:expense_scan.expense_scan_sheet_archive_action
+msgid ""
+"Every sheet generated is kept here with its files, as it was\n"
+"               handed over, and can be sent by e-mail from its page."
+msgstr "Chaque fiche générée est gardée ici avec ses fichiers, telle qu'elle a été remise, et peut être envoyée par courriel depuis sa page."
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_hint_notes
+msgid "Expense Scan Hint Notes"
+msgstr "Indication sous les notes"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__expense_count
+msgid "Expense count"
+msgstr "Nombre de dépenses"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__field
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_search
+msgid "Field"
+msgstr "Champ"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__attachment_ids
+msgid "Files"
+msgstr "Fichiers"
+
+#. module: expense_scan
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_correction__outcome__filled
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_search
+msgid "Filled in"
+msgstr "Saisi"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_follower_ids
+msgid "Followers"
+msgstr "Abonnés"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Abonnés (Partenaires)"
+
+#. module: expense_scan
+#: model_terms:ir.actions.act_window,help:expense_scan.expense_scan_correction_action
+msgid ""
+"For each field the scan fills in, the share of submitted\n"
+"               expenses where a person had to change it: the receipts the\n"
+"               reading gets wrong, by category or by employee."
+msgstr "Pour chaque champ que le scan remplit, la part des dépenses soumises où une personne a dû le changer : les justificatifs que la lecture comprend mal, par catégorie ou par employé."
+
+#. module: expense_scan
+#: model:ir.actions.act_window,name:expense_scan.expense_scan_sheet_archive_action
+#: model:ir.ui.menu,name:expense_scan.menu_expense_scan_sheet_archives
+msgid "Generated Sheets"
+msgstr "Fiches générées"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__user_id
+msgid "Generated by"
+msgstr "Générée par"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_search
+msgid "Generated by me"
+msgstr "Générées par moi"
+
+#. module: expense_scan
+#: model:ir.model,name:expense_scan.model_expense_scan_sheet_archive
+msgid "Generated expense sheet"
+msgstr "Fiche de frais générée"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_form
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_list
+msgid "Generated on"
+msgstr "Générée le"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense.py:0
+msgid "Guests"
+msgstr "Invités"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__has_message
+msgid "Has Message"
+msgstr "A un message"
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_sheet_archive__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si coché, de nouveaux messages demandent votre attention."
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_sheet_archive__message_has_error
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_sheet_archive__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si coché, certains messages ont une erreur de livraison."
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_is_follower
+msgid "Is Follower"
+msgstr "Est un abonné"
+
+#. module: expense_scan
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_correction__outcome__kept
+msgid "Kept"
+msgstr "Gardé"
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_correction__outcome
+msgid "Kept: the value read is the final one. Corrected: a person changed it. Filled in: nothing was read, a person entered it."
+msgstr "Gardé : la valeur lue est la valeur finale. Corrigé : une personne l'a changée. Saisi : rien n'a été lu, une personne l'a saisie."
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_error
+msgid "Message Delivery error"
+msgstr "Erreur d'envoi du message"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_ids
+msgid "Messages"
+msgstr "Messages"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_search
+msgid "Month"
+msgstr "Mois"
+
+#. module: expense_scan
+#: model_terms:ir.actions.act_window,help:expense_scan.expense_scan_sheet_archive_action
+msgid "No expense sheet generated yet"
+msgstr "Aucune fiche de frais générée pour l'instant"
+
+#. module: expense_scan
+#: model_terms:ir.actions.act_window,help:expense_scan.expense_scan_correction_action
+msgid "No submitted scanned expense yet"
+msgstr "Aucune dépense scannée soumise pour l'instant"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Nombre d'actions"
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_covers
+msgid "Number of covers printed on the restaurant bill. Two or more make a business meal, whose guests are named in the notes."
+msgstr "Nombre de couverts imprimé sur la note du restaurant. À partir de deux, c'est une invitation, dont les invités sont nommés dans les notes."
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_error_counter
+msgid "Number of errors"
+msgstr "Nombre d'erreurs"
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_sheet_archive__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Nombre de messages nécessitant une action"
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_sheet_archive__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Nombre de messages avec des erreurs d'envoi"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/expense_sheet_archive.py:0
+msgid "Please find attached the expense sheet %s."
+msgstr "Veuillez trouver ci-joint la fiche de frais %s."
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__rating_ids
+msgid "Ratings"
+msgstr "Évaluations"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Erreur d'envoi SMS"
+
+#. module: expense_scan
+#: model:ir.actions.act_window,name:expense_scan.expense_scan_correction_action
+#: model:ir.model,name:expense_scan.model_expense_scan_correction
+#: model:ir.ui.menu,name:expense_scan.menu_expense_scan_corrections
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_graph
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_pivot
+msgid "Scan corrections"
+msgstr "Corrections du scan"
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_queued
 msgid "Scan waiting for its turn"
 msgstr "Scan en attente de son tour"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_form
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_wizard_view_form
+msgid "Send by e-mail"
+msgstr "Envoyer par courriel"
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_correction__corrected_rate
+msgid "Share of the readings changed by a person, filled-in fields included."
+msgstr "Part des lectures changées par une personne, champs saisis compris."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
@@ -716,6 +971,8 @@ msgstr "Sociétés"
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy__company_id
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__company_id
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_export_column__value__societe
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__company_id
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__company_id
 msgid "Company"
 msgstr "Société"
 
@@ -780,6 +1037,7 @@ msgstr "Créer la facture quand même"
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy_rule__create_uid
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__create_uid
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__create_uid
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__create_uid
 msgid "Created by"
 msgstr "Créé par"
 
@@ -790,6 +1048,7 @@ msgstr "Créé par"
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy_rule__create_date
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__create_date
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__create_date
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__create_date
 msgid "Created on"
 msgstr "Créé le"
 
@@ -807,6 +1066,8 @@ msgstr "Ticket recadré"
 #. module: expense_scan
 #: model:ir.model,name:expense_scan.model_res_currency
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__currency_id
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__currency_id
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_correction__field__currency_id
 msgid "Currency"
 msgstr "Devise"
 
@@ -869,6 +1130,9 @@ msgstr "Taux de référence quotidiens pour les devises actives : un ticket ét
 #: code:addons/expense_scan/models/hr_expense.py:0
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_export_column__value__date
 #: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__date
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_correction__field__date
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_search
 msgid "Date"
 msgstr "Date"
 
@@ -987,6 +1251,8 @@ msgstr "Dîner"
 #: model:ir.model.fields,field_description:expense_scan.field_res_config_settings__display_name
 #: model:ir.model.fields,field_description:expense_scan.field_res_currency__display_name
 #: model:ir.model.fields,field_description:expense_scan.field_res_currency_rate__display_name
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__display_name
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__display_name
 msgid "Display Name"
 msgstr "Nom d'affichage"
 
@@ -1008,6 +1274,8 @@ msgstr "Durée (s)"
 #. module: expense_scan
 #: model:ir.model,name:expense_scan.model_hr_employee
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_export_column__value__salarie
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__employee_id
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_search
 msgid "Employee"
 msgstr "Salarié"
 
@@ -1019,6 +1287,7 @@ msgstr "Dépenses du salarié"
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__employee_ids
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_wizard_view_form
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__employee_ids
 msgid "Employees"
 msgstr "Salariés"
 
@@ -1126,6 +1395,7 @@ msgstr "Agrandir l'aperçu"
 
 #. module: expense_scan
 #: model:ir.model,name:expense_scan.model_hr_expense
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__expense_id
 msgid "Expense"
 msgstr "Dépense"
 
@@ -1225,7 +1495,7 @@ msgstr "Modèle Excel des frais"
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_project_project__expense_scan_sheet_template_id
 msgid "Excel model of the table of the re-invoiced expenses that goes with the e-mail of the customer invoices (for example the model the customer asks for). Empty: no Excel table."
-msgstr "Modèle Excel du tableau des frais refacturés joint au courriel des factures clients (par exemple le modèle que demande le client). Vide : pas de tableau Excel."
+msgstr "Modèle Excel du tableau des frais refacturés joint au courriel des factures clients (par exemple le modèle que demande le client). Vide : pas de tableau Excel."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_project_project__expense_scan_budget
@@ -1292,6 +1562,7 @@ msgstr "Règles de dépenses"
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/expense_sheet.py:0
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__name
 msgid "Expense sheet"
 msgstr "Fiche de frais"
 
@@ -1338,6 +1609,8 @@ msgstr "Dépense dont cette écriture corrige la TVA récupérable. L'extourne d
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_wizard_view_form
 #: model_terms:ir.ui.view,arch_db:expense_scan.project_project_view_form_expense_budget
 #: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__expense_ids
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_form
 msgid "Expenses"
 msgstr "Dépenses"
 
@@ -1364,6 +1637,7 @@ msgstr "Dépenses qui retiennent la facture"
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense_team.py:0
 #: code:addons/expense_scan/models/project_project.py:0
+#: code:addons/expense_scan/models/expense_sheet_archive.py:0
 msgid "Expenses of %s"
 msgstr "Dépenses de %s"
 
@@ -1514,6 +1788,7 @@ msgstr "Module libre, développé sur le temps de son auteur"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__date_from
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__date_from
 msgid "From"
 msgstr "Du"
 
@@ -1588,6 +1863,8 @@ msgstr "J'ai vérifié auprès de mon comptable"
 #: model:ir.model.fields,field_description:expense_scan.field_res_config_settings__id
 #: model:ir.model.fields,field_description:expense_scan.field_res_currency__id
 #: model:ir.model.fields,field_description:expense_scan.field_res_currency_rate__id
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__id
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__id
 msgid "ID"
 msgstr "ID"
 
@@ -1663,6 +1940,7 @@ msgstr "Ordinateurs portables, tablettes et fenêtres en demi-écran : dès 768
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy_rule__write_uid
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__write_uid
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__write_uid
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__write_uid
 msgid "Last Updated by"
 msgstr "Dernière mise à jour par"
 
@@ -1673,6 +1951,7 @@ msgstr "Dernière mise à jour par"
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy_rule__write_date
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__write_date
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__write_date
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__write_date
 msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
@@ -1794,6 +2073,7 @@ msgstr "Repas"
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_merchant
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_export_column__value__enseigne
 #: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_correction__field__merchant
 msgid "Merchant"
 msgstr "Enseigne"
 
@@ -2216,6 +2496,8 @@ msgstr "Par nuitée"
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__period
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_wizard_view_form
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_form
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_search
 msgid "Period"
 msgstr "Période"
 
@@ -3426,6 +3708,7 @@ msgstr "Cochez la case pour confirmer que vous avez vérifié auprès de votre c
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__date_to
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__date_to
 msgid "To"
 msgstr "Au"
 
@@ -3461,6 +3744,9 @@ msgstr "Péages et parkings"
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense.py:0
 #: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__total_amount
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_correction__field__total_amount_currency
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_list
 msgid "Total"
 msgstr "Total"
 
@@ -3639,6 +3925,16 @@ msgid "Warnings on expenses that go beyond your rules, and Excel templates for t
 msgstr "Alertes sur les dépenses hors règles, et modèles Excel pour la fiche de frais"
 
 #. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__website_message_ids
+msgid "Website Messages"
+msgstr "Messages du site web"
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_sheet_archive__website_message_ids
+msgid "Website communication history"
+msgstr "Historique de communication du site web"
+
+#. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "What the scan may fill in on its own"
 msgstr "Ce que le scan a le droit de renseigner automatiquement"
@@ -3682,8 +3978,8 @@ msgstr "Pourquoi cette dépense dépasse les règles. Le manager la lit en valid
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_limit_projects
 #: model:ir.model.fields,help:expense_scan.field_res_config_settings__expense_scan_limit_projects
-msgid "With re-invoicing, an employee is offered the projects they manage, have a task on or are assigned to, not the whole list. A project manager and an administrator always see every project. Only the choice offered in the form is limited."
-msgstr "Avec la refacturation, le salarié se voit proposer les projets qu'il dirige, sur lesquels il a une tâche ou auxquels il est affecté, et non la liste complète. Un responsable de projet et un administrateur voient toujours tous les projets. Seul le choix proposé dans le formulaire est limité."
+msgid "With re-invoicing, an employee is offered the projects they manage, have a task on or are assigned to, not the whole list, and cannot link another one. A project manager and an administrator always see every project."
+msgstr "Avec la refacturation, le salarié se voit proposer les projets qu'il dirige, sur lesquels il a une tâche ou auxquels il est affecté, et non la liste complète, et ne peut pas en lier un autre. Un responsable de projet et un administrateur voient toujours tous les projets."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_no_vat
@@ -3803,8 +4099,20 @@ msgstr "d'après un prix au litre ou au kWh"
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense_category.py:0
+msgid "from the %s covers read"
+msgstr "d'après les %s couverts lus"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_category.py:0
 msgid "from the brand \"%s\""
 msgstr "d'après la marque « %s »"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_category.py:0
+msgid "from the entry and the exit printed on the ticket"
+msgstr "d'après l'entrée et la sortie imprimées sur le ticket"
 
 #. module: expense_scan
 #. odoo-python
@@ -3980,12 +4288,12 @@ msgstr "Dépenses par projet"
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "Follow the expenses of each project: budget, analytic account. To re-invoice them to the customer, install the Sales app."
-msgstr "Suivre les dépenses de chaque projet : budget, compte analytique. Pour les refacturer au client, installez l'application Ventes."
+msgstr "Suivre les dépenses de chaque projet : budget, compte analytique. Pour les refacturer au client, installez l'application Ventes."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
 msgid "This expense cannot be re-invoiced yet: re-invoicing goes through a sales order. To re-invoice it, install the Sales app, create the customer's order, then select that order on the project (Invoicing tab). Until then the expense is only followed in the project budget."
-msgstr "Cette dépense ne peut pas encore être refacturée : la refacturation passe par une commande de vente. Pour la refacturer, installez l'application Ventes, créez la commande du client, puis sélectionnez-la sur le projet (onglet Facturation). D'ici là, la dépense est seulement suivie dans le budget du projet."
+msgstr "Cette dépense ne peut pas encore être refacturée : la refacturation passe par une commande de vente. Pour la refacturer, installez l'application Ventes, créez la commande du client, puis sélectionnez-la sur le projet (onglet Facturation). D'ici là, la dépense est seulement suivie dans le budget du projet."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_sales

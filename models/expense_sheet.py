@@ -899,7 +899,8 @@ class ExpenseScanSheetWizard(models.TransientModel):
                 amount=formatLang(self.env, sum(selected.mapped('total_amount')),
                                   currency_obj=self.env.company.currency_id))
 
-    def action_generate(self):
+    def _expense_scan_generate(self):
+        """Build the files of the selection and keep them: ``(archive, files)``."""
         self.ensure_one()
         expenses = self._selected()
         if not expenses:
@@ -920,10 +921,25 @@ class ExpenseScanSheetWizard(models.TransientModel):
             reimbursable_only=self.scope == 'all')
         if not files:
             raise UserError(_("Nothing to produce: none of these expenses has a receipt."))
+        # Kept as generated: the sheet handed over can be found again, unchanged.
+        archive = self.env['expense.scan.sheet.archive']._expense_scan_keep(
+            expenses, files, Sheet._file_stem(expenses, _("Expense sheet")),
+            date_from=self.period and self.date_from, date_to=self.period and self.date_to)
+        return archive, files
+
+    def action_send(self):
+        """Generate, then write the e-mail that carries the files."""
+        archive, _files = self._expense_scan_generate()
+        return archive.action_expense_scan_send()
+
+    def action_generate(self):
+        self.ensure_one()
+        archive, files = self._expense_scan_generate()
         if len(files) == 1:
             name, content = files[0]
         else:
-            name = "%s.zip" % self.env['expense.scan.sheet']._file_stem(expenses, _("Expense sheets"))
+            name = "%s.zip" % self.env['expense.scan.sheet']._file_stem(
+                archive.expense_ids, _("Expense sheets"))
             content = self.env['expense.scan.sheet']._zip(files)
         self.write({'result_file': base64.b64encode(content), 'result_name': name})
         # The client downloads the file, then closes the dialog. A plain link

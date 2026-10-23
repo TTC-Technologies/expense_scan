@@ -9,7 +9,7 @@ settings, and uninstalling gives them back. The features that are optional
 """
 from datetime import date
 
-from odoo.exceptions import AccessError
+from odoo.exceptions import AccessError, ValidationError
 from odoo.tests import common, tagged
 from odoo.tools import mute_logger
 
@@ -166,6 +166,21 @@ class TestOptionalFeatures(common.TransactionCase):
         self.env.company.expense_scan_limit_projects = False
         expense.invalidate_recordset()
         self.assertEqual(expense.expense_scan_project_domain, "[]")
+
+    def test_without_the_limit_an_employee_links_any_project(self):
+        """The form offers every project: saving one is not refused."""
+        user = self.env['res.users'].create({
+            'name': "Employé Zz", 'login': 'employe_zz_free',
+            'group_ids': [(6, 0, [self.env.ref('base.group_user').id])]})
+        employee = self.env['hr.employee'].create({'name': "Employé Zz", 'user_id': user.id})
+        project = self.env['project.project'].create({'name': "Projet sans lui Zz"})
+        values = {'name': "Taxi", 'employee_id': employee.id, 'total_amount_currency': 12.0,
+                  'project_id': project.id}
+        with self.assertRaises(ValidationError):
+            self.env['hr.expense'].with_user(user).create(values)
+        self.env.company.expense_scan_limit_projects = False
+        expense = self.env['hr.expense'].with_user(user).create(values)
+        self.assertEqual(expense.project_id, project)
 
 
 @tagged('post_install', '-at_install')

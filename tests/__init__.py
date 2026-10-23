@@ -29,3 +29,5 @@ from . import test_sync_bench
 from . import test_store_readiness
 from . import test_ergonomie
 from . import test_review_fixes
+from . import test_guests
+from . import test_corrections

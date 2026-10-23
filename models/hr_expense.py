@@ -142,6 +142,7 @@ class HrExpense(models.Model):
     expense_scan_hint_tax = fields.Char(compute='_compute_expense_scan_field_hints')
     expense_scan_hint_category = fields.Char(compute='_compute_expense_scan_field_hints')
     expense_scan_hint_reinvoice = fields.Char(compute='_compute_expense_scan_field_hints')
+    expense_scan_hint_notes = fields.Char(compute='_compute_expense_scan_field_hints')
     expense_scan_todo_unplaced = fields.Boolean(compute='_compute_expense_scan_field_hints')
     expense_scan_todo_pending = fields.Boolean(
         string="Points to check still open",
@@ -260,6 +261,9 @@ class HrExpense(models.Model):
         'category': lambda expense: expense._expense_scan_changed('product_id'),
         'currency': lambda expense: expense._expense_scan_changed('currency_id'),
         'currency_rate': lambda expense: not expense._expense_scan_missing_rate(),
+        # Guests named, or the category changed: not a business meal after all.
+        'guests': lambda expense: bool((expense.description or '').strip())
+        or expense._expense_scan_changed('product_id'),
     }
     #: Field concerned by each point.
     TODO_FIELDS = {
@@ -277,6 +281,7 @@ class HrExpense(models.Model):
         'tax_amount': 'tax', 'tax_total': 'tax', 'tax_category': 'tax',
         'category': 'category',
         'reinvoice': 'reinvoice',
+        'guests': 'notes',
     }
     #: Fields whose value set by the scan is kept, to detect a later
     #: correction.
@@ -284,7 +289,7 @@ class HrExpense(models.Model):
 
     @api.depends('expense_scan_todo_codes', 'expense_scan_read_values', 'reinvoice_mode',
                  'tax_ids', 'scan_tax_amount', 'total_amount_currency', 'date',
-                 'product_id', 'currency_id')
+                 'product_id', 'currency_id', 'description')
     def _compute_expense_scan_todo_pending(self):
         for expense in self:
             expense.expense_scan_todo_pending = bool(expense._expense_scan_open_codes())
@@ -323,7 +328,7 @@ class HrExpense(models.Model):
 
     @api.depends('expense_scan_hints', 'expense_scan_todo_codes', 'expense_scan_read_values',
                  'reinvoice_mode', 'tax_ids', 'scan_tax_amount', 'total_amount_currency',
-                 'date', 'product_id', 'currency_id', 'state')
+                 'date', 'product_id', 'currency_id', 'state', 'description')
     def _compute_expense_scan_field_hints(self):
         """A hint under each field to check, as long as it needs checking.
 
@@ -342,7 +347,7 @@ class HrExpense(models.Model):
                     place = self.HINT_PLACES.get(code)
                     if place and hints.get(code):
                         texts.setdefault(place, []).append(hints[code])
-            for place in ('date', 'total', 'tax', 'category', 'reinvoice'):
+            for place in ('date', 'total', 'tax', 'category', 'reinvoice', 'notes'):
                 expense['expense_scan_hint_%s' % place] = " ".join(texts.get(place, [])) or False
             # The banner only stays for points without a field of their own
             # (scans made before the per-field hints).
@@ -1260,7 +1265,7 @@ class HrExpense(models.Model):
         'expense_scan_read_values', 'scan_engine', 'scan_duration', 'scan_score',
         'scan_detected_tax', 'expense_scan_mixed_rates', 'scan_time', 'scan_datetime',
         'scan_raw_text', 'expense_scan_merchant_read', 'expense_scan_guessed_product_id',
-        'expense_scan_category_reason')
+        'expense_scan_category_reason', 'expense_scan_covers')
 
     def _expense_scan_receipt_removed(self, kept):
         """Forget the reading of a receipt the user deleted.
@@ -1946,8 +1951,20 @@ class HrExpense(models.Model):
                           _("No exchange rate for %s in Odoo: the amount counts one "
                             "for one in the company currency until a rate is entered.",
                             code)))
-        check_category_tax = False
+        covers = values.get('expense_scan_covers') or 0
         target = self._expense_scan_target_product(values)
+        if covers >= 2 and not (self.description or '').strip():
+            # Guests at the table: their names and companies justify a
+            # business meal.
+            if self._expense_scan_is_invitation(target):
+                items.append((_("Guests"), 'guests', _(
+                    "%s covers read: a business meal. Write the names and companies "
+                    "of the guests in the notes.", covers)))
+            elif self._expense_scan_is_meal(target):
+                items.append((_("Guests"), 'guests', _(
+                    "%s covers read: for a business meal, choose its category and write "
+                    "the names and companies of the guests in the notes.", covers)))
+        check_category_tax = False
         if company.expense_scan_apply_tax and not self._expense_scan_product_no_vat(target):
             if foreign:
                 items.append((_("Foreign tax (%s), not deducted", foreign), 'tax_amount',
@@ -2018,8 +2035,10 @@ class HrExpense(models.Model):
                             "the tax read is deducted.")))
             after.update({'scan_state': 'partial', **self._expense_scan_todo_values(items)})
         # Values set by the scan, to recognise a correction later.
-        after['expense_scan_read_values'] = json.dumps({
-            name: self._expense_scan_comparable(name) for name in self.READ_VALUE_FIELDS})
+        after['expense_scan_read_values'] = json.dumps(dict({
+            name: self._expense_scan_comparable(name) for name in self.READ_VALUE_FIELDS},
+            # For the report of corrections only: a merchant is never kept.
+            expense_scan_merchant=self.expense_scan_merchant or False))
         after['expense_scan_manual_fields'] = ','.join(sorted(keep)) or False
         self.write(after)
         if not company.expense_scan_apply_tax and 'scan_tax_amount' not in keep:

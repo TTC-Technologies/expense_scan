@@ -115,6 +115,17 @@ class TestLexicon(common.TransactionCase):
         self.assertTrue(lexicon.fuel_unit(["Energy: 23.3170 kWh"]))
         self.assertFalse(lexicon.fuel_unit(["Eau minérale 1,5L 0,80", "TOTAL 0,80"]))
 
+    def test_entry_and_exit_make_a_toll_or_a_car_park(self):
+        from ..ocr import categorize
+        toll = ["ASFLieu-dit A7 CG", "RECU", "Sortie Date 12/06/25 ST SELVE",
+                "Entree TARBES/OUEST", "PRIX TTC 37,00 euros"]
+        self.assertTrue(lexicon.entry_and_exit(toll))
+        scores, reasons, _brand = categorize.score(toll, {}, {'toll_parking': 'park'})
+        self.assertEqual(lexicon.pick_category(scores), 'park')
+        self.assertEqual(reasons['park'][0][1][0], categorize.ENTRY_EXIT)
+        # A starter on a menu is no entry of a car park.
+        self.assertFalse(lexicon.entry_and_exit(["L'OLIVIER", "1 x ENTREE PLAT 17,50"]))
+
     def test_close_scores_decide_nothing(self):
         categories = {'lodging': ["hotel"], 'meal': ["restaurant"]}
         lines = ["HOTEL DU PARC", "RESTAURANT"]

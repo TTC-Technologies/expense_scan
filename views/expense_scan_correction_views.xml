@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2026 T.T.C. SAS
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0). -->
+<odoo>
+
+    <!-- What people correct after the scan, field by field: where the
+         reading goes wrong on the company's own receipts. -->
+    <record id="expense_scan_correction_view_pivot" model="ir.ui.view">
+        <field name="name">expense.scan.correction.pivot</field>
+        <field name="model">expense.scan.correction</field>
+        <field name="arch" type="xml">
+            <pivot string="Scan corrections" sample="1">
+                <field name="field" type="row"/>
+                <field name="outcome" type="col"/>
+                <field name="corrected_rate" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="expense_scan_correction_view_graph" model="ir.ui.view">
+        <field name="name">expense.scan.correction.graph</field>
+        <field name="model">expense.scan.correction</field>
+        <field name="arch" type="xml">
+            <graph string="Scan corrections" type="bar" sample="1">
+                <field name="field"/>
+                <field name="corrected_rate" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="expense_scan_correction_view_list" model="ir.ui.view">
+        <field name="name">expense.scan.correction.list</field>
+        <field name="model">expense.scan.correction</field>
+        <field name="arch" type="xml">
+            <list create="0" edit="0" delete="0">
+                <field name="date"/>
+                <field name="expense_id"/>
+                <field name="employee_id"/>
+                <field name="product_id"/>
+                <field name="field"/>
+                <field name="outcome" widget="badge"
+                       decoration-success="outcome == 'kept'"
+                       decoration-warning="outcome == 'corrected'"
+                       decoration-info="outcome == 'filled'"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="expense_scan_correction_view_search" model="ir.ui.view">
+        <field name="name">expense.scan.correction.search</field>
+        <field name="model">expense.scan.correction</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="employee_id"/>
+                <field name="product_id"/>
+                <field name="expense_id"/>
+                <filter string="Corrected" name="corrected" domain="[('outcome', '=', 'corrected')]"/>
+                <filter string="Filled in" name="filled" domain="[('outcome', '=', 'filled')]"/>
+                <separator/>
+                <filter string="Date" name="date" date="date"/>
+                <group>
+                    <filter string="Field" name="by_field" context="{'group_by': 'field'}"/>
+                    <filter string="Category" name="by_category" context="{'group_by': 'product_id'}"/>
+                    <filter string="Employee" name="by_employee" context="{'group_by': 'employee_id'}"/>
+                    <filter string="Month" name="by_month" context="{'group_by': 'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="expense_scan_correction_action" model="ir.actions.act_window">
+        <field name="name">Scan corrections</field>
+        <field name="res_model">expense.scan.correction</field>
+        <field name="view_mode">pivot,graph,list</field>
+        <field name="search_view_id" ref="expense_scan_correction_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No submitted scanned expense yet</p>
+            <p>For each field the scan fills in, the share of submitted
+               expenses where a person had to change it: the receipts the
+               reading gets wrong, by category or by employee.</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_expense_scan_corrections"
+              name="Scan corrections"
+              parent="hr_expense.menu_hr_expense_reports"
+              action="expense_scan_correction_action"
+              groups="hr_expense.group_hr_expense_manager"
+              sequence="20"/>
+
+</odoo>

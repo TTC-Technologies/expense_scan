@@ -60,7 +60,14 @@ what is missing:
   expenses of a project add up on one line of its sales order, and an
   expense budget can be followed on the project.
 - **Expense sheets**: PDF summary with tax by rate and numbered receipts,
-  Excel export on your own template.
+  Excel export on your own template; each sheet generated is kept with its
+  files and can be sent by e-mail.
+- **Business meals**: a restaurant bill printing two covers or more is filed
+  in your business meal category, and the names and companies of the guests
+  are asked in the notes before it can be submitted.
+- **Scan corrections** (*Reporting*): for each field the scan fills in, the
+  share of submitted expenses where a person had to change it, by category
+  or employee.
 - **Expense rules**: meal, daily and hotel ceilings, words to watch; a
   warning shows on the expense and a filter gathers them.
 - **VAT correction**: once an expense is posted, an accounting manager can
@@ -227,7 +234,15 @@ and its own requirements.
 - **Expense sheet** (button in place of "Print" on the list): PDF summary
   with tax by rate and numbered receipts, Excel export on a template
   (*Configuration → Excel Export Templates*), one sheet per employee, gathered in
-  an archive when there are several.
+  an archive when there are several. Every sheet generated is kept under
+  *My Expenses → Generated Sheets*, as it was handed over; *Send by e-mail*,
+  in the dialog or on the sheet, writes the e-mail with the files attached,
+  and the sheet's history keeps it.
+- **Business meals**: a category whose name says so ("Invitation", "Business
+  meal", "Bewirtung", "Repas client"...) receives the restaurant bills
+  printing two covers or more ("Couverts : 2", "Gäste 2", "Coperti 2"). The
+  notes must then name the guests and their companies before the expense is
+  submitted. Without such a category, the scan only suggests it.
 - **Expense rules** (*Configuration → Expense Rules*): ceilings per meal, per
   day or per night, words to watch. The warning shows at the top of the
   expense, with a sign in the list (⚠ breach, ℹ︎ point to check) that "Save and close"
@@ -373,6 +388,22 @@ The preprocessing tests skip themselves if OpenCV is not installed.
 ## Licence
 
 LGPL-3, like Odoo Community.
+
+### Data from other sources
+
+- **Brands** (`ocr/brands_europe.json`): the European hotels, fuel stations,
+  restaurants, shops and car rentals of OpenStreetMap's
+  [Name Suggestion Index](https://github.com/osmlab/name-suggestion-index),
+  BSD 3-Clause; its licence is in `ocr/BRANDS_LICENSE.md`.
+- **OCR models**: the PP-OCR models of
+  [RapidOCR](https://github.com/RapidAI/RapidOCR), Apache 2.0. They are not
+  shipped with the module: the library downloads them on the first scan.
+- **Sirene** (France, optional): the database of establishments of INSEE,
+  published on data.gouv.fr under the Licence Ouverte 2.0 (Etalab). It is
+  only downloaded when an administrator loads it.
+- **Exchange rates** (optional): the euro reference rates of the European
+  Central Bank, free to reuse with the source quoted.
+- The category icons are drawn for the module, in the style of Odoo's own.
 
 ## Supporting the project
 

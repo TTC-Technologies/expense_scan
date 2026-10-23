@@ -36,6 +36,12 @@ msgstr "\"%(cell)s\": en kolonnebokstav (B) eller en celle (K4)."
 
 #. module: expense_scan
 #. odoo-python
+#: code:addons/expense_scan/models/hr_expense_category.py:0
+msgid "\"%(expense)s\" is a business meal for %(covers)s covers: write the names and companies of the guests in the notes before submitting it."
+msgstr "«%(expense)s» er et representasjonsmåltid for %(covers)s kuverter: skriv gjestenes navn og firmaer i notatene før du sender det inn."
+
+#. module: expense_scan
+#. odoo-python
 #: code:addons/expense_scan/models/hr_expense_nights.py:0
 msgid "\"%(expense)s\" is in the \"%(category)s\" category, which requires the number of nights. Enter it before saving."
 msgstr "\"%(expense)s\" hører til kategorien \"%(category)s\", som krever antall netter. Fyll det inn før du lagrer."
@@ -50,6 +56,28 @@ msgstr "\"%(value)s\" kan ikke stå i %(where)s (%(cell)s)."
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "\"My Expenses\" and \"Expenses to Process\" start with the \"Current month\" filter."
 msgstr "\"Utleggene mine\" og \"Utgifter å behandle\" starter med filteret \"Inneværende måned\"."
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense.py:0
+msgid "%s covers read: a business meal. Write the names and companies of the guests in the notes."
+msgstr "%s kuverter lest: et representasjonsmåltid. Skriv gjestenes navn og firmaer i notatene."
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense.py:0
+msgid "%s covers read: for a business meal, choose its category and write the names and companies of the guests in the notes."
+msgstr "%s kuverter lest: for et representasjonsmåltid, velg kategorien og skriv gjestenes navn og firmaer i notatene."
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_needaction
+msgid "Action Needed"
+msgstr "Handling påkrevet"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__outcome
+msgid "After the scan"
+msgstr "Etter skanningen"
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__reinvoice_mode
@@ -329,6 +357,7 @@ msgstr "<span class=\"o_stat_text\">Utlegg</span>"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_wizard_view_form
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_form
 msgid "<span>to</span>"
 msgstr "<span>til</span>"
 
@@ -491,6 +520,11 @@ msgid "Attachment"
 msgstr "Vedlegg"
 
 #. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_attachment_count
+msgid "Attachment Count"
+msgstr "Antall vedlegg"
+
+#. module: expense_scan
 #: model:ir.model.fields.selection,name:expense_scan.selection__res_company__expense_scan_engine__auto
 msgid "Automatic (best available)"
 msgstr "Automatisk (beste tilgjengelige)"
@@ -599,6 +633,9 @@ msgstr "Kategorier"
 #: code:addons/expense_scan/models/hr_expense.py:0
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_export_column__value__categorie
 #: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__product_id
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_correction__field__product_id
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_search
 msgid "Category"
 msgstr "Kategori"
 
@@ -632,9 +669,227 @@ msgid "Category recognised"
 msgstr "Gjenkjent kategori"
 
 #. module: expense_scan
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_correction__outcome__corrected
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_search
+msgid "Corrected"
+msgstr "Rettet"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__corrected_rate
+msgid "Corrected (%)"
+msgstr "Rettet (%)"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_covers
+msgid "Covers read"
+msgstr "Leste kuverter"
+
+#. module: expense_scan
+#: model_terms:ir.actions.act_window,help:expense_scan.expense_scan_sheet_archive_action
+msgid ""
+"Every sheet generated is kept here with its files, as it was\n"
+"               handed over, and can be sent by e-mail from its page."
+msgstr "Hver utleggsrapport som lages, lagres her med filene sine, slik den ble levert, og kan sendes på e-post fra siden sin."
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_hint_notes
+msgid "Expense Scan Hint Notes"
+msgstr "Hint under notatene"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__expense_count
+msgid "Expense count"
+msgstr "Antall utgifter"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__field
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_search
+msgid "Field"
+msgstr "Felt"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__attachment_ids
+msgid "Files"
+msgstr "Filer"
+
+#. module: expense_scan
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_correction__outcome__filled
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_search
+msgid "Filled in"
+msgstr "Fylt inn"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_follower_ids
+msgid "Followers"
+msgstr "Følgere"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Følgere (partnere)"
+
+#. module: expense_scan
+#: model_terms:ir.actions.act_window,help:expense_scan.expense_scan_correction_action
+msgid ""
+"For each field the scan fills in, the share of submitted\n"
+"               expenses where a person had to change it: the receipts the\n"
+"               reading gets wrong, by category or by employee."
+msgstr "For hvert felt skanningen fyller ut, andelen innsendte utgifter der noen måtte endre det: kvitteringene lesingen forstår feil, per kategori eller ansatt."
+
+#. module: expense_scan
+#: model:ir.actions.act_window,name:expense_scan.expense_scan_sheet_archive_action
+#: model:ir.ui.menu,name:expense_scan.menu_expense_scan_sheet_archives
+msgid "Generated Sheets"
+msgstr "Lagde utleggsrapporter"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__user_id
+msgid "Generated by"
+msgstr "Laget av"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_search
+msgid "Generated by me"
+msgstr "Laget av meg"
+
+#. module: expense_scan
+#: model:ir.model,name:expense_scan.model_expense_scan_sheet_archive
+msgid "Generated expense sheet"
+msgstr "Laget utleggsrapport"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_form
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_list
+msgid "Generated on"
+msgstr "Laget den"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense.py:0
+msgid "Guests"
+msgstr "Gjester"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__has_message
+msgid "Has Message"
+msgstr "Har melding"
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_sheet_archive__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Hvis haket av, vil nye meldinger kreve din oppmerksomhet."
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_sheet_archive__message_has_error
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_sheet_archive__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Hvis haket av, har enkelte meldinger leveringsfeil."
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_is_follower
+msgid "Is Follower"
+msgstr "Er følger"
+
+#. module: expense_scan
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_correction__outcome__kept
+msgid "Kept"
+msgstr "Beholdt"
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_correction__outcome
+msgid "Kept: the value read is the final one. Corrected: a person changed it. Filled in: nothing was read, a person entered it."
+msgstr "Beholdt: den leste verdien er den endelige. Rettet: noen endret den. Fylt inn: ingenting ble lest, noen fylte den inn."
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_error
+msgid "Message Delivery error"
+msgstr "Melding ved leveringsfeil"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_ids
+msgid "Messages"
+msgstr "Meldinger"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_search
+msgid "Month"
+msgstr "Måned"
+
+#. module: expense_scan
+#: model_terms:ir.actions.act_window,help:expense_scan.expense_scan_sheet_archive_action
+msgid "No expense sheet generated yet"
+msgstr "Ingen utleggsrapport laget ennå"
+
+#. module: expense_scan
+#: model_terms:ir.actions.act_window,help:expense_scan.expense_scan_correction_action
+msgid "No submitted scanned expense yet"
+msgstr "Ingen innsendt skannet utgift ennå"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Antall handlinger"
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_covers
+msgid "Number of covers printed on the restaurant bill. Two or more make a business meal, whose guests are named in the notes."
+msgstr "Antall kuverter trykt på restaurantregningen. Fra to er det et representasjonsmåltid, der gjestene oppgis i notatene."
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_error_counter
+msgid "Number of errors"
+msgstr "Antall feil"
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_sheet_archive__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Antall beskjeder som trenger oppfølging"
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_sheet_archive__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Antall meldinger med leveringsfeil"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/expense_sheet_archive.py:0
+msgid "Please find attached the expense sheet %s."
+msgstr "Vedlagt finner du utleggsrapporten %s."
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__rating_ids
+msgid "Ratings"
+msgstr "Vurderinger"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "SMS Leveringsfeil"
+
+#. module: expense_scan
+#: model:ir.actions.act_window,name:expense_scan.expense_scan_correction_action
+#: model:ir.model,name:expense_scan.model_expense_scan_correction
+#: model:ir.ui.menu,name:expense_scan.menu_expense_scan_corrections
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_graph
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_pivot
+msgid "Scan corrections"
+msgstr "Skanningsrettelser"
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_queued
 msgid "Scan waiting for its turn"
 msgstr "Skanning venter på tur"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_form
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_wizard_view_form
+msgid "Send by e-mail"
+msgstr "Send på e-post"
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_correction__corrected_rate
+msgid "Share of the readings changed by a person, filled-in fields included."
+msgstr "Andel av lesingene endret av en person, utfylte felt medregnet."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
@@ -716,6 +971,8 @@ msgstr "Firmaer"
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy__company_id
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__company_id
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_export_column__value__societe
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__company_id
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__company_id
 msgid "Company"
 msgstr "Firma"
 
@@ -780,6 +1037,7 @@ msgstr "Opprett fakturaen likevel"
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy_rule__create_uid
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__create_uid
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__create_uid
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__create_uid
 msgid "Created by"
 msgstr "Opprettet av"
 
@@ -790,6 +1048,7 @@ msgstr "Opprettet av"
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy_rule__create_date
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__create_date
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__create_date
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__create_date
 msgid "Created on"
 msgstr "Opprettet"
 
@@ -807,6 +1066,8 @@ msgstr "Beskåret kvittering"
 #. module: expense_scan
 #: model:ir.model,name:expense_scan.model_res_currency
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__currency_id
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__currency_id
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_correction__field__currency_id
 msgid "Currency"
 msgstr "Valuta"
 
@@ -869,6 +1130,9 @@ msgstr "Daglige referansekurser for de aktive valutaene: en utenlandsk kvitterin
 #: code:addons/expense_scan/models/hr_expense.py:0
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_export_column__value__date
 #: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__date
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_correction__field__date
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_search
 msgid "Date"
 msgstr "Dato"
 
@@ -987,6 +1251,8 @@ msgstr "Middag"
 #: model:ir.model.fields,field_description:expense_scan.field_res_config_settings__display_name
 #: model:ir.model.fields,field_description:expense_scan.field_res_currency__display_name
 #: model:ir.model.fields,field_description:expense_scan.field_res_currency_rate__display_name
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__display_name
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__display_name
 msgid "Display Name"
 msgstr "Visningsnavn"
 
@@ -1008,6 +1274,8 @@ msgstr "Varighet (s)"
 #. module: expense_scan
 #: model:ir.model,name:expense_scan.model_hr_employee
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_export_column__value__salarie
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__employee_id
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_correction_view_search
 msgid "Employee"
 msgstr "Ansatt"
 
@@ -1019,6 +1287,7 @@ msgstr "Den ansattes utlegg"
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__employee_ids
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_wizard_view_form
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__employee_ids
 msgid "Employees"
 msgstr "Ansatte"
 
@@ -1126,6 +1395,7 @@ msgstr "Forstørr forhåndsvisningen"
 
 #. module: expense_scan
 #: model:ir.model,name:expense_scan.model_hr_expense
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__expense_id
 msgid "Expense"
 msgstr "Utlegg"
 
@@ -1292,6 +1562,7 @@ msgstr "Utleggsregler"
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/expense_sheet.py:0
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__name
 msgid "Expense sheet"
 msgstr "Utleggsrapport"
 
@@ -1338,6 +1609,8 @@ msgstr "Utlegg hvis fradragsberettigede mva dette bilaget korrigerer. En reverse
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_wizard_view_form
 #: model_terms:ir.ui.view,arch_db:expense_scan.project_project_view_form_expense_budget
 #: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__expense_ids
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_form
 msgid "Expenses"
 msgstr "Utlegg"
 
@@ -1364,6 +1637,7 @@ msgstr "Utlegg som holder tilbake fakturaen"
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense_team.py:0
 #: code:addons/expense_scan/models/project_project.py:0
+#: code:addons/expense_scan/models/expense_sheet_archive.py:0
 msgid "Expenses of %s"
 msgstr "Utlegg for %s"
 
@@ -1514,6 +1788,7 @@ msgstr "Fri modul, utviklet på fritiden til utvikleren"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__date_from
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__date_from
 msgid "From"
 msgstr "Fra"
 
@@ -1588,6 +1863,8 @@ msgstr "Jeg har sjekket med regnskapsføreren min"
 #: model:ir.model.fields,field_description:expense_scan.field_res_config_settings__id
 #: model:ir.model.fields,field_description:expense_scan.field_res_currency__id
 #: model:ir.model.fields,field_description:expense_scan.field_res_currency_rate__id
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__id
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__id
 msgid "ID"
 msgstr "ID"
 
@@ -1663,6 +1940,7 @@ msgstr "Bærbare datamaskiner, nettbrett og halvskjermvinduer: fra 768 px bredde
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy_rule__write_uid
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__write_uid
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__write_uid
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__write_uid
 msgid "Last Updated by"
 msgstr "Sist oppdatert av"
 
@@ -1673,6 +1951,7 @@ msgstr "Sist oppdatert av"
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy_rule__write_date
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__write_date
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__write_date
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__write_date
 msgid "Last Updated on"
 msgstr "Sist oppdatert"
 
@@ -1790,6 +2069,7 @@ msgstr "Måltider"
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_merchant
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_export_column__value__enseigne
 #: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_correction__field__merchant
 msgid "Merchant"
 msgstr "Brukersted"
 
@@ -2212,6 +2492,8 @@ msgstr "Per natt"
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__period
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_wizard_view_form
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_form
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_search
 msgid "Period"
 msgstr "Periode"
 
@@ -3413,6 +3695,7 @@ msgstr "Kryss av i boksen for å bekrefte at du har sjekket med regnskapsførere
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__date_to
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__date_to
 msgid "To"
 msgstr "Til"
 
@@ -3448,6 +3731,9 @@ msgstr "Bompenger og parkering"
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense.py:0
 #: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__total_amount
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_correction__field__total_amount_currency
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_list
 msgid "Total"
 msgstr "Totalt"
 
@@ -3626,6 +3912,16 @@ msgid "Warnings on expenses that go beyond your rules, and Excel templates for t
 msgstr "Advarsler om utlegg som går utover reglene dine, og Excel-maler for utleggsrapporten"
 
 #. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__website_message_ids
+msgid "Website Messages"
+msgstr "Meldinger fra nettsted"
+
+#. module: expense_scan
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_sheet_archive__website_message_ids
+msgid "Website communication history"
+msgstr "Kommunikasjonshistorikk for nettsted"
+
+#. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "What the scan may fill in on its own"
 msgstr "Hva skanningen kan fylle ut selv"
@@ -3669,8 +3965,8 @@ msgstr "Hvorfor utlegget går utover reglene. Lederen leser det når utlegget go
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_limit_projects
 #: model:ir.model.fields,help:expense_scan.field_res_config_settings__expense_scan_limit_projects
-msgid "With re-invoicing, an employee is offered the projects they manage, have a task on or are assigned to, not the whole list. A project manager and an administrator always see every project. Only the choice offered in the form is limited."
-msgstr "Ved viderefakturering får den ansatte tilbud om prosjektene vedkommende leder, har en oppgave på eller er tildelt, ikke hele listen. En prosjektleder og en administrator ser alltid alle prosjekter. Bare valget i skjemaet er begrenset."
+msgid "With re-invoicing, an employee is offered the projects they manage, have a task on or are assigned to, not the whole list, and cannot link another one. A project manager and an administrator always see every project."
+msgstr "Ved viderefakturering får den ansatte tilbud om prosjektene vedkommende leder, har en oppgave på eller er tildelt, ikke hele listen, og kan ikke koble til et annet. En prosjektleder og en administrator ser alltid alle prosjekter."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_no_vat
@@ -3790,8 +4086,20 @@ msgstr "ut fra en pris per liter eller kWh"
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense_category.py:0
+msgid "from the %s covers read"
+msgstr "ut fra de %s leste kuvertene"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_category.py:0
 msgid "from the brand \"%s\""
 msgstr "ut fra merket \"%s\""
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_category.py:0
+msgid "from the entry and the exit printed on the ticket"
+msgstr "ut fra inn- og utkjøringen trykt på billetten"
 
 #. module: expense_scan
 #. odoo-python
