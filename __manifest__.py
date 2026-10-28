@@ -28,17 +28,19 @@ receipts never leave the server.
 * The receipt is cropped and straightened before it is read; a manual retouch is there
   for the difficult ones.
 * Doubtful fields carry a hint; the module never approves an expense by itself.
-* Expense category recognition, receipts in several pieces, hotel nights, projects and
-  re-invoicing to the customer, expense sheets (PDF and Excel), expense rules and
-  policies, exchange rates of the European Central Bank, 11 interface languages.
+* Expense category recognition, receipts in several pieces, hotel nights, business meals,
+  mileage by route with its map, projects and re-invoicing to the customer, expense
+  sheets (PDF and Excel), expense rules and policies, exchange rates of the European
+  Central Bank, 11 interface languages.
 
 Requirements: the Python packages opencv-python-headless, rapidocr, onnxruntime,
 pdf2image and openpyxl, and the poppler-utils package; about 285 MB on disk with the
 OCR models (47.5 MB, downloaded once). Not for Odoo Online.
 
 Network access: the OCR models are downloaded once; the public reference rates of the
-European Central Bank are downloaded daily (one switch in the settings). Nothing is
-sent out and no data of yours leaves the server.
+European Central Bank are downloaded daily (one switch in the settings). For mileage by
+route only, the places typed are looked up on OpenStreetMap (Nominatim, OSRM; your own
+servers can be set instead). Receipts, their texts and amounts never leave the server.
 
 Free module, LGPL-3.
 """,
