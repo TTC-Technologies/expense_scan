@@ -2,13 +2,14 @@
 # Copyright 2026 T.T.C. SAS
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
 {
-    'name': "Expense Receipt Scanner (local OCR and AI)",
+    'name': "Expense Receipt Scanner",
     'version': '19.0.3.4.1',
     # The store search reads only the name and the summary, as exact phrases: they carry the
-    # words people type (expense OCR, receipt OCR, expense scanner, scan receipts).
-    'summary': "Expense scanner with receipt OCR on your own server: scan receipts with a phone and the expense "
-               "fills itself in (merchant, date, total, VAT, category). Expense OCR by a local AI, no API key, "
-               "no fee per scan.",
+    # words people type (expense OCR, receipt OCR, expense scanner, scan receipts, local OCR).
+    # The store asks for a name of 25 characters at most.
+    'summary': "Expense scanner with receipt OCR: scan receipts with a phone and the expense fills itself in "
+               "(merchant, date, total, VAT, category). Local OCR and AI on your own server: expense OCR with "
+               "no API key, no fee per scan.",
     'description': """
 Expense Receipt Scanner: scan receipts with local OCR and AI
 ============================================================
