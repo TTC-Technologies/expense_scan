@@ -204,6 +204,11 @@ class HrExpense(models.Model):
                 quantity = values.get('expense_scan_route_km', expense.expense_scan_route_km) * factor
                 if abs(quantity - expense.quantity) > 0.001:
                     values['quantity'] = quantity
+            # The form names the expense as it goes; an import or another caller does not.
+            if expense._expense_scan_route_may_rename():
+                name = expense._expense_scan_route_name()
+                if name != expense.name:
+                    values.update(name=name, expense_scan_route_name=name)
             if values:
                 expense.write(values)
             try:

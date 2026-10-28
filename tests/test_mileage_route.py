@@ -189,6 +189,34 @@ class TestMileageRoute(common.TransactionCase):
         self.assertEqual(expense.quantity, 150.8)
         self.assertEqual(len([url for url in fake.urls if "/route/v1/" in url]), routes)
 
+    def test_an_expense_created_elsewhere_is_named_after_its_route(self):
+        """An import names the expense after its category, as Odoo does: the route renames it."""
+        fake, patched = self.fake()
+        with patched:
+            expense = self.env['hr.expense'].create({
+                'name': self.mileage.name, 'employee_id': self.employee.id, 'product_id': self.mileage.id,
+                'expense_scan_route_from_id': self.station.id,
+                'expense_scan_route_to_id': self.albi.id})
+            self.assertEqual(expense.name, "Gare Matabiau – Albi")
+            expense.expense_scan_round_trip = True
+            self.assertTrue(expense.name.startswith("Gare Matabiau – Albi, "), expense.name)
+            named = self.env['hr.expense'].create({
+                'name': "Visite chantier", 'employee_id': self.employee.id, 'product_id': self.mileage.id,
+                'expense_scan_route_from_id': self.station.id,
+                'expense_scan_route_to_id': self.albi.id})
+        self.assertEqual(named.name, "Visite chantier", "a description written by hand stays")
+
+    def test_the_map_of_a_route_is_not_retouched(self):
+        fake, patched = self.fake()
+        with patched:
+            expense = self.env['hr.expense'].create({
+                'name': "Trajet", 'employee_id': self.employee.id, 'product_id': self.mileage.id,
+                'expense_scan_route_from_id': self.station.id,
+                'expense_scan_route_to_id': self.albi.id})
+        self.assertEqual(expense.message_main_attachment_id, expense.expense_scan_route_attachment_id)
+        with self.assertRaises(UserError):
+            expense.expense_scan_retouch_data()
+
     def test_a_place_typed_again_is_not_doubled(self):
         place_id, _name = self.env['expense.scan.place'].name_create("gare matabiau")
         self.assertEqual(place_id, self.station.id)
