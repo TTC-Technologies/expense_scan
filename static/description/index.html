@@ -88,8 +88,16 @@
                 <li><b>Projects</b>: re-invoice an expense to a project, or charge it to the project budget only;
                     the analytic account follows the project. Approved expenses add up on one line of the sales
                     order (with the Sales app), and an expense budget can be followed on the project.</li>
+                <li><b>Mileage by route</b>: from one place to another (home, office, customer, station, airport or
+                    any address), the road distance is measured, doubled for a return trip, and a map of the route
+                    is attached as the receipt. An employee's home comes from the HR file; others see only its
+                    town.</li>
+                <li><b>Business meals</b>: a restaurant bill that prints two covers or more goes to your business
+                    meals category, and the guests are named in the notes before the expense is submitted.</li>
                 <li><b>Expense sheets</b>: PDF summary with tax by rate and numbered receipts, Excel export on your
-                    own workbook.</li>
+                    own workbook. Every sheet printed is kept, and can be sent by e-mail.</li>
+                <li><b>Corrections report</b>: the fields corrected by hand after a scan, by merchant and category,
+                    to see where the reading falls short.</li>
                 <li><b>Expense rules</b>: ceilings per meal, per day or per night, words to watch. A warning shows
                     on the expense, with a sign in the list: &#9888; for a breach, &#8505;&#65038; for a point to
                     check. A justification puts the sign out; the manager reads it when approving.</li>
@@ -128,6 +136,14 @@
             <h4 class="text-center mt32">Foreign receipts, converted at the rate of their day</h4>
             <div class="text-center mt16 mb16">
                 <img src="screenshot_currency.png" alt="A Swiss receipt in francs converted at the rate of its day" class="img-fluid shadow" style="max-width:100%; border-radius:6px"/>
+            </div>
+            <h4 class="text-center mt32">Mileage by route, with its map as the receipt</h4>
+            <div class="text-center mt16 mb16">
+                <img src="screenshot_mileage.png" alt="A return trip from home to a customer: distance, duration and the map of the route attached" class="img-fluid shadow" style="max-width:100%; border-radius:6px"/>
+            </div>
+            <h4 class="text-center mt32">Three covers read: a business meal, guests to name</h4>
+            <div class="text-center mt16 mb16">
+                <img src="screenshot_business_meal.png" alt="A brasserie bill for three covers filed as a business meal, with a note asking for the guests" class="img-fluid shadow" style="max-width:100%; border-radius:6px"/>
             </div>
             <h4 class="text-center mt32">On a phone</h4>
             <div class="row">
@@ -228,6 +244,9 @@ sudo apt install poppler-utils</pre>
                     nothing is sent). The option is on by default and has one switch in the settings.</li>
                 <li>Optional: the public French Sirene register can be imported, by hand, to find the activity of a
                     merchant from its SIRET number.</li>
+                <li>Mileage by route only: the place typed for a route is looked up on OpenStreetMap's Nominatim, and
+                    the road distance is asked from an OSRM server, both public by default and replaceable by your
+                    own in the settings. Each place is looked up once, then kept.</li>
                 <li>Receipts, texts and amounts never leave the server. The module needs no activation key and keeps
                     no data of yours anywhere else.</li>
             </ul>
