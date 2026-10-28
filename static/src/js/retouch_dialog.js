@@ -41,7 +41,14 @@ function normalizeQuarter(quarter) {
 
 /** True if the expense has a receipt (image or PDF) to retouch. */
 export function hasReceipt(record) {
-    return Boolean(record.resId && record.data.message_main_attachment_id);
+    const main = idOf(record.data.message_main_attachment_id);
+    // The map of a route is drawn from the route: nothing to retouch.
+    return Boolean(record.resId && main && main !== idOf(record.data.expense_scan_route_attachment_id));
+}
+
+/** Id of a many2one value, a tuple or an object depending on the relational model. */
+function idOf(value) {
+    return Array.isArray(value) ? value[0] : value?.id || false;
 }
 
 /**

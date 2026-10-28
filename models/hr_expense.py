@@ -990,7 +990,7 @@ class HrExpense(models.Model):
             and preprocess.pdf_page_count(binary_bytes(attachment.raw)) > 1
 
     def _expense_scan_check_retouchable(self, source):
-        """Refuse the retouch of a PDF of several pages.
+        """Refuse the retouch of a PDF of several pages, or of a route map.
 
         The retouch replaces the receipt with an image of its first page:
         the other pages, often the one with the total, would be lost.
@@ -999,6 +999,9 @@ class HrExpense(models.Model):
             raise UserError(_(
                 "This PDF has several pages: it stays the receipt as it is. "
                 "Retouch applies to photos and single-page PDFs."))
+        if source == self.expense_scan_route_attachment_id:
+            # The map of a route is drawn again from the route, never retouched.
+            raise UserError(_("No receipt to retouch."))
 
     def expense_scan_retouch_data(self):
         """Starting image and settings of the last retouch, for the editor.

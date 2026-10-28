@@ -1,5 +1,13 @@
 # Changelog
 
+## 20.0.3.4.2 — 2026-10-28
+
+- Mileage by route: an expense created by an import or another program, still named after its
+  category, takes the name of its route, as in the form; a description written by hand stays.
+- The map of a route is not offered for retouch: no *Retouch* button on it, and the server refuses it.
+- Store page: mileage by route, business meals and the corrections report, with two screenshots; the
+  summary carries the words searched on the store; the network access of the routes is described.
+
 ## 20.0.3.4.1 — 2026-10-23
 
 - Mileage by route: a new expense named after its category in another language ("[KM] Kilométrage")
