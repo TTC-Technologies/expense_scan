@@ -6,6 +6,9 @@
 - Re-invoice column: a click goes from *to decide* to *no*, then *yes*; the dialog for a mixed selection
   offers the answers in the same order. After a click on a selection, the expenses stay selected, for the
   next click.
+- Automatic description: the category alone, without "on dd/mm/yyyy" (the expense has its date field). It
+  follows a change of category on an expense entered by hand too; a description written by the employee
+  stays.
 
 ## 19.0.3.4.2 — 2026-10-28
 

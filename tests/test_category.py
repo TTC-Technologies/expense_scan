@@ -7,7 +7,7 @@ The tests run on a database that already holds categories and a history:
 the words and merchants used here are made up, to avoid any clash with real
 data.
 """
-from odoo.tests import common, tagged
+from odoo.tests import Form, common, tagged
 
 from ..ocr import lexicon, parser
 from .tax_setup import ensure_fiscal_country
@@ -504,6 +504,23 @@ class TestCategoryRecognition(common.TransactionCase):
         self.assertFalse(expense._expense_scan_name_is_automatic())
         expense.name = expense._expense_scan_date_name("Zorglub", "12/09/2026")
         self.assertFalse(expense._expense_scan_name_is_automatic())
+
+    def test_the_automatic_description_has_no_date(self):
+        """The expense has its own date field: the description is the category alone."""
+        from datetime import date
+        expense = self.expense()
+        self.assertEqual(expense._expense_scan_auto_name(self.food, date(2026, 9, 12)), self.food.name)
+
+    def test_an_expense_entered_by_hand_follows_the_category_changed(self):
+        """Odoo names it after the first category chosen; a second choice renames it, not a written text."""
+        form = Form(self.env['hr.expense'].with_context(default_employee_id=self.employee.id))
+        form.product_id = self.food
+        self.assertEqual(form.name, self.food.display_name)
+        form.product_id = self.train
+        self.assertEqual(form.name, self.train.name)
+        form.name = "Visite chantier Alpha"
+        form.product_id = self.lodging
+        self.assertEqual(form.name, "Visite chantier Alpha")
 
     def fiscal_country(self, code):
         self.company.account_fiscal_country_id = self.env['res.country'].search(

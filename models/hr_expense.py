@@ -446,12 +446,13 @@ class HrExpense(models.Model):
     def _onchange_expense_scan_name(self):
         """An automatic description follows the chosen category.
 
-        "Receipt on 12/09" becomes "Toll on 12/09" when the category is Toll.
-        A description written by the employee is left alone.
+        "Receipt" becomes "Toll" when the category is Toll, for a scanned
+        expense as for one entered by hand, whose description Odoo set to the
+        first category chosen. A description written by the employee is left
+        alone.
         """
         for expense in self:
-            if expense.date and expense.scan_state != 'none' \
-                    and not expense.expense_scan_keep_name \
+            if expense.date and not expense.expense_scan_keep_name \
                     and expense._expense_scan_name_is_automatic():
                 expense.name = expense._expense_scan_auto_name(expense.product_id, expense.date)
 
@@ -2185,9 +2186,16 @@ class HrExpense(models.Model):
                 or name == (self.product_id.display_name or '') \
                 or name == (self.expense_scan_merchant or ''):
             return True
-        # "Receipt on 12/09/2026", "Toll on 12/09/2026": the name of any
-        # category (it may have changed since), followed by a date. Written
-        # in the employee's language, which may not be the current one.
+        if labels is None:
+            labels = self._expense_scan_automatic_labels()
+        # The name of a category, as set by the scan or by Odoo ("[MEALS] Meals"), maybe a category chosen
+        # before the current one.
+        if re.sub(r'^\[[^\]]*\]\s*', '', name).lower() in labels:
+            return True
+        # "Receipt on 12/09/2026", "Toll on 12/09/2026", as written before
+        # 3.4.3: the name of any category (it may have changed since),
+        # followed by a date. Written in the employee's language, which may
+        # not be the current one.
         match = next(filter(None, (re.fullmatch(pattern, name)
                                    for pattern in self._expense_scan_date_name_patterns())), None)
         if not match:
@@ -2195,8 +2203,6 @@ class HrExpense(models.Model):
         # Category name in any installed language. When it was not
         # recognised, an automatic description in English passed for the
         # purpose of a trip and spread to the neighbouring expenses.
-        if labels is None:
-            labels = self._expense_scan_automatic_labels()
         return match.group('label').strip().lower() in labels
 
     def _expense_scan_date_name_patterns(self):
@@ -2306,15 +2312,15 @@ class HrExpense(models.Model):
     def _expense_scan_auto_name(self, product, scan_date):
         """Description set automatically: the recognised category, otherwise "Receipt".
 
-        Written in the employee's language: the scan may run without a
-        language (scheduled task).
+        Without the date: the expense has its own date field. Written in the
+        employee's language: the scan may run without a language (scheduled
+        task).
         """
         lang = self.employee_id.user_id.lang or self.env.user.lang or self.env.lang
-        expense = self.with_context(lang=lang)
         company_default = (self.company_id or self.env.company)._expense_scan_default_product()
-        label = (product.with_context(lang=lang).name
-                 if product and product != company_default else expense.env._("Receipt"))
-        return expense._expense_scan_date_name(label, format_date(expense.env, scan_date))
+        if product and product != company_default:
+            return product.with_context(lang=lang).name
+        return self.with_context(lang=lang).env._("Receipt")
 
     def _expense_scan_field_values(self, result, company, foreign=None):
         """Turn the parser result into Odoo field values."""
