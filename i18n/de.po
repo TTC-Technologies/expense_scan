@@ -3881,13 +3881,6 @@ msgid "The receipt tax cannot be negative."
 msgstr "Die Belegsteuer darf nicht negativ sein."
 
 #. module: expense_scan
-#: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
-msgid ""
-"The receipts follow, in order and under the same number.\n"
-"                        Flat rates (mileage, allowance scales) have none."
-msgstr "Die Belege folgen, in dieser Reihenfolge und unter derselben Nummer. Pauschalen (Kilometer, amtliche Sätze) haben keinen."
-
-#. module: expense_scan
 #. odoo-javascript
 #: code:addons/expense_scan/static/src/js/retouch_dialog.js:0
 msgid "The retouch could not be saved. Try again."

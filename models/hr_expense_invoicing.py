@@ -514,7 +514,7 @@ class HrExpense(models.Model):
     def action_expense_scan_set_reinvoice(self, mode=None):
         """Set the re-invoicing of the expenses from the list.
 
-        Without ``mode``, the next answer in the loop "to decide, yes, no".
+        Without ``mode``, the next answer in the loop "to decide, no, yes".
         "Yes" looks for the project of the receipt date, as the scan does;
         without a project found, the expense has to be opened. An approved
         expense stays decided, so the loop skips "to decide" for it.
@@ -595,15 +595,13 @@ class HrExpense(models.Model):
         return action
 
     def _expense_scan_next_reinvoice(self):
-        """To decide, then yes, then no, then to decide again.
+        """To decide, then no, then yes, then to decide again.
 
-        An expense without a project has nothing to decide: its answer goes from no to yes.
+        An approved expense stays decided: its answer goes from yes back to no.
         """
         self.ensure_one()
-        if self.reinvoice_mode == 'none' and not self.project_id:
-            return 'project'
-        order = {'todo': 'project', 'project': 'none', 'none': 'todo'}
-        choice = order.get(self.reinvoice_mode, 'project')
+        order = {'todo': 'none', 'none': 'project', 'project': 'todo'}
+        choice = order.get(self.reinvoice_mode, 'none')
         if choice == 'todo' and self.state == 'approved':
-            choice = 'project'
+            choice = 'none'
         return choice

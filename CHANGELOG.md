@@ -1,5 +1,12 @@
 # Changelog
 
+## 19.0.3.4.3 — 2026-10-29
+
+- Expense sheet: the note under the summary ("the receipts follow, in order...") is removed.
+- Re-invoice column: a click goes from *to decide* to *no*, then *yes*; the dialog for a mixed selection
+  offers the answers in the same order. After a click on a selection, the expenses stay selected, for the
+  next click.
+
 ## 19.0.3.4.2 — 2026-10-28
 
 - Mileage by route: an expense created by an import or another program, still named after its

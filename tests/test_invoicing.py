@@ -253,13 +253,13 @@ class TestInvoicing(common.TransactionCase):
         self.assertEqual(expense.project_id, self.project, "the loop can come back to yes")
 
     def test_list_toggle_loops_through_the_three_answers(self):
-        """To decide, yes, no, to decide... A click without a choice moves on."""
+        """To decide, no, yes, to decide... A click without a choice moves on."""
         expense = self.expense(25.0, mode='none', submit=False)
         seen = []
         for _click in range(4):
             expense.action_expense_scan_set_reinvoice()
             seen.append(expense.reinvoice_mode)
-        self.assertEqual(seen, ['todo', 'project', 'none', 'todo'])
+        self.assertEqual(seen, ['project', 'todo', 'none', 'project'])
 
     def test_an_approved_expense_stays_decided_in_the_loop(self):
         expense = self.expense(25.0)

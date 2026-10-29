@@ -3892,15 +3892,6 @@ msgid "The receipt tax cannot be negative."
 msgstr "La TVA du ticket ne peut pas être négative."
 
 #. module: expense_scan
-#: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
-msgid ""
-"The receipts follow, in order and under the same number.\n"
-"                        Flat rates (mileage, allowance scales) have none."
-msgstr ""
-"Les justificatifs suivent, dans l'ordre et sous le même numéro.\n"
-"                        Les forfaits (kilométrage, barèmes) n'en ont pas."
-
-#. module: expense_scan
 #. odoo-javascript
 #: code:addons/expense_scan/static/src/js/retouch_dialog.js:0
 msgid "The retouch could not be saved. Try again."

@@ -3,7 +3,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
 {
     'name': "Expense Receipt Scanner",
-    'version': '19.0.3.4.2',
+    'version': '19.0.3.4.3',
     # The store search reads only the name and the summary, as exact phrases: they carry the
     # words people type (expense OCR, receipt OCR, expense scanner, scan receipts, local OCR).
     # The store asks for a name of 25 characters at most.

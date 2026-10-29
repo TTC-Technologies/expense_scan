@@ -3881,13 +3881,6 @@ msgid "The receipt tax cannot be negative."
 msgstr "De bonbelasting kan niet negatief zijn."
 
 #. module: expense_scan
-#: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
-msgid ""
-"The receipts follow, in order and under the same number.\n"
-"                        Flat rates (mileage, allowance scales) have none."
-msgstr "De bonnen volgen, in volgorde en onder hetzelfde nummer. Forfaits (kilometers, officiële tarieven) hebben er geen."
-
-#. module: expense_scan
 #. odoo-javascript
 #: code:addons/expense_scan/static/src/js/retouch_dialog.js:0
 msgid "The retouch could not be saved. Try again."
