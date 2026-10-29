@@ -6,6 +6,8 @@
 The services are OpenStreetMap's: a Nominatim search for the addresses and
 an OSRM server for the route, both replaceable in the settings by one's
 own. Their data is © OpenStreetMap contributors (ODbL): the picture says it.
+The map under the route comes from the Plan IGN of the French Géoplateforme
+(open licence, no key), or from any tile server set instead.
 """
 import io
 import json
@@ -20,6 +22,10 @@ ROAD_FACTOR = 1.25
 EARTH_RADIUS_KM = 6371.0088
 #: Longest route believed for one expense.
 MAX_ROUTE_KM = 3000.0
+#: Plan IGN of the Géoplateforme: France and its borders, open licence (Etalab 2.0), no key needed.
+IGN_TILES = ("https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0"
+             "&LAYER=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2&STYLE=normal&TILEMATRIXSET=PM&FORMAT=image/png"
+             "&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}")
 
 
 @dataclass
@@ -38,6 +44,8 @@ class Route:
     #: True when no service answered: straight line times ROAD_FACTOR.
     estimated: bool = False
     source: str = ""
+    #: The roads most of the route follows: (number, (lat, lon) of the middle of their longest stretch).
+    roads: List[Tuple[str, Tuple[float, float]]] = field(default_factory=list)
 
 
 def haversine_km(a, b):
@@ -99,7 +107,7 @@ def geocode(fetch, base, query, language=None, country_codes=None, limit=5):
 
 
 def route_url(base, start, end):
-    return "%s/route/v1/driving/%.6f,%.6f;%.6f,%.6f?overview=simplified&geometries=polyline" % (
+    return "%s/route/v1/driving/%.6f,%.6f;%.6f,%.6f?overview=full&geometries=polyline&steps=true" % (
         base.rstrip("/"), start.lon, start.lat, end.lon, end.lat)
 
 
@@ -112,9 +120,108 @@ def road_route(fetch, base, start, end):
     km = float(best.get("distance") or 0.0) / 1000.0
     if not 0 < km <= MAX_ROUTE_KM:
         return None
-    path = decode_polyline(best["geometry"]) if isinstance(best.get("geometry"), str) else []
+    # The whole path, thinned to what the picture can show: on a map, the line keeps to the roads.
+    path = simplify(decode_polyline(best["geometry"])) if isinstance(best.get("geometry"), str) else []
     return Route(km=km, minutes=float(best.get("duration") or 0.0) / 60.0,
-                 path=path or [(start.lat, start.lon), (end.lat, end.lon)], source="osrm")
+                 path=path or [(start.lat, start.lon), (end.lat, end.lon)], source="osrm",
+                 roads=main_roads(best, km))
+
+
+def simplify(path, share=3000.0):
+    """The path without the points the picture would not show (Ramer-Douglas-Peucker).
+
+    A point stays when it lies further from the line of its neighbours than
+    the size of the route divided by ``share``: a third of a pixel on the
+    picture, some 20 m for a route across a city.
+    """
+    if len(path) < 3:
+        return list(path)
+    cosine = math.cos(math.radians(path[0][0]))
+    flat = [(lon * 111.32 * cosine, lat * 110.57) for lat, lon in path]
+    xs, ys = zip(*flat)
+    tolerance = max(max(xs) - min(xs), max(ys) - min(ys), 0.5) / share
+    kept = {0, len(path) - 1}
+    stack = [(0, len(path) - 1)]
+    while stack:
+        first, last = stack.pop()
+        (x1, y1), (x2, y2) = flat[first], flat[last]
+        length = math.hypot(x2 - x1, y2 - y1)
+        farthest, distance = None, tolerance
+        for index in range(first + 1, last):
+            x, y = flat[index]
+            gap = (abs((x2 - x1) * (y1 - y) - (x1 - x) * (y2 - y1)) / length if length
+                   else math.hypot(x - x1, y - y1))
+            if gap > distance:
+                farthest, distance = index, gap
+        if farthest is not None:
+            kept.add(farthest)
+            stack += [(first, farthest), (farthest, last)]
+    return [path[index] for index in sorted(kept)]
+
+
+def main_roads(route, km, count=4):
+    """The numbered roads ("A 68", "D 631") most of an OSRM route follows, the longest first.
+
+    Each with the middle of its longest stretch, where its number is drawn.
+    """
+    totals, longest = {}, {}
+    for leg in route.get("legs") or []:
+        for step in leg.get("steps") or []:
+            ref = str(step.get("ref") or "").split(";")[0].strip()
+            if not ref:
+                continue
+            distance = float(step.get("distance") or 0.0) / 1000.0
+            totals[ref] = totals.get(ref, 0.0) + distance
+            if distance > longest.get(ref, (0.0, None))[0] and isinstance(step.get("geometry"), str):
+                points = decode_polyline(step["geometry"])
+                if points:
+                    longest[ref] = (distance, points[len(points) // 2])
+    # Roads of a few hundred metres say nothing about the way taken.
+    kept = [ref for ref in totals if ref in longest and totals[ref] >= max(3.0, km * 0.05)]
+    kept.sort(key=lambda ref: -totals[ref])
+    return [(ref, longest[ref][1]) for ref in kept[:count]]
+
+
+def reverse_url(base, lat, lon, language=None):
+    params = {"lat": "%.5f" % lat, "lon": "%.5f" % lon, "zoom": 10, "format": "jsonv2"}
+    if language:
+        params["accept-language"] = language
+    return "%s/reverse?%s" % (base.rstrip("/"), urllib.parse.urlencode(params))
+
+
+def towns_along(fetch, base, path, language=None, count=3, pause=None):
+    """Towns the route goes through: ``[Point]``, read at even distances along the path.
+
+    One question to the geocoder per town; ``pause(seconds)`` spaces them,
+    as Nominatim asks (one request per second at most). A short route has
+    none: its two ends say enough.
+    """
+    if not base or len(path) < 2:
+        return []
+    lengths = [0.0]
+    for a, b in zip(path, path[1:]):
+        lengths.append(lengths[-1] + haversine_km(a, b))
+    if lengths[-1] < 20:
+        return []
+    towns, seen = [], set()
+    for number in range(1, count + 1):
+        target = lengths[-1] * number / (count + 1)
+        lat, lon = path[next(i for i, length in enumerate(lengths) if length >= target)]
+        if pause and number > 1:
+            pause(1.0)
+        try:
+            data = json.loads(fetch(reverse_url(base, lat, lon, language)))
+        except Exception:  # noqa: BLE001 - a picture without towns is still a picture
+            continue
+        if not isinstance(data, dict):
+            continue
+        address = data.get("address") or {}
+        name = next((address[key] for key in ("city", "town", "village", "municipality") if address.get(key)),
+                    None) or data.get("name")
+        if name and name not in seen:
+            seen.add(name)
+            towns.append(Point(lat, lon, name))
+    return towns
 
 
 def estimated_route(start, end):
@@ -143,6 +250,9 @@ TILE_SIZE = 256
 WIDTH, HEIGHT = 1100, 780
 MAP_TOP = 150
 MARGIN = 60
+PLAIN = (236, 241, 236)
+#: Most tiles asked for one picture.
+MAX_TILES = 30
 
 
 def _mercator(lat, lon, zoom):
@@ -176,37 +286,136 @@ def _font(size, bold=False, font_path=None):
         return ImageFont.load_default()
 
 
-def render_route(route, start, end, lines, attribution, tiles_url=None, fetch=None,
-                 fonts=None):
+def _frame(route, start, end):
+    """What the picture shows: the path, the zoom, and the pixel at the top left of the map."""
+    frame_w, frame_h = WIDTH - 2 * MARGIN, HEIGHT - MAP_TOP - MARGIN
+    path = route.path or [(start.lat, start.lon), (end.lat, end.lon)]
+    zoom = _fit_zoom(path, frame_w - 80, frame_h - 80)
+    xs, ys = zip(*(_mercator(lat, lon, zoom) for lat, lon in path))
+    return (path, zoom, (min(xs) + max(xs)) / 2 - frame_w / 2, (min(ys) + max(ys)) / 2 - frame_h / 2,
+            frame_w, frame_h)
+
+
+def map_background(route, start, end, tiles_url, fetch):
+    """The map under the route, from a tile server ("https://.../{z}/{x}/{y}.png"), or ``None``.
+
+    ``None`` too where the server has no map of the route (the Plan IGN
+    stops at the French borders): the plain background, with the towns and
+    road numbers, then says more. A tile under the route is asked first, so
+    a route abroad costs one question; the others are asked four at a time.
+    """
+    from PIL import Image
+
+    path, zoom, origin_x, origin_y, width, height = _frame(route, start, end)
+    first_x, first_y = int(origin_x // TILE_SIZE), int(origin_y // TILE_SIZE)
+    last_x, last_y = int((origin_x + width) // TILE_SIZE), int((origin_y + height) // TILE_SIZE)
+    count = 2 ** zoom
+    tiles = [(x, y) for x in range(first_x, last_x + 1) for y in range(first_y, last_y + 1) if 0 <= y < count]
+    if len(tiles) > MAX_TILES:
+        return None
+    crossed = set()
+    for lat, lon in path:
+        x, y = _mercator(lat, lon, zoom)
+        crossed.add((int(x // TILE_SIZE), int(y // TILE_SIZE)))
+    tiles.sort(key=lambda tile: tile not in crossed)
+
+    def ask(tile):
+        return _tile(tiles_url, fetch, zoom, tile[0] % count, tile[1])
+
+    def blank(tile):
+        """No map: no tile, or a tile of one colour, where the road would show."""
+        return tile is None or all(low == high for low, high in tile.getextrema())
+    found = _ask_all(ask, tiles[:1])
+    if blank(found[tiles[0]]):
+        return None
+    found.update(_ask_all(ask, tiles[1:]))
+    canvas = Image.new("RGB", (width, height), PLAIN)
+    for tile_x, tile_y in tiles:
+        tile = found.get((tile_x, tile_y))
+        if (tile_x, tile_y) in crossed and blank(tile):
+            return None
+        if tile is not None:
+            canvas.paste(tile, (int(tile_x * TILE_SIZE - origin_x), int(tile_y * TILE_SIZE - origin_y)))
+    return canvas
+
+
+def _ask_all(ask, tiles, patience=4.0):
+    """``{tile: ask(tile)}``, four tiles at a time.
+
+    A tile still awaited after ``patience`` seconds is asked a second time:
+    the Géoplateforme gives most tiles in 0.2 s, a few in 20 s, and the
+    second question is answered sooner. The first answer wins.
+    """
+    from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
+
+    found, retried = {}, set()
+    pool = ThreadPoolExecutor(max_workers=4)
+    pending = {pool.submit(ask, tile): tile for tile in tiles}
+    try:
+        while pending:
+            done, _waiting = wait(pending, timeout=patience, return_when=FIRST_COMPLETED)
+            if not done:
+                for tile in set(pending.values()) - retried:
+                    retried.add(tile)
+                    pending[pool.submit(ask, tile)] = tile
+                continue
+            for future in done:
+                tile = pending.pop(future, None)
+                if tile is None or found.get(tile) is not None:
+                    continue
+                found[tile] = future.result()
+                if found[tile] is not None:
+                    for other in [other for other, same in pending.items() if same == tile]:
+                        del pending[other]
+    finally:
+        # A question left unanswered ends on its own time-out, without holding the picture.
+        pool.shutdown(wait=False, cancel_futures=True)
+    return found
+
+
+def _tile(url, fetch, zoom, x, y):
+    """One tile, in RGB, or ``None`` when the server has none or an empty one."""
+    from PIL import Image
+
+    try:
+        tile = Image.open(io.BytesIO(fetch(url.format(z=zoom, x=x, y=y))))
+        tile.load()
+    except Exception:  # noqa: BLE001 - a missing tile leaves its square plain
+        return None
+    if tile.mode in ("RGBA", "LA", "PA") or "transparency" in tile.info:
+        tile = tile.convert("RGBA")
+        if tile.getchannel("A").getbbox() is None:
+            return None
+        under = Image.new("RGBA", tile.size, PLAIN + (255,))
+        under.alpha_composite(tile)
+        tile = under
+    return tile.convert("RGB")
+
+
+def render_route(route, start, end, lines, attribution, background=None, fonts=None, towns=None):
     """PNG of the route: the path, both ends, and the lines of text above.
 
-    ``tiles_url``: a tile server ("https://.../{z}/{x}/{y}.png") for a map
-    background; without one, the route is drawn on a plain background.
-    ``fonts``: ``(regular, bold)`` font files.
+    ``background``: the map from ``map_background``; without one, the route
+    is drawn on a plain background, with the towns it goes through
+    (``towns``: ``[Point]``) and the numbers of its main roads to show the
+    way. ``fonts``: ``(regular, bold)`` font files.
     """
     from PIL import Image, ImageDraw
 
     regular, bold = (fonts or (None, None))
     image = Image.new("RGB", (WIDTH, HEIGHT), (250, 250, 247))
     draw = ImageDraw.Draw(image)
-    frame_w, frame_h = WIDTH - 2 * MARGIN, HEIGHT - MAP_TOP - MARGIN
-    path = route.path or [(start.lat, start.lon), (end.lat, end.lon)]
-    zoom = _fit_zoom(path, frame_w - 80, frame_h - 80)
+    path, zoom, origin_x, origin_y, frame_w, frame_h = _frame(route, start, end)
     pixels = [_mercator(lat, lon, zoom) for lat, lon in path]
-    xs, ys = zip(*pixels)
-    origin_x = (min(xs) + max(xs)) / 2 - frame_w / 2
-    origin_y = (min(ys) + max(ys)) / 2 - frame_h / 2
 
     def place(x, y):
         return MARGIN + x - origin_x, MAP_TOP + y - origin_y
 
     box = (MARGIN, MAP_TOP, MARGIN + frame_w, MAP_TOP + frame_h)
-    background = tiles_url and fetch and _tiles(tiles_url, fetch, zoom, origin_x, origin_y,
-                                                frame_w, frame_h)
     if background:
         image.paste(background, (MARGIN, MAP_TOP))
     else:
-        draw.rectangle(box, fill=(236, 241, 236))
+        draw.rectangle(box, fill=PLAIN)
         # A light grid, every 10 km or so, gives a sense of scale.
         step = 10.0 / _km_per_pixel(path[0][0], zoom)
         if step > 25:
@@ -225,6 +434,32 @@ def render_route(route, start, end, lines, attribution, tiles_url=None, fetch=No
     if len(points) > 1:
         draw.line(points, fill=(255, 255, 255), width=11, joint="curve")
         draw.line(points, fill=(32, 96, 200), width=6, joint="curve")
+    ends = (points[0], points[-1])
+
+    def free(x, y, room=45):
+        """Away from both ends, whose names are written next to them."""
+        return all(abs(x - ex) > room or abs(y - ey) > room for ex, ey in ends)
+
+    town_font = _font(15, False, regular)
+    for town in towns or []:
+        x, y = place(*_mercator(town.lat, town.lon, zoom))
+        if not free(x, y):
+            continue
+        draw.ellipse((x - 5, y - 5, x + 5, y + 5), fill=(60, 60, 60), outline=(255, 255, 255), width=2)
+        right = x < MARGIN + frame_w * 0.7
+        draw.text((x + 10 if right else x - 10, y), town.label[:30], fill=(40, 40, 40), font=town_font,
+                  anchor="lm" if right else "rm", stroke_width=3, stroke_fill=(255, 255, 255))
+    road_font = _font(14, True, bold)
+    for ref, (lat, lon) in [] if background else route.roads:
+        x, y = place(*_mercator(lat, lon, zoom))
+        if not free(x, y, 30):
+            continue
+        # The colours of the road signs: red for motorways and national roads, yellow for the others.
+        main = ref[:1].upper() in ("A", "M", "N", "E")
+        left, top, right_edge, bottom = draw.textbbox((x, y), ref, font=road_font, anchor="mm")
+        draw.rounded_rectangle((left - 6, top - 4, right_edge + 6, bottom + 4), radius=4,
+                               fill=(196, 40, 40) if main else (245, 205, 50), outline=(255, 255, 255), width=2)
+        draw.text((x, y), ref, fill=(255, 255, 255) if main else (30, 30, 30), font=road_font, anchor="mm")
     marker = _font(18, True, bold)
     name = _font(17, True, bold)
     for (x, y), colour, letter, point in ((points[0], (30, 140, 60), "A", start),
@@ -254,29 +489,6 @@ def render_route(route, start, end, lines, attribution, tiles_url=None, fetch=No
 
 def _km_per_pixel(lat, zoom):
     return 40075.016686 * math.cos(math.radians(lat)) / (TILE_SIZE * 2 ** zoom)
-
-
-def _tiles(url, fetch, zoom, origin_x, origin_y, width, height):
-    """The map background of the frame, from a tile server, or ``None``."""
-    from PIL import Image
-
-    canvas = Image.new("RGB", (width, height), (236, 241, 236))
-    first_x, first_y = int(origin_x // TILE_SIZE), int(origin_y // TILE_SIZE)
-    last_x, last_y = int((origin_x + width) // TILE_SIZE), int((origin_y + height) // TILE_SIZE)
-    if (last_x - first_x + 1) * (last_y - first_y + 1) > 30:
-        return None
-    count = 2 ** zoom
-    try:
-        for tile_x in range(first_x, last_x + 1):
-            for tile_y in range(first_y, last_y + 1):
-                if not 0 <= tile_y < count:
-                    continue
-                data = fetch(url.format(z=zoom, x=tile_x % count, y=tile_y))
-                tile = Image.open(io.BytesIO(data)).convert("RGB")
-                canvas.paste(tile, (int(tile_x * TILE_SIZE - origin_x), int(tile_y * TILE_SIZE - origin_y)))
-    except Exception:  # noqa: BLE001 - without its tiles, the plain background will do
-        return None
-    return canvas
 
 
 def format_minutes(minutes):

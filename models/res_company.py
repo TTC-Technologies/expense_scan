@@ -7,6 +7,8 @@ import os
 from odoo import fields, models
 from odoo.tools import config
 
+from ..route import geo
+
 _logger = logging.getLogger(__name__)
 
 
@@ -146,9 +148,13 @@ class ResCompany(models.Model):
     )
     expense_scan_map_tiles_url = fields.Char(
         string="Map background",
+        default=geo.IGN_TILES,
         help="Tile server drawn under the route picture, as "
-             "https://.../{z}/{x}/{y}.png. Empty: the route on a plain "
-             "background. OpenStreetMap's own tiles may not be used this way.",
+             "https://.../{z}/{x}/{y}.png. By default the Plan IGN of the "
+             "French Géoplateforme (open licence, France and its borders). "
+             "Empty, or where the server has no map: the route on a plain "
+             "background, with the towns and the numbers of the roads "
+             "followed. OpenStreetMap's own tiles may not be used this way.",
     )
     expense_scan_product_id = fields.Many2one(
         comodel_name='product.product',

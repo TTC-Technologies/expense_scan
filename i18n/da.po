@@ -993,6 +993,12 @@ msgid "Map data © OpenStreetMap contributors"
 msgstr "Kortdata © OpenStreetMap-bidragydere"
 
 #. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "Map © IGN – Plan IGN"
+msgstr "Kort © IGN – Plan IGN"
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_error
 msgid "Message Delivery error"
 msgstr "Besked ved leveringsfejl"
@@ -1146,6 +1152,11 @@ msgid "Route path"
 msgstr "Rutens forløb"
 
 #. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_roads
+msgid "Route roads"
+msgstr "Rutens veje"
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_attachment_id
 msgid "Route picture"
 msgstr "Billede af ruten"
@@ -1161,6 +1172,12 @@ msgstr "Rutetjeneste"
 #: code:addons/expense_scan/models/hr_expense_route.py:0
 msgid "Route: OSRM · map data © OpenStreetMap contributors"
 msgstr "Rute: OSRM · kortdata © OpenStreetMap-bidragydere"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "Route: OSRM · map © IGN – Plan IGN"
+msgstr "Rute: OSRM · kort © IGN – Plan IGN"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_sms_error
@@ -3881,13 +3898,6 @@ msgid "The receipt tax cannot be negative."
 msgstr "Kvitteringsafgiften kan ikke være negativ."
 
 #. module: expense_scan
-#: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
-msgid ""
-"The receipts follow, in order and under the same number.\n"
-"                        Flat rates (mileage, allowance scales) have none."
-msgstr "Kvitteringerne følger, i rækkefølge og under samme nummer. Satser (kørselsgodtgørelse, officielle takster) har ingen."
-
-#. module: expense_scan
 #. odoo-javascript
 #: code:addons/expense_scan/static/src/js/retouch_dialog.js:0
 msgid "The retouch could not be saved. Try again."
@@ -4044,8 +4054,8 @@ msgstr "Sæt kryds i feltet for at bekræfte, at du har tjekket med din bogholde
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_map_tiles_url
 #: model:ir.model.fields,help:expense_scan.field_res_config_settings__expense_scan_map_tiles_url
-msgid "Tile server drawn under the route picture, as https://.../{z}/{x}/{y}.png. Empty: the route on a plain background. OpenStreetMap's own tiles may not be used this way."
-msgstr "Tile-server, der tegnes under billedet af ruten, som https://.../{z}/{x}/{y}.png. Tom: ruten på ensfarvet baggrund. OpenStreetMaps egne tiles må ikke bruges sådan."
+msgid "Tile server drawn under the route picture, as https://.../{z}/{x}/{y}.png. By default the Plan IGN of the French Géoplateforme (open licence, France and its borders). Empty, or where the server has no map: the route on a plain background, with the towns and the numbers of the roads followed. OpenStreetMap's own tiles may not be used this way."
+msgstr "Tile-server, der tegnes under billedet af ruten, som https://.../{z}/{x}/{y}.png. Som standard Plan IGN fra den franske Géoplateforme (åben licens, Frankrig og dets grænseområder). Tom, eller hvor serveren ikke har noget kort: ruten på ensfarvet baggrund med byerne og numrene på de fulgte veje. OpenStreetMaps egne tiles må ikke bruges sådan."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__date_to
@@ -4432,8 +4442,8 @@ msgstr "tom: kun kendte steder"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
-msgid "empty: plain background"
-msgstr "tom: ensfarvet baggrund"
+msgid "empty: plain background, with towns and roads"
+msgstr "tom: ensfarvet baggrund med byer og veje"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan

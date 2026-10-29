@@ -4,14 +4,15 @@
  * "Re-invoicable" column of the expense lists.
  *
  * A box checked for "yes", empty for "no", a question mark for "to decide".
- * A click moves to the next answer (to decide, yes, no, to decide...) and
+ * A click moves to the next answer (to decide, no, yes, to decide...) and
  * saves at once, so a manager settles a whole list without opening the
  * expenses.
  *
  * On a row of a selection, the click applies to every selected expense: the
  * next answer when they all have the same one, otherwise the answer chosen
  * in a dialog. Expenses that cannot take it (no project at their date,
- * already invoiced...) are left as they are and listed.
+ * already invoiced...) are left as they are and listed. The selection stays,
+ * for the next click.
  */
 import { Component, t, useProps } from "@odoo/owl";
 import { _t } from "@web/core/l10n/translation";
@@ -21,7 +22,7 @@ import { useService } from "@web/core/utils/hooks";
 import { standardFieldProps } from "@web/views/fields/standard_field_props";
 
 const FINAL_STATES = ["posted", "in_payment", "paid", "refused"];
-const NEXT = { todo: "project", project: "none", none: "project" };
+const NEXT = { todo: "none", none: "project", project: "todo" };
 
 export class ExpenseScanReinvoiceChoice extends Component {
     static template = "expense_scan.ReinvoiceChoice";
@@ -89,7 +90,7 @@ export class ExpenseScanReinvoice extends Component {
                 return;
             }
         }
-        // The server knows the next answer: to decide, yes, no, to decide...
+        // The server knows the next answer: to decide, no, yes, to decide...
         await this.orm.call("hr.expense", "action_expense_scan_set_reinvoice", [
             [this.props.record.resId],
         ]);
@@ -98,16 +99,21 @@ export class ExpenseScanReinvoice extends Component {
 
     async applyToSelection(selection) {
         const modes = new Set(selection.map((record) => record.data.reinvoice_mode));
-        const mode =
-            modes.size === 1 ? NEXT[this.mode] || "project" : await this.askMode(selection.length);
+        let mode = modes.size === 1 ? NEXT[this.mode] || "none" : await this.askMode(selection.length);
         if (!mode) {
             return;
+        }
+        // An approved expense stays decided: from yes, the loop goes back to no.
+        if (mode === "todo" && selection.some((record) => record.data.state === "approved")) {
+            mode = "none";
         }
         const result = await this.orm.call("hr.expense", "action_expense_scan_set_reinvoice_many", [
             selection.map((record) => record.resId),
             mode,
         ]);
-        await this.props.record.model.root.load();
+        // The selected rows only: reloading the whole list would clear the selection, and the
+        // answer often takes a second click.
+        await Promise.all(selection.map((record) => record.load()));
         if (result.left.length) {
             this.notification.add(result.left.join("\n"), {
                 title: _t("%(count)s expense(s) left as they were", { count: result.left.length }),

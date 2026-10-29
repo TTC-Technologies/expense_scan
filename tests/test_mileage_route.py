@@ -6,6 +6,7 @@
 The map services are replaced by a fake answering what OSRM and Nominatim
 would: the tests make no network request.
 """
+import io
 import json
 from unittest.mock import patch
 
@@ -50,6 +51,82 @@ class TestGeo(common.TransactionCase):
                                geo.Point(*paris), geo.Point(*lyon))
         self.assertTrue(route.estimated)
         self.assertAlmostEqual(route.km, 392 * geo.ROAD_FACTOR, delta=3)
+
+    def test_main_roads_and_towns(self):
+        """The numbers of the roads followed, and the towns read along the path."""
+        osrm = {"code": "Ok", "routes": [{"distance": 76000, "duration": 3200, "geometry": "_p~iF~ps|U_ulLnnqC",
+                                          "legs": [{"steps": [
+                                              {"distance": 60000, "ref": "A 68", "geometry": "_p~iF~ps|U_ulLnnqC"},
+                                              {"distance": 14000, "ref": "D 988;D 999", "geometry": "_p~iF~ps|U"},
+                                              {"distance": 2000, "ref": "D 1", "geometry": "_p~iF~ps|U"},
+                                              {"distance": 500, "name": "Rue Basse"}]}]}]}
+        route = geo.road_route(lambda url: json.dumps(osrm).encode(), "https://osrm.test",
+                               geo.Point(38.5, -120.2), geo.Point(40.7, -120.95))
+        self.assertEqual([ref for ref, _point in route.roads], ["A 68", "D 988"], "short stretches say nothing")
+
+        def reverse(url):
+            self.assertIn("/reverse?", url)
+            return json.dumps({"name": "Saint-Sulpice", "address": {"town": "Saint-Sulpice-la-Pointe"}}).encode()
+        towns = geo.towns_along(reverse, "https://nominatim.test", [(43.6, 1.44), (43.93, 2.15)])
+        self.assertEqual([town.label for town in towns], ["Saint-Sulpice-la-Pointe"], "each town once")
+        self.assertFalse(geo.towns_along(reverse, "https://nominatim.test", [(43.6, 1.44), (43.62, 1.45)]),
+                         "a short route has none")
+        png = geo.render_route(route, geo.Point(38.5, -120.2, "A"), geo.Point(40.7, -120.95, "B"),
+                               ["A – B", "A", "B", "76 km"], "© OpenStreetMap", towns=towns)
+        self.assertTrue(png.startswith(b"\x89PNG"))
+
+    def test_simplified_path(self):
+        """The points the picture would not show go; the bends stay."""
+        line = [(43.6 + i * 0.001, 1.44 + i * 0.001) for i in range(50)]
+        self.assertEqual(geo.simplify(line), [line[0], line[-1]])
+        bend = line + [(43.649, 1.489 + i * 0.001) for i in range(1, 50)]
+        self.assertEqual(len(geo.simplify(bend)), 3)
+
+    def test_map_background(self):
+        """The tiles under the route, then the others; no map where the server has none."""
+        from PIL import Image
+
+        def png(colour, dot=False):
+            tile = Image.new("RGB", (256, 256), colour)
+            if dot:
+                tile.putpixel((10, 10), (0, 0, 0))
+            output = io.BytesIO()
+            tile.save(output, format="PNG")
+            return output.getvalue()
+
+        start, end = geo.Point(43.6115, 1.4541, "Gare"), geo.Point(43.9289, 2.1480, "Albi")
+        route = geo.Route(km=75.4, path=[(43.6115, 1.4541), (43.75, 1.8), (43.9289, 2.148)])
+        asked = []
+
+        def tiles(url):
+            asked.append(url)
+            return png((240, 240, 230), dot=True)
+        background = geo.map_background(route, start, end, "https://tiles.test/{z}/{x}/{y}.png", tiles)
+        self.assertEqual(background.size, (geo.WIDTH - 2 * geo.MARGIN, geo.HEIGHT - geo.MAP_TOP - geo.MARGIN))
+        self.assertTrue(geo.render_route(route, start, end, ["A – B", "A", "B", "75 km"], "© IGN",
+                                         background=background).startswith(b"\x89PNG"))
+
+        def abroad(url):
+            asked.append(url)
+            return png((255, 255, 255))
+        asked.clear()
+        self.assertIsNone(geo.map_background(route, start, end, "https://tiles.test/{z}/{x}/{y}.png", abroad),
+                          "an empty tile under the route: no map")
+        self.assertEqual(len(asked), 1, "the tiles under the route are asked first")
+
+        path, zoom = geo._frame(route, start, end)[:2]
+        under = {(int(x // 256), int(y // 256)) for x, y in (geo._mercator(lat, lon, zoom) for lat, lon in path)}
+        missing = []
+
+        def missing_aside(url):
+            _base, _zoom, x, y = url.rsplit("/", 3)
+            if (int(x), int(y[:-4])) in under:
+                return png((240, 240, 230), dot=True)
+            missing.append(url)
+            raise OSError("404")
+        self.assertTrue(geo.map_background(route, start, end, "https://tiles.test/{z}/{x}/{y}.png", missing_aside),
+                        "a missing tile away from the route leaves its square plain")
+        self.assertTrue(missing)
 
     def test_picture(self):
         start, end = geo.Point(43.6115, 1.4541, "Gare Matabiau"), geo.Point(43.9289, 2.1480, "Albi")

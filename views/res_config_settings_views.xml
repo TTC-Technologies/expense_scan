@@ -86,7 +86,7 @@
                         <div class="row">
                             <label for="expense_scan_map_tiles_url" class="col-lg-4 o_light_label"/>
                             <field name="expense_scan_map_tiles_url" class="col-lg-8"
-                                   placeholder="empty: plain background"/>
+                                   placeholder="empty: plain background, with towns and roads"/>
                         </div>
                         <div>
                             <button name="%(expense_scan.expense_scan_place_action)d"

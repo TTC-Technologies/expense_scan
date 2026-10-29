@@ -117,6 +117,7 @@
                 <field name="expense_scan_route_estimated" invisible="1" force_save="1"/>
                 <field name="expense_scan_route_name" invisible="1" force_save="1"/>
                 <field name="expense_scan_route_path" invisible="1" force_save="1"/>
+                <field name="expense_scan_route_roads" invisible="1" force_save="1"/>
                 <div colspan="2" class="text-muted small mb-2"
                      invisible="not expense_scan_mileage or not expense_scan_route_summary">
                     <field name="expense_scan_route_summary" class="d-inline"/>

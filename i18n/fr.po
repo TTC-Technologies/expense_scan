@@ -993,6 +993,12 @@ msgid "Map data © OpenStreetMap contributors"
 msgstr "Données de carte © les contributeurs d'OpenStreetMap"
 
 #. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "Map © IGN – Plan IGN"
+msgstr "Carte © IGN – Plan IGN"
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_error
 msgid "Message Delivery error"
 msgstr "Erreur d'envoi du message"
@@ -1146,6 +1152,11 @@ msgid "Route path"
 msgstr "Tracé de l'itinéraire"
 
 #. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_roads
+msgid "Route roads"
+msgstr "Routes de l'itinéraire"
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_attachment_id
 msgid "Route picture"
 msgstr "Image de l'itinéraire"
@@ -1161,6 +1172,12 @@ msgstr "Service d'itinéraire"
 #: code:addons/expense_scan/models/hr_expense_route.py:0
 msgid "Route: OSRM · map data © OpenStreetMap contributors"
 msgstr "Itinéraire : OSRM · données de carte © les contributeurs d'OpenStreetMap"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "Route: OSRM · map © IGN – Plan IGN"
+msgstr "Itinéraire : OSRM · carte © IGN – Plan IGN"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_sms_error
@@ -3892,15 +3909,6 @@ msgid "The receipt tax cannot be negative."
 msgstr "La TVA du ticket ne peut pas être négative."
 
 #. module: expense_scan
-#: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
-msgid ""
-"The receipts follow, in order and under the same number.\n"
-"                        Flat rates (mileage, allowance scales) have none."
-msgstr ""
-"Les justificatifs suivent, dans l'ordre et sous le même numéro.\n"
-"                        Les forfaits (kilométrage, barèmes) n'en ont pas."
-
-#. module: expense_scan
 #. odoo-javascript
 #: code:addons/expense_scan/static/src/js/retouch_dialog.js:0
 msgid "The retouch could not be saved. Try again."
@@ -4057,8 +4065,8 @@ msgstr "Cochez la case pour confirmer que vous avez vérifié auprès de votre c
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_map_tiles_url
 #: model:ir.model.fields,help:expense_scan.field_res_config_settings__expense_scan_map_tiles_url
-msgid "Tile server drawn under the route picture, as https://.../{z}/{x}/{y}.png. Empty: the route on a plain background. OpenStreetMap's own tiles may not be used this way."
-msgstr "Serveur de tuiles dessiné sous l'image de l'itinéraire, sous la forme https://.../{z}/{x}/{y}.png. Vide : l'itinéraire sur un fond uni. Les tuiles d'OpenStreetMap elles-mêmes ne peuvent pas être utilisées ainsi."
+msgid "Tile server drawn under the route picture, as https://.../{z}/{x}/{y}.png. By default the Plan IGN of the French Géoplateforme (open licence, France and its borders). Empty, or where the server has no map: the route on a plain background, with the towns and the numbers of the roads followed. OpenStreetMap's own tiles may not be used this way."
+msgstr "Serveur de tuiles dessiné sous l'image de l'itinéraire, sous la forme https://.../{z}/{x}/{y}.png. Par défaut le Plan IGN de la Géoplateforme (licence ouverte, la France et ses frontières). Vide, ou là où le serveur n'a pas de carte : l'itinéraire sur un fond uni, avec les villes et les numéros des routes suivies. Les tuiles d'OpenStreetMap elles-mêmes ne peuvent pas être utilisées ainsi."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__date_to
@@ -4445,8 +4453,8 @@ msgstr "vide : lieux connus seulement"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
-msgid "empty: plain background"
-msgstr "vide : fond uni"
+msgid "empty: plain background, with towns and roads"
+msgstr "vide : fond uni, avec villes et routes"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan

@@ -9,9 +9,11 @@ stay editable: a detour made for the job is the employee's to declare.
 """
 import json
 import logging
+import time
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.modules import module as odoo_module
 from odoo.tools import file_path, format_date
 
 from ..route import geo
@@ -50,6 +52,9 @@ class HrExpense(models.Model):
     #: Path of the route, as JSON [[latitude, longitude], ...]: the picture is
     #: drawn again (return trip switched) without asking the route again.
     expense_scan_route_path = fields.Text(string="Route path", readonly=True, copy=False)
+    #: Numbered roads of the route, as JSON [[number, latitude, longitude], ...]: named on a picture
+    #: drawn without a map.
+    expense_scan_route_roads = fields.Text(string="Route roads", readonly=True, copy=False)
     expense_scan_route_attachment_id = fields.Many2one(
         'ir.attachment', string="Route picture", readonly=True, copy=False,
         ondelete='set null')
@@ -133,6 +138,7 @@ class HrExpense(models.Model):
         self.expense_scan_route_minutes = route.minutes
         self.expense_scan_route_estimated = route.estimated
         self.expense_scan_route_path = self._expense_scan_path_json(route)
+        self.expense_scan_route_roads = self._expense_scan_roads_json(route)
         if self.expense_scan_mileage:
             self.quantity = round(route.km, 1) * factor
         if self._expense_scan_route_may_rename():
@@ -198,6 +204,7 @@ class HrExpense(models.Model):
                     'expense_scan_route_minutes': route.minutes,
                     'expense_scan_route_estimated': route.estimated,
                     'expense_scan_route_path': expense._expense_scan_path_json(route),
+                    'expense_scan_route_roads': expense._expense_scan_roads_json(route),
                 }
             if expense.expense_scan_mileage:
                 factor = 2 if expense.expense_scan_round_trip else 1
@@ -236,6 +243,10 @@ class HrExpense(models.Model):
     def _expense_scan_path_json(route):
         return json.dumps([[round(lat, 5), round(lon, 5)] for lat, lon in route.path])
 
+    @staticmethod
+    def _expense_scan_roads_json(route):
+        return json.dumps([[ref, round(lat, 5), round(lon, 5)] for ref, (lat, lon) in route.roads])
+
     def _expense_scan_known_route(self):
         """The route already measured, from the fields of the expense."""
         self.ensure_one()
@@ -243,8 +254,12 @@ class HrExpense(models.Model):
             path = [tuple(point) for point in json.loads(self.expense_scan_route_path or "[]")]
         except ValueError:
             path = []
+        try:
+            roads = [(ref, (lat, lon)) for ref, lat, lon in json.loads(self.expense_scan_route_roads or "[]")]
+        except ValueError:
+            roads = []
         return geo.Route(km=self.expense_scan_route_km, minutes=self.expense_scan_route_minutes,
-                         path=path, estimated=self.expense_scan_route_estimated)
+                         path=path, estimated=self.expense_scan_route_estimated, roads=roads)
 
     def _expense_scan_route_picture(self, route=None):
         """PNG of the route: the path, the places, the distance and the date."""
@@ -274,12 +289,23 @@ class HrExpense(models.Model):
             "B  %s" % destination._expense_scan_public_address(),
             " · ".join(details),
         ]
-        attribution = env._("Route: OSRM · map data © OpenStreetMap contributors") \
-            if not route.estimated else env._("Map data © OpenStreetMap contributors")
+        tiles_url = company.expense_scan_map_tiles_url
+        background = tiles_url and geo.map_background(route, start, end, tiles_url, self._expense_scan_fetch)
+        towns = []
+        if background and 'data.geopf.fr' in tiles_url:
+            attribution = env._("Route: OSRM · map © IGN – Plan IGN") \
+                if not route.estimated else env._("Map © IGN – Plan IGN")
+        else:
+            attribution = env._("Route: OSRM · map data © OpenStreetMap contributors") \
+                if not route.estimated else env._("Map data © OpenStreetMap contributors")
+            if not background and not route.estimated:
+                # Without a map, the towns and road numbers show the way taken.
+                towns = geo.towns_along(self._expense_scan_fetch, company.expense_scan_geocoder_url, route.path,
+                                        language=(lang or 'en_US').replace('_', '-'),
+                                        pause=None if odoo_module.current_test else time.sleep)
         fonts = tuple(self._expense_scan_font(name) for name in FONTS)
-        return geo.render_route(route, start, end, lines, attribution,
-                                tiles_url=company.expense_scan_map_tiles_url or None,
-                                fetch=self._expense_scan_fetch, fonts=fonts)
+        return geo.render_route(route, start, end, lines, attribution, background=background or None,
+                                fonts=fonts, towns=towns)
 
     @staticmethod
     def _expense_scan_font(name):

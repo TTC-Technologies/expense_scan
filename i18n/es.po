@@ -993,6 +993,12 @@ msgid "Map data © OpenStreetMap contributors"
 msgstr "Datos del mapa © colaboradores de OpenStreetMap"
 
 #. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "Map © IGN – Plan IGN"
+msgstr "Mapa © IGN – Plan IGN"
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_error
 msgid "Message Delivery error"
 msgstr "Error de envío de mensaje"
@@ -1146,6 +1152,11 @@ msgid "Route path"
 msgstr "Trazado del trayecto"
 
 #. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_roads
+msgid "Route roads"
+msgstr "Carreteras del trayecto"
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_attachment_id
 msgid "Route picture"
 msgstr "Imagen del trayecto"
@@ -1161,6 +1172,12 @@ msgstr "Servicio de rutas"
 #: code:addons/expense_scan/models/hr_expense_route.py:0
 msgid "Route: OSRM · map data © OpenStreetMap contributors"
 msgstr "Trayecto: OSRM · datos del mapa © colaboradores de OpenStreetMap"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "Route: OSRM · map © IGN – Plan IGN"
+msgstr "Trayecto: OSRM · mapa © IGN – Plan IGN"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_sms_error
@@ -3881,13 +3898,6 @@ msgid "The receipt tax cannot be negative."
 msgstr "El impuesto del recibo no puede ser negativo."
 
 #. module: expense_scan
-#: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
-msgid ""
-"The receipts follow, in order and under the same number.\n"
-"                        Flat rates (mileage, allowance scales) have none."
-msgstr "Los recibos siguen, en orden y con el mismo número. Las tarifas fijas (kilometraje, baremos) no tienen."
-
-#. module: expense_scan
 #. odoo-javascript
 #: code:addons/expense_scan/static/src/js/retouch_dialog.js:0
 msgid "The retouch could not be saved. Try again."
@@ -4044,8 +4054,8 @@ msgstr "Marque la casilla para confirmar que ha consultado con su contable."
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_map_tiles_url
 #: model:ir.model.fields,help:expense_scan.field_res_config_settings__expense_scan_map_tiles_url
-msgid "Tile server drawn under the route picture, as https://.../{z}/{x}/{y}.png. Empty: the route on a plain background. OpenStreetMap's own tiles may not be used this way."
-msgstr "Servidor de teselas dibujado bajo la imagen del trayecto, como https://.../{z}/{x}/{y}.png. Vacío: el trayecto sobre un fondo liso. Las teselas de OpenStreetMap no pueden usarse así."
+msgid "Tile server drawn under the route picture, as https://.../{z}/{x}/{y}.png. By default the Plan IGN of the French Géoplateforme (open licence, France and its borders). Empty, or where the server has no map: the route on a plain background, with the towns and the numbers of the roads followed. OpenStreetMap's own tiles may not be used this way."
+msgstr "Servidor de teselas dibujado bajo la imagen del trayecto, como https://.../{z}/{x}/{y}.png. Por defecto, el Plan IGN de la Géoplateforme francesa (licencia abierta, Francia y sus fronteras). Vacío, o donde el servidor no tiene mapa: el trayecto sobre un fondo liso, con las localidades y los números de las carreteras seguidas. Las teselas de OpenStreetMap no pueden usarse así."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__date_to
@@ -4432,8 +4442,8 @@ msgstr "vacío: solo lugares conocidos"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
-msgid "empty: plain background"
-msgstr "vacío: fondo liso"
+msgid "empty: plain background, with towns and roads"
+msgstr "vacío: fondo liso, con localidades y carreteras"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan

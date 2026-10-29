@@ -23,9 +23,9 @@
         <Dialog title.translate="Re-invoice the selection" size="'md'">
             <p>The selected expenses do not all have the same answer. Which one should they all take?</p>
             <t t-set-slot="footer">
-                <button class="btn btn-primary" t-on-click="() => this.pick('project')">Yes</button>
-                <button class="btn btn-secondary" t-on-click="() => this.pick('none')">No</button>
                 <button class="btn btn-secondary" t-on-click="() => this.pick('todo')">To decide</button>
+                <button class="btn btn-secondary" t-on-click="() => this.pick('none')">No</button>
+                <button class="btn btn-primary" t-on-click="() => this.pick('project')">Yes</button>
                 <button class="btn btn-link" t-on-click="this.props.close">Cancel</button>
             </t>
         </Dialog>
