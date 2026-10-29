@@ -51,6 +51,29 @@ class TestGeo(common.TransactionCase):
         self.assertTrue(route.estimated)
         self.assertAlmostEqual(route.km, 392 * geo.ROAD_FACTOR, delta=3)
 
+    def test_main_roads_and_towns(self):
+        """The numbers of the roads followed, and the towns read along the path."""
+        osrm = {"code": "Ok", "routes": [{"distance": 76000, "duration": 3200, "geometry": "_p~iF~ps|U_ulLnnqC",
+                                          "legs": [{"steps": [
+                                              {"distance": 60000, "ref": "A 68", "geometry": "_p~iF~ps|U_ulLnnqC"},
+                                              {"distance": 14000, "ref": "D 988;D 999", "geometry": "_p~iF~ps|U"},
+                                              {"distance": 2000, "ref": "D 1", "geometry": "_p~iF~ps|U"},
+                                              {"distance": 500, "name": "Rue Basse"}]}]}]}
+        route = geo.road_route(lambda url: json.dumps(osrm).encode(), "https://osrm.test",
+                               geo.Point(38.5, -120.2), geo.Point(40.7, -120.95))
+        self.assertEqual([ref for ref, _point in route.roads], ["A 68", "D 988"], "short stretches say nothing")
+
+        def reverse(url):
+            self.assertIn("/reverse?", url)
+            return json.dumps({"name": "Saint-Sulpice", "address": {"town": "Saint-Sulpice-la-Pointe"}}).encode()
+        towns = geo.towns_along(reverse, "https://nominatim.test", [(43.6, 1.44), (43.93, 2.15)])
+        self.assertEqual([town.label for town in towns], ["Saint-Sulpice-la-Pointe"], "each town once")
+        self.assertFalse(geo.towns_along(reverse, "https://nominatim.test", [(43.6, 1.44), (43.62, 1.45)]),
+                         "a short route has none")
+        png = geo.render_route(route, geo.Point(38.5, -120.2, "A"), geo.Point(40.7, -120.95, "B"),
+                               ["A – B", "A", "B", "76 km"], "© OpenStreetMap", towns=towns)
+        self.assertTrue(png.startswith(b"\x89PNG"))
+
     def test_picture(self):
         start, end = geo.Point(43.6115, 1.4541, "Gare Matabiau"), geo.Point(43.9289, 2.1480, "Albi")
         png = geo.render_route(geo.Route(km=75.4, minutes=53, path=[(43.6115, 1.4541), (43.9289, 2.148)]),

@@ -38,6 +38,8 @@ class Route:
     #: True when no service answered: straight line times ROAD_FACTOR.
     estimated: bool = False
     source: str = ""
+    #: The roads most of the route follows: (number, (lat, lon) of the middle of their longest stretch).
+    roads: List[Tuple[str, Tuple[float, float]]] = field(default_factory=list)
 
 
 def haversine_km(a, b):
@@ -99,7 +101,7 @@ def geocode(fetch, base, query, language=None, country_codes=None, limit=5):
 
 
 def route_url(base, start, end):
-    return "%s/route/v1/driving/%.6f,%.6f;%.6f,%.6f?overview=simplified&geometries=polyline" % (
+    return "%s/route/v1/driving/%.6f,%.6f;%.6f,%.6f?overview=simplified&geometries=polyline&steps=true" % (
         base.rstrip("/"), start.lon, start.lat, end.lon, end.lat)
 
 
@@ -114,7 +116,73 @@ def road_route(fetch, base, start, end):
         return None
     path = decode_polyline(best["geometry"]) if isinstance(best.get("geometry"), str) else []
     return Route(km=km, minutes=float(best.get("duration") or 0.0) / 60.0,
-                 path=path or [(start.lat, start.lon), (end.lat, end.lon)], source="osrm")
+                 path=path or [(start.lat, start.lon), (end.lat, end.lon)], source="osrm",
+                 roads=main_roads(best, km))
+
+
+def main_roads(route, km, count=4):
+    """The numbered roads ("A 68", "D 631") most of an OSRM route follows, the longest first.
+
+    Each with the middle of its longest stretch, where its number is drawn.
+    """
+    totals, longest = {}, {}
+    for leg in route.get("legs") or []:
+        for step in leg.get("steps") or []:
+            ref = str(step.get("ref") or "").split(";")[0].strip()
+            if not ref:
+                continue
+            distance = float(step.get("distance") or 0.0) / 1000.0
+            totals[ref] = totals.get(ref, 0.0) + distance
+            if distance > longest.get(ref, (0.0, None))[0] and isinstance(step.get("geometry"), str):
+                points = decode_polyline(step["geometry"])
+                if points:
+                    longest[ref] = (distance, points[len(points) // 2])
+    # Roads of a few hundred metres say nothing about the way taken.
+    kept = [ref for ref in totals if ref in longest and totals[ref] >= max(3.0, km * 0.05)]
+    kept.sort(key=lambda ref: -totals[ref])
+    return [(ref, longest[ref][1]) for ref in kept[:count]]
+
+
+def reverse_url(base, lat, lon, language=None):
+    params = {"lat": "%.5f" % lat, "lon": "%.5f" % lon, "zoom": 10, "format": "jsonv2"}
+    if language:
+        params["accept-language"] = language
+    return "%s/reverse?%s" % (base.rstrip("/"), urllib.parse.urlencode(params))
+
+
+def towns_along(fetch, base, path, language=None, count=3, pause=None):
+    """Towns the route goes through: ``[Point]``, read at even distances along the path.
+
+    One question to the geocoder per town; ``pause(seconds)`` spaces them,
+    as Nominatim asks (one request per second at most). A short route has
+    none: its two ends say enough.
+    """
+    if not base or len(path) < 2:
+        return []
+    lengths = [0.0]
+    for a, b in zip(path, path[1:]):
+        lengths.append(lengths[-1] + haversine_km(a, b))
+    if lengths[-1] < 20:
+        return []
+    towns, seen = [], set()
+    for number in range(1, count + 1):
+        target = lengths[-1] * number / (count + 1)
+        lat, lon = path[next(i for i, length in enumerate(lengths) if length >= target)]
+        if pause and number > 1:
+            pause(1.0)
+        try:
+            data = json.loads(fetch(reverse_url(base, lat, lon, language)))
+        except Exception:  # noqa: BLE001 - a picture without towns is still a picture
+            continue
+        if not isinstance(data, dict):
+            continue
+        address = data.get("address") or {}
+        name = next((address[key] for key in ("city", "town", "village", "municipality") if address.get(key)),
+                    None) or data.get("name")
+        if name and name not in seen:
+            seen.add(name)
+            towns.append(Point(lat, lon, name))
+    return towns
 
 
 def estimated_route(start, end):
@@ -177,12 +245,13 @@ def _font(size, bold=False, font_path=None):
 
 
 def render_route(route, start, end, lines, attribution, tiles_url=None, fetch=None,
-                 fonts=None):
+                 fonts=None, towns=None):
     """PNG of the route: the path, both ends, and the lines of text above.
 
     ``tiles_url``: a tile server ("https://.../{z}/{x}/{y}.png") for a map
-    background; without one, the route is drawn on a plain background.
-    ``fonts``: ``(regular, bold)`` font files.
+    background; without one, the route is drawn on a plain background, with
+    the towns it goes through (``towns``: ``[Point]``) and the numbers of its
+    main roads to show the way. ``fonts``: ``(regular, bold)`` font files.
     """
     from PIL import Image, ImageDraw
 
@@ -225,6 +294,32 @@ def render_route(route, start, end, lines, attribution, tiles_url=None, fetch=No
     if len(points) > 1:
         draw.line(points, fill=(255, 255, 255), width=11, joint="curve")
         draw.line(points, fill=(32, 96, 200), width=6, joint="curve")
+    ends = (points[0], points[-1])
+
+    def free(x, y, room=45):
+        """Away from both ends, whose names are written next to them."""
+        return all(abs(x - ex) > room or abs(y - ey) > room for ex, ey in ends)
+
+    town_font = _font(15, False, regular)
+    for town in towns or []:
+        x, y = place(*_mercator(town.lat, town.lon, zoom))
+        if not free(x, y):
+            continue
+        draw.ellipse((x - 5, y - 5, x + 5, y + 5), fill=(60, 60, 60), outline=(255, 255, 255), width=2)
+        right = x < MARGIN + frame_w * 0.7
+        draw.text((x + 10 if right else x - 10, y), town.label[:30], fill=(40, 40, 40), font=town_font,
+                  anchor="lm" if right else "rm", stroke_width=3, stroke_fill=(255, 255, 255))
+    road_font = _font(14, True, bold)
+    for ref, (lat, lon) in route.roads:
+        x, y = place(*_mercator(lat, lon, zoom))
+        if not free(x, y, 30):
+            continue
+        # The colours of the road signs: red for motorways and national roads, yellow for the others.
+        main = ref[:1].upper() in ("A", "M", "N", "E")
+        left, top, right_edge, bottom = draw.textbbox((x, y), ref, font=road_font, anchor="mm")
+        draw.rounded_rectangle((left - 6, top - 4, right_edge + 6, bottom + 4), radius=4,
+                               fill=(196, 40, 40) if main else (245, 205, 50), outline=(255, 255, 255), width=2)
+        draw.text((x, y), ref, fill=(255, 255, 255) if main else (30, 30, 30), font=road_font, anchor="mm")
     marker = _font(18, True, bold)
     name = _font(17, True, bold)
     for (x, y), colour, letter, point in ((points[0], (30, 140, 60), "A", start),

@@ -9,9 +9,11 @@ stay editable: a detour made for the job is the employee's to declare.
 """
 import json
 import logging
+import time
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.modules import module as odoo_module
 from odoo.tools import file_path, format_date
 
 from ..route import geo
@@ -277,9 +279,22 @@ class HrExpense(models.Model):
         attribution = env._("Route: OSRM · map data © OpenStreetMap contributors") \
             if not route.estimated else env._("Map data © OpenStreetMap contributors")
         fonts = tuple(self._expense_scan_font(name) for name in FONTS)
+        towns = []
+        if not company.expense_scan_map_tiles_url and not route.estimated:
+            # Without a map background, the towns and road numbers show the way taken. A route measured
+            # before has no road numbers: the route service gives them again.
+            if not route.roads and company.expense_scan_route_url:
+                try:
+                    found = geo.road_route(self._expense_scan_fetch, company.expense_scan_route_url, start, end)
+                except Exception:  # noqa: BLE001 - the picture goes without them
+                    found = None
+                route.roads = found.roads if found else []
+            towns = geo.towns_along(self._expense_scan_fetch, company.expense_scan_geocoder_url, route.path,
+                                    language=(lang or 'en_US').replace('_', '-'),
+                                    pause=None if odoo_module.current_test else time.sleep)
         return geo.render_route(route, start, end, lines, attribution,
                                 tiles_url=company.expense_scan_map_tiles_url or None,
-                                fetch=self._expense_scan_fetch, fonts=fonts)
+                                fetch=self._expense_scan_fetch, fonts=fonts, towns=towns)
 
     @staticmethod
     def _expense_scan_font(name):

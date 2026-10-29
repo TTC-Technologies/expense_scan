@@ -287,7 +287,9 @@ and a **To**, and offers a **Return trip** switch.
   the OSRM demo server for routes). They are meant for light use: a company
   entering many routes points these settings to its own servers. A map
   background can be drawn from a tile server of your choice; OpenStreetMap's
-  own tiles may not be used this way, so the route is drawn on a plain
+  own tiles may not be used this way. Without one, the picture names the
+  numbered roads followed (given by OSRM) and three towns along the way (three
+  reverse lookups to Nominatim, one per second), and the route is drawn on a plain
   background by default. These requests are the only ones the module makes
   besides the exchange rates and the OCR models.
 
