@@ -9,9 +9,12 @@
 - Automatic description: the category alone, without "on dd/mm/yyyy" (the expense has its date field). It
   follows a change of category on an expense entered by hand too; a description written by the employee
   stays.
-- Route picture without a map background: the numbers of the main roads followed (A 68, D 631), in the
-  colours of road signs, and three towns along the way, so the route can be judged. Three points of the
-  route are looked up on Nominatim, one per second.
+- Route picture on a full map: the Plan IGN of the French Géoplateforme (open licence, no key) by default,
+  set on upgrade where no map background was chosen. The path follows the roads drawn (OSRM's full
+  geometry, thinned to what the picture shows). A slow tile is asked again after 4 s.
+- Where the tile server has no map (abroad for the Plan IGN), or without one: the route on a plain
+  background with the numbers of the main roads followed (A 68, D 631), in the colours of road signs, and
+  three towns along the way (three lookups on Nominatim, one per second).
 
 ## 19.0.3.4.2 — 2026-10-28
 

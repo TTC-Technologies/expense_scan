@@ -993,6 +993,12 @@ msgid "Map data © OpenStreetMap contributors"
 msgstr "Kartendaten © OpenStreetMap-Mitwirkende"
 
 #. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "Map © IGN – Plan IGN"
+msgstr "Karte © IGN – Plan IGN"
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_error
 msgid "Message Delivery error"
 msgstr "Nachricht mit Zustellungsfehler"
@@ -1146,6 +1152,11 @@ msgid "Route path"
 msgstr "Verlauf der Strecke"
 
 #. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_roads
+msgid "Route roads"
+msgstr "Straßen der Strecke"
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_attachment_id
 msgid "Route picture"
 msgstr "Bild der Strecke"
@@ -1161,6 +1172,12 @@ msgstr "Routendienst"
 #: code:addons/expense_scan/models/hr_expense_route.py:0
 msgid "Route: OSRM · map data © OpenStreetMap contributors"
 msgstr "Route: OSRM · Kartendaten © OpenStreetMap-Mitwirkende"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "Route: OSRM · map © IGN – Plan IGN"
+msgstr "Route: OSRM · Karte © IGN – Plan IGN"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_sms_error
@@ -4037,8 +4054,8 @@ msgstr "Aktivieren Sie das Kontrollkästchen, um zu bestätigen, dass Sie das mi
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_map_tiles_url
 #: model:ir.model.fields,help:expense_scan.field_res_config_settings__expense_scan_map_tiles_url
-msgid "Tile server drawn under the route picture, as https://.../{z}/{x}/{y}.png. Empty: the route on a plain background. OpenStreetMap's own tiles may not be used this way."
-msgstr "Kachelserver, der unter das Bild der Strecke gezeichnet wird, als https://.../{z}/{x}/{y}.png. Leer: die Strecke auf einfarbigem Hintergrund. Die Kacheln von OpenStreetMap selbst dürfen so nicht verwendet werden."
+msgid "Tile server drawn under the route picture, as https://.../{z}/{x}/{y}.png. By default the Plan IGN of the French Géoplateforme (open licence, France and its borders). Empty, or where the server has no map: the route on a plain background, with the towns and the numbers of the roads followed. OpenStreetMap's own tiles may not be used this way."
+msgstr "Kachelserver, der unter das Bild der Strecke gezeichnet wird, als https://.../{z}/{x}/{y}.png. Standardmäßig der Plan IGN der französischen Géoplateforme (offene Lizenz, Frankreich und seine Grenzgebiete). Leer oder wo der Server keine Karte hat: die Strecke auf einfarbigem Hintergrund, mit den Orten und den Nummern der befahrenen Straßen. Die Kacheln von OpenStreetMap selbst dürfen so nicht verwendet werden."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__date_to
@@ -4425,8 +4442,8 @@ msgstr "leer: nur bekannte Orte"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
-msgid "empty: plain background"
-msgstr "leer: einfarbiger Hintergrund"
+msgid "empty: plain background, with towns and roads"
+msgstr "leer: einfarbiger Hintergrund mit Orten und Straßen"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan

@@ -993,6 +993,12 @@ msgid "Map data © OpenStreetMap contributors"
 msgstr "Kartdata © OpenStreetMap-bidragsytere"
 
 #. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "Map © IGN – Plan IGN"
+msgstr "Kart © IGN – Plan IGN"
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_error
 msgid "Message Delivery error"
 msgstr "Melding ved leveringsfeil"
@@ -1146,6 +1152,11 @@ msgid "Route path"
 msgstr "Rutens forløp"
 
 #. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_roads
+msgid "Route roads"
+msgstr "Rutens veier"
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_attachment_id
 msgid "Route picture"
 msgstr "Bilde av ruten"
@@ -1161,6 +1172,12 @@ msgstr "Rutetjeneste"
 #: code:addons/expense_scan/models/hr_expense_route.py:0
 msgid "Route: OSRM · map data © OpenStreetMap contributors"
 msgstr "Rute: OSRM · kartdata © OpenStreetMap-bidragsytere"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "Route: OSRM · map © IGN – Plan IGN"
+msgstr "Rute: OSRM · kart © IGN – Plan IGN"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_sms_error
@@ -4037,8 +4054,8 @@ msgstr "Kryss av i boksen for å bekrefte at du har sjekket med regnskapsførere
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_map_tiles_url
 #: model:ir.model.fields,help:expense_scan.field_res_config_settings__expense_scan_map_tiles_url
-msgid "Tile server drawn under the route picture, as https://.../{z}/{x}/{y}.png. Empty: the route on a plain background. OpenStreetMap's own tiles may not be used this way."
-msgstr "Fliseserver som tegnes under bildet av ruten, som https://.../{z}/{x}/{y}.png. Tom: ruten på ensfarget bakgrunn. OpenStreetMaps egne fliser kan ikke brukes slik."
+msgid "Tile server drawn under the route picture, as https://.../{z}/{x}/{y}.png. By default the Plan IGN of the French Géoplateforme (open licence, France and its borders). Empty, or where the server has no map: the route on a plain background, with the towns and the numbers of the roads followed. OpenStreetMap's own tiles may not be used this way."
+msgstr "Fliseserver som tegnes under bildet av ruten, som https://.../{z}/{x}/{y}.png. Som standard Plan IGN fra den franske Géoplateforme (åpen lisens, Frankrike og grenseområdene). Tom, eller der serveren ikke har kart: ruten på ensfarget bakgrunn, med byene og numrene på veiene som følges. OpenStreetMaps egne fliser kan ikke brukes slik."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__date_to
@@ -4425,8 +4442,8 @@ msgstr "tom: bare kjente steder"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
-msgid "empty: plain background"
-msgstr "tom: ensfarget bakgrunn"
+msgid "empty: plain background, with towns and roads"
+msgstr "tom: ensfarget bakgrunn med byer og veier"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan

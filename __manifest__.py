@@ -39,9 +39,9 @@ OCR models (47.5 MB, downloaded once). Not for Odoo Online.
 
 Network access: the OCR models are downloaded once; the public reference rates of the
 European Central Bank are downloaded daily (one switch in the settings). For mileage by
-route only, the places typed and three points of each route (to name the towns on its
-picture) are looked up on OpenStreetMap (Nominatim, OSRM; your own servers can be set
-instead). Receipts, their texts and amounts never leave the server.
+route only, the places typed are looked up on OpenStreetMap (Nominatim, OSRM) and the
+map under each route picture comes from the French Géoplateforme (Plan IGN); your own
+servers can be set instead. Receipts, their texts and amounts never leave the server.
 
 Free module, LGPL-3.
 """,

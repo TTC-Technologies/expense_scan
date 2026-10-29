@@ -285,13 +285,15 @@ and a **To**, and offers a **Return trip** switch.
 - **Services** (*Settings → Mileage by route*): OpenStreetMap's public servers
   by default (Nominatim for addresses, as Odoo uses to place contacts, and
   the OSRM demo server for routes). They are meant for light use: a company
-  entering many routes points these settings to its own servers. A map
-  background can be drawn from a tile server of your choice; OpenStreetMap's
-  own tiles may not be used this way. Without one, the picture names the
-  numbered roads followed (given by OSRM) and three towns along the way (three
-  reverse lookups to Nominatim, one per second), and the route is drawn on a plain
-  background by default. These requests are the only ones the module makes
-  besides the exchange rates and the OCR models.
+  entering many routes points these settings to its own servers. The map
+  under the route picture is the Plan IGN of the French Géoplateforme by
+  default (open licence, no key; France and its borders), or any tile server
+  set instead; OpenStreetMap's own tiles may not be used this way. Where the
+  tile server has no map, and when the setting is empty, the route is drawn on
+  a plain background with the numbered roads followed (given by OSRM) and three
+  towns along the way (three reverse lookups to Nominatim, one per second).
+  These requests are the only ones the module makes besides the exchange rates
+  and the OCR models.
 
 ## Country specifics
 

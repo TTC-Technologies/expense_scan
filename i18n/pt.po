@@ -993,6 +993,12 @@ msgid "Map data © OpenStreetMap contributors"
 msgstr "Dados do mapa © contribuidores do OpenStreetMap"
 
 #. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "Map © IGN – Plan IGN"
+msgstr "Mapa © IGN – Plan IGN"
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_error
 msgid "Message Delivery error"
 msgstr "Erro de Envio de Mensagem"
@@ -1146,6 +1152,11 @@ msgid "Route path"
 msgstr "Traçado do percurso"
 
 #. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_roads
+msgid "Route roads"
+msgstr "Estradas do percurso"
+
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_attachment_id
 msgid "Route picture"
 msgstr "Imagem do percurso"
@@ -1161,6 +1172,12 @@ msgstr "Serviço de percursos"
 #: code:addons/expense_scan/models/hr_expense_route.py:0
 msgid "Route: OSRM · map data © OpenStreetMap contributors"
 msgstr "Percurso: OSRM · dados do mapa © contribuidores do OpenStreetMap"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "Route: OSRM · map © IGN – Plan IGN"
+msgstr "Percurso: OSRM · mapa © IGN – Plan IGN"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_sms_error
@@ -4037,8 +4054,8 @@ msgstr "Assinale a caixa para confirmar que consultou o seu contabilista."
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_map_tiles_url
 #: model:ir.model.fields,help:expense_scan.field_res_config_settings__expense_scan_map_tiles_url
-msgid "Tile server drawn under the route picture, as https://.../{z}/{x}/{y}.png. Empty: the route on a plain background. OpenStreetMap's own tiles may not be used this way."
-msgstr "Servidor de mosaicos desenhado sob a imagem do percurso, como https://.../{z}/{x}/{y}.png. Vazio: o percurso sobre um fundo liso. Os mosaicos do próprio OpenStreetMap não podem ser usados assim."
+msgid "Tile server drawn under the route picture, as https://.../{z}/{x}/{y}.png. By default the Plan IGN of the French Géoplateforme (open licence, France and its borders). Empty, or where the server has no map: the route on a plain background, with the towns and the numbers of the roads followed. OpenStreetMap's own tiles may not be used this way."
+msgstr "Servidor de mosaicos desenhado sob a imagem do percurso, como https://.../{z}/{x}/{y}.png. Por omissão, o Plan IGN da Géoplateforme francesa (licença aberta, França e as suas fronteiras). Vazio, ou onde o servidor não tem mapa: o percurso sobre um fundo liso, com as localidades e os números das estradas seguidas. Os mosaicos do próprio OpenStreetMap não podem ser usados assim."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__date_to
@@ -4425,8 +4442,8 @@ msgstr "vazio: só locais conhecidos"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
-msgid "empty: plain background"
-msgstr "vazio: fundo liso"
+msgid "empty: plain background, with towns and roads"
+msgstr "vazio: fundo liso, com localidades e estradas"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
