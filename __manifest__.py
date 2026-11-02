@@ -5,11 +5,12 @@
     'name': "Expense Receipt Scanner",
     'version': '19.0.3.4.3',
     # The store search reads only the name and the summary, as exact phrases: they carry the
-    # words people type (expense OCR, receipt OCR, expense scanner, scan receipts, local OCR).
+    # words people type (expense OCR, receipt OCR, expense scanner, scan receipts, local OCR, AI expense,
+    # AI receipt, OCR expense, expense automation, mileage expense).
     # The store asks for a name of 25 characters at most.
-    'summary': "Expense scanner with receipt OCR: scan receipts with a phone and the expense fills itself in "
-               "(merchant, date, total, VAT, category). Local OCR and AI on your own server: expense OCR with "
-               "no API key, no fee per scan.",
+    'summary': "AI expense scanner with receipt OCR: scan receipts with a phone and the expense fills itself in "
+               "(merchant, date, total, VAT, category). Local OCR on your own server: expense OCR, AI receipt "
+               "reading, OCR expense automation, mileage expense by route. No API key, no fee per scan.",
     'description': """
 Expense Receipt Scanner: scan receipts with local OCR and AI
 ============================================================
