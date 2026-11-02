@@ -163,6 +163,18 @@ ARTICLE B 3,50
                             % (far.day, far.month))
         self.assertIsNone(result.value('date'))
 
+    def test_a_vat_table_is_not_a_date(self):
+        """The receipt has no date: "15.09" is the amount before tax of the 10 % line."""
+        today = date(2026, 10, 26)
+        result = self.parse("DELI&CIA@AEROPORT DE BORDEAUX@TOTAL 19.80@HT TUA TTC@"
+                            "B TUA 5.50 % 3.03 0.17 3.20@E TUA 10.00 15.09 1.51 16.60".replace("@", "\n"), today=today)
+        self.assertIsNone(result.value('date'))
+        # A day and a month with a dot, next to a time or the word "date", is a date.
+        result = self.parse("KIOSQUE@15.09 12:40@TOTAL 4,50".replace("@", "\n"), today=today)
+        self.assertEqual(result.value('date'), date(2026, 9, 15))
+        result = self.parse("KIOSQUE@DATE 15.09@TOTAL 4,50@HT 3,75 TVA 0,75".replace("@", "\n"), today=today)
+        self.assertEqual(result.value('date'), date(2026, 9, 15))
+
     def test_decimal_amount_is_not_a_date(self):
         """'5.67' is not a date (day 5, month 67)."""
         result = self.parse("GARAGE\nPRIX HT 5.67\nTOTAL 6,80")
