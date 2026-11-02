@@ -10,6 +10,8 @@ token, no document sent to a third party.
 
 ## What the module does
 
+![Flowchart of the module](static/description/flowchart.svg)
+
 | Step | Detail |
 |---|---|
 | **One tap** | The **Scan** (mobile) / **Upload** (desktop) button of the expense list opens the camera or the photo library directly. |
