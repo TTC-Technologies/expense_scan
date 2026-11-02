@@ -42,7 +42,9 @@ class ExpenseScanSheetArchive(models.Model):
     @api.model
     def _expense_scan_keep(self, expenses, files, name, date_from=False, date_to=False):
         """Keep the files of one generation; returns the new record."""
-        archive = self.create({
+        # Created with the rights of the module: an employee generating their own sheet may not read the
+        # employee records the archive points to (Odoo checks it when the link is written).
+        archive = self.sudo().create({
             'name': name,
             'company_id': (expenses.company_id[:1] or self.env.company).id,
             'date_from': date_from or min(expenses.mapped('date'), default=False),
@@ -50,7 +52,7 @@ class ExpenseScanSheetArchive(models.Model):
             'employee_ids': [(6, 0, expenses.employee_id.ids)],
             'expense_ids': [(6, 0, expenses.ids)],
             'total_amount': sum(expenses.mapped('total_amount')),
-        })
+        }).with_env(self.env)
         attachments = self.env['ir.attachment'].create([{
             'name': file_name,
             'datas': base64.b64encode(content),

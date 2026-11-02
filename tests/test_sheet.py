@@ -244,6 +244,23 @@ class TestExpenseSheet(common.TransactionCase):
         self.assertEqual(len(archive.attachment_ids), 2)
         self.assertEqual(archive.employee_ids, mine.employee_id | other)
 
+    def test_an_employee_generates_their_own_sheet(self):
+        """Without the right to read employees: the archive of the sheet is still kept, and readable."""
+        user = self.env['res.users'].create({
+            'name': "Hugo Fiche", 'login': 'hugo_fiche_zz',
+            'group_ids': [(6, 0, [self.env.ref('base.group_user').id])]})
+        mine = self.env['hr.employee'].create({'name': "Hugo Fiche", 'user_id': user.id})
+        expense = self.expense("Mon repas", 4, employee_id=mine.id)
+        self.attach(expense, png(), "t.png", "image/png")
+        wizard = self.env["expense.scan.sheet.wizard"].with_user(user).with_context(
+            active_model="hr.expense", active_ids=expense.ids).create({"summary": False, "receipts": True})
+        wizard.action_generate()
+        archive = self.env["expense.scan.sheet.archive"].with_user(user).search([("expense_ids", "in", expense.ids)])
+        self.assertEqual(len(archive), 1)
+        self.assertEqual(len(archive.attachment_ids), 1)
+        self.assertEqual(archive.employee_ids.ids, mine.ids)
+        self.assertEqual(archive.employee_ids.mapped('display_name'), ["Hugo Fiche"])
+
     def test_wizard_sends_the_sheet_by_email(self):
         expense = self.expense("A envoyer", 1)
         self.attach(expense, png(), "t.png", "image/png")
