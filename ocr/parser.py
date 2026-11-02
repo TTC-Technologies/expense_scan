@@ -471,6 +471,27 @@ def _infer_year(day, month, today):
     return None
 
 
+#: An amount with two decimals, "15.09" or "1,51".
+DECIMAL_AMOUNT_RE = re.compile(r"(?<![\d.,])\d{1,6}[.,]\d{2}(?![\d.,])")
+
+
+def _is_amount_of_a_row(text, match):
+    """Whether "15.09" is an amount in a row of amounts, not a day and a month.
+
+    The VAT table of a receipt without a date ("E TVA 10.00 15.09 1.51 16.60")
+    holds amounts that read as dates. A day and a month written with a dot sit
+    next to a time, the word "date" or few other amounts: not among three.
+    """
+    if "." not in match.group(0) and "," not in match.group(0):
+        return False
+    if TIME_RE.search(text) or DATE_KEYWORD_RE.search(text):
+        return False
+    here = match.span()
+    others = [m for m in DECIMAL_AMOUNT_RE.finditer(text) if m.span() != here and not
+              (here[0] <= m.start() and m.end() <= here[1])]
+    return len(others) >= 2
+
+
 def _day_month(first, second, order):
     """Day and month of a numeric date, in the country's order.
 
@@ -550,6 +571,8 @@ def extract_date(lines, today=None, max_age_days=730, order="dmy"):
                 if kind in INFERRED_YEAR_KINDS and (today - found).days > NO_YEAR_MAX_AGE_DAYS:
                     # Inferred year too old: probably a travel or due date,
                     # not the purchase date.
+                    continue
+                if kind == "dm" and _is_amount_of_a_row(text, match):
                     continue
                 confidence = weight * max(line.score, 0.4)
                 # A date next to a time or to the word "date" is almost
