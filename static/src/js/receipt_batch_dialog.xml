@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2026 T.T.C. SAS
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0). -->
+<templates xml:space="preserve">
+
+    <!-- Open behind the camera: the photos taken so far are counted here. -->
+    <t t-name="expense_scan.ReceiptBatchDialog">
+        <Dialog title="this.title" size="'sm'" footer="false" contentClass="'o_expense_scan_batch'">
+            <div class="d-grid gap-2">
+                <p class="mb-1 text-center fw-bold" t-esc="this.summary"/>
+                <div t-if="this.count" class="d-flex flex-wrap justify-content-center gap-1 mb-2">
+                    <img t-foreach="this.props.batch.thumbs" t-as="thumb" t-key="thumb_index" t-att-src="thumb"
+                         alt="" class="rounded border" style="width: 48px; height: 64px; object-fit: cover;"/>
+                </div>
+                <button type="button" class="btn btn-primary btn-lg" t-on-click="this.props.next">
+                    <i class="oi oi-fw me-2" data-icon="photo_camera" role="img" aria-hidden="true"/>Photograph the next one
+                </button>
+                <button type="button" class="btn btn-success btn-lg" t-att-disabled="!this.count" t-on-click="this.onFinish">
+                    <t t-esc="this.finishLabel"/>
+                </button>
+                <button type="button" class="btn btn-link" t-on-click="this.onCancel">Cancel</button>
+            </div>
+        </Dialog>
+    </t>
+
+</templates>

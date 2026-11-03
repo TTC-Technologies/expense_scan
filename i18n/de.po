@@ -4798,3 +4798,39 @@ msgstr "Gleiche Strecke"
 #: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
 msgid "A new expense for the same trip, dated today"
 msgstr "Eine neue Ausgabe für dieselbe Strecke, mit dem heutigen Datum"
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/receipt_source_dialog.xml:0
+msgid "Several receipts in a row"
+msgstr "Mehrere Belege hintereinander"
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/receipt_batch_dialog.js:0
+msgid "Receipt batch"
+msgstr "Belegstapel"
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/receipt_batch_dialog.js:0
+msgid "%(count)s receipt(s) ready to be read."
+msgstr "%(count)s Beleg(e) zum Lesen bereit."
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/receipt_batch_dialog.js:0
+msgid "Take the first receipt in photo."
+msgstr "Fotografieren Sie den ersten Beleg."
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/receipt_batch_dialog.js:0
+msgid "Finish and read the %(count)s receipt(s)"
+msgstr "Fertig und die %(count)s Beleg(e) lesen"
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/receipt_batch_dialog.xml:0
+msgid "Photograph the next one"
+msgstr "Nächsten fotografieren"
