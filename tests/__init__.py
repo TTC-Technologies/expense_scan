@@ -16,6 +16,7 @@ from . import test_todo_banner
 from . import test_async_scan
 from . import test_corpus
 from . import test_receipt_lifecycle
+from . import test_flatten
 from . import test_i18n
 from . import test_accounting_fields
 from . import test_currency_rates

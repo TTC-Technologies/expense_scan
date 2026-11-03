@@ -9,6 +9,9 @@
                 <div t-if="state.error" class="alert alert-danger py-1 px-2 small mb-2">
                     <t t-esc="state.error"/>
                 </div>
+                <div t-if="state.notice" class="alert alert-info py-1 px-2 small mb-2">
+                    <t t-esc="state.notice"/>
+                </div>
                 <div t-if="!state.loaded and !state.error" class="text-center text-muted py-5">
                     <i class="fa fa-circle-o-notch fa-spin fa-2x" role="img" aria-hidden="true"/>
                 </div>
@@ -37,14 +40,22 @@
                         </button>
                         <button type="button" class="btn btn-outline-secondary btn-sm"
                                 title="Reset: uploaded image, untouched"
-                                t-on-click="() => this.reset()" t-att-disabled="state.auto or state.busy">
+                                t-on-click="() => this.reset()" t-att-disabled="state.auto or state.busy or state.flattening">
                             <i class="fa fa-history" role="img" aria-label="Reset"/>
                         </button>
                         <button type="button" class="btn btn-outline-secondary btn-sm"
                                 title="Automatic retouch (can be changed before applying)"
-                                t-on-click="() => this.autoRetouch()" t-att-disabled="state.auto or state.busy">
+                                t-on-click="() => this.autoRetouch()"
+                                t-att-disabled="state.auto or state.busy or state.flattening or state.flat">
                             <i class="fa" t-att-class="state.auto ? 'fa-circle-o-notch fa-spin' : 'fa-magic'"
                                role="img" aria-label="Automatic retouch"/>
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm"
+                                title="Flatten: make the lines of a curled or folded receipt straight"
+                                t-on-click="() => this.flatten()"
+                                t-att-disabled="state.auto or state.busy or state.flattening or state.flat">
+                            <i class="fa" t-att-class="state.flattening ? 'fa-circle-o-notch fa-spin' : 'fa-align-justify'"
+                               role="img" aria-label="Flatten"/>
                         </button>
                     </div>
                     <div class="d-flex align-items-center gap-2 px-2">
@@ -66,7 +77,7 @@
                         Cancel
                     </button>
                     <button type="button" class="btn btn-primary" t-on-click="onApply"
-                            t-att-disabled="!state.loaded or state.busy or state.auto">
+                            t-att-disabled="!state.loaded or state.busy or state.auto or state.flattening">
                         <i t-if="state.busy" class="fa fa-circle-o-notch fa-spin me-1"
                            role="img" aria-hidden="true"/>
                         Apply

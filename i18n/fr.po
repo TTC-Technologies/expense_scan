@@ -4721,3 +4721,33 @@ msgstr "<i class=\"fa fa-lightbulb-o me-1\" aria-hidden=\"true\"/>Suggérer une 
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "<i class=\"fa fa-wrench me-1\" aria-hidden=\"true\"/>Ask for a custom adaptation"
 msgstr "<i class=\"fa fa-wrench me-1\" aria-hidden=\"true\"/>Demander une adaptation sur mesure"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense.py:0
+msgid "flattened"
+msgstr "aplati"
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/retouch_dialog.xml:0
+msgid "Flatten"
+msgstr "Aplatir"
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/retouch_dialog.xml:0
+msgid "Flatten: make the lines of a curled or folded receipt straight"
+msgstr "Aplatir : redresser les lignes d'un ticket gondolé ou plié"
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/retouch_dialog.js:0
+msgid "The lines are already straight: nothing to flatten."
+msgstr "Les lignes sont déjà droites : rien à aplatir."
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/retouch_dialog.js:0
+msgid "The flattening failed."
+msgstr "L'aplatissement a échoué."
