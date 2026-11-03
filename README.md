@@ -372,8 +372,12 @@ on the same list of positioned words.
   default model, which reads accented Latin text without trouble. If a later
   version of the library fixes the latin models, they will be candidates
   again with nothing to change.
-- **Item lines**: the module extracts the header and the total, not the item
-  details. An Odoo expense has a single amount anyway.
+- **Item lines**: the scan extracts the header and the total. The lines of a
+  till receipt (what was bought) are read afterwards, from the text kept, by a
+  scheduled task (every 30 minutes), and shown under the notes only when they
+  add up to the total of the expense: an invoice table or a doubtful reading
+  shows nothing. They are erased with the text. An Odoo expense has a single
+  amount anyway.
 - **Several tax rates** on the same receipt: the module keeps the exact sum
   of the taxes read and sets the highest rate on the expense; the accountant
   can correct it.

@@ -30,3 +30,4 @@ from . import expense_scan_correction
 from . import expense_sheet_archive
 from . import expense_scan_place
 from . import hr_expense_route
+from . import hr_expense_items

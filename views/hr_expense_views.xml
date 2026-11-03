@@ -308,6 +308,12 @@
                 <field name="expense_scan_hint_category" nolabel="1" colspan="2" readonly="1"
                        invisible="not expense_scan_hint_category" class="o_expense_scan_hint"/>
             </xpath>
+            <xpath expr="//field[@name='description']" position="after">
+                <div invisible="not expense_scan_items_html" class="mt-2">
+                    <div class="text-muted small">Lines of the receipt, read: they add up to the total.</div>
+                    <field name="expense_scan_items_html" nolabel="1" readonly="1"/>
+                </div>
+            </xpath>
             <xpath expr="//field[@name='description']" position="before">
                 <field name="expense_scan_hint_notes" readonly="1"
                        invisible="not expense_scan_hint_notes" class="o_expense_scan_hint d-block"/>

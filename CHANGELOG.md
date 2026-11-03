@@ -12,6 +12,11 @@
   and sends them together; one expense per receipt, and their list to review them one by one.
 - The lists and the Actions menu (Back to draft...) keep their selection after Submit, Approve, Post: a manager no longer
   selects the same expenses again.
+- Merchants whose receipts are corrected: from three readings of which most were corrected (report of corrections), the
+  next receipt of that merchant asks for a look at the date or the amount, even when nothing looked doubtful.
+- Lines of the receipt: the lines of a till receipt are read afterwards, from the text kept, by a scheduled task (every 30
+  minutes; nothing is added to the time of the scan), and shown under the notes when they add up to the total of the
+  expense. Erased with the text.
 - Route picture: the national map of the country of the route (France: Plan IGN, Switzerland: swisstopo, Spain: IGN
   España, Germany: basemap.de; open data, no key). The "Map background" setting is "auto" by default (the Plan IGN set
   by 3.4.3 becomes "auto"); an address of tiles of your own still works.
