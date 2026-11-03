@@ -4828,3 +4828,15 @@ msgstr "Fertig und die %(count)s Beleg(e) lesen"
 #: code:addons/expense_scan/static/src/js/receipt_batch_dialog.xml:0
 msgid "Photograph the next one"
 msgstr "Nächsten fotografieren"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense.py:0
+msgid "The date is often wrong on this merchant's receipts: check it."
+msgstr "Das Datum ist auf den Belegen dieses Händlers oft falsch: Bitte prüfen."
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense.py:0
+msgid "The amount is often wrong on this merchant's receipts: check it."
+msgstr "Der Betrag ist auf den Belegen dieses Händlers oft falsch: Bitte prüfen."

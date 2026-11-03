@@ -4839,3 +4839,15 @@ msgstr "Terminer et lire les %(count)s ticket(s)"
 #: code:addons/expense_scan/static/src/js/receipt_batch_dialog.xml:0
 msgid "Photograph the next one"
 msgstr "Photographier le suivant"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense.py:0
+msgid "The date is often wrong on this merchant's receipts: check it."
+msgstr "La date est souvent fausse sur les tickets de ce commerçant : vérifiez-la."
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense.py:0
+msgid "The amount is often wrong on this merchant's receipts: check it."
+msgstr "Le montant est souvent faux sur les tickets de ce commerçant : vérifiez-le."

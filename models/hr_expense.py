@@ -8,7 +8,7 @@ import math
 import os
 import re
 import time
-from collections import Counter, OrderedDict
+from collections import Counter, OrderedDict, defaultdict
 from datetime import datetime, time as dtime, timedelta
 
 import psycopg2
@@ -1983,6 +1983,43 @@ class HrExpense(models.Model):
     REINVOICE_FIELDS = ('project_id', 'reinvoice_mode',
                         'analytic_distribution', 'sale_order_id', 'expense_scan_task_id')
 
+    #: A merchant is watched once so many of its receipts were read and submitted, and this share of the
+    #: readings of a field was corrected (or filled in) by people.
+    WATCH_MIN_READINGS = 3
+    WATCH_CORRECTED_SHARE = 0.6
+
+    def _expense_scan_watched(self, result, company, items):
+        """Points to check on a merchant whose receipts people keep correcting.
+
+        The report of corrections says, per merchant, how often the date and the amount read were
+        changed. Where it is most of the time, the next receipt of that merchant asks for a look at
+        the field even though nothing looked doubtful to the reading. Only what the reading did not
+        already doubt is added.
+        """
+        merchant = result.value('merchant')
+        if not merchant:
+            return []
+        known = {code for _label, code, _hint in items}
+        rows = self.env['expense.scan.correction'].sudo()._read_group(
+            [('company_id', '=', company.id), ('expense_id.expense_scan_merchant', '=', merchant),
+             ('field', 'in', ('date', 'total_amount_currency'))],
+            ['field', 'outcome'], ['__count'])
+        readings, corrected = defaultdict(int), defaultdict(int)
+        for field, outcome, count in rows:
+            readings[field] += count
+            if outcome != 'kept':
+                corrected[field] += count
+        labels = {'date': _("Date"), 'total': _("Total")}
+        sentences = {'date': _("The date is often wrong on this merchant's receipts: check it."),
+                     'total': _("The amount is often wrong on this merchant's receipts: check it.")}
+        watched = []
+        for field, code in (('date', 'date'), ('total_amount_currency', 'total')):
+            if code in known or readings[field] < self.WATCH_MIN_READINGS:
+                continue
+            if corrected[field] >= self.WATCH_CORRECTED_SHARE * readings[field]:
+                watched.append((labels[code], code, sentences[code]))
+        return watched
+
     def _expense_scan_apply(self, result, attachment):
         """Write the fields read and prepare the review message."""
         self.ensure_one()
@@ -2077,6 +2114,7 @@ class HrExpense(models.Model):
                 # tags: checked after writing, since the recognised category
                 # may bring one.
                 check_category_tax = True
+        items += self._expense_scan_watched(result, company, items)
         # A field entered by hand before the scan only needs checking when it
         # differs from the receipt.
         keep = self._expense_scan_kept_fields()
