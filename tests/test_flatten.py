@@ -113,6 +113,23 @@ class TestFlatten(common.TransactionCase):
             flat, model = flatten.flatten(bent)
         self.assertIsNone(model)
         self.assertIs(flat, bent)
+        with patch.object(flatten, '_maps', side_effect=MemoryError()):
+            flat, model = flatten.flatten(bent)
+        self.assertIsNone(model)
+        self.assertIs(flat, bent)
+
+    def test_unusual_pictures_do_not_break_the_scan(self):
+        """A grey picture, a picture with a transparency channel: flattened or left alone, never an error."""
+        import cv2
+        bent = bend(receipt(seed=6), bow=28)
+        grey = cv2.cvtColor(bent, cv2.COLOR_BGR2GRAY)
+        flatten.flatten(grey)
+        flatten.flatten(cv2.cvtColor(bent, cv2.COLOR_BGR2BGRA))
+        # Large photo: analysed at a reduced size, flattened at its own.
+        big = cv2.resize(bent, None, fx=3, fy=3, interpolation=cv2.INTER_CUBIC)
+        flat, model = flatten.flatten(big)
+        self.assertTrue(model)
+        self.assertEqual(flat.shape, big.shape)
 
 
 @tagged('post_install', '-at_install')

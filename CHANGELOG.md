@@ -1,5 +1,15 @@
 # Changelog
 
+## 19.0.3.4.6 — 2026-11-03
+
+- Receipts curled by humidity or folded in two: the picture shown beside the fields gets its lines straight. It is the last
+  step of the scan (the words are read already): the lines are found in the picture, one model explains a common bow and a
+  slope that changes with the height (a fold), and the picture is applied only when the rows of print get crisper on the
+  pixels themselves. A flat receipt, a PDF or a picture with too little text is not touched, and a flattened picture is not
+  flattened twice. Follows the "Straighten photos" setting. The scan note says "flattened".
+- Retouch: a Flatten button, on the receipt as it is turned in the editor; the rotation it was made with is kept in the
+  settings of the retouch, so that it is made again when the retouch is reopened.
+
 ## 19.0.3.4.5 — 2026-11-02
 
 - A receipt without a date no longer takes an amount for one: the VAT table of a receipt ("E TVA 10.00 15.09 1.51 16.60")

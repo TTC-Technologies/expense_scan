@@ -54,7 +54,9 @@ what is missing:
   pieces are compared and merged into one expense, or split when they
   clearly describe two purchases.
 - **Retouch**: rotate and crop a receipt by hand, or accept the automatic
-  suggestion.
+  suggestion; a Flatten button makes the lines of a curled or folded receipt
+  straight again. The scan does it by itself, as its last step, for the
+  picture shown beside the fields.
 - **Trip purpose**: an expense on the same day or at the same place as a
   neighbouring expense takes up its description ("Sales visit Acme").
 - **Projects**: re-invoice an expense to a project, or charge it to the
@@ -331,6 +333,7 @@ expense_scan/
 ├── ocr/                     ← independent of Odoo, testable on its own
 │   ├── types.py             shared structures
 │   ├── preprocess.py        EXIF, receipt detection, perspective, straightening
+│   ├── flatten.py           curled or folded receipts: lines made straight, for the picture shown
 │   ├── engines.py           interchangeable engines (RapidOCR, Tesseract)
 │   ├── parser.py            field extraction from a European receipt
 │   ├── lexicon.py           receipt words, activity codes, brands

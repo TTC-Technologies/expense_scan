@@ -246,20 +246,24 @@ def flatten(image):
     """The receipt with its lines straight, and what was done; ``(image, info)``.
 
     ``info`` is ``None`` when the picture is left as it is (flat already, too little text,
-    doubtful fit), otherwise a dictionary describing the fit (for the log and the tests).
+    doubtful fit, any failure), otherwise a dictionary describing the fit (for the log and the tests).
     """
     if not available() or not hasattr(image, 'shape') or image.size == 0 or image.ndim < 2:
         return image, None
+    try:
+        return _flatten(image)
+    except Exception:  # noqa: BLE001 - a picture left alone is better than a failed scan
+        _logger.warning("Flattening failed", exc_info=True)
+        return image, None
+
+
+def _flatten(image):
     height, width = image.shape[:2]
     scale = min(1.0, WORK_SIDE / float(max(height, width)))
     small = image if scale == 1.0 else cv2.resize(
         image, None, fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
     gray = cv2.cvtColor(small, cv2.COLOR_BGR2GRAY) if small.ndim == 3 else small
-    try:
-        model = fit(_spans(gray), gray.shape[1], gray.shape[0])
-    except Exception:  # noqa: BLE001 - a picture left alone is better than a failed scan
-        _logger.warning("Flattening failed", exc_info=True)
-        return image, None
+    model = fit(_spans(gray), gray.shape[1], gray.shape[0])
     if not worth_applying(model):
         return image, None
     map_x, map_y = _maps(model, (width, height), scale)
