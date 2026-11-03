@@ -67,6 +67,14 @@
                         <field name="scan_todo" class="fw-bold" nolabel="1" readonly="1"/>
                     </span>
                 </div>
+                <div class="alert alert-warning d-flex align-items-center gap-2"
+                     role="alert" name="expense_scan_date_missing"
+                     invisible="expense_scan_date_state != 'missing' or state != 'draft'">
+                    <i class="fa fa-calendar" role="img" aria-hidden="true"/>
+                    <div class="flex-grow-1">The date is not printed on the receipt: the expense has the date of the day. Enter the date, or confirm this one, before submitting.</div>
+                    <button name="action_expense_scan_confirm_date" type="object" class="btn btn-secondary"
+                            string="Confirm this date"/>
+                </div>
                 <div class="alert alert-danger d-flex align-items-center gap-2"
                      role="alert" name="expense_scan_error"
                      invisible="scan_state != 'error'">
@@ -304,6 +312,7 @@
                 <field name="expense_scan_todo_unplaced" invisible="1"/>
                 <field name="scan_state" invisible="1"/>
                 <field name="expense_scan_todo_pending" invisible="1"/>
+                <field name="expense_scan_date_state" invisible="1"/>
                 <field name="expense_scan_reinvoice" invisible="1"/>
                 <field name="expense_scan_own" invisible="1"/>
                 <field name="expense_scan_expense_manager" invisible="1"/>

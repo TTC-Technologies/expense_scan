@@ -481,6 +481,14 @@ class HrExpense(models.Model):
                     "\"%(expense)s\" is a business meal for %(covers)s covers: write the "
                     "names and companies of the guests in the notes before submitting it.",
                     expense=expense.name, covers=expense.expense_scan_covers))
+        # Each date missing from its receipt is entered, or confirmed, before the expense goes up: a
+        # receipt read with nobody looking would otherwise land on the day it was received.
+        for expense in self:
+            if expense.expense_scan_date_state == 'missing':
+                raise UserError(_(
+                    "\"%(expense)s\": the date is not printed on the receipt, the expense has the date "
+                    "of the day. Enter the date, or confirm it, before submitting.",
+                    expense=expense.name))
         return super().action_submit()
 
     def _expense_scan_reason(self, reason, number=None):
