@@ -196,7 +196,11 @@ class TestReceiptLifecycle(common.TransactionCase):
             with patch.object(type(expense), '_expense_scan_store_image', autospec=True,
                               return_value={}), \
                     patch.object(type(expense), '_expense_scan_foreign_tax', autospec=True,
+                                 return_value=False), \
+                    patch.object(type(expense), '_expense_scan_product_no_vat', autospec=True,
                                  return_value=False):
+                # Whatever the default category of the database: one without tax would ask for none.
+                expense.company_id.expense_scan_apply_tax = True
                 expense.with_context(lang='en_US')._expense_scan_apply(
                     parser.parse(words_from_text(text)), self.Attachment)
             todo[name] = expense.scan_todo or ""
