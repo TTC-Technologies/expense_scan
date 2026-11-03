@@ -50,6 +50,9 @@ what is missing:
   (a "Subscriptions" category ends up recognised without anyone typing a
   word). Only categories chosen by a person teach, a correction counts for
   more than a confirmation, and a word entered by hand is never overridden.
+- **Several receipts in one photo**: those laid on the table are cut out, read
+  and told apart: one expense for each purchase (the till receipt and the card
+  slip of one purchase stay together).
 - **Several receipts for one purchase** (till receipt + card slip): the
   pieces are compared and merged into one expense, or split when they
   clearly describe two purchases.

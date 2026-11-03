@@ -4866,3 +4866,9 @@ msgstr "Zeilen des Belegs"
 #: model:ir.cron,cron_name:expense_scan.ir_cron_expense_scan_items
 msgid "Receipt scan: read the item lines of the receipts"
 msgstr "Belegscan: Artikelzeilen der Belege lesen"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_multi.py:0
+msgid "The photo holds %(count)s different purchases: one expense each; this one keeps the first."
+msgstr "Das Foto enthält %(count)s verschiedene Einkäufe: eine Ausgabe je Einkauf; diese behält den ersten."

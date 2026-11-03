@@ -1,5 +1,12 @@
 # Changelog
 
+## 20.0.3.4.8 — 2026-11-04
+
+- A photo of several receipts: each receipt laid on the table is found, cut out and straightened, then read; those that
+  make one purchase (the till receipt and the card slip) are joined, the others go to an expense of their own (the first
+  stays on the expense scanned, a note in its chatter links the others). A photo whose pieces all make one purchase is
+  read as it is. The original photo is kept apart. Follows the "Crop the receipt" setting.
+
 ## 20.0.3.4.7 — 2026-11-03
 
 - A receipt without a printed date keeps the date of the day, and says so until it is dated: "Date to enter" (alert and
