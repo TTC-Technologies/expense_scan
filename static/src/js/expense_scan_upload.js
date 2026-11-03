@@ -87,13 +87,13 @@ const expenseScanUpload = () => ({
 
     /** Open the camera for one more photo (within a click). */
     expenseScanBatchCamera() {
-        configureReceiptInput(this.fileInput.el, "camera");
-        this.fileInput.el.click();
+        configureReceiptInput(this.fileInput(), "camera");
+        this.fileInput().click();
     },
 
     /** The photo taken joins the batch. */
     expenseScanAddToBatch() {
-        const input = this.fileInput.el;
+        const input = this.fileInput();
         for (const file of input.files) {
             this.expenseScanBatch.files.push(file);
             this.expenseScanBatch.thumbs.push(URL.createObjectURL(file));
@@ -112,7 +112,7 @@ const expenseScanUpload = () => ({
         for (const file of batch.files) {
             transfer.items.add(file);
         }
-        this.fileInput.el.files = transfer.files;
+        this.fileInput().files = transfer.files;
         this.expenseScanDropBatch({ keepInput: true });
         await this.onChangeFileInput();
     },
@@ -122,8 +122,8 @@ const expenseScanUpload = () => ({
             URL.revokeObjectURL(url);
         }
         this.expenseScanBatch = null;
-        if (!keepInput && this.fileInput?.el) {
-            this.fileInput.el.value = "";
+        if (!keepInput && this.fileInput()) {
+            this.fileInput().value = "";
         }
     },
 
