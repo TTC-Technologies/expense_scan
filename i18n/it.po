@@ -4776,3 +4776,19 @@ msgstr "Data da inserire"
 #: model:ir.model.fields.selection,name:expense_scan.selection__hr_expense__expense_scan_date_state__confirmed
 msgid "Date entered"
 msgstr "Data inserita"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "This expense has no route: pick where the trip starts and ends first."
+msgstr "Questa spesa non ha un percorso: scelga prima partenza e arrivo."
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
+msgid "Same route"
+msgstr "Stesso percorso"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
+msgid "A new expense for the same trip, dated today"
+msgstr "Una nuova spesa per lo stesso percorso, con la data di oggi"

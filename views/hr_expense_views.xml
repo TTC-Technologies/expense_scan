@@ -19,6 +19,11 @@
 
             <!-- Delete button at the end of the bar, behind a confirmation. -->
             <xpath expr="//header" position="inside">
+                <button name="action_expense_scan_same_route" type="object" string="Same route"
+                        icon="fa-repeat"
+                        invisible="not expense_scan_mileage or not expense_scan_route_from_id
+                                   or not expense_scan_route_to_id or not id"
+                        help="A new expense for the same trip, dated today"/>
                 <button name="action_expense_scan_drop" type="object"
                         icon="fa-trash" title="Delete" class="text-danger"
                         confirm="Delete this expense and its receipt for good?"

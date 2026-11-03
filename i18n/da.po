@@ -4776,3 +4776,19 @@ msgstr "Dato skal indtastes"
 #: model:ir.model.fields.selection,name:expense_scan.selection__hr_expense__expense_scan_date_state__confirmed
 msgid "Date entered"
 msgstr "Dato indtastet"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "This expense has no route: pick where the trip starts and ends first."
+msgstr "Udgiften har ingen rute: vælg først start og mål."
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
+msgid "Same route"
+msgstr "Samme rute"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
+msgid "A new expense for the same trip, dated today"
+msgstr "En ny udgift for samme rute, med dagens dato"

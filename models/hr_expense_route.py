@@ -170,6 +170,37 @@ class HrExpense(models.Model):
             name = _("%s, return trip", name)
         return name
 
+    def action_expense_scan_same_route(self):
+        """The same trip again, dated today: a new expense with the route of this one.
+
+        The places, the return trip and the distance are carried over (a duplicate leaves them out), so
+        nothing is measured again; the receipt is the picture of the route, drawn for the new date. What
+        concerns the trip itself (category, project, re-invoicing, reason) is kept as written.
+        """
+        self.ensure_one()
+        self.check_access('read')
+        if not (self.expense_scan_route_from_id and self.expense_scan_route_to_id):
+            raise UserError(_("This expense has no route: pick where the trip starts and ends first."))
+        new = self.copy({
+            'date': fields.Date.context_today(self),
+            'expense_scan_route_from_id': self.expense_scan_route_from_id.id,
+            'expense_scan_route_to_id': self.expense_scan_route_to_id.id,
+            'expense_scan_round_trip': self.expense_scan_round_trip,
+            'expense_scan_route_km': self.expense_scan_route_km,
+            'expense_scan_route_minutes': self.expense_scan_route_minutes,
+            'expense_scan_route_estimated': self.expense_scan_route_estimated,
+            'expense_scan_route_path': self.expense_scan_route_path,
+            'expense_scan_route_roads': self.expense_scan_route_roads,
+            'expense_scan_route_name': self.expense_scan_route_name,
+        })
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'hr.expense',
+            'res_id': new.id,
+            'view_mode': 'form',
+            'views': [(False, 'form')],
+        }
+
     @api.model_create_multi
     def create(self, vals_list):
         expenses = super().create(vals_list)
