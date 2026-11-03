@@ -995,8 +995,8 @@ msgstr "Kortdata © OpenStreetMap-bidragydere"
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense_route.py:0
-msgid "Map © IGN – Plan IGN"
-msgstr "Kort © IGN – Plan IGN"
+msgid "Map © %s"
+msgstr "Kort © %s"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_error
@@ -1176,8 +1176,8 @@ msgstr "Rute: OSRM · kortdata © OpenStreetMap-bidragydere"
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense_route.py:0
-msgid "Route: OSRM · map © IGN – Plan IGN"
-msgstr "Rute: OSRM · kort © IGN – Plan IGN"
+msgid "Route: OSRM · map © %s"
+msgstr "Rute: OSRM · kort © %s"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_sms_error
@@ -4054,8 +4054,8 @@ msgstr "Sæt kryds i feltet for at bekræfte, at du har tjekket med din bogholde
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_map_tiles_url
 #: model:ir.model.fields,help:expense_scan.field_res_config_settings__expense_scan_map_tiles_url
-msgid "Tile server drawn under the route picture, as https://.../{z}/{x}/{y}.png. By default the Plan IGN of the French Géoplateforme (open licence, France and its borders). Empty, or where the server has no map: the route on a plain background, with the towns and the numbers of the roads followed. OpenStreetMap's own tiles may not be used this way."
-msgstr "Tile-server, der tegnes under billedet af ruten, som https://.../{z}/{x}/{y}.png. Som standard Plan IGN fra den franske Géoplateforme (åben licens, Frankrig og dets grænseområder). Tom, eller hvor serveren ikke har noget kort: ruten på ensfarvet baggrund med byerne og numrene på de fulgte veje. OpenStreetMaps egne tiles må ikke bruges sådan."
+msgid "Map drawn under the route picture. \"auto\": the national map of the country of the route (France, Switzerland, Spain and Germany: open data, no key); or a tile server of your own, as https://.../{z}/{x}/{y}.png. Empty, or where there is no map (another country, a route between two countries): the route on a plain background, with the towns and the numbers of the roads followed. OpenStreetMap's own tiles may not be used this way."
+msgstr "Kort tegnet under billedet af ruten. »auto«: landets eget kort for rutens land (Frankrig, Schweiz, Spanien og Tyskland: åbne data, uden nøgle); eller en egen fliseserver, som https://.../{z}/{x}/{y}.png. Tom, eller hvor der ikke er noget kort (et andet land, en rute mellem to lande): ruten på ensfarvet baggrund med byerne og numrene på de fulgte veje. OpenStreetMaps egne fliser må ikke bruges sådan."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__date_to
@@ -4442,8 +4442,8 @@ msgstr "tom: kun kendte steder"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
-msgid "empty: plain background, with towns and roads"
-msgstr "tom: ensfarvet baggrund med byer og veje"
+msgid "auto, an address of tiles, or empty: plain background"
+msgstr "auto, en fliseadresse, eller tom: ensfarvet baggrund"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan

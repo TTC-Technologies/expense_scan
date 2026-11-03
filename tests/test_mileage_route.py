@@ -128,6 +128,68 @@ class TestGeo(common.TransactionCase):
                         "a missing tile away from the route leaves its square plain")
         self.assertTrue(missing)
 
+    def test_the_national_map_of_the_country_of_the_route(self):
+        """"auto" picks the map of the country that holds both ends; none between two countries."""
+        from PIL import Image
+
+        def tile(url):
+            image = Image.new("RGB", (256, 256), (240, 240, 230))
+            image.putpixel((10, 10), (0, 0, 0))
+            output = io.BytesIO()
+            image.save(output, format="PNG")
+            asked.append(url)
+            return output.getvalue()
+
+        def route(a, b):
+            return geo.Route(km=50, path=[(a.lat, a.lon), ((a.lat + b.lat) / 2, (a.lon + b.lon) / 2), (b.lat, b.lon)])
+
+        countries = {}
+
+        def country_of(point):
+            return countries.get((point.lat, point.lon))
+
+        asked = []
+        cases = (("Toulouse", geo.Point(43.6045, 1.444), geo.Point(43.80, 1.98), "FR", "IGN – Plan IGN", "data.geopf.fr"),
+                 ("Zürich", geo.Point(47.3769, 8.5417), geo.Point(47.5, 8.7237), "CH", "swisstopo", "wmts.geo.admin.ch"),
+                 ("Madrid", geo.Point(40.4168, -3.7038), geo.Point(39.8628, -4.0273), "ES",
+                  "Instituto Geográfico Nacional", "www.ign.es"),
+                 ("Berlin", geo.Point(52.52, 13.405), geo.Point(52.3906, 13.0645), "DE", "GeoBasis-DE / BKG",
+                  "geodatenzentrum.de"))
+        for name, a, b, code, credit, host in cases:
+            countries[(a.lat, a.lon)] = countries[(b.lat, b.lon)] = code
+            asked.clear()
+            picture, found = geo.choose_background(route(a, b), a, b, geo.AUTO_MAPS, tile, country_of)
+            self.assertEqual(found, credit, name)
+            self.assertTrue(picture is not None and all(host in url for url in asked), name)
+        # Between two countries, or in one without a national map: the plain background.
+        lyon, geneva = geo.Point(45.764, 4.8357), geo.Point(46.2044, 6.1432)
+        countries[(lyon.lat, lyon.lon)], countries[(geneva.lat, geneva.lon)] = "FR", "CH"
+        self.assertEqual(geo.choose_background(route(lyon, geneva), lyon, geneva, geo.AUTO_MAPS, tile, country_of),
+                         (None, None))
+        milan, turin = geo.Point(45.4642, 9.19), geo.Point(45.0703, 7.6869)
+        countries[(milan.lat, milan.lon)] = countries[(turin.lat, turin.lon)] = "IT"
+        self.assertEqual(geo.choose_background(route(milan, turin), milan, turin, geo.AUTO_MAPS, tile, country_of),
+                         (None, None))
+        # The geocoder does not answer: no national map.
+        a, b = cases[0][1], cases[0][2]
+        self.assertEqual(geo.choose_background(route(a, b), a, b, geo.AUTO_MAPS, tile, lambda point: None), (None, None))
+        # A tile server of the company is used as it is, without a credit; none draws nothing.
+        asked.clear()
+        picture, found = geo.choose_background(route(a, b), a, b, "https://tiles.test/{z}/{x}/{y}.png", tile)
+        self.assertTrue(picture is not None and found is None and all("tiles.test" in url for url in asked))
+        self.assertEqual(geo.choose_background(route(a, b), a, b, False, tile), (None, None))
+
+    def test_the_country_from_the_geocoder(self):
+        point = geo.Point(43.6045, 1.444)
+        answer = json.dumps({"name": "Toulouse", "address": {"country_code": "fr"}}).encode()
+        self.assertEqual(geo.country_code(lambda url: answer, "https://nominatim.test", point), "FR")
+        self.assertIsNone(geo.country_code(lambda url: b"{}", "https://nominatim.test", point))
+        self.assertIsNone(geo.country_code(lambda url: answer, "", point), "no geocoder")
+
+        def down(url):
+            raise OSError("unreachable")
+        self.assertIsNone(geo.country_code(down, "https://nominatim.test", point))
+
     def test_picture(self):
         start, end = geo.Point(43.6115, 1.4541, "Gare Matabiau"), geo.Point(43.9289, 2.1480, "Albi")
         png = geo.render_route(geo.Route(km=75.4, minutes=53, path=[(43.6115, 1.4541), (43.9289, 2.148)]),

@@ -148,12 +148,13 @@ class ResCompany(models.Model):
     )
     expense_scan_map_tiles_url = fields.Char(
         string="Map background",
-        default=geo.IGN_TILES,
-        help="Tile server drawn under the route picture, as "
-             "https://.../{z}/{x}/{y}.png. By default the Plan IGN of the "
-             "French Géoplateforme (open licence, France and its borders). "
-             "Empty, or where the server has no map: the route on a plain "
-             "background, with the towns and the numbers of the roads "
+        default=geo.AUTO_MAPS,
+        help="Map drawn under the route picture. \"auto\": the national map "
+             "of the country of the route (France, Switzerland, Spain and "
+             "Germany: open data, no key); or a tile server of your own, as "
+             "https://.../{z}/{x}/{y}.png. Empty, or where there is no map "
+             "(another country, a route between two countries): the route on "
+             "a plain background, with the towns and the numbers of the roads "
              "followed. OpenStreetMap's own tiles may not be used this way.",
     )
     expense_scan_product_id = fields.Many2one(
