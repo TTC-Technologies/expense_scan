@@ -995,8 +995,8 @@ msgstr "Dane mapy © współtwórcy OpenStreetMap"
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense_route.py:0
-msgid "Map © IGN – Plan IGN"
-msgstr "Mapa © IGN – Plan IGN"
+msgid "Map © %s"
+msgstr "Mapa © %s"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_error
@@ -1176,8 +1176,8 @@ msgstr "Trasa: OSRM · dane mapy © współtwórcy OpenStreetMap"
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense_route.py:0
-msgid "Route: OSRM · map © IGN – Plan IGN"
-msgstr "Trasa: OSRM · mapa © IGN – Plan IGN"
+msgid "Route: OSRM · map © %s"
+msgstr "Trasa: OSRM · mapa © %s"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_sms_error
@@ -4054,8 +4054,8 @@ msgstr "Zaznacz pole, aby potwierdzić, że sprawdzono to z księgowym."
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_map_tiles_url
 #: model:ir.model.fields,help:expense_scan.field_res_config_settings__expense_scan_map_tiles_url
-msgid "Tile server drawn under the route picture, as https://.../{z}/{x}/{y}.png. By default the Plan IGN of the French Géoplateforme (open licence, France and its borders). Empty, or where the server has no map: the route on a plain background, with the towns and the numbers of the roads followed. OpenStreetMap's own tiles may not be used this way."
-msgstr "Serwer kafelków rysowany pod obrazem trasy, w postaci https://.../{z}/{x}/{y}.png. Domyślnie Plan IGN francuskiej Géoplateforme (otwarta licencja, Francja i jej pogranicza). Puste lub tam, gdzie serwer nie ma mapy: trasa na jednolitym tle, z miejscowościami i numerami przejechanych dróg. Kafelków samego OpenStreetMap nie można tak używać."
+msgid "Map drawn under the route picture. \"auto\": the national map of the country of the route (France, Switzerland, Spain and Germany: open data, no key); or a tile server of your own, as https://.../{z}/{x}/{y}.png. Empty, or where there is no map (another country, a route between two countries): the route on a plain background, with the towns and the numbers of the roads followed. OpenStreetMap's own tiles may not be used this way."
+msgstr "Mapa rysowana pod obrazem trasy. „auto”: mapa krajowa kraju trasy (Francja, Szwajcaria, Hiszpania i Niemcy: otwarte dane, bez klucza); lub własny serwer kafelków, w postaci https://.../{z}/{x}/{y}.png. Puste lub tam, gdzie nie ma mapy (inny kraj, trasa między dwoma krajami): trasa na jednolitym tle, z miejscowościami i numerami przejechanych dróg. Kafelków samego OpenStreetMap nie można tak używać."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__date_to
@@ -4442,8 +4442,8 @@ msgstr "puste: tylko znane miejsca"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
-msgid "empty: plain background, with towns and roads"
-msgstr "puste: jednolite tło z miejscowościami i drogami"
+msgid "auto, an address of tiles, or empty: plain background"
+msgstr "auto, adres kafelków lub puste: jednolite tło"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan

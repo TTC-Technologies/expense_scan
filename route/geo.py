@@ -6,8 +6,9 @@
 The services are OpenStreetMap's: a Nominatim search for the addresses and
 an OSRM server for the route, both replaceable in the settings by one's
 own. Their data is © OpenStreetMap contributors (ODbL): the picture says it.
-The map under the route comes from the Plan IGN of the French Géoplateforme
-(open licence, no key), or from any tile server set instead.
+The map under the route comes from the national map of the country the route is in
+(France, Switzerland, Spain, Germany: open data, no key), or from any tile server set
+instead.
 """
 import io
 import json
@@ -26,6 +27,23 @@ MAX_ROUTE_KM = 3000.0
 IGN_TILES = ("https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0"
              "&LAYER=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2&STYLE=normal&TILEMATRIXSET=PM&FORMAT=image/png"
              "&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}")
+#: The setting value that picks the national map of the route's country.
+AUTO_MAPS = "auto"
+#: National maps, open data, no key, by country code: (name for the credit line, tiles).
+NATIONAL_MAPS = {
+    "FR": ("IGN – Plan IGN", IGN_TILES),
+    # Federal Office of Topography (free use, source credited).
+    "CH": ("swisstopo",
+           "https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/3857/{z}/{x}/{y}.jpeg"),
+    # Instituto Geográfico Nacional (CC BY 4.0).
+    "ES": ("Instituto Geográfico Nacional",
+           "https://www.ign.es/wmts/mapa-raster?service=WMTS&request=GetTile&version=1.0.0&format=image/jpeg"
+           "&layer=MTN&style=default&tilematrixset=GoogleMapsCompatible&TileMatrix={z}&TileRow={y}&TileCol={x}"),
+    # basemap.de of the BKG (CC BY 4.0).
+    "DE": ("GeoBasis-DE / BKG",
+           "https://sgx.geodatenzentrum.de/wmts_basemapde/tile/1.0.0/de_basemapde_web_raster_farbe/default/"
+           "GLOBAL_WEBMERCATOR/{z}/{y}/{x}.png"),
+}
 
 
 @dataclass
@@ -182,8 +200,8 @@ def main_roads(route, km, count=4):
     return [(ref, longest[ref][1]) for ref in kept[:count]]
 
 
-def reverse_url(base, lat, lon, language=None):
-    params = {"lat": "%.5f" % lat, "lon": "%.5f" % lon, "zoom": 10, "format": "jsonv2"}
+def reverse_url(base, lat, lon, language=None, zoom=10):
+    params = {"lat": "%.5f" % lat, "lon": "%.5f" % lon, "zoom": zoom, "format": "jsonv2"}
     if language:
         params["accept-language"] = language
     return "%s/reverse?%s" % (base.rstrip("/"), urllib.parse.urlencode(params))
@@ -337,6 +355,39 @@ def map_background(route, start, end, tiles_url, fetch):
         if tile is not None:
             canvas.paste(tile, (int(tile_x * TILE_SIZE - origin_x), int(tile_y * TILE_SIZE - origin_y)))
     return canvas
+
+
+def country_code(fetch, base, point):
+    """The country of a point, as the geocoder says it (``"FR"``), or ``None``."""
+    if not base:
+        return None
+    try:
+        data = json.loads(fetch(reverse_url(base, point.lat, point.lon, "en", zoom=3)))
+    except Exception:  # noqa: BLE001 - no answer, no national map
+        return None
+    code = ((data.get("address") or {}).get("country_code") or "") if isinstance(data, dict) else ""
+    return code.upper() or None
+
+
+def choose_background(route, start, end, setting, fetch, country_of=None):
+    """The map under the route, and whose it is: ``(picture, credit)``, or ``(None, None)``.
+
+    ``setting``: ``"auto"`` picks the national map of the country that holds both ends of the route
+    (``country_of(point)`` says which: a route between two countries has none); a tile server address
+    is used as it is, its credit left to the caller (``None``); nothing draws the plain background.
+    """
+    if not setting:
+        return None, None
+    if setting != AUTO_MAPS:
+        return map_background(route, start, end, setting, fetch), None
+    if country_of is None:
+        return None, None
+    code = country_of(start)
+    if code not in NATIONAL_MAPS or country_of(end) != code:
+        return None, None
+    name, tiles = NATIONAL_MAPS[code]
+    picture = map_background(route, start, end, tiles, fetch)
+    return (picture, name) if picture is not None else (None, None)
 
 
 def _ask_all(ask, tiles, patience=4.0):

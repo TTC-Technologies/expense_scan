@@ -290,10 +290,12 @@ and a **To**, and offers a **Return trip** switch.
   by default (Nominatim for addresses, as Odoo uses to place contacts, and
   the OSRM demo server for routes). They are meant for light use: a company
   entering many routes points these settings to its own servers. The map
-  under the route picture is the Plan IGN of the French Géoplateforme by
-  default (open licence, no key; France and its borders), or any tile server
-  set instead; OpenStreetMap's own tiles may not be used this way. Where the
-  tile server has no map, and when the setting is empty, the route is drawn on
+  under the route picture is the national map of the country of the route by
+  default (France: Plan IGN of the Géoplateforme; Switzerland: swisstopo;
+  Spain: Instituto Geográfico Nacional; Germany: basemap.de of the BKG; open
+  data, no key), or any tile server set instead; OpenStreetMap's own tiles may
+  not be used this way. Where there is no map (another country, a route
+  between two countries), and when the setting is empty, the route is drawn on
   a plain background with the numbered roads followed (given by OSRM) and three
   towns along the way (three reverse lookups to Nominatim, one per second).
   These requests are the only ones the module makes besides the exchange rates

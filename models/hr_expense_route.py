@@ -24,6 +24,8 @@ _logger = logging.getLogger(__name__)
 FETCH_TIMEOUT = 10
 FONTS = ('web/static/fonts/google/Roboto/Roboto-Regular.ttf',
          'web/static/fonts/google/Roboto/Roboto-Bold.ttf')
+#: Country of the areas already asked of the geocoder, kept by the worker.
+_COUNTRIES = {}
 #: Fields that change the route, hence its picture; the places change its distance.
 PLACE_FIELDS = {'expense_scan_route_from_id', 'expense_scan_route_to_id'}
 ROUTE_FIELDS = PLACE_FIELDS | {'expense_scan_round_trip'}
@@ -320,12 +322,13 @@ class HrExpense(models.Model):
             "B  %s" % destination._expense_scan_public_address(),
             " · ".join(details),
         ]
-        tiles_url = company.expense_scan_map_tiles_url
-        background = tiles_url and geo.map_background(route, start, end, tiles_url, self._expense_scan_fetch)
+        background, credit = geo.choose_background(
+            route, start, end, company.expense_scan_map_tiles_url, self._expense_scan_fetch,
+            country_of=self._expense_scan_country_of(company))
         towns = []
-        if background and 'data.geopf.fr' in tiles_url:
-            attribution = env._("Route: OSRM · map © IGN – Plan IGN") \
-                if not route.estimated else env._("Map © IGN – Plan IGN")
+        if background and credit:
+            attribution = env._("Route: OSRM · map © %s", credit) \
+                if not route.estimated else env._("Map © %s", credit)
         else:
             attribution = env._("Route: OSRM · map data © OpenStreetMap contributors") \
                 if not route.estimated else env._("Map data © OpenStreetMap contributors")
@@ -337,6 +340,22 @@ class HrExpense(models.Model):
         fonts = tuple(self._expense_scan_font(name) for name in FONTS)
         return geo.render_route(route, start, end, lines, attribution, background=background or None,
                                 fonts=fonts, towns=towns)
+
+    def _expense_scan_country_of(self, company):
+        """``country_of(point)`` for the choice of the national map: the geocoder, asked once per area."""
+        base = company.expense_scan_geocoder_url
+        fetch = self._expense_scan_fetch
+
+        def country_of(point):
+            key = (base, round(point.lat, 1), round(point.lon, 1))
+            if key not in _COUNTRIES:
+                if _COUNTRIES and not odoo_module.current_test:
+                    time.sleep(1.0)  # one question a second, as Nominatim asks
+                _COUNTRIES[key] = geo.country_code(fetch, base, point)
+                while len(_COUNTRIES) > 2000:
+                    _COUNTRIES.pop(next(iter(_COUNTRIES)))
+            return _COUNTRIES[key]
+        return country_of
 
     @staticmethod
     def _expense_scan_font(name):

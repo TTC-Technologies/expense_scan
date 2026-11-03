@@ -1,5 +1,21 @@
 # Changelog
 
+## 19.0.3.4.7 — 2026-11-03
+
+- A receipt without a printed date keeps the date of the day, and says so until it is dated: "Date to enter" (alert and
+  "Confirm this date" button on the form, badge and "Dates to enter" filter on the list). The expense cannot be submitted
+  before the date is typed or confirmed. It was nothing but today's date until now, which an e-mail import read with
+  nobody looking could carry onto the wrong month.
+- Same route button: the trip again, dated today, with the places, the return trip and the distance of the expense it
+  starts from (a duplicate leaves them out); the picture of the route is drawn for the new expense.
+- Receipt batch: on a phone, "Several receipts in a row" keeps each photo (counted, with thumbnails, behind the camera)
+  and sends them together; one expense per receipt, and their list to review them one by one.
+- The lists and the Actions menu (Back to draft...) keep their selection after Submit, Approve, Post: a manager no longer
+  selects the same expenses again.
+- Route picture: the national map of the country of the route (France: Plan IGN, Switzerland: swisstopo, Spain: IGN
+  España, Germany: basemap.de; open data, no key). The "Map background" setting is "auto" by default (the Plan IGN set
+  by 3.4.3 becomes "auto"); an address of tiles of your own still works.
+
 ## 19.0.3.4.6 — 2026-11-03
 
 - Receipts curled by humidity or folded in two: the picture shown beside the fields gets its lines straight. It is the last

@@ -3,7 +3,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
 {
     'name': "Expense Receipt Scanner",
-    'version': '19.0.3.4.6',
+    'version': '19.0.3.4.7',
     # The store search reads only the name and the summary, as exact phrases: they carry the
     # words people type (expense OCR, receipt OCR, expense scanner, scan receipts, local OCR, AI expense,
     # AI receipt, OCR expense, expense automation, mileage expense).
@@ -41,7 +41,7 @@ OCR models (47.5 MB, downloaded once). Not for Odoo Online.
 Network access: the OCR models are downloaded once; the public reference rates of the
 European Central Bank are downloaded daily (one switch in the settings). For mileage by
 route only, the places typed are looked up on OpenStreetMap (Nominatim, OSRM) and the
-map under each route picture comes from the French Géoplateforme (Plan IGN); your own
+map under each route picture comes from the national map of its country (IGN, swisstopo, IGN España, BKG); your own
 servers can be set instead. Receipts, their texts and amounts never leave the server.
 
 Free module, LGPL-3.
