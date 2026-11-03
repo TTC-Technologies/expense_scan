@@ -12,11 +12,16 @@ expenses as distinct receipts otherwise. By email, the scan starts on its
 own, without any action from the user.
 """
 import logging
+import os
 import re
+
+from markupsafe import Markup, escape
 
 from odoo import _, api, fields, models
 from odoo.service.model import PG_CONCURRENCY_EXCEPTIONS_TO_RETRY
 from odoo.tools import format_date
+
+from ..ocr import preprocess
 
 _logger = logging.getLogger(__name__)
 
@@ -185,6 +190,66 @@ class HrExpense(models.Model):
         self._expense_scan_apply_group(
             first, main_first=self.scan_state in ('done', 'partial'))
         return self.browse().union(*[self._expense_scan_split_off(group) for group in others])
+
+    def _expense_scan_run_photo(self, attachment):
+        """A photo of several receipts: each is cut out, read, and the expenses are made from them.
+
+        The receipts laid on the table are found in the photo and cut out one by one; each is read,
+        and those that make one purchase (the till receipt and the card slip) are joined, the others
+        go to expenses of their own: the first stays on this expense. A photo whose pieces all make
+        a single purchase (a receipt cut in two by a shadow, say) is read as it is, as a single photo.
+        The original photo is kept apart, out of the list of receipts.
+
+        Returns the new expenses, or ``None`` when the photo holds a single purchase.
+        """
+        self.ensure_one()
+        company = self.company_id or self.env.company
+        if self._expense_scan_is_pdf(attachment) or not company.expense_scan_autocrop:
+            return None
+        ok, _message = preprocess.dependencies_status()
+        if not ok:
+            return None
+        try:
+            crops = preprocess.split_receipts(preprocess.load_image(attachment.raw))
+        except Exception:  # noqa: BLE001 - a photo that does not split is read as it is
+            _logger.warning("Receipts of the photo not looked for (expense %s)", self.id, exc_info=True)
+            return None
+        if not crops:
+            return None
+        stem = os.path.splitext(attachment.name or 'ticket')[0]
+        pieces_attachments = self.env['ir.attachment'].create([{
+            'name': "%s (%d/%d).jpg" % (stem, number, len(crops)),
+            'raw': preprocess.encode_jpeg(crop),
+            'mimetype': 'image/jpeg',
+            'res_model': 'hr.expense',
+            'res_id': self.id,
+        } for number, crop in enumerate(crops, 1)])
+        pieces = []
+        for piece in pieces_attachments:
+            try:
+                with self.env.cr.savepoint():
+                    pieces.append((piece, self._expense_scan_process(piece)))
+            except PG_CONCURRENCY_EXCEPTIONS_TO_RETRY:
+                raise  # retried by Odoo, see _expense_scan_run
+            except Exception:  # noqa: BLE001 - the other pieces are still read
+                _logger.exception("Unreadable receipt of a photo (expense %s, attachment %s)", self.id, piece.id)
+        groups = self._expense_scan_group_pieces(pieces)
+        if len(groups) < 2:
+            pieces_attachments.unlink()
+            return None
+        # The original photo stays on this expense, out of the list of receipts and without being read again.
+        attachment.sudo().write({'res_field': 'scan_original_attachment_id'})
+        self.write({'scan_original_attachment_id': attachment.id})
+        self.sudo()._message_set_main_attachment_id(groups[0][0][0], force=True)
+        self._expense_scan_apply_group(groups[0])
+        moved = self.browse().union(*[self._expense_scan_split_off(group) for group in groups[1:]])
+        links = Markup(', ').join(
+            Markup('<a href="/odoo/hr.expense/%d">%s</a>') % (expense.id, escape(expense.name or expense.display_name))
+            for expense in moved)
+        self.message_post(body=Markup("%s %s") % (
+            _("The photo holds %(count)s different purchases: one expense each; this one keeps the first.",
+              count=len(groups)), links))
+        return moved
 
     def _expense_scan_group_pieces(self, pieces):
         """Group the pieces that describe the same receipt.

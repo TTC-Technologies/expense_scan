@@ -4860,3 +4860,9 @@ msgstr "Linhas do talão"
 #: model:ir.cron,cron_name:expense_scan.ir_cron_expense_scan_items
 msgid "Receipt scan: read the item lines of the receipts"
 msgstr "Análise de talões: ler as linhas de artigos"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_multi.py:0
+msgid "The photo holds %(count)s different purchases: one expense each; this one keeps the first."
+msgstr "A foto contém %(count)s compras diferentes: uma despesa cada; esta fica com a primeira."

@@ -1524,6 +1524,9 @@ class HrExpense(models.Model):
                 # over it. The savepoint lets the error be written afterwards
                 # on a clean cursor.
                 with self.env.cr.savepoint():
+                    if from_original and not expense.expense_scan_manual_retouch \
+                            and expense._expense_scan_run_photo(attachment) is not None:
+                        continue  # several purchases on the photo: one expense each
                     result = expense._expense_scan_process(attachment, progress=progress)
                     if progress:
                         progress('values', expense._expense_scan_preview(result))

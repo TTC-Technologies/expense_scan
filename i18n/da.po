@@ -4860,3 +4860,9 @@ msgstr "Kvitteringens linjer"
 #: model:ir.cron,cron_name:expense_scan.ir_cron_expense_scan_items
 msgid "Receipt scan: read the item lines of the receipts"
 msgstr "Kvitteringsscanning: læs varelinjerne på kvitteringerne"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_multi.py:0
+msgid "The photo holds %(count)s different purchases: one expense each; this one keeps the first."
+msgstr "Billedet indeholder %(count)s forskellige køb: én udgift hver; denne beholder det første."

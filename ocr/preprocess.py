@@ -309,6 +309,62 @@ def _has_several_receipts(gray, image_area):
             and areas[1] >= SECOND_RECEIPT_RELATIVE_AREA * areas[0])
 
 
+#: Most receipts cut out of one photo.
+MAX_RECEIPTS_IN_PHOTO = 6
+
+
+def split_receipts(image):
+    """The receipts of a photo that holds several, each cut out and straightened; ``[]`` for one.
+
+    The light areas of the photo (Otsu threshold, closed and opened as for the crop) that are large
+    enough, in themselves and next to the largest, are receipts laid on the table. They come in the
+    order they are read: top to bottom, and from left to right on a row. A photo with a single area,
+    or whose areas are too small, gives nothing: the usual scan crops it.
+    """
+    height, width = image.shape[:2]
+    scale = min(1.0, DETECTION_MAX_SIDE / float(max(height, width)))
+    small = cv2.resize(image, None, fx=scale, fy=scale, interpolation=cv2.INTER_AREA) if scale < 1.0 else image
+    gray = cv2.cvtColor(small, cv2.COLOR_BGR2GRAY)
+    area = small.shape[0] * small.shape[1]
+    blurred = cv2.GaussianBlur(gray, (7, 7), 0)
+    _, mask = cv2.threshold(blurred, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (9, 9))
+    mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel, iterations=2)
+    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    contours = sorted(contours, key=cv2.contourArea, reverse=True)
+    if len(contours) < 2:
+        return []
+    largest = cv2.contourArea(contours[0])
+    kept = [contour for contour in contours[:MAX_RECEIPTS_IN_PHOTO]
+            if cv2.contourArea(contour) >= SECOND_RECEIPT_AREA_RATIO * area
+            and cv2.contourArea(contour) >= SECOND_RECEIPT_RELATIVE_AREA * largest]
+    if len(kept) < 2:
+        return []
+    boxes = []
+    for contour in kept:
+        box = cv2.boxPoints(cv2.minAreaRect(contour)).astype("float32")
+        boxes.append(box / scale if scale < 1.0 else box)
+    # Reading order: rows from the top (a row is as tall as the first receipt of it), then left to right.
+    boxes.sort(key=lambda box: box[:, 1].mean())
+    rows, current = [], [boxes[0]]
+    for box in boxes[1:]:
+        reference = current[0]
+        if box[:, 1].mean() - reference[:, 1].mean() < 0.5 * (reference[:, 1].max() - reference[:, 1].min()):
+            current.append(box)
+        else:
+            rows.append(current)
+            current = [box]
+    rows.append(current)
+    receipts = []
+    for row in rows:
+        for box in sorted(row, key=lambda box: box[:, 0].mean()):
+            cut = four_point_transform(image, box)
+            if cut is not None:
+                receipts.append(cut)
+    return receipts if len(receipts) >= 2 else []
+
+
 #: Largest gap between a corner of the outline and a right angle, in
 #: degrees. Photos of receipts, perspective included, stay under 14; beyond,
 #: the outline has taken in something else (a white menu touching the
