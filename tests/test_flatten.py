@@ -174,7 +174,7 @@ class TestFlattenInTheExpense(common.TransactionCase):
             result = expense._expense_scan_process(expense.message_main_attachment_id)
         self.assertTrue(result.preprocess.flattened)
         self.assertTrue(result.image_bytes)
-        self.assertIn("flattened", expense._expense_scan_summary(result))
+        self.assertIn("flattened", expense.with_context(lang='en_US')._expense_scan_summary(result))
         shown = preprocess.load_image(result.image_bytes)
         self.assertGreater(sharpness(shown), 1.3 * sharpness(bent))
         # A company that does not straighten leaves the picture as it is.
