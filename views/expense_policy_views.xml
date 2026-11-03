@@ -172,6 +172,8 @@
                         domain="[('reinvoice_mode', '=', 'todo')]"/>
                 <filter string="Rule breaches" name="policy_breach"
                         domain="[('expense_scan_policy_breach', '=', True)]"/>
+                <filter string="Dates to enter" name="date_missing"
+                        domain="[('expense_scan_date_state', '=', 'missing')]"/>
             </xpath>
         </field>
     </record>
@@ -184,6 +186,9 @@
         <field name="inherit_id" ref="hr_expense.hr_expense_view_expenses_analysis_tree"/>
         <field name="arch" type="xml">
             <field name="name" position="after">
+                <field name="expense_scan_date_state" widget="badge" optional="show"
+                       decoration-warning="expense_scan_date_state == 'missing'"
+                       invisible="expense_scan_date_state != 'missing'"/>
                 <field name="expense_scan_policy_status" nolabel="1" readonly="1"
                        optional="show" class="o_expense_scan_policy_sign"
                        decoration-warning="expense_scan_policy_status == 'breach'"

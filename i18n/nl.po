@@ -4740,3 +4740,39 @@ msgstr "De regels zijn al recht: niets om vlak te maken."
 #: code:addons/expense_scan/static/src/js/retouch_dialog.js:0
 msgid "The flattening failed."
 msgstr "Het vlakmaken is mislukt."
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_category.py:0
+msgid "\"%(expense)s\": the date is not printed on the receipt, the expense has the date of the day. Enter the date, or confirm it, before submitting."
+msgstr "\"%(expense)s\": de datum staat niet op de bon, de uitgave heeft de datum van vandaag. Voer de datum in, of bevestig ze, voordat u indient."
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
+msgid "Confirm this date"
+msgstr "Deze datum bevestigen"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
+msgid "The date is not printed on the receipt: the expense has the date of the day. Enter the date, or confirm this one, before submitting."
+msgstr "De datum staat niet op de bon: de uitgave heeft de datum van vandaag. Voer de datum in, of bevestig deze, voordat u indient."
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_search_scan
+msgid "Dates to enter"
+msgstr "In te voeren datums"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_date_state
+msgid "Date of the receipt"
+msgstr "Datum van de bon"
+
+#. module: expense_scan
+#: model:ir.model.fields.selection,name:expense_scan.selection__hr_expense__expense_scan_date_state__missing
+msgid "Date to enter"
+msgstr "Datum in te voeren"
+
+#. module: expense_scan
+#: model:ir.model.fields.selection,name:expense_scan.selection__hr_expense__expense_scan_date_state__confirmed
+msgid "Date entered"
+msgstr "Datum ingevoerd"

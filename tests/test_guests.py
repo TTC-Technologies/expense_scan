@@ -69,6 +69,7 @@ class TestGuests(common.TransactionCase):
         # Guests named: the point is closed and the expense goes through.
         expense.description = "M. Dupont, Société Zorgal"
         self.assertFalse(expense.expense_scan_hint_notes)
+        expense.action_expense_scan_confirm_date()
         expense.action_submit()
         self.assertNotEqual(expense.state, 'draft')
 
@@ -84,6 +85,7 @@ class TestGuests(common.TransactionCase):
         self.assertTrue(expense._expense_scan_is_meal(expense.product_id))
         self.assertIn("3", expense.expense_scan_hint_notes)
         # A meal: nothing blocks the submission.
+        expense.action_expense_scan_confirm_date()
         expense.action_submit()
         self.assertNotEqual(expense.state, 'draft')
 
@@ -97,5 +99,6 @@ class TestGuests(common.TransactionCase):
         expense = self.scan(self.expense(), "BRASSERIE ZORGAL\nCouverts : 2\nTOTAL 64,00 EUR")
         expense.product_id = self.meal
         self.assertFalse(expense.expense_scan_hint_notes)
+        expense.action_expense_scan_confirm_date()
         expense.action_submit()
         self.assertNotEqual(expense.state, 'draft')

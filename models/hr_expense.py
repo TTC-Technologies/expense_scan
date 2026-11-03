@@ -118,6 +118,12 @@ class HrExpense(models.Model):
     )
     scan_message = fields.Char(string="Scan details", readonly=True, copy=False)
     scan_todo = fields.Char(string="Fields to check", readonly=True, copy=False)
+    #: A receipt without a printed date keeps the date of the day. The expense says so until someone has
+    #: entered the date, or confirmed that the day is the right one: it must not slip onto the wrong
+    #: month unnoticed (an import by e-mail is read with nobody looking).
+    expense_scan_date_state = fields.Selection(
+        [('missing', "Date to enter"), ('confirmed', "Date entered")],
+        string="Date of the receipt", readonly=True, copy=False, index=True)
     #: One code per point listed in ``scan_todo``, in the same order
     #: ("reinvoice,tax_amount"), to know which ones are still open once the
     #: expense is edited. ``static`` marks the points that cannot be
@@ -261,7 +267,8 @@ class HrExpense(models.Model):
         # tax amount of the receipt (scan_tax_amount).
         'tax_amount': lambda expense: bool(expense.scan_tax_amount),
         'tax_total': lambda expense: bool(expense.total_amount_currency),
-        'date': lambda expense: expense._expense_scan_changed('date'),
+        'date': lambda expense: expense.expense_scan_date_state == 'confirmed'
+        or expense._expense_scan_changed('date'),
         'total': lambda expense: expense._expense_scan_changed('total_amount_currency'),
         'category': lambda expense: expense._expense_scan_changed('product_id'),
         'currency': lambda expense: expense._expense_scan_changed('currency_id'),
@@ -294,10 +301,24 @@ class HrExpense(models.Model):
 
     @api.depends('expense_scan_todo_codes', 'expense_scan_read_values', 'reinvoice_mode',
                  'tax_ids', 'scan_tax_amount', 'total_amount_currency', 'date',
-                 'product_id', 'currency_id', 'description')
+                 'product_id', 'currency_id', 'description', 'expense_scan_date_state')
     def _compute_expense_scan_todo_pending(self):
         for expense in self:
             expense.expense_scan_todo_pending = bool(expense._expense_scan_open_codes())
+
+    def write(self, vals):
+        # Typing a date settles the doubt about the day. The scan writes the state itself, with the rest.
+        if 'date' in vals and 'expense_scan_date_state' not in vals:
+            self.filtered(lambda e: e.expense_scan_date_state == 'missing').write(
+                {'expense_scan_date_state': 'confirmed'})
+        return super().write(vals)
+
+    def action_expense_scan_confirm_date(self):
+        """The day of the expense is the right one, though the receipt does not print it."""
+        self.check_access('write')
+        self.filtered(lambda e: e.expense_scan_date_state == 'missing').write(
+            {'expense_scan_date_state': 'confirmed'})
+        return True
 
     def _expense_scan_open_codes(self):
         """Codes of the points still to check, in their order."""
@@ -2106,6 +2127,9 @@ class HrExpense(models.Model):
             # For the report of corrections only: a merchant is never kept.
             expense_scan_merchant=self.expense_scan_merchant or False))
         after['expense_scan_manual_fields'] = ','.join(sorted(keep)) or False
+        # No date printed on the receipt, and none typed by the employee: the day stays, to be confirmed.
+        after['expense_scan_date_state'] = 'missing' if result.value('date') is None and 'date' not in keep \
+            else False
         self.write(after)
         if not company.expense_scan_apply_tax and 'scan_tax_amount' not in keep:
             # The tax read is not used: the field shows the tax the rate

@@ -4740,3 +4740,39 @@ msgstr "Las líneas ya están rectas: nada que aplanar."
 #: code:addons/expense_scan/static/src/js/retouch_dialog.js:0
 msgid "The flattening failed."
 msgstr "El aplanado ha fallado."
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_category.py:0
+msgid "\"%(expense)s\": the date is not printed on the receipt, the expense has the date of the day. Enter the date, or confirm it, before submitting."
+msgstr "«%(expense)s»: la fecha no está impresa en el ticket, el gasto tiene la fecha del día. Introduzca la fecha, o confírmela, antes de enviar."
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
+msgid "Confirm this date"
+msgstr "Confirmar esta fecha"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
+msgid "The date is not printed on the receipt: the expense has the date of the day. Enter the date, or confirm this one, before submitting."
+msgstr "La fecha no está impresa en el ticket: el gasto tiene la fecha del día. Introduzca la fecha, o confirme esta, antes de enviar."
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_search_scan
+msgid "Dates to enter"
+msgstr "Fechas por introducir"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_date_state
+msgid "Date of the receipt"
+msgstr "Fecha del ticket"
+
+#. module: expense_scan
+#: model:ir.model.fields.selection,name:expense_scan.selection__hr_expense__expense_scan_date_state__missing
+msgid "Date to enter"
+msgstr "Fecha por introducir"
+
+#. module: expense_scan
+#: model:ir.model.fields.selection,name:expense_scan.selection__hr_expense__expense_scan_date_state__confirmed
+msgid "Date entered"
+msgstr "Fecha introducida"

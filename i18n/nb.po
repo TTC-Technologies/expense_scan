@@ -4740,3 +4740,39 @@ msgstr "Linjene er allerede rette: ingenting å flate ut."
 #: code:addons/expense_scan/static/src/js/retouch_dialog.js:0
 msgid "The flattening failed."
 msgstr "Utflatingen mislyktes."
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_category.py:0
+msgid "\"%(expense)s\": the date is not printed on the receipt, the expense has the date of the day. Enter the date, or confirm it, before submitting."
+msgstr "«%(expense)s»: datoen er ikke trykt på kvitteringen, utgiften har dagens dato. Skriv inn datoen, eller bekreft den, før du sender inn."
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
+msgid "Confirm this date"
+msgstr "Bekreft denne datoen"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
+msgid "The date is not printed on the receipt: the expense has the date of the day. Enter the date, or confirm this one, before submitting."
+msgstr "Datoen er ikke trykt på kvitteringen: utgiften har dagens dato. Skriv inn datoen, eller bekreft denne, før du sender inn."
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_search_scan
+msgid "Dates to enter"
+msgstr "Datoer som må skrives inn"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_date_state
+msgid "Date of the receipt"
+msgstr "Kvitteringens dato"
+
+#. module: expense_scan
+#: model:ir.model.fields.selection,name:expense_scan.selection__hr_expense__expense_scan_date_state__missing
+msgid "Date to enter"
+msgstr "Dato må skrives inn"
+
+#. module: expense_scan
+#: model:ir.model.fields.selection,name:expense_scan.selection__hr_expense__expense_scan_date_state__confirmed
+msgid "Date entered"
+msgstr "Dato skrevet inn"

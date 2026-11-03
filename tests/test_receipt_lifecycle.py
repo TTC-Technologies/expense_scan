@@ -185,6 +185,48 @@ class TestReceiptLifecycle(common.TransactionCase):
         self.assertIn("Receipt?", expense.scan_todo)
         self.assertNotIn("%", expense.scan_message)
 
+    def test_a_receipt_without_a_date_must_be_dated_before_it_goes_up(self):
+        """The day of the scan stays, and the expense says so until the date is entered or confirmed."""
+        from datetime import timedelta
+        from odoo import fields
+        from odoo.exceptions import UserError
+        from ..ocr import parser
+        from .test_parser import words_from_text
+
+        def scan(name, text, **values):
+            expense = self.Expense.create(dict({'name': name, 'employee_id': self.employee.id}, **values))
+            with patch.object(type(expense), '_expense_scan_store_image', autospec=True, return_value={}):
+                expense.with_context(lang='en_US')._expense_scan_apply(
+                    parser.parse(words_from_text(text)), self.Attachment)
+            return expense
+
+        today = fields.Date.context_today(self.Expense)
+        undated = scan("Sans date", "TRAITEUR SARL\nSandwich 12,50\nTOTAL 12,50")
+        self.assertEqual(undated.expense_scan_date_state, 'missing')
+        self.assertEqual(undated.date, today, "the day of the scan stays")
+        self.assertIn('date', undated._expense_scan_open_codes())
+        self.assertTrue(undated.expense_scan_todo_pending)
+        found = self.Expense.search([('expense_scan_date_state', '=', 'missing')])
+        self.assertIn(undated, found)
+        with self.assertRaises(UserError):
+            undated.action_submit()
+        # Entering a date settles it, even the one of the day.
+        undated.date = today - timedelta(days=3)
+        self.assertEqual(undated.expense_scan_date_state, 'confirmed')
+        self.assertNotIn('date', undated._expense_scan_open_codes())
+        undated.action_submit()
+        self.assertNotEqual(undated.state, 'draft')
+        # Or confirming that the day is the right one.
+        other = scan("Aujourd'hui", "TRAITEUR SARL\nSandwich 12,50\nTOTAL 12,50")
+        other.action_expense_scan_confirm_date()
+        self.assertEqual(other.expense_scan_date_state, 'confirmed')
+        other.action_submit()
+        # A date printed on the receipt asks nothing; neither does one typed before the scan.
+        dated = scan("Daté", "TRAITEUR SARL\n%s 12:30\nTOTAL 12,50" % (today - timedelta(days=2)).strftime("%d/%m/%Y"))
+        self.assertFalse(dated.expense_scan_date_state)
+        typed = self.Expense.create({'name': "Saisi", 'employee_id': self.employee.id, 'date': today - timedelta(days=5)})
+        self.assertFalse(typed.expense_scan_date_state)
+
     def test_an_exempt_receipt_has_no_tax_to_check(self):
         """A receipt printed at 0 % does not ask for a tax, unlike one without any."""
         from ..ocr import parser
