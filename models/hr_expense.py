@@ -21,7 +21,7 @@ from odoo.modules import module as odoo_module
 from .odoo_compat import PG_CONCURRENCY_EXCEPTIONS_TO_RETRY, binary_bytes
 from odoo.tools import email_normalize, format_date, formatLang
 
-from ..ocr import engines, parser, preprocess
+from ..ocr import engines, flatten, parser, preprocess
 from .hr_expense_category import CONFIRMED_STATES
 
 _logger = logging.getLogger(__name__)
@@ -38,6 +38,8 @@ FOUND_FIELDS = len(MAIN_FIELDS)
 #: Resolution of a PDF rendered for the phone preview: readable on a narrow
 #: screen, light to transfer.
 PDF_PREVIEW_DPI = 110
+#: Longest side of the receipt flattened for the retouch: light to carry to the browser.
+RETOUCH_FLATTEN_SIDE = 2800
 # First pages already drawn, by checksum of the file: opening a form again does not draw the PDF again
 # (2 to 6 seconds for a long document). A few entries per worker; the key changes with the file.
 _PDF_PREVIEWS = OrderedDict()
@@ -1131,18 +1133,57 @@ class HrExpense(models.Model):
 
     @staticmethod
     def _expense_scan_clean_retouch_params(params):
-        """Retouch settings received from the browser, checked, as JSON; False otherwise."""
+        """Retouch settings received from the browser, checked, as JSON; False otherwise.
+
+        ``flat``: the rotation the receipt had when it was flattened; the other settings then apply
+        to the flattened image.
+        """
         try:
             crop = [min(max(float(value), 0.0), 1.0) for value in params['crop']]
             if len(crop) != 4 or crop[0] >= crop[2] or crop[1] >= crop[3]:
                 return False
-            return json.dumps({
+            cleaned = {
                 'quarter': int(params['quarter']) % 4,
                 'fine': min(max(float(params['fine']), -45.0), 45.0),
                 'crop': crop,
-            })
-        except (KeyError, TypeError, ValueError):
+            }
+            flat = params.get('flat')
+            if flat:
+                cleaned['flat'] = {
+                    'quarter': int(flat['quarter']) % 4,
+                    'fine': min(max(float(flat['fine']), -45.0), 45.0),
+                }
+            return json.dumps(cleaned)
+        except (KeyError, TypeError, ValueError, AttributeError):
             return False
+
+    def expense_scan_retouch_flatten(self, quarter=0, fine=0.0):
+        """The receipt turned as the editor has it, then flattened: ``{'url', 'changed'}``.
+
+        For the "Flatten" button of the retouch: a receipt curled or folded gets its lines straight
+        again. ``url`` is the image as a data URL, whatever the outcome (the turned image when there
+        was nothing to flatten), and ``changed`` tells whether the lines were straightened.
+        """
+        self.ensure_one()
+        self.check_access('read')
+        ok, message = preprocess.dependencies_status()
+        if not ok:
+            raise UserError(message)
+        source = self._expense_scan_retouch_source()
+        self._expense_scan_check_retouchable(source)
+        data, _mimetype = self._expense_scan_retouch_image()
+        image = preprocess.load_image(data)
+        image = preprocess.rotate_quarters(image, int(quarter))
+        fine = min(max(float(fine), -45.0), 45.0)
+        if fine:
+            # The editor turns clockwise, preprocess.rotate anticlockwise.
+            image = preprocess.rotate(image, -fine)
+        image, model = flatten.flatten(image)
+        image = preprocess.limit_size(image, RETOUCH_FLATTEN_SIDE)
+        return {
+            'url': 'data:image/jpeg;base64,%s' % base64.b64encode(preprocess.encode_jpeg(image)).decode(),
+            'changed': bool(model),
+        }
 
     def action_expense_scan_retouch(self, image_base64, params=None):
         """Replace the displayed receipt with an image retouched by hand.
@@ -1619,6 +1660,13 @@ class HrExpense(models.Model):
         if not manual:
             image = self._expense_scan_tighten(image, words, info, company)
         timer.lap('crop')
+        # Last step, for the picture only: the words are read already. A receipt curled by humidity
+        # or folded in two gets its lines straight again, to be looked at beside the fields.
+        if not manual and company.expense_scan_deskew and not self._expense_scan_is_pdf(attachment):
+            image, flat = flatten.flatten(image)
+            if flat:
+                info.flattened = True
+                info.changed = True
 
         parse_kwargs = dict(
             max_age_days=company.expense_scan_max_age_days or 730,
@@ -2682,6 +2730,8 @@ class HrExpense(models.Model):
                                self._expense_scan_number(info.deskew_angle, 1)))
             if info.rotated_quarters:
                 steps.append(_("rotated by %d°", info.rotated_quarters * 90))
+            if info.flattened:
+                steps.append(_("flattened"))
             if info.reread:
                 steps.append(_("read again"))
             if steps:

@@ -93,6 +93,7 @@ class PreprocessInfo:
     final_size: Tuple[int, int] = (0, 0)
     changed: bool = False
     reread: bool = False  # a second reading, on the straightened or cropped image
+    flattened: bool = False  # lines of a curled or folded receipt made straight, for the picture only
 
 
 @dataclass

@@ -4727,3 +4727,33 @@ msgstr "<i class=\"oi me-1\" data-icon=\"build\" aria-hidden=\"true\"/>Demander 
 #: code:addons/expense_scan/models/hr_expense.py:0
 msgid "Untitled Expense %s"
 msgstr "Dépense sans titre %s"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense.py:0
+msgid "flattened"
+msgstr "aplati"
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/retouch_dialog.xml:0
+msgid "Flatten"
+msgstr "Aplatir"
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/retouch_dialog.xml:0
+msgid "Flatten: make the lines of a curled or folded receipt straight"
+msgstr "Aplatir : redresser les lignes d'un ticket gondolé ou plié"
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/retouch_dialog.js:0
+msgid "The lines are already straight: nothing to flatten."
+msgstr "Les lignes sont déjà droites : rien à aplatir."
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/retouch_dialog.js:0
+msgid "The flattening failed."
+msgstr "L'aplatissement a échoué."

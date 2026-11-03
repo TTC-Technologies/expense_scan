@@ -1,7 +1,7 @@
 // Copyright 2026 T.T.C. SAS
 // License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
 /**
- * Receipt retouch: rotation and crop.
+ * Receipt retouch: rotation, crop and flattening.
  *
  * The retouch always starts from the uploaded image (original photo, or the
  * first page of a PDF rendered by the server), on which the editor applies
@@ -13,6 +13,12 @@
  * The rotation applies to the whole image, without cutting it. The crop
  * frame is set on the rotated image: changing the rotation resets it to the
  * whole image.
+ *
+ * Flattening (a receipt curled by humidity, or folded in two) is done by the
+ * server, on the image as the editor has it turned. The flattened image
+ * becomes the one the editor works on, with no rotation left; the rotation
+ * it was made with is kept (``flat``) to make it again when the retouch is
+ * reopened.
  */
 import { _t } from "@web/core/l10n/translation";
 import { Component, onWillUnmount, onMounted, proxy, signal, t, useProps } from "@odoo/owl";
@@ -99,6 +105,10 @@ export class RetouchDialog extends Component {
             loaded: false,
             busy: false,
             auto: false,
+            // Rotation the image had when it was flattened; null for the uploaded image.
+            flat: null,
+            flattening: false,
+            notice: null,
             error: null,
             dragging: false,
             // Height of the image area, fixed for the whole retouch: the
@@ -108,6 +118,7 @@ export class RetouchDialog extends Component {
         });
         this.orm = useService("orm");
         this.image = null;
+        this.originalUrl = null;
         this.scale = 1;
         this.drag = null; // { handle } or { move, startX, startY, crop0 }
 
@@ -117,22 +128,54 @@ export class RetouchDialog extends Component {
             browser.addEventListener("resize", this.onResize);
             const { url, params } = await this.orm.call(
                 "hr.expense", "expense_scan_retouch_data", [[this.props.resId]]);
-            const image = new Image();
-            image.onload = () => {
-                this.image = image;
-                this.state.loaded = true;
-                this.layout(params);
-            };
-            image.onerror = () => {
+            this.originalUrl = url;
+            let startUrl = url;
+            if (params?.flat) {
+                // The settings were made on the flattened image: flatten again, as it was.
+                try {
+                    const flat = await this.flattened(params.flat.quarter, params.flat.fine);
+                    startUrl = flat.url;
+                    this.state.flat = params.flat;
+                } catch {
+                    params.flat = null;
+                    params.quarter = 0;
+                    params.fine = 0;
+                    params.crop = [0, 0, 1, 1];
+                }
+            }
+            try {
+                await this.loadImage(startUrl);
+            } catch {
                 this.state.error = _t("This attachment cannot be opened as an image.");
-            };
-            image.src = url;
+                return;
+            }
+            this.state.loaded = true;
+            this.layout(params);
         });
         onWillUnmount(() => browser.removeEventListener("resize", this.onResize));
     }
 
     get title() {
         return _t("Retouch");
+    }
+
+    /** Load an image (address or data URL) as the one the editor works on. */
+    loadImage(url) {
+        return new Promise((resolve, reject) => {
+            const image = new Image();
+            image.onload = () => {
+                this.image = image;
+                resolve();
+            };
+            image.onerror = reject;
+            image.src = url;
+        });
+    }
+
+    /** The uploaded image turned as the editor has it, then flattened (server). */
+    flattened(quarter, fine) {
+        return this.orm.call(
+            "hr.expense", "expense_scan_retouch_flatten", [[this.props.resId], quarter, fine]);
     }
 
     get fineRange() {
@@ -212,18 +255,55 @@ export class RetouchDialog extends Component {
             fine: this.state.fine,
             crop: [crop.x0 / canvas.width, crop.y0 / canvas.height,
                    crop.x1 / canvas.width, crop.y1 / canvas.height],
+            flat: this.state.flat,
         };
     }
 
-    /** Go back to the uploaded image, without rotation or crop. */
-    reset() {
+    /** Go back to the uploaded image, without rotation, crop or flattening. */
+    async reset() {
+        this.state.notice = null;
+        if (this.state.flat) {
+            try {
+                await this.loadImage(this.originalUrl);
+            } catch {
+                this.state.error = _t("This attachment cannot be opened as an image.");
+                return;
+            }
+            this.state.flat = null;
+            this.layout(null);
+            return;
+        }
         this.setParams(null);
+    }
+
+    /** Make the lines of a curled or folded receipt straight, on the image as it is turned now. */
+    async flatten() {
+        this.state.flattening = true;
+        this.state.error = null;
+        this.state.notice = null;
+        try {
+            const { url, changed } = await this.flattened(this.state.quarter, this.state.fine);
+            if (!changed) {
+                this.state.notice = _t("The lines are already straight: nothing to flatten.");
+                return;
+            }
+            const turned = { quarter: this.state.quarter, fine: this.state.fine };
+            await this.loadImage(url);
+            this.state.flat = turned;
+            this.layout({ quarter: 0, fine: 0, crop: [0, 0, 1, 1] });
+        } catch (error) {
+            this.state.error = _t("The flattening failed.");
+            throw error;
+        } finally {
+            this.state.flattening = false;
+        }
     }
 
     /** Suggest the rotation and frame of the automatic retouch, without applying. */
     async autoRetouch() {
         this.state.auto = true;
         this.state.error = null;
+        this.state.notice = null;
         try {
             this.setParams(await this.orm.call(
                 "hr.expense", "expense_scan_auto_retouch_params", [[this.props.resId]]));

@@ -9,6 +9,9 @@
                 <div t-if="this.state.error" class="alert alert-danger py-1 px-2 small mb-2">
                     <t t-esc="this.state.error"/>
                 </div>
+                <div t-if="this.state.notice" class="alert alert-info py-1 px-2 small mb-2">
+                    <t t-esc="this.state.notice"/>
+                </div>
                 <div t-if="!this.state.loaded and !this.state.error" class="text-center text-muted py-5">
                     <i class="oi oi-spin oi-2x" data-icon="progress_activity" role="img" aria-hidden="true"/>
                 </div>
@@ -37,14 +40,23 @@
                         </button>
                         <button type="button" class="btn btn-outline-secondary btn-sm"
                                 title="Reset: uploaded image, untouched"
-                                t-on-click="() => this.reset()" t-att-disabled="this.state.auto or this.state.busy">
+                                t-on-click="() => this.reset()"
+                                t-att-disabled="this.state.auto or this.state.busy or this.state.flattening">
                             <i class="oi" data-icon="history" role="img" aria-label="Reset"/>
                         </button>
                         <button type="button" class="btn btn-outline-secondary btn-sm"
                                 title="Automatic retouch (can be changed before applying)"
-                                t-on-click="() => this.autoRetouch()" t-att-disabled="this.state.auto or this.state.busy">
+                                t-on-click="() => this.autoRetouch()"
+                                t-att-disabled="this.state.auto or this.state.busy or this.state.flattening or this.state.flat">
                             <i class="oi" t-att-class="{ 'oi-spin': this.state.auto }" t-att-data-icon="this.state.auto ? 'progress_activity' : 'crop_rotate'"
                                role="img" aria-label="Automatic retouch"/>
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm"
+                                title="Flatten: make the lines of a curled or folded receipt straight"
+                                t-on-click="() => this.flatten()"
+                                t-att-disabled="this.state.auto or this.state.busy or this.state.flattening or this.state.flat">
+                            <i class="oi" t-att-class="{ 'oi-spin': this.state.flattening }" t-att-data-icon="this.state.flattening ? 'progress_activity' : 'format_align_justify'"
+                               role="img" aria-label="Flatten"/>
                         </button>
                     </div>
                     <div class="d-flex align-items-center gap-2 px-2">
@@ -66,7 +78,7 @@
                         Cancel
                     </button>
                     <button type="button" class="btn btn-primary" t-on-click="this.onApply"
-                            t-att-disabled="!this.state.loaded or this.state.busy or this.state.auto">
+                            t-att-disabled="!this.state.loaded or this.state.busy or this.state.auto or this.state.flattening">
                         <i t-if="this.state.busy" class="oi oi-spin me-1" data-icon="progress_activity"
                            role="img" aria-hidden="true"/>
                         Apply

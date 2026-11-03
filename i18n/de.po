@@ -4716,3 +4716,33 @@ msgstr "<i class=\"oi me-1\" data-icon=\"build\" aria-hidden=\"true\"/>Eine indi
 #: code:addons/expense_scan/models/hr_expense.py:0
 msgid "Untitled Expense %s"
 msgstr "Unbenannte Ausgabe %s"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense.py:0
+msgid "flattened"
+msgstr "geglättet"
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/retouch_dialog.xml:0
+msgid "Flatten"
+msgstr "Glätten"
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/retouch_dialog.xml:0
+msgid "Flatten: make the lines of a curled or folded receipt straight"
+msgstr "Glätten: die Zeilen eines gewellten oder gefalteten Belegs begradigen"
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/retouch_dialog.js:0
+msgid "The lines are already straight: nothing to flatten."
+msgstr "Die Zeilen sind bereits gerade: nichts zu glätten."
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/retouch_dialog.js:0
+msgid "The flattening failed."
+msgstr "Das Glätten ist fehlgeschlagen."
