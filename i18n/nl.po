@@ -4840,3 +4840,23 @@ msgstr "De datum klopt vaak niet op de bonnen van deze handelaar: controleer ze.
 #: code:addons/expense_scan/models/hr_expense.py:0
 msgid "The amount is often wrong on this merchant's receipts: check it."
 msgstr "Het bedrag klopt vaak niet op de bonnen van deze handelaar: controleer het."
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
+msgid "Lines of the receipt, read: they add up to the total."
+msgstr "Regels van de bon, gelezen: ze tellen op tot het totaal."
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_items
+msgid "Receipt lines (read)"
+msgstr "Bonregels (gelezen)"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_items_html
+msgid "Lines of the receipt"
+msgstr "Regels van de bon"
+
+#. module: expense_scan
+#: model:ir.cron,cron_name:expense_scan.ir_cron_expense_scan_items
+msgid "Receipt scan: read the item lines of the receipts"
+msgstr "Bonscan: de artikelregels van de bonnen lezen"

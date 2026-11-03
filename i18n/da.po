@@ -4840,3 +4840,23 @@ msgstr "Datoen er ofte forkert på denne forhandlers kvitteringer: kontroller de
 #: code:addons/expense_scan/models/hr_expense.py:0
 msgid "The amount is often wrong on this merchant's receipts: check it."
 msgstr "Beløbet er ofte forkert på denne forhandlers kvitteringer: kontroller det."
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
+msgid "Lines of the receipt, read: they add up to the total."
+msgstr "Kvitteringens linjer, læst: de summerer til totalen."
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_items
+msgid "Receipt lines (read)"
+msgstr "Kvitteringslinjer (læst)"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_items_html
+msgid "Lines of the receipt"
+msgstr "Kvitteringens linjer"
+
+#. module: expense_scan
+#: model:ir.cron,cron_name:expense_scan.ir_cron_expense_scan_items
+msgid "Receipt scan: read the item lines of the receipts"
+msgstr "Kvitteringsscanning: læs varelinjerne på kvitteringerne"

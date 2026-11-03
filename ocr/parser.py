@@ -228,6 +228,54 @@ TOTAL_EXCLUDE_RE = re.compile(
 )
 
 
+#: A line is judged from the first of these: the subtotal, the total, the tax, the payment.
+ITEMS_STOP_RE = re.compile(
+    r"\bS?OUS\s*[- ]?\s*TOTAL\b|\bSUB\s*[- ]?\s*TOTAL\b|\bSUBTOTALE?\b|\bZWISCHENSUMME\b|"
+    r"\bTOT(?:AL|ALE|AAL)?\b|\bNET\s*A\s*PAYER\b|\bA\s*PAYER\b|\bTE\s*BETALEN\b|\bZU\s*ZAHLEN\b|"
+    r"\bSUMME\b|\bSUMMA\b|\bTVA\b|\bMWST\b|\bIVA\b|\bVAT\b|\bCARTE\b|\bCB\b|\bESPECES\b|"
+    r"\bPAIEMENT\b|\bREGLEMENT\b|\bPAYMENT\b|\bBAR\b")
+#: Words of a line that is not an item, among the lines before the total.
+NOT_ITEM_RE = re.compile(
+    r"\bTICKET\b|\bFACTURE\b|\bCAISSE\b|\bCLIENT\b|\bTABLE\b|\bCOUVERTS?\b|\bSERVEUR\b|\bSIRET\b|\bTEL\b|"
+    r"\bDATE\b|\bHEURE\b|\bRECU\b|\bMERCI\b|\bWWW\b|\bHTTP\b|\bREMISE\b|\bRABAIS\b|\bRENDU\b|\bMONNAIE\b|"
+    r"\bDESIGNATION\b|\bQTE\b|\bPRIX\b")
+DATE_IN_LINE_RE = re.compile(r"\b\d{1,2}[/.\-]\d{1,2}[/.\-]\d{2,4}\b")
+ITEM_LABEL_RE = re.compile(r"[^\W\d_]{3,}")
+#: The lines of items must add up to the total, within this much (rounding of a line, in the currency).
+ITEMS_TOLERANCE = 0.05
+
+
+def extract_items(text):
+    """``[(label, amount)]``: the item lines of a till receipt, between its header and its first total.
+
+    A line holds a label, then one or two amounts (the unit price, the line total): the label is what
+    comes before the first, the amount the last. Reductions and anything that looks like a date, a
+    time, a total, a tax or a payment are not items. The result is a reading to be checked against the
+    total of the expense, not a certainty.
+    """
+    found = []
+    for raw in (text or "").splitlines():
+        line = raw.strip()
+        if not line:
+            continue
+        norm = normalize(line)
+        if ITEMS_STOP_RE.search(norm) and not TIME_RE.search(norm):
+            if found:
+                break
+            continue
+        if NOT_ITEM_RE.search(norm) or TIME_RE.search(norm) or DATE_IN_LINE_RE.search(norm):
+            continue
+        amounts = find_positive_amounts(line)
+        if not amounts:
+            continue
+        label = re.sub(r"\s+", " ", line[:amounts[0][1]]).strip(" .:-*xX")
+        label = re.sub(r"^\d{1,3}\s*[xX*]?\s+", "", label)
+        if not ITEM_LABEL_RE.search(label) or len(label) > 60:
+            continue
+        found.append((label, amounts[-1][0]))
+    return found
+
+
 def _triplet_gross(values):
     """Return the gross amount of a valid net + VAT = gross triplet, or ``None``.
 

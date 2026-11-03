@@ -888,7 +888,8 @@ class HrExpense(models.Model):
                 ('state', 'in', CONFIRMED_STATES),
                 ('date', '<', limit),
             ], limit=batch)
-            old.with_context(tracking_disable=True).write({'scan_raw_text': False})
+            # The lines read hold what was bought: they go with the text they come from.
+            old.with_context(tracking_disable=True).write({'scan_raw_text': False, 'expense_scan_items': False})
             if not odoo_module.current_test:
                 self.env.cr.commit()
 

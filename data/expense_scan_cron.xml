@@ -49,6 +49,18 @@
         <field name="active" eval="True"/>
     </record>
 
+    <!-- The lines of items of the receipts scanned since the last run, read from the text kept: nothing is
+         added to the time of the scan. -->
+    <record id="ir_cron_expense_scan_items" model="ir.cron">
+        <field name="name">Receipt scan: read the item lines of the receipts</field>
+        <field name="model_id" ref="hr_expense.model_hr_expense"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_expense_scan_items()</field>
+        <field name="interval_number">30</field>
+        <field name="interval_type">minutes</field>
+        <field name="active" eval="True"/>
+    </record>
+
     <!-- Erase the text read (personal data) after the configured delay. -->
     <record id="ir_cron_expense_scan_purge_texts" model="ir.cron">
         <field name="name">Receipt scan: erase the text read on old expenses</field>

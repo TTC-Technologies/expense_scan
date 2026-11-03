@@ -227,6 +227,30 @@ class TestReceiptLifecycle(common.TransactionCase):
         typed = self.Expense.create({'name': "Saisi", 'employee_id': self.employee.id, 'date': today - timedelta(days=5)})
         self.assertFalse(typed.expense_scan_date_state)
 
+    def test_the_item_lines_are_read_afterwards_and_kept_when_they_add_up(self):
+        text = "\n".join(["BOULANGERIE DU COIN", "BAGUETTE 1,10", "PAIN AU CHOCOLAT 1,20", "SANDWICH JAMBON 4,50",
+                          "TOTAL 6,80"])
+        expense = self.Expense.create({'name': "Ticket", 'employee_id': self.employee.id, 'scan_state': 'done',
+                                       'scan_raw_text': text, 'total_amount_currency': 6.80})
+        # Nothing is read while the receipt is scanned: the scheduled task does it.
+        self.assertFalse(expense.expense_scan_items)
+        self.assertFalse(expense.expense_scan_items_html)
+        self.Expense._cron_expense_scan_items()
+        self.assertEqual(len(expense._expense_scan_items_shown()), 3)
+        self.assertIn("SANDWICH JAMBON", expense.expense_scan_items_html)
+        # A total corrected by hand no longer matches the lines: they are not shown.
+        expense.total_amount_currency = 9.0
+        self.assertFalse(expense.expense_scan_items_html)
+        # Lines that do not add up to the total of the receipt are not kept at all.
+        odd = self.Expense.create({'name': "Facture", 'employee_id': self.employee.id, 'scan_state': 'done',
+                                   'scan_raw_text': "CONSEIL 40,00\nREDACTION 12,00\nTOTAL 400,00",
+                                   'total_amount_currency': 400.0})
+        self.Expense._cron_expense_scan_items()
+        self.assertEqual(odd.expense_scan_items, "[]")
+        self.assertFalse(odd.expense_scan_items_html)
+        # Read once: the scheduled task leaves them alone afterwards.
+        self.assertEqual(self.Expense._cron_expense_scan_items(), 0)
+
     def test_an_exempt_receipt_has_no_tax_to_check(self):
         """A receipt printed at 0 % does not ask for a tax, unlike one without any."""
         from ..ocr import parser

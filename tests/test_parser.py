@@ -175,6 +175,20 @@ ARTICLE B 3,50
         result = self.parse("KIOSQUE@DATE 15.09@TOTAL 4,50@HT 3,75 TVA 0,75".replace("@", "\n"), today=today)
         self.assertEqual(result.value('date'), date(2026, 9, 15))
 
+    def test_the_item_lines_of_a_till_receipt(self):
+        text = "\n".join([
+            "BOULANGERIE DU COIN", "12 rue Haute 31000 TOULOUSE", "Ticket 0045  le 12/09/2026 12:31",
+            "1 BAGUETTE TRADITION 1,10", "2 x PAIN AU CHOCOLAT 1,20 2,40", "SANDWICH JAMBON 4,50",
+            "REMISE -0,50", "SOUS-TOTAL 7,50", "TOTAL 8,00", "TVA 10 % 0,73", "CARTE BANCAIRE 8,00"])
+        items = parser.extract_items(text)
+        self.assertEqual(items, [("BAGUETTE TRADITION", 1.10), ("PAIN AU CHOCOLAT", 2.40), ("SANDWICH JAMBON", 4.50)])
+        # The reading stops at the first total: the tax and the payment are not items.
+        self.assertEqual(parser.extract_items("CAFE 1,50\nTOTAL 1,50\nESPECES 2,00"), [("CAFE", 1.50)])
+        # Nothing before a total, no amounts, no text: nothing.
+        self.assertEqual(parser.extract_items("TOTAL 12,50"), [])
+        self.assertEqual(parser.extract_items("Merci de votre visite"), [])
+        self.assertEqual(parser.extract_items(None), [])
+
     def test_decimal_amount_is_not_a_date(self):
         """'5.67' is not a date (day 5, month 67)."""
         result = self.parse("GARAGE\nPRIX HT 5.67\nTOTAL 6,80")
