@@ -4792,3 +4792,39 @@ msgstr "Mismo trayecto"
 #: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
 msgid "A new expense for the same trip, dated today"
 msgstr "Un nuevo gasto para el mismo trayecto, con la fecha de hoy"
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/receipt_source_dialog.xml:0
+msgid "Several receipts in a row"
+msgstr "Varios tickets seguidos"
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/receipt_batch_dialog.js:0
+msgid "Receipt batch"
+msgstr "Lote de tickets"
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/receipt_batch_dialog.js:0
+msgid "%(count)s receipt(s) ready to be read."
+msgstr "%(count)s ticket(s) listo(s) para leer."
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/receipt_batch_dialog.js:0
+msgid "Take the first receipt in photo."
+msgstr "Haga la foto del primer ticket."
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/receipt_batch_dialog.js:0
+msgid "Finish and read the %(count)s receipt(s)"
+msgstr "Terminar y leer los %(count)s ticket(s)"
+
+#. module: expense_scan
+#. odoo-javascript
+#: code:addons/expense_scan/static/src/js/receipt_batch_dialog.xml:0
+msgid "Photograph the next one"
+msgstr "Fotografiar el siguiente"

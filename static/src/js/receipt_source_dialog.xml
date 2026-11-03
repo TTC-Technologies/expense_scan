@@ -12,6 +12,10 @@
                         t-on-click="() => this.pick('camera')">
                     <i class="fa fa-camera fa-fw me-2" role="img" aria-hidden="true"/>Camera
                 </button>
+                <button t-if="props.batch" type="button" class="btn btn-secondary btn-lg text-start"
+                        t-on-click="() => this.pickBatch()">
+                    <i class="fa fa-clone fa-fw me-2" role="img" aria-hidden="true"/>Several receipts in a row
+                </button>
                 <button type="button" class="btn btn-secondary btn-lg text-start"
                         t-on-click="() => this.pick('gallery')">
                     <i class="fa fa-picture-o fa-fw me-2" role="img" aria-hidden="true"/>Gallery

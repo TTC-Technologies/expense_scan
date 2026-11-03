@@ -14,7 +14,10 @@ import { Domain } from "@web/core/domain";
 import { patch } from "@web/core/utils/patch";
 import { useService } from "@web/core/utils/hooks";
 
+import { reactive } from "@odoo/owl";
+
 import { ReceiptSourceDialog, configureReceiptInput } from "@expense_scan/js/receipt_source_dialog";
+import { ReceiptBatchDialog } from "@expense_scan/js/receipt_batch_dialog";
 
 import { ExpenseListController } from "@hr_expense/views/list";
 import { ExpenseKanbanController } from "@hr_expense/views/kanban";
@@ -37,6 +40,8 @@ const expenseScanUpload = () => ({
         // would count as running alongside another and would stay on the
         // list. That counter is therefore not used here.
         this.expenseScanInFlight = 0;
+        // Photos of a batch not sent yet; null outside a batch.
+        this.expenseScanBatch = null;
     },
 
     /**
@@ -56,7 +61,70 @@ const expenseScanUpload = () => ({
                 // refuses to open the picker.
                 this.fileInput.el.click();
             },
+            batch: () => this.expenseScanStartBatch(),
         });
+    },
+
+    /**
+     * A batch: the camera opens, each photo is kept, the dialog (which stays open behind the
+     * camera) counts them, and "Finish" sends them all as one upload.
+     */
+    expenseScanStartBatch() {
+        this.expenseScanBatch = reactive({ files: [], thumbs: [] });
+        this.expenseScanBatchCamera();
+        this.expenseScanDialog.add(
+            ReceiptBatchDialog,
+            {
+                batch: this.expenseScanBatch,
+                next: () => this.expenseScanBatchCamera(),
+                finish: () => this.expenseScanFinishBatch(),
+                cancel: () => this.expenseScanDropBatch(),
+            },
+            // Closed by the cross or the escape key: the photos are thrown away, as by "Cancel".
+            { onClose: () => this.expenseScanDropBatch() }
+        );
+    },
+
+    /** Open the camera for one more photo (within a click). */
+    expenseScanBatchCamera() {
+        configureReceiptInput(this.fileInput.el, "camera");
+        this.fileInput.el.click();
+    },
+
+    /** The photo taken joins the batch. */
+    expenseScanAddToBatch() {
+        const input = this.fileInput.el;
+        for (const file of input.files) {
+            this.expenseScanBatch.files.push(file);
+            this.expenseScanBatch.thumbs.push(URL.createObjectURL(file));
+        }
+        // Emptied, so that the same photo taken again is a change.
+        input.value = "";
+    },
+
+    /** All the photos are sent as one upload: one expense each, and their list. */
+    async expenseScanFinishBatch() {
+        const batch = this.expenseScanBatch;
+        if (!batch?.files.length) {
+            return this.expenseScanDropBatch();
+        }
+        const transfer = new DataTransfer();
+        for (const file of batch.files) {
+            transfer.items.add(file);
+        }
+        this.fileInput.el.files = transfer.files;
+        this.expenseScanDropBatch({ keepInput: true });
+        await this.onChangeFileInput();
+    },
+
+    expenseScanDropBatch({ keepInput = false } = {}) {
+        for (const url of this.expenseScanBatch?.thumbs || []) {
+            URL.revokeObjectURL(url);
+        }
+        this.expenseScanBatch = null;
+        if (!keepInput && this.fileInput?.el) {
+            this.fileInput.el.value = "";
+        }
     },
 
     /**
@@ -89,6 +157,11 @@ const expenseScanUpload = () => ({
      * @override
      */
     async onChangeFileInput() {
+        if (this.expenseScanBatch) {
+            // A photo of a batch: kept, nothing is sent yet.
+            this.expenseScanAddToBatch();
+            return;
+        }
         // A single receipt is scanned in its form, which shows the steps: the
         // notification only mentions the upload.
         const closeNotification = this.notification.add(

@@ -44,6 +44,8 @@ export class ReceiptSourceDialog extends Component {
     static components = { Dialog };
     static props = {
         choose: Function,
+        // Several receipts photographed in a row (see receipt_batch_dialog.js).
+        batch: { type: Function, optional: true },
         close: Function,
     };
 
@@ -54,6 +56,12 @@ export class ReceiptSourceDialog extends Component {
     /** Open the picker before closing the dialog, during the user action. */
     pick(source) {
         this.props.choose(source);
+        this.props.close();
+    }
+
+    /** Start a batch: the camera opens within this click, the batch dialog takes over. */
+    pickBatch() {
+        this.props.batch();
         this.props.close();
     }
 }
