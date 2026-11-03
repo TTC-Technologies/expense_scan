@@ -9,6 +9,7 @@
 import { ActionMenus } from "@web/search/action_menus/action_menus";
 import { patch } from "@web/core/utils/patch";
 import { session } from "@web/session";
+import { noteSelection } from "@expense_scan/js/selection_memory";
 
 patch(ActionMenus.prototype, {
     /** "Expense Sheet" action, if it is in this bar. */
@@ -27,6 +28,14 @@ patch(ActionMenus.prototype, {
             return items;
         }
         return items.filter((item) => item.action?.id !== actionId);
+    },
+
+    /** The expenses selected stay selected once the action is done (the list is built again). */
+    async executeAction(action) {
+        if (this.props.resModel === "hr.expense" && !this.props.isDomainSelected) {
+            noteSelection(this.props.getActiveIds());
+        }
+        return super.executeAction(action);
     },
 
     onExpenseSheet() {
