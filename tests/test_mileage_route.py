@@ -283,6 +283,37 @@ class TestMileageRoute(common.TransactionCase):
                 'expense_scan_route_to_id': self.albi.id})
         self.assertEqual(named.name, "Visite chantier", "a description written by hand stays")
 
+    def test_the_same_route_again_is_a_new_expense_dated_today(self):
+        """The trip repeated: places, return trip and distance carried over, nothing measured again."""
+        from odoo import fields
+        fake, patched = self.fake()
+        with patched:
+            first = self.env['hr.expense'].create({
+                'name': "Visite chantier", 'employee_id': self.employee.id, 'product_id': self.mileage.id,
+                'date': "2026-09-02", 'expense_scan_round_trip': True,
+                'expense_scan_route_from_id': self.station.id,
+                'expense_scan_route_to_id': self.albi.id})
+            routes = len([url for url in fake.urls if "/route/v1/" in url])
+            action = first.action_expense_scan_same_route()
+            again = self.env['hr.expense'].browse(action['res_id'])
+            self.assertEqual(len([url for url in fake.urls if "/route/v1/" in url]), routes,
+                             "the distance is known: the route service is not asked again")
+        self.assertNotEqual(again, first)
+        self.assertEqual(again.date, fields.Date.context_today(again))
+        self.assertEqual((again.expense_scan_route_from_id, again.expense_scan_route_to_id),
+                         (first.expense_scan_route_from_id, first.expense_scan_route_to_id))
+        self.assertTrue(again.expense_scan_round_trip)
+        self.assertEqual((again.expense_scan_route_km, again.quantity), (first.expense_scan_route_km, first.quantity))
+        self.assertEqual(again.product_id, first.product_id)
+        self.assertEqual(again.name, "Visite chantier", "what is written about the trip is kept")
+        self.assertTrue(again.expense_scan_route_attachment_id, "the picture of the route is drawn for the new expense")
+        self.assertNotEqual(again.expense_scan_route_attachment_id, first.expense_scan_route_attachment_id)
+        self.assertEqual(again.state, 'draft')
+        # Without a route there is nothing to repeat.
+        plain = self.env['hr.expense'].create({'name': "Autre", 'employee_id': self.employee.id})
+        with self.assertRaises(UserError):
+            plain.action_expense_scan_same_route()
+
     def test_the_map_of_a_route_is_not_retouched(self):
         fake, patched = self.fake()
         with patched:

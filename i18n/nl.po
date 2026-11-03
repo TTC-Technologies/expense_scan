@@ -4782,3 +4782,19 @@ msgstr "Datum in te voeren"
 #: model:ir.model.fields.selection,name:expense_scan.selection__hr_expense__expense_scan_date_state__confirmed
 msgid "Date entered"
 msgstr "Datum ingevoerd"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_route.py:0
+msgid "This expense has no route: pick where the trip starts and ends first."
+msgstr "Deze uitgave heeft geen route: kies eerst vertrek en aankomst."
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
+msgid "Same route"
+msgstr "Dezelfde route"
+
+#. module: expense_scan
+#: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
+msgid "A new expense for the same trip, dated today"
+msgstr "Een nieuwe uitgave voor dezelfde route, met de datum van vandaag"
