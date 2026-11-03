@@ -8,7 +8,6 @@ expenses it covered: the sheet given to the accountant in March can be
 found again in June, as it was. Sending it by e-mail goes through the
 record, whose history then says to whom it went.
 """
-import base64
 
 from odoo import _, api, fields, models
 
@@ -55,7 +54,7 @@ class ExpenseScanSheetArchive(models.Model):
         }).with_env(self.env)
         attachments = self.env['ir.attachment'].create([{
             'name': file_name,
-            'datas': base64.b64encode(content),
+            'raw': content,
             'res_model': self._name,
             'res_id': archive.id,
         } for file_name, content in files])

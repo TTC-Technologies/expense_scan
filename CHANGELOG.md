@@ -9,6 +9,8 @@
   flattened twice. Follows the "Straighten photos" setting. The scan note says "flattened".
 - Retouch: a Flatten button, on the receipt as it is turned in the editor; the rotation it was made with is kept in the
   settings of the retouch, so that it is made again when the retouch is reopened.
+- Odoo 20: the files of the expense sheets kept (PDF, Excel, zip) were empty, because Odoo 20 ignores the field "datas" when
+  an attachment is created; they are given as "raw" now (Odoo 19 reads it too).
 
 ## 20.0.3.4.5 — 2026-11-02
 

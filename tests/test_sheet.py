@@ -243,6 +243,8 @@ class TestExpenseSheet(common.TransactionCase):
         self.assertEqual(archive.expense_ids, mine | theirs)
         self.assertEqual(len(archive.attachment_ids), 2)
         self.assertEqual(archive.employee_ids, mine.employee_id | other)
+        # The files are in the archive: Odoo 20 drops "datas" at creation, which left them empty.
+        self.assertTrue(all(attachment.raw for attachment in archive.attachment_ids))
 
     def test_an_employee_generates_their_own_sheet(self):
         """Without the right to read employees: the archive of the sheet is still kept, and readable."""
