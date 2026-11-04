@@ -71,6 +71,9 @@ class ExpenseMileageVehicle(models.Model):
         """The category of a vehicle of this fiscal power and fuel: the closest range that holds the power."""
         candidates = self.sudo().search([('company_id', '=', company.id), ('electric', '=', bool(electric))],
                                         order='power_from desc, id')
+        if not power:
+            # No power entered: only the categories that do not depend on it (one scale for every vehicle).
+            return candidates.filtered(lambda c: not c.power_from and not c.power_to)[:1]
         for category in candidates:
             if category.power_from <= (power or 0) and (not category.power_to or (power or 0) <= category.power_to):
                 return category
@@ -271,6 +274,14 @@ class HrExpense(models.Model):
     expense_vehicle_id = fields.Many2one(
         'expense.employee.vehicle', string="Vehicle", domain="[('employee_id', '=', employee_id)]",
         copy=True, help="The vehicle of the employee used for the trip: its scale pays the distance.")
+    expense_has_vehicles = fields.Boolean(
+        compute='_compute_expense_has_vehicles',
+        help="The employee has a personal vehicle: the form then asks which one drove the trip.")
+
+    @api.depends('employee_id')
+    def _compute_expense_has_vehicles(self):
+        for expense in self:
+            expense.expense_has_vehicles = bool(expense.employee_id.sudo().expense_vehicle_ids)
 
     def _expense_scan_vehicle(self):
         """The personal vehicle of the trip: the one chosen, else the usual one, unless it is a company vehicle."""

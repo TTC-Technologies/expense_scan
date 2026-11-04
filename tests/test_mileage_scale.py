@@ -145,6 +145,12 @@ class TestExpenseMileageScale(common.TransactionCase):
         self.assertAlmostEqual(self.trip(5000, '2031-04-01').total_amount_currency,
                                formula(THERMAL, 6000) - formula(THERMAL, 1000), places=2)
 
+    def test_a_vehicle_without_power_takes_no_power_bound_category(self):
+        categories = self.env['expense.mileage.vehicle']
+        self.assertFalse(categories._category_for(self.company, 0, False).filtered(lambda c: c.power_from or c.power_to))
+        anywhere = categories.create({'name': "Test any car", 'company_id': self.company.id, 'electric': False})
+        self.assertIn(anywhere, categories._category_for(self.company, 0, False))
+
     def test_the_category_follows_the_power_and_the_fuel(self):
         vehicle = self.env['expense.employee.vehicle'].create({
             'name': "Golf", 'employee_id': self.employee.id, 'fiscal_power': 4, 'electric': False})

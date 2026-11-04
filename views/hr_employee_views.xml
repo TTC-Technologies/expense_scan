@@ -39,7 +39,7 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="employee_id"/>
+                            <field name="employee_id" readonly="id"/>
                             <field name="name"/>
                             <field name="plate"/>
                         </group>
