@@ -5504,3 +5504,108 @@ msgstr "· Periode"
 msgid "ℹ︎"
 msgstr "ℹ︎"
 
+#. module: expense_scan
+#: model:expense.scan.policy,name:expense_scan.policy_good_practice
+msgid "Good practice"
+msgstr "God praksis"
+
+#. module: expense_scan
+#: model:expense.scan.policy,note:expense_scan.policy_good_practice
+msgid ""
+"Examples to adjust: add your own ceilings per meal, per day or per night, following the rules of your country and of your company.\n"
+"\n"
+"Beyond a ceiling, an actual expense can usually be reimbursed if it is justified. Fines and personal expenses are neither business expenses nor deductible."
+msgstr ""
+"Eksempler å justere: legg til egne tak per måltid, per dag eller per natt, etter reglene i ditt land og ditt firma.\n"
+"\n"
+"Over et tak kan et faktisk utlegg vanligvis refunderes hvis det er begrunnet. Bøter og private utgifter er verken jobbutgifter eller fradragsberettiget."
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.policy_good_practice_personal
+msgid "Fines and personal expenses: neither business expenses nor deductible"
+msgstr ""
+"Bøter og private utgifter: verken jobbutgifter eller fradragsberettiget"
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.policy_good_practice_hotel_extras
+msgid "Personal hotel extras (minibar, films, laundry): paid by the employee"
+msgstr "Private hotelltillegg (minibar, filmer, vask): betales av den ansatte"
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.policy_good_practice_alcohol
+msgid "Alcohol on a meal bill: moderate consumption, to be justified"
+msgstr "Alkohol på en restaurantregning: moderat forbruk, må begrunnes"
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.policy_good_practice_travel_class
+msgid "Train in 2nd class, plane in economy class, unless agreed beforehand"
+msgstr ""
+"Tog på 2. klasse, fly på økonomiklasse, med mindre annet er avtalt på "
+"forhånd"
+
+#. module: expense_scan
+#: model:expense.scan.export.template,name:expense_scan.export_template_basic
+msgid "Expense sheet (basic template)"
+msgstr "Utleggsrapport (grunnmal)"
+
+#. module: expense_scan
+#: model:expense.scan.export.template,note:expense_scan.export_template_basic
+msgid ""
+"Workbook delivered with the module: download it from the \"Excel file\" "
+"field, adapt it (logo, colours, columns), then upload it again. Keep a row "
+"of titles above the expenses and the totals just below: the export adds or "
+"removes rows and the totals follow. The \"Blank workbook\" button builds a "
+"new one from the mappings below."
+msgstr ""
+"Arbeidsbok som følger med modulen: last den ned fra feltet \"Excel-fil\", "
+"tilpass den (logo, farger, kolonner) og last den opp igjen. Behold en rad "
+"med titler over utleggene og summene rett under: eksporten legger til eller "
+"fjerner rader og summene følger med. Knappen \"Tom arbeidsbok\" lager en ny "
+"ut fra tilordningene nedenfor."
+
+#. module: expense_scan
+#: model:expense.scan.policy,name:expense_scan.demo_policy
+msgid "Example: a customer's requirements"
+msgstr "Eksempel: en kundes krav"
+
+#. module: expense_scan
+#: model:expense.scan.policy,note:expense_scan.demo_policy
+msgid ""
+"Made-up rules, set by contract with the customer: they apply to the projects"
+" of its sites, on top of the company's good practice."
+msgstr ""
+"Oppdiktede regler, avtalt med kunden: de gjelder prosjektene på kundens "
+"anlegg, i tillegg til firmaets gode praksis."
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.demo_policy_travel_class
+msgid "Train in 2nd class, plane in economy class, no exception"
+msgstr "Tog på 2. klasse, fly på økonomiklasse, uten unntak"
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.demo_policy_breakfast
+msgid "Breakfast: 15 at most"
+msgstr "Frokost: høyst 15"
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.demo_policy_lunch
+msgid "Lunch: 25 at most"
+msgstr "Lunsj: høyst 25"
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.demo_policy_dinner
+msgid "Dinner: 35 at most"
+msgstr "Middag: høyst 35"
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.demo_policy_daily_meals
+msgid ""
+"Meals of the day: 55 in total (a more expensive meal is accepted within this"
+" limit)"
+msgstr ""
+"Dagens måltider: 55 totalt (et dyrere måltid godtas innenfor denne grensen)"
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.demo_policy_hotel
+msgid "Hotel: 110 a night, 140 in large cities"
+msgstr "Hotell: 110 per natt, 140 i storbyer"

@@ -5504,3 +5504,112 @@ msgstr "· Zeitraum"
 msgid "ℹ︎"
 msgstr "ℹ︎"
 
+#. module: expense_scan
+#: model:expense.scan.policy,name:expense_scan.policy_good_practice
+msgid "Good practice"
+msgstr "Gute Praktiken"
+
+#. module: expense_scan
+#: model:expense.scan.policy,note:expense_scan.policy_good_practice
+msgid ""
+"Examples to adjust: add your own ceilings per meal, per day or per night, following the rules of your country and of your company.\n"
+"\n"
+"Beyond a ceiling, an actual expense can usually be reimbursed if it is justified. Fines and personal expenses are neither business expenses nor deductible."
+msgstr ""
+"Beispiele zum Anpassen: fügen Sie Ihre eigenen Obergrenzen pro Mahlzeit, pro Tag oder pro Nacht hinzu, gemäß den Regeln Ihres Landes und Ihres Unternehmens.\n"
+"\n"
+"Über einer Obergrenze kann eine tatsächliche Ausgabe meist erstattet werden, wenn sie begründet ist. Bußgelder und private Ausgaben sind weder Geschäftsausgaben noch abziehbar."
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.policy_good_practice_personal
+msgid "Fines and personal expenses: neither business expenses nor deductible"
+msgstr ""
+"Bußgelder und private Ausgaben: weder Geschäftsausgaben noch abziehbar"
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.policy_good_practice_hotel_extras
+msgid "Personal hotel extras (minibar, films, laundry): paid by the employee"
+msgstr ""
+"Private Hotelextras (Minibar, Filme, Wäscherei): vom Mitarbeiter zu tragen"
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.policy_good_practice_alcohol
+msgid "Alcohol on a meal bill: moderate consumption, to be justified"
+msgstr "Alkohol auf einer Restaurantrechnung: maßvoller Konsum, zu begründen"
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.policy_good_practice_travel_class
+msgid "Train in 2nd class, plane in economy class, unless agreed beforehand"
+msgstr ""
+"Bahn in der 2. Klasse, Flug in der Economy Class, außer nach vorheriger "
+"Absprache"
+
+#. module: expense_scan
+#: model:expense.scan.export.template,name:expense_scan.export_template_basic
+msgid "Expense sheet (basic template)"
+msgstr "Ausgabenbogen (Basisvorlage)"
+
+#. module: expense_scan
+#: model:expense.scan.export.template,note:expense_scan.export_template_basic
+msgid ""
+"Workbook delivered with the module: download it from the \"Excel file\" "
+"field, adapt it (logo, colours, columns), then upload it again. Keep a row "
+"of titles above the expenses and the totals just below: the export adds or "
+"removes rows and the totals follow. The \"Blank workbook\" button builds a "
+"new one from the mappings below."
+msgstr ""
+"Mit dem Modul gelieferte Arbeitsmappe: laden Sie sie über das Feld \"Excel-"
+"Datei\" herunter, passen Sie sie an (Logo, Farben, Spalten) und laden Sie "
+"sie wieder hoch. Lassen Sie eine Titelzeile über den Ausgaben und die Summen"
+" direkt darunter: der Export fügt Zeilen hinzu oder entfernt sie, und die "
+"Summen passen sich an. Die Schaltfläche \"Leere Arbeitsmappe\" erstellt eine"
+" neue aus den Zuordnungen unten."
+
+#. module: expense_scan
+#: model:expense.scan.policy,name:expense_scan.demo_policy
+msgid "Example: a customer's requirements"
+msgstr "Beispiel: Anforderungen eines Kunden"
+
+#. module: expense_scan
+#: model:expense.scan.policy,note:expense_scan.demo_policy
+msgid ""
+"Made-up rules, set by contract with the customer: they apply to the projects"
+" of its sites, on top of the company's good practice."
+msgstr ""
+"Erfundene Regeln, vertraglich mit dem Kunden vereinbart: sie gelten für die "
+"Projekte seiner Standorte, zusätzlich zu den guten Praktiken des "
+"Unternehmens."
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.demo_policy_travel_class
+msgid "Train in 2nd class, plane in economy class, no exception"
+msgstr "Bahn in der 2. Klasse, Flug in der Economy Class, ohne Ausnahme"
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.demo_policy_breakfast
+msgid "Breakfast: 15 at most"
+msgstr "Frühstück: höchstens 15"
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.demo_policy_lunch
+msgid "Lunch: 25 at most"
+msgstr "Mittagessen: höchstens 25"
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.demo_policy_dinner
+msgid "Dinner: 35 at most"
+msgstr "Abendessen: höchstens 35"
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.demo_policy_daily_meals
+msgid ""
+"Meals of the day: 55 in total (a more expensive meal is accepted within this"
+" limit)"
+msgstr ""
+"Mahlzeiten des Tages: insgesamt 55 (eine teurere Mahlzeit ist innerhalb "
+"dieser Grenze erlaubt)"
+
+#. module: expense_scan
+#: model:expense.scan.policy.rule,name:expense_scan.demo_policy_hotel
+msgid "Hotel: 110 a night, 140 in large cities"
+msgstr "Hotel: 110 pro Nacht, 140 in Großstädten"
