@@ -97,10 +97,6 @@
                             Employees with a vehicle (set on their record) are paid by the scale of the year,
                             from the cumulated distance.
                         </div>
-                        <div class="row">
-                            <label for="expense_mileage_electric_bonus" class="col-lg-4 o_light_label"/>
-                            <field name="expense_mileage_electric_bonus" class="col-lg-8"/>
-                        </div>
                         <div>
                             <button name="%(expense_scan.expense_scan_place_action)d"
                                     type="action" string="Places"

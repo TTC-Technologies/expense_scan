@@ -12,7 +12,7 @@ An employee with a vehicle (fiscal horsepower) is paid by that scale: each milea
 the scale of the year after the trip, less the scale before it. The thresholds and the fixed part
 need no thought: the expense of the trip that crosses 5 000 km carries the rate of both sides, and
 the cumulated allowance of the year is always the scale of the cumulated distance. An electric
-vehicle gets the increase of the company (20 % by default), on the whole amount.
+vehicle has its own scale (the official one: the thermal scale increased by 20 % and rounded).
 
 Employees without a vehicle keep the single rate of their record, or the cost of the category.
 """
@@ -23,14 +23,24 @@ from odoo.exceptions import ValidationError
 THRESHOLD_1 = 5000
 THRESHOLD_2 = 20000
 
-#: Scale of a car (fiscal horsepower: rate up to 5 000 km, rate and fixed part from 5 001 to
-#: 20 000 km, rate beyond 20 000 km). The values to start with: check them against the scale in force.
+#: Scales of a car, 2026 (fiscal horsepower: rate up to 5 000 km, rate and fixed part from 5 001 to
+#: 20 000 km, rate beyond 20 000 km): thermal, hydrogen and hybrid vehicles, then 100 % electric ones.
+#: The values to start with: check them against the scale in force.
 DEFAULT_CAR_SCALE = {
-    '3': (0.529, 0.316, 1065.0, 0.370),
-    '4': (0.606, 0.340, 1330.0, 0.407),
-    '5': (0.636, 0.357, 1395.0, 0.427),
-    '6': (0.665, 0.374, 1457.0, 0.447),
-    '7': (0.697, 0.394, 1515.0, 0.470),
+    False: {
+        '3': (0.529, 0.316, 1065.0, 0.370),
+        '4': (0.606, 0.340, 1330.0, 0.407),
+        '5': (0.636, 0.357, 1395.0, 0.427),
+        '6': (0.665, 0.374, 1457.0, 0.447),
+        '7': (0.697, 0.394, 1515.0, 0.470),
+    },
+    True: {
+        '3': (0.635, 0.379, 1278.0, 0.444),
+        '4': (0.727, 0.408, 1596.0, 0.488),
+        '5': (0.763, 0.428, 1674.0, 0.512),
+        '6': (0.798, 0.449, 1748.0, 0.536),
+        '7': (0.836, 0.473, 1818.0, 0.564),
+    },
 }
 
 
@@ -46,13 +56,15 @@ class ExpenseMileageScale(models.Model):
     hp = fields.Selection(
         [('3', "3 CV or less"), ('4', "4 CV"), ('5', "5 CV"), ('6', "6 CV"), ('7', "7 CV and more")],
         string="Fiscal horsepower", required=True)
+    electric = fields.Boolean(string="Electric vehicle", help="The scale of 100 % electric vehicles.")
     rate_1 = fields.Float(string="Up to 5 000 km (per km)", digits=(16, 4), required=True)
     rate_2 = fields.Float(string="5 001 to 20 000 km (per km)", digits=(16, 4), required=True)
     fixed_2 = fields.Float(string="5 001 to 20 000 km (fixed part)", digits=(16, 2), required=True)
     rate_3 = fields.Float(string="Beyond 20 000 km (per km)", digits=(16, 4), required=True)
 
     _unique_year_hp = models.Constraint(
-        'unique(company_id, year, hp)', "A scale already exists for this company, this year and this power.")
+        'unique(company_id, year, hp, electric)',
+        "A scale already exists for this company, this year, this power and this kind of vehicle.")
 
     def amount(self, distance):
         """Allowance of a year for this distance, before the increase of an electric vehicle."""
@@ -65,39 +77,31 @@ class ExpenseMileageScale(models.Model):
         return distance * self.rate_3
 
     @api.model
-    def _scale_for(self, company, year, hp):
-        """The scale in force for a company, a year and a power: the most recent one not after the year."""
+    def _scale_for(self, company, year, hp, electric=False):
+        """The scale in force for a company, a year, a power and a kind of vehicle: the most recent one
+        not after the year."""
         return self.sudo().search([
-            ('company_id', '=', company.id), ('hp', '=', hp), ('year', '<=', year)], order='year desc', limit=1)
+            ('company_id', '=', company.id), ('hp', '=', hp), ('electric', '=', bool(electric)),
+            ('year', '<=', year)], order='year desc', limit=1)
 
     @api.model
     def _expense_scan_scale_init(self):
-        """The scale of cars of the companies that have none (install and update)."""
+        """The scales of cars of the companies that have none, thermal and electric (install and update)."""
         year = fields.Date.context_today(self).year
         for company in self.env['res.company'].search([]):
-            if self.sudo().search_count([('company_id', '=', company.id)]):
-                continue
-            self.sudo().create([
-                {'company_id': company.id, 'year': year, 'hp': hp, 'rate_1': r1, 'rate_2': r2,
-                 'fixed_2': fixed, 'rate_3': r3}
-                for hp, (r1, r2, fixed, r3) in DEFAULT_CAR_SCALE.items()])
+            for electric, scale in DEFAULT_CAR_SCALE.items():
+                if self.sudo().search_count([('company_id', '=', company.id), ('electric', '=', electric)]):
+                    continue
+                self.sudo().create([
+                    {'company_id': company.id, 'year': year, 'hp': hp, 'electric': electric, 'rate_1': r1,
+                     'rate_2': r2, 'fixed_2': fixed, 'rate_3': r3}
+                    for hp, (r1, r2, fixed, r3) in scale.items()])
 
 
 class ResCompany(models.Model):
     _inherit = 'res.company'
 
-    expense_mileage_electric_bonus = fields.Float(
-        string="Electric vehicle increase", default=0.20, digits=(16, 3),
-        help="Added to the whole allowance of a mileage scale for an electric vehicle: 0.20 for the 20 % "
-             "increase of the French scale.")
     expense_mileage_scale_ids = fields.One2many('expense.mileage.scale', 'company_id', string="Mileage scale")
-
-
-class ResConfigSettings(models.TransientModel):
-    _inherit = 'res.config.settings'
-
-    expense_mileage_electric_bonus = fields.Float(
-        related='company_id.expense_mileage_electric_bonus', readonly=False)
 
 
 class HrEmployee(models.Model):
@@ -110,7 +114,7 @@ class HrEmployee(models.Model):
              "part and the thresholds are handled). Empty: the mileage rate below, or the category cost.")
     expense_vehicle_electric = fields.Boolean(
         string="Electric vehicle", groups="hr.group_hr_user",
-        help="Adds the increase of the company (20 % by default) to the scale.")
+        help="Pays by the scale of 100 % electric vehicles.")
     expense_mileage_start_km = fields.Float(
         string="Kilometres already driven", groups="hr.group_hr_user",
         help="Business distance of the year driven before the first expense of Odoo (the year below).")
@@ -139,7 +143,8 @@ class HrExpense(models.Model):
         if not (employee.expense_vehicle_hp and self.company_id and self._expense_scan_is_distance()):
             return self.env['expense.mileage.scale']
         year = (self.date or fields.Date.context_today(self)).year
-        return self.env['expense.mileage.scale']._scale_for(self.company_id, year, employee.expense_vehicle_hp)
+        return self.env['expense.mileage.scale']._scale_for(
+            self.company_id, year, employee.expense_vehicle_hp, employee.expense_vehicle_electric)
 
     def _expense_scan_scale_distance_before(self):
         """Distance of the year driven before this expense: the starting kilometres and the earlier trips."""
@@ -169,9 +174,7 @@ class HrExpense(models.Model):
         if not scale or not self.quantity or self.quantity <= 0:
             return None
         before = self._expense_scan_scale_distance_before()
-        bonus = 1 + (self.company_id.expense_mileage_electric_bonus if self.employee_id.sudo().expense_vehicle_electric
-                     else 0.0)
-        amount = (scale.amount(before + self.quantity) - scale.amount(before)) * bonus
+        amount = scale.amount(before + self.quantity) - scale.amount(before)
         return amount / self.quantity
 
     def _expense_scan_apply_scale(self):
