@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2026 T.T.C. SAS
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0). -->
+<odoo>
+
+    <record id="expense_mileage_scale_view_list" model="ir.ui.view">
+        <field name="name">expense.mileage.scale.list</field>
+        <field name="model">expense.mileage.scale</field>
+        <field name="arch" type="xml">
+            <list string="Mileage scales">
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="vehicle_id"/>
+                <field name="year"/>
+                <field name="method"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="expense_mileage_scale_view_search" model="ir.ui.view">
+        <field name="name">expense.mileage.scale.search</field>
+        <field name="model">expense.mileage.scale</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="vehicle_id"/>
+                <field name="year"/>
+                <group>
+                    <filter name="group_vehicle" string="Vehicle" context="{'group_by': 'vehicle_id'}"/>
+                    <filter name="group_year" string="Year" context="{'group_by': 'year'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="expense_mileage_scale_view_form" model="ir.ui.view">
+        <field name="name">expense.mileage.scale.form</field>
+        <field name="model">expense.mileage.scale</field>
+        <field name="arch" type="xml">
+            <form string="Mileage scale">
+                <header>
+                    <button name="action_copy_next_year" type="object" string="Copy to next year"
+                            invisible="not id"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="vehicle_id"/>
+                            <field name="year" options="{'format': 0}"/>
+                        </group>
+                        <group>
+                            <field name="method"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <p class="text-muted">
+                        The brackets apply above the distance of their first column, in the distance unit of the
+                        expenses (kilometres or miles). Adjust the rates when the scale of the country changes:
+                        copy the scale to next year, then edit the copy.
+                    </p>
+                    <field name="line_ids">
+                        <list editable="bottom">
+                            <field name="distance_from"/>
+                            <field name="rate"/>
+                            <field name="fixed" column_invisible="parent.method != 'formula'"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="expense_mileage_scale_action" model="ir.actions.act_window">
+        <field name="name">Mileage scales</field>
+        <field name="res_model">expense.mileage.scale</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_group_vehicle': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Add the mileage scale of a vehicle</p>
+            <p>An employee with a vehicle is paid by the scale of the year, from the cumulated distance.
+               Rates, brackets and vehicles are yours to adjust for your country.</p>
+        </field>
+    </record>
+
+    <record id="expense_mileage_vehicle_view_list" model="ir.ui.view">
+        <field name="name">expense.mileage.vehicle.list</field>
+        <field name="model">expense.mileage.vehicle</field>
+        <field name="arch" type="xml">
+            <list string="Vehicles" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="electric"/>
+                <field name="power_from"/>
+                <field name="power_to"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="expense_mileage_vehicle_action" model="ir.actions.act_window">
+        <field name="name">Vehicle categories (mileage scale)</field>
+        <field name="res_model">expense.mileage.vehicle</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <menuitem id="menu_expense_mileage_scale" name="Mileage scales"
+              parent="hr_expense.menu_hr_expense_configuration"
+              action="expense_mileage_scale_action" sequence="62"
+              groups="hr_expense.group_hr_expense_manager"/>
+    <menuitem id="menu_expense_mileage_vehicle" name="Vehicle categories (mileage scale)"
+              parent="hr_expense.menu_hr_expense_configuration"
+              action="expense_mileage_vehicle_action" sequence="63"
+              groups="hr_expense.group_hr_expense_manager"/>
+
+</odoo>

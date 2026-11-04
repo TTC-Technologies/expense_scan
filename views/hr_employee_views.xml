@@ -3,7 +3,7 @@
      License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0). -->
 <odoo>
 
-    <!-- Mileage rate, after the expense approver. HR only, like the field. -->
+    <!-- Mileage rate, after the expense approver, and the personal vehicles. HR only, like the fields. -->
     <record id="hr_employee_view_form_expense_scan" model="ir.ui.view">
         <field name="name">hr.employee.form.expense.scan</field>
         <field name="model">hr.employee</field>
@@ -12,7 +12,80 @@
             <xpath expr="//field[@name='expense_manager_id']" position="after">
                 <field name="expense_mileage_rate" groups="hr.group_hr_user"/>
             </xpath>
+            <xpath expr="//field[@name='expense_manager_id']/ancestor::group[1]" position="after">
+                <group string="Personal vehicles" groups="hr.group_hr_user" colspan="2">
+                    <field name="expense_vehicle_ids" nolabel="1" colspan="2">
+                        <list>
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                            <field name="plate"/>
+                            <field name="fiscal_power"/>
+                            <field name="electric"/>
+                            <field name="scale_vehicle_id"/>
+                            <field name="registration_file" widget="binary" filename="registration_filename"/>
+                            <field name="registration_filename" column_invisible="1"/>
+                        </list>
+                    </field>
+                </group>
+            </xpath>
         </field>
     </record>
+
+    <record id="expense_employee_vehicle_view_form" model="ir.ui.view">
+        <field name="name">expense.employee.vehicle.form</field>
+        <field name="model">expense.employee.vehicle</field>
+        <field name="arch" type="xml">
+            <form string="Personal vehicle">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id" readonly="id"/>
+                            <field name="name"/>
+                            <field name="plate"/>
+                        </group>
+                        <group>
+                            <field name="fiscal_power"/>
+                            <field name="electric"/>
+                            <field name="scale_vehicle_id"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <group string="Registration certificate">
+                        <field name="registration_file" widget="binary" filename="registration_filename"/>
+                        <field name="registration_filename" invisible="1"/>
+                    </group>
+                    <group string="Distance already driven this year">
+                        <field name="start_km"/>
+                        <field name="start_year" options="{'format': 0}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="expense_employee_vehicle_view_list" model="ir.ui.view">
+        <field name="name">expense.employee.vehicle.list</field>
+        <field name="model">expense.employee.vehicle</field>
+        <field name="arch" type="xml">
+            <list string="Personal vehicles">
+                <field name="employee_id"/>
+                <field name="name"/>
+                <field name="plate"/>
+                <field name="fiscal_power"/>
+                <field name="scale_vehicle_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="expense_employee_vehicle_action" model="ir.actions.act_window">
+        <field name="name">Personal vehicles</field>
+        <field name="res_model">expense.employee.vehicle</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_expense_employee_vehicle" name="Personal vehicles"
+              parent="hr_expense.menu_hr_expense_configuration"
+              action="expense_employee_vehicle_action" sequence="64"
+              groups="hr_expense.group_hr_expense_manager"/>
 
 </odoo>

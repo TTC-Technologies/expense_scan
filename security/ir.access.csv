@@ -23,3 +23,13 @@ access_expense_scan_place_user,Places: homes are private,expense.scan.place,base
 access_expense_scan_place_manager,Places: expense managers,expense.scan.place,hr_expense.group_hr_expense_manager,crud,"['|', ('employee_id', '=', False), ('employee_id.user_id', '=', user.id)]"
 access_expense_scan_place_hr,Places: all for HR,expense.scan.place,hr.group_hr_user,r,
 expense_scan_place_company_rule,Places: multi-company,expense.scan.place,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_expense_mileage_vehicle_user,Mileage vehicle types: read,expense.mileage.vehicle,base.group_user,r,
+access_expense_mileage_vehicle_manager,Mileage vehicle types: expense managers,expense.mileage.vehicle,hr_expense.group_hr_expense_manager,crud,
+access_expense_mileage_scale_user,Mileage scales: read,expense.mileage.scale,base.group_user,r,
+access_expense_mileage_scale_manager,Mileage scales: expense managers,expense.mileage.scale,hr_expense.group_hr_expense_manager,crud,
+access_expense_mileage_scale_line_user,Mileage scale lines: read,expense.mileage.scale.line,base.group_user,r,
+access_expense_mileage_scale_line_manager,Mileage scale lines: expense managers,expense.mileage.scale.line,hr_expense.group_hr_expense_manager,crud,
+access_expense_employee_vehicle_user,Personal vehicles: one's own and those followed,expense.employee.vehicle,base.group_user,crud,"['|', '|', ('employee_id.user_id', '=', user.id), ('employee_id.expense_manager_id', '=', user.id), ('employee_id.parent_id.user_id', '=', user.id)]"
+access_expense_employee_vehicle_manager,Personal vehicles: all for managers,expense.employee.vehicle,hr_expense.group_hr_expense_manager,crud,
+access_expense_employee_vehicle_hr,Personal vehicles: all for HR,expense.employee.vehicle,hr.group_hr_user,crud,
+expense_employee_vehicle_company_rule,Personal vehicles: multi-company,expense.employee.vehicle,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"

@@ -226,3 +226,41 @@ class TestRpcAccess(common.TransactionCase):
     def test_only_accountants_reimburse(self):
         with self.assertRaises(AccessError):
             self.expense.with_user(self.users[0]).action_expense_scan_pay()
+
+
+@tagged('post_install', '-at_install')
+class TestSearchMonths(common.TransactionCase):
+
+    def date_filter(self):
+        from lxml import etree
+        arch = self.env['hr.expense'].get_views([(False, 'search')])['views']['search']['arch']
+        return etree.fromstring(arch).xpath("//filter[@name='date']")[0]
+
+    def test_the_expense_date_lists_twelve_months(self):
+        node = self.date_filter()
+        self.assertEqual((node.get('start_month'), node.get('end_month')), ('-11', '0'))
+        self.assertEqual((node.get('start_year'), node.get('end_year')), ('0', '0'))
+
+    def test_the_trimmed_search_view_keeps_the_months(self):
+        """Settings "tidy filters" on: the date filter still lists its months."""
+        self.env['res.config.settings'].create({'expense_scan_tidy_filters': True}).execute()
+        node = self.date_filter()
+        self.assertEqual((node.get('start_month'), node.get('end_month')), ('-11', '0'))
+
+    def test_the_migration_cleans_a_trimmed_view_made_before(self):
+        import importlib.util
+        import os
+        path = os.path.join(os.path.dirname(__file__), '..', 'migrations', '3.5.1', 'post-migrate.py')
+        spec = importlib.util.spec_from_file_location('expense_scan_migration_351', path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        arch = """<data><xpath expr="//filter[@name='by_company']" position="replace"/>
+                <!-- The months are the two filters above: the expense date no
+                     longer lists them. -->
+                <xpath expr="//filter[@name='date']" position="attributes">
+                    <attribute name="start_month">0</attribute>
+                    <attribute name="end_month">-1</attribute>
+                </xpath></data>"""
+        cleaned = module.clean(arch)
+        self.assertNotIn('start_month', cleaned)
+        self.assertIn('by_company', cleaned)

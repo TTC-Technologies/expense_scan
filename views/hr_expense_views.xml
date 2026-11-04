@@ -125,6 +125,13 @@
                        context="{'default_company_id': company_id}" options="{'no_open': True}"/>
                 <field name="expense_scan_round_trip" invisible="not expense_scan_mileage"
                        readonly="not is_editable" widget="boolean_toggle"/>
+                <field name="expense_has_vehicles" invisible="1"/>
+                <field name="expense_company_vehicle" invisible="not expense_scan_mileage or not expense_has_vehicles"
+                       readonly="not is_editable" widget="boolean_toggle"/>
+                <field name="expense_vehicle_id"
+                       invisible="not expense_scan_mileage or not expense_has_vehicles or expense_company_vehicle"
+                       readonly="not is_editable" options="{'no_create': True, 'no_open': True}"
+                       placeholder="Your vehicle"/>
                 <field name="expense_scan_route_km" invisible="1" force_save="1"/>
                 <field name="expense_scan_route_minutes" invisible="1" force_save="1"/>
                 <field name="expense_scan_route_estimated" invisible="1" force_save="1"/>

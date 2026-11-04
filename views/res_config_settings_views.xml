@@ -89,6 +89,15 @@
                                    placeholder="auto, an address of tiles, or empty: plain background"/>
                         </div>
                         <div>
+                            <button name="%(expense_scan.expense_mileage_scale_action)d"
+                                    type="action" string="Mileage scale"
+                                    class="btn-link ps-0" icon="oi-arrow-right"/>
+                        </div>
+                        <div class="text-muted small ps-4">
+                            Employees with a vehicle (set on their record) are paid by the scale of the year,
+                            from the cumulated distance.
+                        </div>
+                        <div>
                             <button name="%(expense_scan.expense_scan_place_action)d"
                                     type="action" string="Places"
                                     class="btn-link ps-0" icon="oi-arrow-right"/>

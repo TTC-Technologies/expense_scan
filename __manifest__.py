@@ -3,7 +3,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
 {
     'name': "Expense Receipt Scanner",
-    'version': '20.0.3.4.8',
+    'version': '20.0.3.5.1',
     # The store search reads only the name and the summary, as exact phrases: they carry the
     # words people type (expense OCR, receipt OCR, expense scanner, scan receipts, local OCR, AI expense,
     # AI receipt, OCR expense, expense automation, mileage expense).
@@ -65,8 +65,10 @@ Free module, LGPL-3.
         'data/expense_scan_cron.xml',
         'data/mail_activity_types.xml',
         'data/menu_icon.xml',
+        'data/expense_mileage_scale.xml',
         'views/hr_expense_views.xml',
         'views/hr_employee_views.xml',
+        'views/expense_mileage_scale_views.xml',
         'views/expense_team_views.xml',
         'views/expense_batch_actions.xml',
         'views/expense_sheet_views.xml',

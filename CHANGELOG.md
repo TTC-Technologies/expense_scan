@@ -1,5 +1,31 @@
 # Changelog
 
+## 20.0.3.5.1 — 2026-11-04
+
+- Search of the expenses: the expense date lists the last twelve months (month by month, as the expenses are followed),
+  without the quarters and the years; another period is a custom filter. The trimmed search view of the settings no
+  longer empties the months (updated where it was made).
+
+## 20.0.3.5.0 — 2026-11-04
+
+- Mileage scales by yearly distance, applied cumulatively, for any country. An employee who drives their own vehicle (one or
+  several personal vehicles on the employee record: name, registration number, fiscal power, electric or not, registration
+  certificate; the one of the trip is chosen on the mileage expense, the usual one by default) is paid by the scale of the
+  category of the vehicle: each mileage expense is worth the scale of the
+  year after the trip, less the scale before it. The thresholds and the fixed part of a bracket need no thought: the trip
+  that crosses a threshold carries the rates of both sides, and the cumulated allowance of the year is always the scale of
+  the cumulated distance, to the cent. Two methods: "yearly formula" (France: distance x rate + fixed part of the bracket
+  the yearly distance falls in) and "each kilometre at the rate of its bracket" (United Kingdom and most others).
+- The scales are tables to adjust: vehicle categories (Expenses, Configuration; a personal vehicle takes its category from
+  its fiscal power and fuel), and for each vehicle a scale per year with its
+  brackets (distance from, rate, fixed part). "Copy to next year" prepares the update, whose rates are then edited by hand.
+  An update of the module never rewrites them. To start with, a company gets the scales of its country when it has none:
+  France 2026 (thermal and electric, 5 powers) and the United Kingdom (HMRC); elsewhere the tables are empty, to fill in.
+- Each vehicle has its own cumulated distance; the distance driven before the first expense of Odoo is entered on the
+  vehicle for the year. A trip ticked "Company vehicle" keeps the single rate of the employee or the category cost. An earlier trip, a change
+  of distance or a deletion moves the later draft expenses of the year. Employees without a vehicle keep their single
+  rate, or the category cost.
+
 ## 20.0.3.4.8 — 2026-11-04
 
 - A photo of several receipts: each receipt laid on the table is found, cut out and straightened, then read; those that
