@@ -65,4 +65,24 @@
         <field name="domain_force">[(1, '=', 1)]</field>
         <field name="groups" eval="[(4, ref('hr.group_hr_user'))]"/>
     </record>
+    <!-- Personal vehicles and their registration certificates: the employee's own, those of the people an
+         approver follows; every one for HR users and expense managers. -->
+    <record id="expense_employee_vehicle_company_rule" model="ir.rule">
+        <field name="name">Personal vehicles: multi-company</field>
+        <field name="model_id" ref="model_expense_employee_vehicle"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="expense_employee_vehicle_own_rule" model="ir.rule">
+        <field name="name">Personal vehicles: one's own and those followed</field>
+        <field name="model_id" ref="model_expense_employee_vehicle"/>
+        <field name="domain_force">['|', '|', ('employee_id.user_id', '=', user.id),
+            ('employee_id.expense_manager_id', '=', user.id), ('employee_id.parent_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+    <record id="expense_employee_vehicle_manager_rule" model="ir.rule">
+        <field name="name">Personal vehicles: all for managers</field>
+        <field name="model_id" ref="model_expense_employee_vehicle"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('hr_expense.group_hr_expense_manager')), (4, ref('hr.group_hr_user'))]"/>
+    </record>
 </odoo>

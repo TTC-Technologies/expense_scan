@@ -30,12 +30,20 @@ class TestExpenseMileageScale(common.TransactionCase):
         cls.mileage.standard_price = 1.0
         cls.company = cls.env.company
         Vehicle = cls.env['expense.mileage.vehicle']
-        cls.thermal = Vehicle.create({'name': "Test 4 CV", 'company_id': cls.company.id})
-        cls.electric = Vehicle.create({'name': "Test 4 CV (electric)", 'company_id': cls.company.id})
+        cls.thermal = Vehicle.create({'name': "Test 4 CV", 'company_id': cls.company.id,
+                                      'power_from': 4, 'power_to': 4})
+        cls.electric = Vehicle.create({'name': "Test 4 CV (electric)", 'company_id': cls.company.id,
+                                       'electric': True, 'power_from': 4, 'power_to': 4})
         cls.make_scale(cls.thermal, 2031, 'formula', THERMAL)
         cls.make_scale(cls.electric, 2031, 'formula', ELECTRIC)
-        cls.employee = cls.env['hr.employee'].create({
-            'name': "Camille Barème", 'expense_vehicle_id': cls.electric.id, 'expense_mileage_rate': 0.5})
+        cls.employee = cls.env['hr.employee'].create({'name': "Camille Barème", 'expense_mileage_rate': 0.5})
+        cls.zoe = cls.make_vehicle(cls.employee, "Zoe", cls.electric, 4, True)
+
+    @classmethod
+    def make_vehicle(cls, employee, name, category, power, electric=False, **values):
+        return cls.env['expense.employee.vehicle'].create(dict({
+            'name': name, 'employee_id': employee.id, 'fiscal_power': power, 'electric': electric,
+            'scale_vehicle_id': category.id}, **values))
 
     @classmethod
     def make_scale(cls, vehicle, year, method, brackets):
@@ -44,10 +52,10 @@ class TestExpenseMileageScale(common.TransactionCase):
             'line_ids': [(0, 0, {'distance_from': start, 'rate': rate, 'fixed': fixed})
                          for start, rate, fixed in brackets]})
 
-    def trip(self, km, date='2031-03-10', employee=None):
-        return self.env['hr.expense'].create({
+    def trip(self, km, date='2031-03-10', employee=None, **values):
+        return self.env['hr.expense'].create(dict({
             'name': "Déplacement", 'employee_id': (employee or self.employee).id,
-            'product_id': self.mileage.id, 'quantity': km, 'date': date})
+            'product_id': self.mileage.id, 'quantity': km, 'date': date}, **values))
 
     # -- the scales ---------------------------------------------------------------------------
 
@@ -64,7 +72,8 @@ class TestExpenseMileageScale(common.TransactionCase):
         self.assertAlmostEqual(scale.amount(8000), 8000 * 0.45, places=2)
         self.assertAlmostEqual(scale.amount(12000), 10000 * 0.45 + 2000 * 0.25, places=2)
         # A trip across the threshold is paid at both rates.
-        worker = self.env['hr.employee'].create({'name': "Alex UK", 'expense_vehicle_id': pound.id})
+        worker = self.env['hr.employee'].create({'name': "Alex UK"})
+        self.make_vehicle(worker, "Focus", pound, 0)
         self.trip(9000, '2031-02-01', worker)
         second = self.trip(2000, '2031-03-01', worker)
         self.assertAlmostEqual(second.total_amount_currency, 1000 * 0.45 + 1000 * 0.25, places=2)
@@ -93,7 +102,11 @@ class TestExpenseMileageScale(common.TransactionCase):
         self.env['expense.mileage.scale']._expense_scan_scale_init()
         vehicles = france.expense_mileage_vehicle_ids
         self.assertEqual(len(vehicles), 10)
-        electric = vehicles.filtered(lambda v: '4 CV' in v.name and 'electric' in v.name)
+        electric = self.env['expense.mileage.vehicle']._category_for(france, 4, True)
+        self.assertIn('4 CV', electric.name)
+        self.assertTrue(electric.electric)
+        self.assertEqual(self.env['expense.mileage.vehicle']._category_for(france, 9, False).power_from, 7)
+        self.assertEqual(self.env['expense.mileage.vehicle']._category_for(france, 2, False).power_to, 3)
         scale = self.env['expense.mileage.scale']._scale_for(electric, fields_year())
         self.assertEqual(scale.method, 'formula')
         self.assertEqual(sorted(scale.line_ids.mapped('rate')), [0.408, 0.488, 0.727])
@@ -121,16 +134,51 @@ class TestExpenseMileageScale(common.TransactionCase):
         self.assertAlmostEqual(self.trip(100, '2031-03-01').total_amount_currency, 100 * 0.408, places=2)
 
     def test_the_starting_distance_counts(self):
-        self.employee.write({'expense_mileage_start_km': 6000.0, 'expense_mileage_start_year': 2031})
+        self.zoe.write({'start_km': 6000.0, 'start_year': 2031})
         self.assertAlmostEqual(self.trip(100).total_amount_currency, 100 * 0.408, places=2)
         # Another year starts again from zero.
         self.assertAlmostEqual(self.trip(100, '2032-03-10').total_amount_currency, 100 * 0.727, places=2)
 
     def test_a_thermal_vehicle_has_the_thermal_scale(self):
-        self.employee.expense_vehicle_id = self.thermal
+        self.zoe.write({'scale_vehicle_id': self.thermal.id})
         self.assertAlmostEqual(self.trip(1000).total_amount_currency, 1000 * 0.606, places=2)
         self.assertAlmostEqual(self.trip(5000, '2031-04-01').total_amount_currency,
                                formula(THERMAL, 6000) - formula(THERMAL, 1000), places=2)
+
+    def test_the_category_follows_the_power_and_the_fuel(self):
+        vehicle = self.env['expense.employee.vehicle'].create({
+            'name': "Golf", 'employee_id': self.employee.id, 'fiscal_power': 4, 'electric': False})
+        self.assertTrue(vehicle.scale_vehicle_id.power_from <= 4)
+        self.assertFalse(vehicle.scale_vehicle_id.electric)
+        vehicle.electric = True
+        self.assertTrue(vehicle.scale_vehicle_id.electric)
+
+    def test_the_trip_takes_the_usual_vehicle_and_keeps_the_choice(self):
+        expense = self.trip(100)
+        self.assertEqual(expense.expense_vehicle_id, self.zoe)
+        golf = self.make_vehicle(self.employee, "Golf", self.thermal, 4)
+        other = self.trip(100, '2031-03-12', expense_vehicle_id=golf.id)
+        self.assertEqual(other.expense_vehicle_id, golf)
+        self.assertAlmostEqual(other.total_amount_currency, 100 * 0.606, places=2)
+
+    def test_each_vehicle_has_its_own_cumulated_distance(self):
+        golf = self.make_vehicle(self.employee, "Golf", self.thermal, 4)
+        self.trip(6000, '2031-02-01')
+        # The first kilometres of another vehicle are paid at its first rate.
+        other = self.trip(100, '2031-03-12', expense_vehicle_id=golf.id)
+        self.assertAlmostEqual(other.total_amount_currency, 100 * 0.606, places=2)
+
+    def test_a_company_vehicle_keeps_the_single_rate(self):
+        expense = self.trip(1000, expense_company_vehicle=True)
+        self.assertFalse(expense.expense_vehicle_id)
+        self.assertAlmostEqual(expense.price_unit, 0.5)
+        # And it does not count in the distance of the personal vehicle.
+        self.assertAlmostEqual(self.trip(100, '2031-04-01').total_amount_currency, 100 * 0.727, places=2)
+
+    def test_the_registration_certificate_is_kept(self):
+        import base64
+        self.zoe.write({'registration_file': base64.b64encode(b"carte grise"), 'registration_filename': "carte_grise.pdf"})
+        self.assertEqual(base64.b64decode(self.zoe.registration_file), b"carte grise")
 
     def test_an_earlier_trip_changes_the_later_draft_ones(self):
         later = self.trip(1000, '2031-06-01')
