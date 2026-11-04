@@ -181,6 +181,16 @@ class TestExpenseMileageScale(common.TransactionCase):
         # And it does not count in the distance of the personal vehicle.
         self.assertAlmostEqual(self.trip(100, '2031-04-01').total_amount_currency, 100 * 0.727, places=2)
 
+    def test_switching_an_existing_trip_to_a_company_vehicle_restores_the_single_rate(self):
+        first = self.trip(6000, '2031-02-01')
+        later = self.trip(1000, '2031-03-01')
+        self.assertAlmostEqual(later.price_unit, 0.408, places=3)
+        first.expense_company_vehicle = True
+        self.assertAlmostEqual(first.price_unit, 0.5)
+        self.assertFalse(first.expense_vehicle_id)
+        # Its 6000 km leave the cumulated distance of the vehicle: the later trip starts again at the first rate.
+        self.assertAlmostEqual(later.price_unit, 0.727, places=3)
+
     def test_the_registration_certificate_is_kept(self):
         import base64
         self.zoe.write({'registration_file': base64.b64encode(b"carte grise"), 'registration_filename': "carte_grise.pdf"})

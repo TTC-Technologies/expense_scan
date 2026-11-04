@@ -1,5 +1,11 @@
 # Changelog
 
+## 19.0.3.5.2 — 2026-11-04
+
+- Mileage scales: switching an existing expense to a company vehicle pays it at the single rate again and removes
+  it from the cumulated distance of the personal vehicle (the later trips of that vehicle are priced again); the
+  same when a trip changes vehicle or date.
+
 ## 19.0.3.5.1 — 2026-11-04
 
 - Search of the expenses: the expense date lists the last twelve months (month by month, as the expenses are followed),

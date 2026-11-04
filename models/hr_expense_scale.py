@@ -383,6 +383,9 @@ class HrExpense(models.Model):
         for expense in self:
             if expense.state == 'draft' and expense.product_id:
                 price = expense._expense_scan_scale_price_unit()
+                if price is None and expense.expense_company_vehicle and expense._expense_scan_is_distance():
+                    # A company vehicle is paid at the single rate, not at a scale.
+                    price = expense._expense_scan_default_unit_price()
                 if price is not None:
                     expense.price_unit = price
 
@@ -393,10 +396,24 @@ class HrExpense(models.Model):
         return expenses
 
     def write(self, vals):
+        scale_keys = {'quantity', 'date', 'employee_id', 'product_id', 'state', 'expense_vehicle_id',
+                      'expense_company_vehicle'} & set(vals)
+        # The later trips of the vehicle the expense leaves (another vehicle, a company vehicle, another date).
+        left = self.browse()
+        if scale_keys:
+            for expense in self:
+                left |= expense._expense_scan_later_scale_expenses()
         result = super().write(vals)
-        if {'quantity', 'date', 'employee_id', 'product_id', 'state', 'expense_vehicle_id',
-                'expense_company_vehicle'} & set(vals):
+        if scale_keys:
+            if vals.get('expense_company_vehicle'):
+                for expense in self.filtered(lambda e: e.state == 'draft' and e._expense_scan_is_distance()):
+                    if expense.expense_vehicle_id:
+                        expense.expense_vehicle_id = False
+                    price = expense._expense_scan_default_unit_price()
+                    if price is not None and abs(price - expense.price_unit) > 1e-9:
+                        expense.price_unit = price
             self._expense_scan_apply_scale()
+            (left.exists() - self)._expense_scan_apply_scale()
         return result
 
     def unlink(self):
