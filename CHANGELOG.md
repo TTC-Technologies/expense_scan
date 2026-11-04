@@ -2,14 +2,19 @@
 
 ## 19.0.3.5.0 — 2026-11-04
 
-- Mileage scale by yearly distance, applied cumulatively. An employee with a vehicle (fiscal horsepower, electric or not,
-  on the employee record) is paid by the scale of the year: each mileage expense is worth the scale of the year after the
-  trip, less the scale before it. The thresholds (5 000 and 20 000 km) and the fixed part of the second bracket need no
-  thought: the trip that crosses 5 000 km carries the rates of both sides, and the cumulated allowance of the year is always
-  the scale of the cumulated distance, to the cent. An electric vehicle has its own scale (the official one). The kilometres driven before the first expense of Odoo are entered on the employee for the year.
-  The scale (Settings, Mileage by route, "Mileage scale") is a table per year and power; the values to start with are those
-  of the French scale for cars in 2026 (thermal and electric). An earlier trip, a change of distance or a deletion
-  moves the later draft expenses of the year. Employees without a vehicle keep their single rate, or the category cost.
+- Mileage scales by yearly distance, applied cumulatively, for any country. An employee with a vehicle (a vehicle of the
+  company, set on the employee record) is paid by the scale of the year: each mileage expense is worth the scale of the
+  year after the trip, less the scale before it. The thresholds and the fixed part of a bracket need no thought: the trip
+  that crosses a threshold carries the rates of both sides, and the cumulated allowance of the year is always the scale of
+  the cumulated distance, to the cent. Two methods: "yearly formula" (France: distance x rate + fixed part of the bracket
+  the yearly distance falls in) and "each kilometre at the rate of its bracket" (United Kingdom and most others).
+- The scales are tables to adjust: vehicles (Expenses, Configuration), and for each vehicle a scale per year with its
+  brackets (distance from, rate, fixed part). "Copy to next year" prepares the update, whose rates are then edited by hand.
+  An update of the module never rewrites them. To start with, a company gets the scales of its country when it has none:
+  France 2026 (thermal and electric, 5 powers) and the United Kingdom (HMRC); elsewhere the tables are empty, to fill in.
+- The distance driven before the first expense of Odoo is entered on the employee for the year. An earlier trip, a change
+  of distance or a deletion moves the later draft expenses of the year. Employees without a vehicle keep their single
+  rate, or the category cost.
 
 ## 19.0.3.4.8 — 2026-11-04
 

@@ -328,13 +328,14 @@ receipts of these countries and of their neighbours:
   for instance), tick *Flat rate without VAT* on the category.
 - **Mileage**: each employee can have their own rate per kilometre or mile,
   to follow the official scale of your country.
-- **Mileage scale by yearly distance**: give an employee a vehicle (fiscal horsepower,
-  electric or not) and each mileage expense is paid by the scale of the year, applied
-  cumulatively: the scale of the distance after the trip, less the scale before it. The
-  thresholds and the fixed part of the middle bracket are handled by the arithmetic, and
-  the allowance of the year is always the scale of the year's distance. The scale is a
-  table per year and horsepower, thermal or electric, in the settings (the French scale
-  for cars in 2026 to start with).
+- **Mileage scales by yearly distance**, for any country: give an employee a vehicle and each
+  mileage expense is paid by the scale of the year, applied cumulatively: the scale of the
+  distance after the trip, less the scale before it. The thresholds and the fixed part of a
+  bracket are handled by the arithmetic, and the allowance of the year is always the scale
+  of the year's distance. Two methods, "yearly formula" (France) and "each kilometre at the
+  rate of its bracket" (United Kingdom and most others). Vehicles, scales and brackets are
+  tables you adjust, with "Copy to next year" for the update; France 2026 and the United
+  Kingdom come to start with.
 
 ---
 

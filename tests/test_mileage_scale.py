@@ -1,21 +1,23 @@
 # -*- coding: utf-8 -*-
 # Copyright 2026 T.T.C. SAS
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
-"""Mileage scale by yearly distance, cumulated: the allowance of a year is the scale of its distance."""
+"""Mileage scales by yearly distance, cumulated: the allowance of a year is the scale of its distance."""
+from odoo.exceptions import ValidationError
 from odoo.tests import Form, common, tagged
 
-#: 4 CV, 2026 scale: thermal, then 100 % electric (rate to 5 000 km, rate and fixed part to 20 000 km, rate beyond).
-THERMAL = (0.606, 0.340, 1330.0, 0.407)
-ELECTRIC = (0.727, 0.408, 1596.0, 0.488)
+#: 4 CV, 2026 French scale: (distance from, rate, fixed part) thermal, then 100 % electric.
+THERMAL = [(0, 0.606, 0.0), (5000, 0.340, 1330.0), (20000, 0.407, 0.0)]
+ELECTRIC = [(0, 0.727, 0.0), (5000, 0.408, 1596.0), (20000, 0.488, 0.0)]
+#: HMRC: 45 p up to 10 000 miles, 25 p beyond.
+BRITISH = [(0, 0.45, 0.0), (10000, 0.25, 0.0)]
 
 
-def scale_of(figures, distance):
-    r1, r2, fixed, r3 = figures
-    if distance <= 5000:
-        return distance * r1
-    if distance <= 20000:
-        return distance * r2 + fixed
-    return distance * r3
+def formula(brackets, distance):
+    line = brackets[0]
+    for candidate in brackets:
+        if candidate[0] < distance:
+            line = candidate
+    return distance * line[1] + line[2]
 
 
 @tagged('post_install', '-at_install')
@@ -27,76 +29,115 @@ class TestExpenseMileageScale(common.TransactionCase):
         cls.mileage = cls.env.ref('hr_expense.expense_product_mileage')
         cls.mileage.standard_price = 1.0
         cls.company = cls.env.company
-        # Scales of our own for a year no other test uses.
-        Scale = cls.env['expense.mileage.scale']
-        Scale.search([('company_id', '=', cls.company.id), ('year', '=', 2031)]).unlink()
-        for electric, figures in ((False, THERMAL), (True, ELECTRIC)):
-            Scale.create({'company_id': cls.company.id, 'year': 2031, 'hp': '4', 'electric': electric,
-                          'rate_1': figures[0], 'rate_2': figures[1], 'fixed_2': figures[2], 'rate_3': figures[3]})
+        Vehicle = cls.env['expense.mileage.vehicle']
+        cls.thermal = Vehicle.create({'name': "Test 4 CV", 'company_id': cls.company.id})
+        cls.electric = Vehicle.create({'name': "Test 4 CV (electric)", 'company_id': cls.company.id})
+        cls.make_scale(cls.thermal, 2031, 'formula', THERMAL)
+        cls.make_scale(cls.electric, 2031, 'formula', ELECTRIC)
         cls.employee = cls.env['hr.employee'].create({
-            'name': "Camille Barème", 'expense_vehicle_hp': '4', 'expense_vehicle_electric': True,
-            'expense_mileage_rate': 0.5})
+            'name': "Camille Barème", 'expense_vehicle_id': cls.electric.id, 'expense_mileage_rate': 0.5})
+
+    @classmethod
+    def make_scale(cls, vehicle, year, method, brackets):
+        return cls.env['expense.mileage.scale'].create({
+            'vehicle_id': vehicle.id, 'year': year, 'method': method,
+            'line_ids': [(0, 0, {'distance_from': start, 'rate': rate, 'fixed': fixed})
+                         for start, rate, fixed in brackets]})
 
     def trip(self, km, date='2031-03-10', employee=None):
         return self.env['hr.expense'].create({
             'name': "Déplacement", 'employee_id': (employee or self.employee).id,
             'product_id': self.mileage.id, 'quantity': km, 'date': date})
 
-    def test_the_default_scales_are_the_official_ones(self):
-        """The scales of the year: thermal and electric, five powers each (4 CV electric: the figures of 2026)."""
-        scale = self.env['expense.mileage.scale']._scale_for(self.company, 2026, '4', True)
-        self.assertEqual((scale.rate_1, scale.rate_2, scale.fixed_2, scale.rate_3), ELECTRIC)
-        thermal = self.env['expense.mileage.scale']._scale_for(self.company, 2026, '7', False)
-        self.assertEqual((thermal.rate_1, thermal.fixed_2), (0.697, 1515.0))
-        self.assertEqual(self.env['expense.mileage.scale'].search_count([
-            ('company_id', '=', self.company.id), ('year', '=', 2026)]), 10)
+    # -- the scales ---------------------------------------------------------------------------
 
-    def test_the_scale_formula(self):
-        scale = self.env['expense.mileage.scale']._scale_for(self.company, 2031, '4', True)
+    def test_the_formula_scale(self):
+        scale = self.env['expense.mileage.scale']._scale_for(self.electric, 2031)
         self.assertAlmostEqual(scale.amount(1000), 727.0, places=2)
+        self.assertAlmostEqual(scale.amount(5000), 5000 * 0.727, places=2)
         self.assertAlmostEqual(scale.amount(6000), 6000 * 0.408 + 1596, places=2)
         self.assertAlmostEqual(scale.amount(25000), 25000 * 0.488, places=2)
 
+    def test_the_marginal_scale_of_another_country(self):
+        pound = self.env['expense.mileage.vehicle'].create({'name': "Test car or van", 'company_id': self.company.id})
+        scale = self.make_scale(pound, 2031, 'marginal', BRITISH)
+        self.assertAlmostEqual(scale.amount(8000), 8000 * 0.45, places=2)
+        self.assertAlmostEqual(scale.amount(12000), 10000 * 0.45 + 2000 * 0.25, places=2)
+        # A trip across the threshold is paid at both rates.
+        worker = self.env['hr.employee'].create({'name': "Alex UK", 'expense_vehicle_id': pound.id})
+        self.trip(9000, '2031-02-01', worker)
+        second = self.trip(2000, '2031-03-01', worker)
+        self.assertAlmostEqual(second.total_amount_currency, 1000 * 0.45 + 1000 * 0.25, places=2)
+
+    def test_the_scale_of_the_latest_year_not_after_applies(self):
+        scale = self.env['expense.mileage.scale']
+        self.assertEqual(scale._scale_for(self.electric, 2033).year, 2031)
+        self.assertFalse(scale._scale_for(self.electric, 2030))
+
+    def test_a_scale_is_copied_to_next_year_then_adjusted(self):
+        scale = self.env['expense.mileage.scale']._scale_for(self.electric, 2031)
+        scale.action_copy_next_year()
+        copy = self.env['expense.mileage.scale']._scale_for(self.electric, 2032)
+        self.assertEqual(copy.year, 2032)
+        self.assertEqual(len(copy.line_ids), 3)
+        copy.line_ids.filtered(lambda line: line.distance_from == 0).rate = 0.75
+        self.assertAlmostEqual(self.trip(100, '2032-03-01').total_amount_currency, 75.0, places=2)
+        # The year before keeps its rates.
+        self.assertAlmostEqual(self.trip(100, '2031-03-01').total_amount_currency, 72.7, places=2)
+        with self.assertRaises(ValidationError):
+            scale.action_copy_next_year()
+
+    def test_the_scales_to_start_with_follow_the_country(self):
+        france = self.env['res.company'].create({
+            'name': "Société FR test", 'country_id': self.env.ref('base.fr').id})
+        self.env['expense.mileage.scale']._expense_scan_scale_init()
+        vehicles = france.expense_mileage_vehicle_ids
+        self.assertEqual(len(vehicles), 10)
+        electric = vehicles.filtered(lambda v: '4 CV' in v.name and 'electric' in v.name)
+        scale = self.env['expense.mileage.scale']._scale_for(electric, fields_year())
+        self.assertEqual(scale.method, 'formula')
+        self.assertEqual(sorted(scale.line_ids.mapped('rate')), [0.408, 0.488, 0.727])
+        # An update leaves what the administrator changed.
+        scale.line_ids.filtered(lambda line: line.distance_from == 0).rate = 0.8
+        self.env['expense.mileage.scale']._expense_scan_scale_init()
+        self.assertIn(0.8, scale.line_ids.mapped('rate'))
+        self.assertEqual(len(france.expense_mileage_vehicle_ids), 10)
+
+    # -- the expenses -------------------------------------------------------------------------
+
     def test_a_first_trip_is_paid_at_the_first_rate(self):
-        expense = self.trip(1000)
-        self.assertAlmostEqual(expense.total_amount_currency, 1000 * 0.727, places=2)
+        self.assertAlmostEqual(self.trip(1000).total_amount_currency, 1000 * 0.727, places=2)
 
     def test_the_trip_that_crosses_5000_km_carries_both_rates(self):
         first = self.trip(4000, '2031-03-10')
         second = self.trip(2000, '2031-03-20')
-        # The scale of 6 000 km less that of 4 000.
-        expected = scale_of(ELECTRIC, 6000) - scale_of(ELECTRIC, 4000)
-        self.assertAlmostEqual(second.total_amount_currency, expected, places=2)
+        self.assertAlmostEqual(second.total_amount_currency, formula(ELECTRIC, 6000) - formula(ELECTRIC, 4000), places=2)
         # The allowance of the year is the scale of the cumulated distance, to the cent.
         total = first.total_amount_currency + second.total_amount_currency
-        self.assertAlmostEqual(total, scale_of(ELECTRIC, 6000), delta=0.02)
+        self.assertAlmostEqual(total, formula(ELECTRIC, 6000), delta=0.02)
 
     def test_beyond_5000_km_the_rate_is_the_second_one_without_the_fixed_part_again(self):
         self.trip(6000, '2031-02-01')
-        third = self.trip(100, '2031-03-01')
-        self.assertAlmostEqual(third.total_amount_currency, 100 * 0.408, places=2)
+        self.assertAlmostEqual(self.trip(100, '2031-03-01').total_amount_currency, 100 * 0.408, places=2)
 
-    def test_the_starting_kilometres_count(self):
+    def test_the_starting_distance_counts(self):
         self.employee.write({'expense_mileage_start_km': 6000.0, 'expense_mileage_start_year': 2031})
-        expense = self.trip(100)
-        self.assertAlmostEqual(expense.total_amount_currency, 100 * 0.408, places=2)
+        self.assertAlmostEqual(self.trip(100).total_amount_currency, 100 * 0.408, places=2)
         # Another year starts again from zero.
-        other = self.trip(100, '2032-03-10')
-        self.assertAlmostEqual(other.total_amount_currency, 100 * 0.727, places=2)
+        self.assertAlmostEqual(self.trip(100, '2032-03-10').total_amount_currency, 100 * 0.727, places=2)
 
     def test_a_thermal_vehicle_has_the_thermal_scale(self):
-        self.employee.expense_vehicle_electric = False
+        self.employee.expense_vehicle_id = self.thermal
         self.assertAlmostEqual(self.trip(1000).total_amount_currency, 1000 * 0.606, places=2)
         self.assertAlmostEqual(self.trip(5000, '2031-04-01').total_amount_currency,
-                               scale_of(THERMAL, 6000) - scale_of(THERMAL, 1000), places=2)
+                               formula(THERMAL, 6000) - formula(THERMAL, 1000), places=2)
 
     def test_an_earlier_trip_changes_the_later_draft_ones(self):
         later = self.trip(1000, '2031-06-01')
         self.assertAlmostEqual(later.total_amount_currency, 1000 * 0.727, places=2)
-        # A trip entered afterwards but dated before: the later one starts after its kilometres.
+        # A trip entered afterwards but dated before: the later one starts after its distance.
         first = self.trip(4500, '2031-05-01')
-        expected = scale_of(ELECTRIC, 5500) - scale_of(ELECTRIC, 4500)
-        self.assertAlmostEqual(later.total_amount_currency, expected, places=2)
+        self.assertAlmostEqual(later.total_amount_currency, formula(ELECTRIC, 5500) - formula(ELECTRIC, 4500), places=2)
         # Changing the distance of the first moves the second again.
         first.quantity = 100
         self.assertAlmostEqual(later.total_amount_currency, 1000 * 0.727, places=2)
@@ -115,14 +156,13 @@ class TestExpenseMileageScale(common.TransactionCase):
             form.product_id = self.mileage
             form.date = '2031-03-15'
             form.quantity = 200
-            expected = scale_of(ELECTRIC, 5100) - scale_of(ELECTRIC, 4900)
-            self.assertAlmostEqual(form.total_amount_currency, expected, places=2)
+            self.assertAlmostEqual(form.total_amount_currency, formula(ELECTRIC, 5100) - formula(ELECTRIC, 4900), places=2)
 
     def test_without_a_vehicle_the_single_rate_stays(self):
         plain = self.env['hr.employee'].create({'name': "Sans véhicule", 'expense_mileage_rate': 0.5})
         self.assertAlmostEqual(self.trip(1000, employee=plain).price_unit, 0.5)
 
-    def test_the_scale_of_the_latest_year_not_after_applies(self):
-        scale = self.env['expense.mileage.scale']
-        self.assertEqual(scale._scale_for(self.company, 2033, '4', True).year, 2031)
-        self.assertFalse(scale._scale_for(self.company, 2030, '4', True).filtered(lambda s: s.year == 2031))
+
+def fields_year():
+    from odoo import fields
+    return fields.Date.today().year
