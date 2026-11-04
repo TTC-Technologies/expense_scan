@@ -328,8 +328,8 @@ receipts of these countries and of their neighbours:
   for instance), tick *Flat rate without VAT* on the category.
 - **Mileage**: each employee can have their own rate per kilometre or mile,
   to follow the official scale of your country.
-- **Mileage scales by yearly distance**, for any country: give an employee a vehicle and each
-  mileage expense is paid by the scale of the year, applied cumulatively: the scale of the
+- **Mileage scales by yearly distance**, for any country: record the employee's personal vehicles
+  (fiscal power, registration certificate) and each mileage expense in one of them is paid by the scale of the year, applied cumulatively: the scale of the
   distance after the trip, less the scale before it. The thresholds and the fixed part of a
   bracket are handled by the arithmetic, and the allowance of the year is always the scale
   of the year's distance. Two methods, "yearly formula" (France) and "each kilometre at the
