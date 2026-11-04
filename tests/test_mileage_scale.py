@@ -182,9 +182,9 @@ class TestExpenseMileageScale(common.TransactionCase):
         self.assertAlmostEqual(self.trip(100, '2031-04-01').total_amount_currency, 100 * 0.727, places=2)
 
     def test_the_registration_certificate_is_kept(self):
-        import base64
-        self.zoe.write({'registration_file': base64.b64encode(b"carte grise"), 'registration_filename': "carte_grise.pdf"})
-        self.assertEqual(base64.b64decode(self.zoe.registration_file), b"carte grise")
+        from ..models.odoo_compat import binary_bytes
+        self.zoe.write({'registration_file': {'content': b"carte grise", 'filename': "carte_grise.pdf"}})
+        self.assertEqual(binary_bytes(self.zoe.registration_file), b"carte grise")
 
     def test_an_earlier_trip_changes_the_later_draft_ones(self):
         later = self.trip(1000, '2031-06-01')
