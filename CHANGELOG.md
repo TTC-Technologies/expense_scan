@@ -1,5 +1,11 @@
 # Changelog
 
+## 19.0.3.5.1 — 2026-11-04
+
+- Search of the expenses: the expense date lists the last twelve months (month by month, as the expenses are followed),
+  without the quarters and the years; another period is a custom filter. The trimmed search view of the settings no
+  longer empties the months (updated where it was made).
+
 ## 19.0.3.5.0 — 2026-11-04
 
 - Mileage scales by yearly distance, applied cumulatively, for any country. An employee who drives their own vehicle (one or

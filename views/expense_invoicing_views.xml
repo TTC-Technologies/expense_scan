@@ -46,8 +46,15 @@
                 <filter string="Reimbursed" name="reimbursed"
                         domain="[('state', 'in', ['in_payment', 'paid']), ('payment_mode', '=', 'own_account')]"/>
             </xpath>
-            <!-- The current and the previous month, between the filters and the
-                 expense date, which no longer lists the months itself. -->
+            <!-- The expense date lists the last twelve months, and nothing else (the quarters and the years
+                 are left out by static/src/js/search_months_patch.js): other periods are a custom filter. -->
+            <xpath expr="//filter[@name='date']" position="attributes">
+                <attribute name="start_month">-11</attribute>
+                <attribute name="end_month">0</attribute>
+                <attribute name="start_year">0</attribute>
+                <attribute name="end_year">0</attribute>
+            </xpath>
+            <!-- The current and the previous month, as quick filters before the expense date. -->
             <xpath expr="//filter[@name='date']" position="before">
                 <filter name="current_month" string="Current month"
                         domain="[('date', '&gt;=', context_today().strftime('%Y-%m-01')),
@@ -74,12 +81,6 @@
                 <xpath expr="//filter[@name='my_team_expenses']" position="replace"/>
                 <xpath expr="//filter[@name='by_company']" position="replace"/>
                 <xpath expr="//filter[@name='by_employee']" position="replace"/>
-                <!-- The months are the two filters above: the expense date no
-                     longer lists them. -->
-                <xpath expr="//filter[@name='date']" position="attributes">
-                    <attribute name="start_month">0</attribute>
-                    <attribute name="end_month">-1</attribute>
-                </xpath>
             </field>
         </record>
     </data>
