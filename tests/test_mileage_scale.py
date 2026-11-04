@@ -183,7 +183,8 @@ class TestExpenseMileageScale(common.TransactionCase):
 
     def test_the_registration_certificate_is_kept(self):
         from ..models.odoo_compat import binary_bytes
-        self.zoe.write({'registration_file': {'content': b"carte grise", 'filename': "carte_grise.pdf"}})
+        from odoo.tools import BinaryBytes
+        self.zoe.write({'registration_file': BinaryBytes(b"carte grise", filename="carte_grise.pdf")})
         self.assertEqual(binary_bytes(self.zoe.registration_file), b"carte grise")
 
     def test_an_earlier_trip_changes_the_later_draft_ones(self):
