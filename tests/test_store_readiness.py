@@ -236,16 +236,17 @@ class TestSearchMonths(common.TransactionCase):
         arch = self.env['hr.expense'].get_views([(False, 'search')])['views']['search']['arch']
         return etree.fromstring(arch).xpath("//filter[@name='date']")[0]
 
+    def month_options(self):
+        return sorted(int(child.get('name').split('_')[1]) for child in self.date_filter().iterchildren('filter'))
+
     def test_the_expense_date_lists_twelve_months(self):
-        node = self.date_filter()
-        self.assertEqual((node.get('start_month'), node.get('end_month')), ('-11', '0'))
-        self.assertEqual((node.get('start_year'), node.get('end_year')), ('0', '0'))
+        """Odoo 20 lists three months; the view adds the nine others (3 to 11 months back)."""
+        self.assertEqual(self.month_options(), list(range(3, 12)))
 
     def test_the_trimmed_search_view_keeps_the_months(self):
         """Settings "tidy filters" on: the date filter still lists its months."""
         self.env['res.config.settings'].create({'expense_scan_tidy_filters': True}).execute()
-        node = self.date_filter()
-        self.assertEqual((node.get('start_month'), node.get('end_month')), ('-11', '0'))
+        self.assertEqual(self.month_options(), list(range(3, 12)))
 
     def test_the_migration_cleans_a_trimmed_view_made_before(self):
         import importlib.util
