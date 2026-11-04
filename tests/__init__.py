@@ -34,3 +34,4 @@ from . import test_review_fixes
 from . import test_guests
 from . import test_corrections
 from . import test_mileage_route
+from . import test_mileage_scale

@@ -10,7 +10,18 @@
         <field name="inherit_id" ref="hr_expense.hr_employee_view_form_inherit_expense"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='expense_manager_id']" position="after">
-                <field name="expense_mileage_rate" groups="hr.group_hr_user"/>
+                <field name="expense_vehicle_hp" groups="hr.group_hr_user"/>
+                <field name="expense_vehicle_electric" groups="hr.group_hr_user"
+                       invisible="not expense_vehicle_hp"/>
+                <label for="expense_mileage_start_km" groups="hr.group_hr_user"
+                       invisible="not expense_vehicle_hp"/>
+                <div class="d-flex gap-2" groups="hr.group_hr_user" invisible="not expense_vehicle_hp">
+                    <field name="expense_mileage_start_km" class="oe_inline"/>
+                    <span>km in</span>
+                    <field name="expense_mileage_start_year" class="oe_inline" options="{'format': 0}"/>
+                </div>
+                <field name="expense_mileage_rate" groups="hr.group_hr_user"
+                       invisible="expense_vehicle_hp"/>
             </xpath>
         </field>
     </record>

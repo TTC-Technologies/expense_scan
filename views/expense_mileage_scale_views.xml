@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2026 T.T.C. SAS
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0). -->
+<odoo>
+
+    <record id="expense_mileage_scale_view_list" model="ir.ui.view">
+        <field name="name">expense.mileage.scale.list</field>
+        <field name="model">expense.mileage.scale</field>
+        <field name="arch" type="xml">
+            <list string="Mileage scale" editable="bottom">
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="year"/>
+                <field name="hp"/>
+                <field name="rate_1"/>
+                <field name="rate_2"/>
+                <field name="fixed_2"/>
+                <field name="rate_3"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="expense_mileage_scale_action" model="ir.actions.act_window">
+        <field name="name">Mileage scale</field>
+        <field name="res_model">expense.mileage.scale</field>
+        <field name="view_mode">list</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Add the mileage scale of the year</p>
+            <p>An employee with a vehicle is paid by the scale of the year, from the cumulated distance.
+               Check these values against the scale in force.</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_expense_mileage_scale" name="Mileage scale"
+              parent="hr_expense.menu_hr_expense_configuration"
+              action="expense_mileage_scale_action" sequence="62"
+              groups="hr_expense.group_hr_expense_manager"/>
+
+</odoo>
