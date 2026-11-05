@@ -94,7 +94,7 @@ class AccountMove(models.Model):
         projects = (expenses.project_id if projects is None else projects).sudo()
         template = projects.expense_scan_sheet_template_id[:1]
         built = self.env['expense.scan.sheet'].sudo().with_context(
-            expense_scan_sheet_project_ids=projects.ids)._build(
+            expense_scan_sheet_project_ids=projects.ids, expense_scan_sheet_kind='client')._build(
             expenses, excel_template=template or False, receipts=True)
         return [(name, content, 'application/pdf' if name.endswith('.pdf') else XLSX_MIMETYPE)
                 for name, content in built]

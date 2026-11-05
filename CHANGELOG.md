@@ -1,5 +1,12 @@
 # Changelog
 
+## 19.0.3.5.5 — 2026-11-05
+
+- Generated sheets: the internal sheet (every expense and every receipt, the record of the reimbursement of the
+  employee) and the client sheet (re-invoiced expenses only) are told apart: a "Sheet type" column and filters in the
+  list, a separate line for each kind, and the kind in the name of the files ("Expense report_internal_...",
+  "Expense report_client_..."), so that one is not sent for the other. Earlier sheets are sorted by what they hold.
+
 ## 19.0.3.5.4 — 2026-11-05
 
 - Expense sheet: an expense not paid by the employee (company card, company car) with a receipt was left out of the

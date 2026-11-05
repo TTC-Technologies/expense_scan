@@ -5670,3 +5670,33 @@ msgstr "Arkusz zawiera wtedy wszystkie wydatki z dowodami, a kwota do zwrotu pra
 #: model:ir.model.fields,field_description:expense_scan.company_paid
 msgid "To reimburse to the employee"
 msgstr "Do zwrotu pracownikowi"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "Internal (reimbursement)"
+msgstr "Wewnętrzny (zwrot kosztów)"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "Client (re-invoicing)"
+msgstr "Klient (refakturowanie)"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "Sheet type"
+msgstr "Typ arkusza"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "internal"
+msgstr "wewnetrzny"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "client"
+msgstr "klient"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "Internal: every expense and every receipt, the record of the reimbursement of the employee. Client: the re-invoiced expenses only."
+msgstr "Wewnętrzny: wszystkie wydatki i wszystkie dowody, zapis zwrotu kosztów pracownikowi. Klient: tylko wydatki refakturowane."

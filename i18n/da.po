@@ -5670,3 +5670,33 @@ msgstr "Arket viser så alle udgifter med deres bilag og det beløb, der skal re
 #: model:ir.model.fields,field_description:expense_scan.company_paid
 msgid "To reimburse to the employee"
 msgstr "Skal refunderes til medarbejderen"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "Internal (reimbursement)"
+msgstr "Intern (refusion)"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "Client (re-invoicing)"
+msgstr "Kunde (viderefakturering)"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "Sheet type"
+msgstr "Arktype"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "internal"
+msgstr "intern"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "client"
+msgstr "kunde"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "Internal: every expense and every receipt, the record of the reimbursement of the employee. Client: the re-invoiced expenses only."
+msgstr "Intern: alle udgifter og alle bilag, dokumentation for refusionen til medarbejderen. Kunde: kun de viderefakturerede udgifter."

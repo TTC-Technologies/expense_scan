@@ -284,6 +284,22 @@ class TestExpenseSheet(common.TransactionCase):
         self.assertEqual(archive.expense_ids, both)
         self.assertTrue(archive.company_paid)
 
+    def test_the_internal_and_the_client_sheets_are_told_apart(self):
+        Archive = self.env["expense.scan.sheet.archive"]
+        expense = self.expense("Les deux", 1, reinvoice_mode="project", project_id=self.project.id)
+        self.attach(expense, png(), "t.png", "image/png")
+        month = dict(date_from=date(2026, 8, 1), date_to=date(2026, 8, 31), is_month=True)
+        internal = Archive._expense_scan_keep(expense, [("a.pdf", b"x", "summary")], "i", scope="all", **month)
+        client = Archive._expense_scan_keep(expense, [("b.pdf", b"x", "summary")], "c", scope="reinvoice", **month)
+        # The same expenses for the two uses: two lines, never one for the other.
+        self.assertNotEqual(internal, client)
+        self.assertEqual((internal.sheet_kind, client.sheet_kind), ("internal", "client"))
+        # The kind is in the name of the files, whichever way they are built.
+        Sheet = self.env["expense.scan.sheet"]
+        self.assertIn("internal", Sheet.with_context(expense_scan_sheet_kind="internal")._file_stem(expense, "Report"))
+        self.assertIn("client", Sheet.with_context(expense_scan_sheet_kind="client")._file_stem(expense, "Report"))
+        self.assertNotIn("client", Sheet._file_stem(expense, "Report"))
+
     def test_a_sheet_asked_again_completes_its_record_with_the_other_formats(self):
         Archive = self.env["expense.scan.sheet.archive"]
         expense = self.expense("Formats", 1)

@@ -5673,3 +5673,33 @@ msgstr "Der Bericht listet dann jede Ausgabe mit ihrem Beleg auf, der an den Mit
 #: model:ir.model.fields,field_description:expense_scan.company_paid
 msgid "To reimburse to the employee"
 msgstr "An den Mitarbeiter zu erstatten"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "Internal (reimbursement)"
+msgstr "Intern (Erstattung)"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "Client (re-invoicing)"
+msgstr "Kunde (Weiterberechnung)"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "Sheet type"
+msgstr "Berichtstyp"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "internal"
+msgstr "intern"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "client"
+msgstr "kunde"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "Internal: every expense and every receipt, the record of the reimbursement of the employee. Client: the re-invoiced expenses only."
+msgstr "Intern: jede Ausgabe und jeder Beleg, der Nachweis der Erstattung an den Mitarbeiter. Kunde: nur die weiterberechneten Ausgaben."
