@@ -262,6 +262,29 @@ class TestExpenseSheet(common.TransactionCase):
         found = Archive.search([("id", "in", (month | custom | older).ids)])
         self.assertEqual(found[-1], older)
 
+    def test_the_sheet_holds_every_expense_with_its_receipt_and_the_total_to_reimburse(self):
+        Sheet = self.env["expense.scan.sheet"]
+        own = self.expense("Paye par moi", 1, total=30.0)
+        company = self.expense("Paye par la societe", 2, total=70.0, payment_mode="company_account",
+                               reinvoice_mode="none")
+        for expense in own | company:
+            self.attach(expense, png(), "t.png", "image/png")
+        both = own | company
+        header = Sheet._header(both, Sheet._lines(both))
+        self.assertAlmostEqual(header["total_ttc"], 100.0)
+        self.assertAlmostEqual(header["a_rembourser"], 30.0)
+        # The receipts of the two are in the sheet: two pages.
+        from odoo.tools.pdf import PdfFileReader
+        receipts = Sheet._receipts_pdf(Sheet._lines(both))
+        self.assertEqual(len(PdfFileReader(io.BytesIO(receipts), strict=False).pages), 2)
+        # By default the wizard keeps the expense paid by the company; unticked, the sheet is the former one.
+        wizard = self.env["expense.scan.sheet.wizard"].with_context(
+            active_model="hr.expense", active_ids=both.ids).create({"summary": False, "receipts": True})
+        self.assertTrue(wizard.company_paid)
+        archive, _files = wizard._expense_scan_generate()
+        self.assertEqual(archive.expense_ids, both)
+        self.assertTrue(archive.company_paid)
+
     def test_a_sheet_asked_again_completes_its_record_with_the_other_formats(self):
         Archive = self.env["expense.scan.sheet.archive"]
         expense = self.expense("Formats", 1)

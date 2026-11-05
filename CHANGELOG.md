@@ -1,5 +1,13 @@
 # Changelog
 
+## 20.0.3.5.4 — 2026-11-05
+
+- Expense sheet: an expense not paid by the employee (company card, company car) with a receipt was left out of the
+  PDF sheet, so the sheet did not hold every receipt. The sheet now lists every expense with its receipt, the
+  "Paid by" column telling who paid and the total to reimburse to the employee shown apart: it can be kept as the
+  record of the transfer. The option "Include the expenses paid by the company" (on by default) can be unticked to
+  get the former sheet, limited to what the employee paid.
+
 ## 20.0.3.5.3 — 2026-11-05
 
 - Generated sheets: the list leads with a "Period" column (the month, "10/2026", when the sheet was asked for the

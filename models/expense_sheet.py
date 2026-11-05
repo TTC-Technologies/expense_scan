@@ -370,6 +370,9 @@ class ExpenseScanSheet(models.AbstractModel):
             'total_ht': sum(line['total_ht'] for line in lines),
             'total_tva': sum(line['total_tva'] for line in lines),
             'total_ttc': sum(line['total_ttc'] for line in lines),
+            # What the company owes the employee: the expenses the employee paid.
+            'a_rembourser': sum(line['total_ttc'] for line in lines
+                                if line['expense'].payment_mode == 'own_account'),
             'societe': expenses.company_id[:1].name or '',
         }
 
@@ -803,6 +806,10 @@ class ExpenseScanSheetWizard(models.TransientModel):
     excel = fields.Boolean(string="Excel export")
     template_id = fields.Many2one('expense.scan.export.template', string="Template")
     receipts = fields.Boolean(string="Receipts only (PDF)")
+    company_paid = fields.Boolean(
+        string="Include the expenses paid by the company", default=True,
+        help="The sheet then lists every expense with its receipt, the total to reimburse to the employee "
+             "apart: it can be kept as the record of the transfer.")
     selected_count = fields.Integer(compute='_compute_selected')
     selected_summary = fields.Char(compute='_compute_selected')
     result_file = fields.Binary(readonly=True, attachment=False)
@@ -921,7 +928,7 @@ class ExpenseScanSheetWizard(models.TransientModel):
             receipts=self.receipts,
             # The internal sheet repays the employee: what the company paid
             # (a company car, a company card) has no place on it.
-            reimbursable_only=self.scope == 'all', kinds=True)
+            reimbursable_only=not self.company_paid, kinds=True)
         if not files:
             raise UserError(_("Nothing to produce: none of these expenses has a receipt."))
         # Kept as generated: the sheet handed over can be found again, unchanged.
@@ -929,6 +936,7 @@ class ExpenseScanSheetWizard(models.TransientModel):
             expenses, files, Sheet._file_stem(expenses, _("Expense sheet")),
             date_from=self.period and self.date_from, date_to=self.period and self.date_to,
             scope=self.scope, template=self.excel and self.template_id, projects=self.project_ids,
+            company_paid=self.company_paid,
             # Asked for a month: the sheet is of that month, whatever the days of the expenses.
             is_month=self.period in ('current', 'previous'))
         return archive, [file[:2] for file in files]

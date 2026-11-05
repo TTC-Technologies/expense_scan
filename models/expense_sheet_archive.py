@@ -44,6 +44,7 @@ class ExpenseScanSheetArchive(models.Model):
     # What the sheet was generated with, to build its other formats afterwards.
     scope = fields.Selection([('all', "All expenses"), ('reinvoice', "Re-invoiced expenses only")],
                              string="Expenses", readonly=True)
+    company_paid = fields.Boolean(string="Include the expenses paid by the company", readonly=True, default=True)
     template_id = fields.Many2one('expense.scan.export.template', string="Excel template", readonly=True,
                                   ondelete='set null')
     project_ids = fields.Many2many('project.project', string="Projects", readonly=True)
@@ -68,7 +69,7 @@ class ExpenseScanSheetArchive(models.Model):
 
     @api.model
     def _expense_scan_keep(self, expenses, files, name, date_from=False, date_to=False, is_month=False,
-                           scope='all', template=False, projects=False):
+                           scope='all', template=False, projects=False, company_paid=True):
         """Keep the files of one generation; returns the record.
 
         One record per sheet: a sheet asked again for the same expenses and the same period (to get another
@@ -99,6 +100,7 @@ class ExpenseScanSheetArchive(models.Model):
         archive = archive.with_env(self.env)
         archive.sudo().write({
             'scope': scope,
+            'company_paid': company_paid,
             'template_id': template.id if template else archive.template_id.id,
             'project_ids': [(6, 0, projects.ids)] if projects else [(6, 0, archive.project_ids.ids)],
         })
@@ -144,7 +146,7 @@ class ExpenseScanSheetArchive(models.Model):
         files = Sheet._build(
             expenses.with_context(expense_scan_sheet_project_ids=self.project_ids.ids),
             summary='summary' not in have, excel_template=('excel' not in have) and template or False,
-            receipts='receipts' not in have, reimbursable_only=self.scope == 'all', kinds=True)
+            receipts='receipts' not in have, reimbursable_only=not self.company_paid, kinds=True)
         if not files:
             raise UserError(_("Nothing to produce: none of these expenses has a receipt."))
         self._expense_scan_add_files(files)

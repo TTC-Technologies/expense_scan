@@ -5663,3 +5663,18 @@ msgstr "Formate"
 #: model:ir.model.fields,field_description:expense_scan.sheet_archive
 msgid "Has Missing Formats"
 msgstr "Fehlende Formate"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.company_paid
+msgid "Include the expenses paid by the company"
+msgstr "Vom Unternehmen bezahlte Ausgaben einbeziehen"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.company_paid
+msgid "The sheet then lists every expense with its receipt, the total to reimburse to the employee apart: it can be kept as the record of the transfer."
+msgstr "Der Bericht listet dann jede Ausgabe mit ihrem Beleg auf, der an den Mitarbeiter zu erstattende Betrag steht gesondert: er kann als Nachweis der Überweisung aufbewahrt werden."
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.company_paid
+msgid "To reimburse to the employee"
+msgstr "An den Mitarbeiter zu erstatten"
