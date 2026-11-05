@@ -5609,3 +5609,48 @@ msgstr ""
 #: model:expense.scan.policy.rule,name:expense_scan.demo_policy_hotel
 msgid "Hotel: 110 a night, 140 in large cities"
 msgstr "Hotell: 110 per natt, 140 i storbyer"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Excel template"
+msgstr "Excel-mal"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "PDF summary"
+msgstr "PDF-oppsummering"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Excel"
+msgstr "Excel"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Sheet format"
+msgstr "Arkets format"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Is Month"
+msgstr "Månedsark"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Create the missing formats"
+msgstr "Opprett manglende formater"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Receipts"
+msgstr "Bilag"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Formats"
+msgstr "Formater"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Has Missing Formats"
+msgstr "Manglende formater"

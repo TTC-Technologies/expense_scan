@@ -5609,3 +5609,48 @@ msgstr ""
 #: model:expense.scan.policy.rule,name:expense_scan.demo_policy_hotel
 msgid "Hotel: 110 a night, 140 in large cities"
 msgstr "Hotel: 110 por noite, 140 nas grandes cidades"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Excel template"
+msgstr "Modelo do Excel"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "PDF summary"
+msgstr "Resumo em PDF"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Excel"
+msgstr "Excel"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Sheet format"
+msgstr "Formato da folha"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Is Month"
+msgstr "Folha de um mês"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Create the missing formats"
+msgstr "Criar os formatos em falta"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Receipts"
+msgstr "Comprovativos"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Formats"
+msgstr "Formatos"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Has Missing Formats"
+msgstr "Formatos em falta"

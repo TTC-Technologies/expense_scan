@@ -42,7 +42,8 @@ class ExpenseScanSheetArchive(models.Model):
     formats = fields.Char(string="Formats", compute='_compute_formats')
     has_missing_formats = fields.Boolean(compute='_compute_formats')
     # What the sheet was generated with, to build its other formats afterwards.
-    scope = fields.Selection([('all', "All expenses"), ('reinvoice', "Re-invoiced expenses only")], readonly=True)
+    scope = fields.Selection([('all', "All expenses"), ('reinvoice', "Re-invoiced expenses only")],
+                             string="Expenses", readonly=True)
     template_id = fields.Many2one('expense.scan.export.template', string="Excel template", readonly=True,
                                   ondelete='set null')
     project_ids = fields.Many2many('project.project', string="Projects", readonly=True)

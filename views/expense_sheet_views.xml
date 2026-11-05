@@ -222,12 +222,14 @@
                     <group>
                         <group>
                             <label for="date_from" string="Period"/>
-                            <div class="d-flex gap-2">
+                            <div>
                                 <field name="is_month" invisible="1"/>
                                 <field name="period_label" invisible="not is_month" class="w-auto"/>
-                                <field name="date_from" class="w-auto" invisible="is_month"/>
-                                <span invisible="is_month">to</span>
-                                <field name="date_to" class="w-auto" invisible="is_month"/>
+                                <div class="d-flex gap-2" invisible="is_month">
+                                    <field name="date_from" class="w-auto"/>
+                                    <span>to</span>
+                                    <field name="date_to" class="w-auto"/>
+                                </div>
                             </div>
                             <field name="employee_ids" widget="many2many_tags"/>
                             <field name="total_amount"/>
