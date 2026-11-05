@@ -5674,3 +5674,33 @@ msgstr "A folha lista então todas as despesas com o comprovativo e o total a re
 #: model:ir.model.fields,field_description:expense_scan.company_paid
 msgid "To reimburse to the employee"
 msgstr "A reembolsar ao colaborador"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "Internal (reimbursement)"
+msgstr "Interna (reembolso)"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "Client (re-invoicing)"
+msgstr "Cliente (refaturação)"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "Sheet type"
+msgstr "Tipo de folha"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "internal"
+msgstr "interna"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "client"
+msgstr "cliente"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+msgid "Internal: every expense and every receipt, the record of the reimbursement of the employee. Client: the re-invoiced expenses only."
+msgstr "Interna: todas as despesas e todos os comprovativos, o registo do reembolso ao colaborador. Cliente: apenas as despesas refaturadas."

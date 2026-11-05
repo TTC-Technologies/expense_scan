@@ -44,10 +44,20 @@ class ExpenseScanSheetArchive(models.Model):
     # What the sheet was generated with, to build its other formats afterwards.
     scope = fields.Selection([('all', "All expenses"), ('reinvoice', "Re-invoiced expenses only")],
                              string="Expenses", readonly=True)
+    sheet_kind = fields.Selection(
+        [('internal', "Internal (reimbursement)"), ('client', "Client (re-invoicing)")],
+        string="Sheet type", compute='_compute_sheet_kind', store=True,
+        help="Internal: every expense and every receipt, the record of the reimbursement of the employee. "
+             "Client: the re-invoiced expenses only.")
     company_paid = fields.Boolean(string="Include the expenses paid by the company", readonly=True, default=True)
     template_id = fields.Many2one('expense.scan.export.template', string="Excel template", readonly=True,
                                   ondelete='set null')
     project_ids = fields.Many2many('project.project', string="Projects", readonly=True)
+
+    @api.depends('scope')
+    def _compute_sheet_kind(self):
+        for archive in self:
+            archive.sheet_kind = 'client' if archive.scope == 'reinvoice' else 'internal'
 
     @api.depends('is_month', 'date_from', 'date_to')
     def _compute_period_label(self):
@@ -82,7 +92,8 @@ class ExpenseScanSheetArchive(models.Model):
         month = bool(is_month and date_from)
         archive = self.sudo().search([
             ('company_id', '=', company.id), ('date_from', '=', date_from), ('date_to', '=', date_to),
-            ('is_month', '=', month), ('expense_ids', 'in', expenses.ids)]).filtered(
+            ('is_month', '=', month), ('sheet_kind', '=', 'client' if scope == 'reinvoice' else 'internal'),
+            ('expense_ids', 'in', expenses.ids)]).filtered(
             lambda a: a.expense_ids == expenses)[:1]
         if not archive:
             # Created with the rights of the module: an employee generating their own sheet may not read the
@@ -93,6 +104,7 @@ class ExpenseScanSheetArchive(models.Model):
                 'date_from': date_from,
                 'date_to': date_to,
                 'is_month': month,
+                'scope': scope,
                 'employee_ids': [(6, 0, expenses.employee_id.ids)],
                 'expense_ids': [(6, 0, expenses.ids)],
                 'total_amount': sum(expenses.mapped('total_amount')),
@@ -142,7 +154,7 @@ class ExpenseScanSheetArchive(models.Model):
         template = self._expense_scan_template()
         expenses = self.expense_ids.sudo()
         Sheet = self.env['expense.scan.sheet'].sudo().with_context(
-            expense_scan_sheet_project_ids=self.project_ids.ids)
+            expense_scan_sheet_project_ids=self.project_ids.ids, expense_scan_sheet_kind=self.sheet_kind)
         files = Sheet._build(
             expenses.with_context(expense_scan_sheet_project_ids=self.project_ids.ids),
             summary='summary' not in have, excel_template=('excel' not in have) and template or False,

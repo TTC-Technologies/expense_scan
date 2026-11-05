@@ -704,7 +704,11 @@ class ExpenseScanSheet(models.AbstractModel):
         header = self._header(expenses, lines)
         start = header['date_debut']
         period = start.strftime('%m-%Y') if start else ''
-        stem = "_".join(part for part in (prefix, header['salarie'], period) if part)
+        # The internal sheet (every expense, to reimburse the employee) and the client one (re-invoiced expenses)
+        # carry their kind in their name, so that one is not sent for the other.
+        kind = {'internal': _("internal"), 'client': _("client")}.get(
+            self.env.context.get('expense_scan_sheet_kind'), '')
+        stem = "_".join(part for part in (prefix, kind, header['salarie'], period) if part)
         return re.sub(r'[\\/:*?"<>|]+', '-', stem)
 
     @api.model
@@ -920,7 +924,8 @@ class ExpenseScanSheetWizard(models.TransientModel):
         if self.excel and not self.template_id:
             raise UserError(_("Choose the Excel template."))
         Sheet = self.env['expense.scan.sheet'].with_context(
-            expense_scan_sheet_project_ids=self.project_ids.ids)
+            expense_scan_sheet_project_ids=self.project_ids.ids,
+            expense_scan_sheet_kind='client' if self.scope == 'reinvoice' else 'internal')
         expenses = expenses.with_context(expense_scan_sheet_project_ids=self.project_ids.ids)
         files = Sheet._build(
             expenses, summary=self.summary,
