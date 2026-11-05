@@ -277,7 +277,7 @@ class TestExpenseSheet(common.TransactionCase):
         # The same format again replaces the file instead of piling up.
         Archive._expense_scan_keep(expense, [("b.pdf", b"newer", "summary")], "s", **month)
         self.assertEqual(len(first.attachment_ids), 2)
-        self.assertEqual(first.attachment_ids.filtered(lambda a: a.expense_scan_kind == "summary").raw, b"newer")
+        self.assertEqual(binary_bytes(first.attachment_ids.filtered(lambda a: a.expense_scan_kind == "summary").raw), b"newer")
         # The button builds what is missing: here the receipts.
         self.assertTrue(first.has_missing_formats)
         first.action_expense_scan_complete_formats()
