@@ -1,5 +1,15 @@
 # Changelog
 
+## 19.0.3.5.3 — 2026-11-05
+
+- Generated sheets: the list leads with a "Period" column (the month, "10/2026", when the sheet was asked for the
+  current or the previous month; "from x to y" for any other range) and is ordered by that period, no longer by the
+  day the sheet was generated, which moves to a later column. The month is recorded when the sheet is generated, not
+  guessed from the dates; earlier sheets covering a whole calendar month read as that month.
+- Generated sheets: one line per sheet. Asking again for the same expenses and the same period (to get another
+  format) completes the line instead of adding one; a "Formats" column lists what it holds (PDF summary, Excel,
+  receipts) and the button "Create the missing formats" builds the others from the expenses of the sheet.
+
 ## 19.0.3.5.2 — 2026-11-04
 
 - Mileage scales: switching an existing expense to a company vehicle pays it at the single rate again and removes

@@ -10,13 +10,16 @@ record, whose history then says to whom it went.
 """
 
 from odoo import _, api, fields, models
+from odoo.exceptions import UserError
+from odoo.tools import format_date
 
 
 class ExpenseScanSheetArchive(models.Model):
     _name = 'expense.scan.sheet.archive'
     _inherit = ['mail.thread']
     _description = "Generated expense sheet"
-    _order = 'create_date desc, id desc'
+    # The period of the sheet drives the order, not the day it was generated.
+    _order = 'date_to desc, date_from desc, id desc'
 
     name = fields.Char(string="Expense sheet", required=True)
     company_id = fields.Many2one('res.company', string="Company", required=True,
@@ -25,6 +28,10 @@ class ExpenseScanSheetArchive(models.Model):
                               default=lambda self: self.env.user)
     date_from = fields.Date(string="From", readonly=True)
     date_to = fields.Date(string="To", readonly=True)
+    # Set when the sheet was asked for a month (current or previous): it then reads "10/2026". Any other
+    # range, typed by the user or taken from the expenses selected, reads "from x to y".
+    is_month = fields.Boolean(readonly=True)
+    period_label = fields.Char(string="Period", compute='_compute_period_label')
     employee_ids = fields.Many2many('hr.employee', string="Employees", readonly=True)
     expense_ids = fields.Many2many('hr.expense', string="Expenses", readonly=True)
     expense_count = fields.Integer(string="Expense count", compute='_compute_expense_count')
@@ -32,6 +39,26 @@ class ExpenseScanSheetArchive(models.Model):
                                    currency_field='currency_id')
     currency_id = fields.Many2one(related='company_id.currency_id')
     attachment_ids = fields.Many2many('ir.attachment', string="Files", readonly=True)
+    formats = fields.Char(string="Formats", compute='_compute_formats')
+    has_missing_formats = fields.Boolean(compute='_compute_formats')
+    # What the sheet was generated with, to build its other formats afterwards.
+    scope = fields.Selection([('all', "All expenses"), ('reinvoice', "Re-invoiced expenses only")], readonly=True)
+    template_id = fields.Many2one('expense.scan.export.template', string="Excel template", readonly=True,
+                                  ondelete='set null')
+    project_ids = fields.Many2many('project.project', string="Projects", readonly=True)
+
+    @api.depends('is_month', 'date_from', 'date_to')
+    def _compute_period_label(self):
+        for archive in self:
+            if not archive.date_from:
+                archive.period_label = ''
+            elif archive.is_month:
+                archive.period_label = archive.date_from.strftime('%m/%Y')
+            else:
+                archive.period_label = _(
+                    "from %(start)s to %(end)s",
+                    start=format_date(self.env, archive.date_from),
+                    end=format_date(self.env, archive.date_to or archive.date_from))
 
     @api.depends('expense_ids')
     def _compute_expense_count(self):
@@ -39,27 +66,88 @@ class ExpenseScanSheetArchive(models.Model):
             archive.expense_count = len(archive.expense_ids)
 
     @api.model
-    def _expense_scan_keep(self, expenses, files, name, date_from=False, date_to=False):
-        """Keep the files of one generation; returns the new record."""
-        # Created with the rights of the module: an employee generating their own sheet may not read the
-        # employee records the archive points to (Odoo checks it when the link is written).
-        archive = self.sudo().create({
-            'name': name,
-            'company_id': (expenses.company_id[:1] or self.env.company).id,
-            'date_from': date_from or min(expenses.mapped('date'), default=False),
-            'date_to': date_to or max(expenses.mapped('date'), default=False),
-            'employee_ids': [(6, 0, expenses.employee_id.ids)],
-            'expense_ids': [(6, 0, expenses.ids)],
-            'total_amount': sum(expenses.mapped('total_amount')),
-        }).with_env(self.env)
+    def _expense_scan_keep(self, expenses, files, name, date_from=False, date_to=False, is_month=False,
+                           scope='all', template=False, projects=False):
+        """Keep the files of one generation; returns the record.
+
+        One record per sheet: a sheet asked again for the same expenses and the same period (to get another
+        format, say) completes its record, a file replacing the one of the same format.
+        ``files``: ``(file name, content, format)``.
+        """
+        date_from = date_from or min(expenses.mapped('date'), default=False)
+        date_to = date_to or max(expenses.mapped('date'), default=False)
+        company = expenses.company_id[:1] or self.env.company
+        month = bool(is_month and date_from)
+        archive = self.sudo().search([
+            ('company_id', '=', company.id), ('date_from', '=', date_from), ('date_to', '=', date_to),
+            ('is_month', '=', month), ('expense_ids', 'in', expenses.ids)]).filtered(
+            lambda a: a.expense_ids == expenses)[:1]
+        if not archive:
+            # Created with the rights of the module: an employee generating their own sheet may not read the
+            # employee records the archive points to (Odoo checks it when the link is written).
+            archive = self.sudo().create({
+                'name': name,
+                'company_id': company.id,
+                'date_from': date_from,
+                'date_to': date_to,
+                'is_month': month,
+                'employee_ids': [(6, 0, expenses.employee_id.ids)],
+                'expense_ids': [(6, 0, expenses.ids)],
+                'total_amount': sum(expenses.mapped('total_amount')),
+            })
+        archive = archive.with_env(self.env)
+        archive.sudo().write({
+            'scope': scope,
+            'template_id': template.id if template else archive.template_id.id,
+            'project_ids': [(6, 0, projects.ids)] if projects else [(6, 0, archive.project_ids.ids)],
+        })
+        archive._expense_scan_add_files(files)
+        return archive
+
+    def _expense_scan_add_files(self, files):
+        """Attach the files, replacing those of the same format."""
+        self.ensure_one()
+        replaced = self.attachment_ids.filtered(lambda a: a.expense_scan_kind in {kind for _n, _c, kind in files})
         attachments = self.env['ir.attachment'].create([{
             'name': file_name,
             'raw': content,
             'res_model': self._name,
-            'res_id': archive.id,
-        } for file_name, content in files])
-        archive.attachment_ids = [(6, 0, attachments.ids)]
-        return archive
+            'res_id': self.id,
+            'expense_scan_kind': kind,
+        } for file_name, content, kind in files])
+        self.attachment_ids = [(6, 0, (self.attachment_ids - replaced).ids + attachments.ids)]
+        replaced.unlink()
+
+    @api.depends('attachment_ids.expense_scan_kind')
+    def _compute_formats(self):
+        labels = dict(self.env['ir.attachment']._fields['expense_scan_kind'].selection)
+        for archive in self:
+            kinds = [k for k in ('summary', 'excel', 'receipts') if k in archive.attachment_ids.mapped('expense_scan_kind')]
+            archive.formats = ", ".join(labels[k] for k in kinds)
+            # The Excel file needs a template: only offered when one is known.
+            archive.has_missing_formats = bool(
+                {'summary', 'receipts'} - set(kinds) or ('excel' not in kinds and archive._expense_scan_template()))
+
+    def _expense_scan_template(self):
+        self.ensure_one()
+        return self.template_id or self.env['expense.scan.export.template'].search([], limit=1)
+
+    def action_expense_scan_complete_formats(self):
+        """Build the formats this sheet does not have yet, from the expenses it was made of."""
+        self.ensure_one()
+        have = set(self.attachment_ids.mapped('expense_scan_kind'))
+        template = self._expense_scan_template()
+        expenses = self.expense_ids.sudo()
+        Sheet = self.env['expense.scan.sheet'].sudo().with_context(
+            expense_scan_sheet_project_ids=self.project_ids.ids)
+        files = Sheet._build(
+            expenses.with_context(expense_scan_sheet_project_ids=self.project_ids.ids),
+            summary='summary' not in have, excel_template=('excel' not in have) and template or False,
+            receipts='receipts' not in have, reimbursable_only=self.scope == 'all', kinds=True)
+        if not files:
+            raise UserError(_("Nothing to produce: none of these expenses has a receipt."))
+        self._expense_scan_add_files(files)
+        return True
 
     def action_expense_scan_send(self):
         """The e-mail composer, with the files of the sheet attached."""

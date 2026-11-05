@@ -705,8 +705,10 @@ class ExpenseScanSheet(models.AbstractModel):
 
     @api.model
     def _build(self, expenses, summary=False, excel_template=False, receipts=False,
-               reimbursable_only=False):
+               reimbursable_only=False, kinds=False):
         """``[(file name, content)]`` for each employee and each output.
+
+        ``kinds``: ``(file name, content, kind)``, the kind being summary, excel or receipts.
 
         ``reimbursable_only`` keeps in the PDF summary the expenses paid by
         the employee: those the company owes them.
@@ -719,15 +721,15 @@ class ExpenseScanSheet(models.AbstractModel):
                     if reimbursable_only else own
                 if shown:
                     files.append(("%s.pdf" % self._file_stem(shown, _("Expense report")),
-                                  self._summary_pdf(shown)))
+                                  self._summary_pdf(shown), 'summary'))
             if excel_template:
                 files.append(("%s.xlsx" % self._file_stem(own, _("Expense report")),
-                              self._excel(excel_template, own)))
+                              self._excel(excel_template, own), 'excel'))
             if receipts:
                 content = self._receipts_pdf(self._lines(own))
                 if content:
-                    files.append(("%s.pdf" % self._file_stem(own, _("Expense receipts")), content))
-        return files
+                    files.append(("%s.pdf" % self._file_stem(own, _("Expense receipts")), content, 'receipts'))
+        return files if kinds else [file[:2] for file in files]
 
     @api.model
     def _zip(self, files):
@@ -918,14 +920,17 @@ class ExpenseScanSheetWizard(models.TransientModel):
             receipts=self.receipts,
             # The internal sheet repays the employee: what the company paid
             # (a company car, a company card) has no place on it.
-            reimbursable_only=self.scope == 'all')
+            reimbursable_only=self.scope == 'all', kinds=True)
         if not files:
             raise UserError(_("Nothing to produce: none of these expenses has a receipt."))
         # Kept as generated: the sheet handed over can be found again, unchanged.
         archive = self.env['expense.scan.sheet.archive']._expense_scan_keep(
             expenses, files, Sheet._file_stem(expenses, _("Expense sheet")),
-            date_from=self.period and self.date_from, date_to=self.period and self.date_to)
-        return archive, files
+            date_from=self.period and self.date_from, date_to=self.period and self.date_to,
+            scope=self.scope, template=self.excel and self.template_id, projects=self.project_ids,
+            # Asked for a month: the sheet is of that month, whatever the days of the expenses.
+            is_month=self.period in ('current', 'previous'))
+        return archive, [file[:2] for file in files]
 
     def action_send(self):
         """Generate, then write the e-mail that carries the files."""
