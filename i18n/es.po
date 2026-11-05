@@ -5615,6 +5615,7 @@ msgstr "Análisis de tickets: leer las líneas de artículos"
 msgid "The photo holds %(count)s different purchases: one expense each; this one keeps the first."
 msgstr "La foto contiene %(count)s compras distintas: un gasto cada una; este conserva la primera."
 
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.sheet_archive
 msgid "Excel template"
 msgstr "Plantilla de Excel"

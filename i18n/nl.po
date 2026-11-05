@@ -5616,6 +5616,7 @@ msgstr "Bonscan: de artikelregels van de bonnen lezen"
 msgid "The photo holds %(count)s different purchases: one expense each; this one keeps the first."
 msgstr "De foto bevat %(count)s verschillende aankopen: een uitgave per aankoop; deze houdt de eerste."
 
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.sheet_archive
 msgid "Excel template"
 msgstr "Excel-sjabloon"

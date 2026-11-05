@@ -5615,6 +5615,7 @@ msgstr "Kvitteringsskanning: les varelinjene på kvitteringene"
 msgid "The photo holds %(count)s different purchases: one expense each; this one keeps the first."
 msgstr "Bildet inneholder %(count)s ulike kjøp: én utgift hver; denne beholder det første."
 
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.sheet_archive
 msgid "Excel template"
 msgstr "Excel-mal"

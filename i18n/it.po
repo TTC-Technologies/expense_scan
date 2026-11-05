@@ -5616,6 +5616,7 @@ msgstr "Analisi degli scontrini: leggere le righe degli articoli"
 msgid "The photo holds %(count)s different purchases: one expense each; this one keeps the first."
 msgstr "La foto contiene %(count)s acquisti diversi: una spesa ciascuno; questa tiene il primo."
 
+#. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.sheet_archive
 msgid "Excel template"
 msgstr "Modello Excel"
