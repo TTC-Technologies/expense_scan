@@ -164,7 +164,10 @@ class ExpenseMileageScale(models.Model):
             sequence = 10
             for electric, method, vehicles in sets:
                 for name, (power_from, power_to, brackets) in vehicles.items():
-                    label = _("Car %s", name) if code == 'FR' else name
+                    label = {
+                        '3 CV or less': _("Car 3 CV or less"), '4 CV': _("Car 4 CV"), '5 CV': _("Car 5 CV"),
+                        '6 CV': _("Car 6 CV"), '7 CV and more': _("Car 7 CV or more"),
+                    }.get(name, name) if code == 'FR' else name
                     vehicle = Vehicle.create({
                         'name': label + (" " + _("(electric)") if electric else ""),
                         'company_id': company.id, 'sequence': sequence, 'electric': electric,

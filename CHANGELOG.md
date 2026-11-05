@@ -1,5 +1,11 @@
 # Changelog
 
+## 20.0.3.5.6 — 2026-11-05
+
+- Mileage scales: the vehicle categories made for a French company are named as whole sentences ("Voiture 3 CV ou
+  moins", "Voiture 7 CV et plus"), translated in the ten languages: they read "Voiture 3 CV or less" before, half in
+  French and half in English. The categories already made are renamed when the module is updated.
+
 ## 20.0.3.5.5 — 2026-11-05
 
 - Generated sheets: the internal sheet (every expense and every receipt, the record of the reimbursement of the
