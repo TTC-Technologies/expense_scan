@@ -5655,3 +5655,18 @@ msgstr "Formaten"
 #: model:ir.model.fields,field_description:expense_scan.sheet_archive
 msgid "Has Missing Formats"
 msgstr "Ontbrekende formaten"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.company_paid
+msgid "Include the expenses paid by the company"
+msgstr "Door het bedrijf betaalde uitgaven opnemen"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.company_paid
+msgid "The sheet then lists every expense with its receipt, the total to reimburse to the employee apart: it can be kept as the record of the transfer."
+msgstr "Het overzicht toont dan elke uitgave met bonnetje en het aan de werknemer terug te betalen totaal apart: het kan worden bewaard als vastlegging van de overschrijving."
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.company_paid
+msgid "To reimburse to the employee"
+msgstr "Terug te betalen aan de werknemer"

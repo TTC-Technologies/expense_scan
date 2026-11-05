@@ -77,6 +77,11 @@
                                 <td class="text-end"><t t-out="header['total_ttc']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
                                 <td/>
                             </tr>
+                            <tr class="fw-bold" t-if="header['a_rembourser'] != header['total_ttc']">
+                                <td colspan="10">To reimburse to the employee</td>
+                                <td class="text-end"><t t-out="header['a_rembourser']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                                <td/>
+                            </tr>
                         </tfoot>
                     </table>
                     <h6 class="mt-2 mb-1">Recoverable tax by rate</h6>

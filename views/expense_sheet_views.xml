@@ -131,6 +131,7 @@
                 <group>
                     <group string="Expenses">
                         <field name="scope" widget="radio"/>
+                        <field name="company_paid" invisible="scope != 'all'"/>
                         <field name="project_ids" widget="many2many_tags"
                                domain="[('id', 'in', available_project_ids)]"
                                options="{'no_create': True}"/>

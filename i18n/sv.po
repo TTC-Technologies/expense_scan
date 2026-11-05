@@ -5652,3 +5652,18 @@ msgstr "Format"
 #: model:ir.model.fields,field_description:expense_scan.sheet_archive
 msgid "Has Missing Formats"
 msgstr "Saknade format"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.company_paid
+msgid "Include the expenses paid by the company"
+msgstr "Ta med utgifter som företaget betalat"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.company_paid
+msgid "The sheet then lists every expense with its receipt, the total to reimburse to the employee apart: it can be kept as the record of the transfer."
+msgstr "Arket visar då alla utgifter med kvitto och det belopp som ska ersättas till den anställde för sig: det kan sparas som underlag för överföringen."
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.company_paid
+msgid "To reimburse to the employee"
+msgstr "Att ersätta den anställde"

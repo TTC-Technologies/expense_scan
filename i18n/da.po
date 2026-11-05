@@ -5655,3 +5655,18 @@ msgstr "Formater"
 #: model:ir.model.fields,field_description:expense_scan.sheet_archive
 msgid "Has Missing Formats"
 msgstr "Manglende formater"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.company_paid
+msgid "Include the expenses paid by the company"
+msgstr "Medtag udgifter betalt af virksomheden"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.company_paid
+msgid "The sheet then lists every expense with its receipt, the total to reimburse to the employee apart: it can be kept as the record of the transfer."
+msgstr "Arket viser så alle udgifter med deres bilag og det beløb, der skal refunderes til medarbejderen, for sig: det kan gemmes som dokumentation for overførslen."
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.company_paid
+msgid "To reimburse to the employee"
+msgstr "Skal refunderes til medarbejderen"

@@ -5655,3 +5655,18 @@ msgstr "Formati"
 #: model:ir.model.fields,field_description:expense_scan.sheet_archive
 msgid "Has Missing Formats"
 msgstr "Formati mancanti"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.company_paid
+msgid "Include the expenses paid by the company"
+msgstr "Includi le spese pagate dall'azienda"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.company_paid
+msgid "The sheet then lists every expense with its receipt, the total to reimburse to the employee apart: it can be kept as the record of the transfer."
+msgstr "Il foglio elenca allora tutte le spese con il giustificativo e il totale da rimborsare al dipendente a parte: può essere conservato come registrazione del bonifico."
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.company_paid
+msgid "To reimburse to the employee"
+msgstr "Da rimborsare al dipendente"
