@@ -191,6 +191,11 @@ class TestExpenseMileageScale(common.TransactionCase):
         # Its 6000 km leave the cumulated distance of the vehicle: the later trip starts again at the first rate.
         self.assertAlmostEqual(later.price_unit, 0.727, places=3)
 
+    def test_the_default_categories_of_a_french_company_are_whole_sentences(self):
+        names = self.env['expense.mileage.vehicle'].with_context(lang='fr_FR').search([]).mapped('name')
+        self.assertFalse([name for name in names if " or less" in name or " and more" in name or " or more" in name],
+                         names)
+
     def test_the_registration_certificate_is_kept(self):
         import base64
         self.zoe.write({'registration_file': base64.b64encode(b"carte grise"), 'registration_filename': "carte_grise.pdf"})

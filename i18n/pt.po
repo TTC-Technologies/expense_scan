@@ -5699,3 +5699,33 @@ msgstr "cliente"
 #: model:ir.model.fields,field_description:expense_scan.sheet_kind
 msgid "Internal: every expense and every receipt, the record of the reimbursement of the employee. Client: the re-invoiced expenses only."
 msgstr "Interna: todas as despesas e todos os comprovativos, o registo do reembolso ao colaborador. Cliente: apenas as despesas refaturadas."
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_scale.py:0
+msgid "Car 3 CV or less"
+msgstr "Carro 3 CV ou menos"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_scale.py:0
+msgid "Car 4 CV"
+msgstr "Carro 4 CV"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_scale.py:0
+msgid "Car 5 CV"
+msgstr "Carro 5 CV"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_scale.py:0
+msgid "Car 6 CV"
+msgstr "Carro 6 CV"
+
+#. module: expense_scan
+#. odoo-python
+#: code:addons/expense_scan/models/hr_expense_scale.py:0
+msgid "Car 7 CV or more"
+msgstr "Carro 7 CV ou mais"
