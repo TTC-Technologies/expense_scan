@@ -5614,3 +5614,47 @@ msgstr "Análisis de tickets: leer las líneas de artículos"
 #: code:addons/expense_scan/models/hr_expense_multi.py:0
 msgid "The photo holds %(count)s different purchases: one expense each; this one keeps the first."
 msgstr "La foto contiene %(count)s compras distintas: un gasto cada una; este conserva la primera."
+
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Excel template"
+msgstr "Plantilla de Excel"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "PDF summary"
+msgstr "Resumen en PDF"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Excel"
+msgstr "Excel"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Sheet format"
+msgstr "Formato de la hoja"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Is Month"
+msgstr "Hoja de un mes"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Create the missing formats"
+msgstr "Crear los formatos que faltan"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Receipts"
+msgstr "Justificantes"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Formats"
+msgstr "Formatos"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Has Missing Formats"
+msgstr "Formatos que faltan"

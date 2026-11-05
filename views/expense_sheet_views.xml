@@ -182,14 +182,16 @@
         <field name="model">expense.scan.sheet.archive</field>
         <field name="arch" type="xml">
             <list create="0">
-                <field name="create_date" string="Generated on"/>
+                <field name="period_label"/>
                 <field name="name"/>
-                <field name="date_from"/>
-                <field name="date_to"/>
                 <field name="employee_ids" widget="many2many_tags"/>
+                <field name="formats"/>
                 <field name="expense_count"/>
                 <field name="total_amount" sum="Total"/>
                 <field name="currency_id" column_invisible="1"/>
+                <field name="create_date" string="Generated on" optional="show"/>
+                <field name="date_from" optional="hide"/>
+                <field name="date_to" optional="hide"/>
                 <field name="user_id" optional="hide"/>
                 <field name="company_id" groups="base.group_multi_company" optional="hide"/>
             </list>
@@ -204,6 +206,8 @@
                 <header>
                     <button name="action_expense_scan_send" type="object" string="Send by e-mail"
                             icon="fa-envelope" class="btn-primary"/>
+                    <button name="action_expense_scan_complete_formats" type="object" string="Create the missing formats"
+                            icon="fa-plus" invisible="not has_missing_formats"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -218,13 +222,19 @@
                     <group>
                         <group>
                             <label for="date_from" string="Period"/>
-                            <div class="d-flex gap-2">
-                                <field name="date_from" class="w-auto"/>
-                                <span>to</span>
-                                <field name="date_to" class="w-auto"/>
+                            <div>
+                                <field name="is_month" invisible="1"/>
+                                <field name="period_label" invisible="not is_month" class="w-auto"/>
+                                <div class="d-flex gap-2" invisible="is_month">
+                                    <field name="date_from" class="w-auto"/>
+                                    <span>to</span>
+                                    <field name="date_to" class="w-auto"/>
+                                </div>
                             </div>
                             <field name="employee_ids" widget="many2many_tags"/>
                             <field name="total_amount"/>
+                            <field name="formats"/>
+                            <field name="has_missing_formats" invisible="1"/>
                             <field name="currency_id" invisible="1"/>
                         </group>
                         <group>

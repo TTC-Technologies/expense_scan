@@ -5615,3 +5615,47 @@ msgstr "Bonscan: de artikelregels van de bonnen lezen"
 #: code:addons/expense_scan/models/hr_expense_multi.py:0
 msgid "The photo holds %(count)s different purchases: one expense each; this one keeps the first."
 msgstr "De foto bevat %(count)s verschillende aankopen: een uitgave per aankoop; deze houdt de eerste."
+
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Excel template"
+msgstr "Excel-sjabloon"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "PDF summary"
+msgstr "PDF-overzicht"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Excel"
+msgstr "Excel"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Sheet format"
+msgstr "Formaat van het overzicht"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Is Month"
+msgstr "Overzicht van een maand"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Create the missing formats"
+msgstr "Ontbrekende formaten maken"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Receipts"
+msgstr "Bonnetjes"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Formats"
+msgstr "Formaten"
+
+#. module: expense_scan
+#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+msgid "Has Missing Formats"
+msgstr "Ontbrekende formaten"

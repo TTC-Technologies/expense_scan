@@ -246,6 +246,44 @@ class TestExpenseSheet(common.TransactionCase):
         # The files are in the archive: Odoo 20 drops "datas" at creation, which left them empty.
         self.assertTrue(all(attachment.raw for attachment in archive.attachment_ids))
 
+    def test_the_archive_reads_as_a_month_only_when_a_month_was_asked(self):
+        Archive = self.env["expense.scan.sheet.archive"]
+        expense = self.expense("Periode", 1)
+        month = Archive._expense_scan_keep(expense, [], "m", date_from=date(2026, 10, 1), date_to=date(2026, 10, 31),
+                                           is_month=True)
+        self.assertEqual(month.period_label, "10/2026")
+        # A range typed by the user, even from the 1st to the last day: the dates, not a guess.
+        custom = Archive._expense_scan_keep(expense, [], "c", date_from=date(2026, 10, 1), date_to=date(2026, 10, 31))
+        self.assertNotEqual(custom.period_label, "10/2026")
+        self.assertIn("2026", custom.period_label)
+        # Newest period first, whatever the day of generation.
+        older = Archive._expense_scan_keep(expense, [], "o", date_from=date(2026, 8, 1), date_to=date(2026, 8, 31),
+                                           is_month=True)
+        found = Archive.search([("id", "in", (month | custom | older).ids)])
+        self.assertEqual(found[-1], older)
+
+    def test_a_sheet_asked_again_completes_its_record_with_the_other_formats(self):
+        Archive = self.env["expense.scan.sheet.archive"]
+        expense = self.expense("Formats", 1)
+        self.attach(expense, png(), "t.png", "image/png")
+        month = dict(date_from=date(2026, 10, 1), date_to=date(2026, 10, 31), is_month=True)
+        first = Archive._expense_scan_keep(expense, [("a.pdf", b"summary", "summary")], "s", **month)
+        self.assertEqual(first.formats, "PDF summary")
+        # Same expenses, same period: the same record, with the new format beside the first.
+        second = Archive._expense_scan_keep(expense, [("a.xlsx", b"excel", "excel")], "s", **month)
+        self.assertEqual(second, first)
+        self.assertEqual(first.formats, "PDF summary, Excel")
+        self.assertEqual(len(first.attachment_ids), 2)
+        # The same format again replaces the file instead of piling up.
+        Archive._expense_scan_keep(expense, [("b.pdf", b"newer", "summary")], "s", **month)
+        self.assertEqual(len(first.attachment_ids), 2)
+        self.assertEqual(first.attachment_ids.filtered(lambda a: a.expense_scan_kind == "summary").raw, b"newer")
+        # The button builds what is missing: here the receipts.
+        self.assertTrue(first.has_missing_formats)
+        first.action_expense_scan_complete_formats()
+        self.assertIn("receipts", first.attachment_ids.mapped("expense_scan_kind"))
+        self.assertEqual(len(Archive.search([("expense_ids", "in", expense.ids)])), 1)
+
     def test_an_employee_generates_their_own_sheet(self):
         """Without the right to read employees: the archive of the sheet is still kept, and readable."""
         user = self.env['res.users'].create({

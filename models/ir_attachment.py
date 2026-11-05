@@ -2,11 +2,15 @@
 # Copyright 2026 T.T.C. SAS
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
 """Deleting the displayed receipt of a scanned expense."""
-from odoo import models
+from odoo import fields, models
 
 
 class IrAttachment(models.Model):
     _inherit = 'ir.attachment'
+
+    # The output of a generated expense sheet a file is: the PDF summary, the Excel file or the receipts.
+    expense_scan_kind = fields.Selection(
+        [('summary', "PDF summary"), ('excel', "Excel"), ('receipts', "Receipts")], string="Sheet format")
 
     def unlink(self):
         """Also delete the original photo of a deleted receipt.
