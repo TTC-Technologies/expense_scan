@@ -1,5 +1,13 @@
 # Changelog
 
+## 20.0.3.5.7 — 2026-11-06
+
+- Menus: *My Expenses → Expense Sheets* replaces both "Expense Sheet" and "Generated Sheets". It lists the sheets of the
+  employee, with a "New sheet" button that opens the wizard. Everyone finds their own sheets and no one else's; an
+  approver also sees those of the people they follow, and expense managers see all of them.
+- Wizard: the two choices of the expenses read "Internal: All expenses" and "Client: Re-invoicable expenses only", like
+  the type of the sheet they produce.
+
 ## 20.0.3.5.6 — 2026-11-05
 
 - Mileage scales: the vehicle categories made for a French company are named as whole sentences ("Voiture 3 CV ou

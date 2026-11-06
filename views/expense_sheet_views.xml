@@ -171,18 +171,16 @@
         <field name="target">new</field>
         <field name="context">{'default_period': 'current'}</field>
     </record>
-    <!-- One entry: the period (this month, last month, other) is picked in the wizard.
-         It sits in the follow-up group, with the expenses themselves. -->
-    <menuitem id="menu_expense_scan_sheets" name="Expense Sheet"
-              parent="hr_expense.menu_hr_expense_my_expenses"
-              action="expense_scan_sheet_current_month_action" sequence="15"/>
-
     <!-- Every generated sheet, with its files, kept as it was handed over. -->
     <record id="expense_scan_sheet_archive_view_list" model="ir.ui.view">
         <field name="name">expense.scan.sheet.archive.list</field>
         <field name="model">expense.scan.sheet.archive</field>
         <field name="arch" type="xml">
             <list create="0">
+                <header>
+                    <button name="%(expense_scan_sheet_current_month_action)d" type="action" string="New sheet"
+                            class="btn-primary" display="always"/>
+                </header>
                 <field name="period_label"/>
                 <field name="sheet_kind" widget="badge" decoration-info="sheet_kind == 'internal'"
                        decoration-warning="sheet_kind == 'client'"/>
@@ -272,7 +270,7 @@
     </record>
 
     <record id="expense_scan_sheet_archive_action" model="ir.actions.act_window">
-        <field name="name">Generated Sheets</field>
+        <field name="name">Expense Sheets</field>
         <field name="res_model">expense.scan.sheet.archive</field>
         <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="expense_scan_sheet_archive_view_search"/>
@@ -282,8 +280,10 @@
                handed over, and can be sent by e-mail from its page.</p>
         </field>
     </record>
-    <menuitem id="menu_expense_scan_sheet_archives" name="Generated Sheets"
+    <!-- The sheets of the employee (and, for an approver, of the people followed), with a button to make a new
+         one: the period (this month, last month, other) is picked in the wizard. -->
+    <menuitem id="menu_expense_scan_sheets" name="Expense Sheets"
               parent="hr_expense.menu_hr_expense_my_expenses"
-              action="expense_scan_sheet_archive_action" sequence="16"/>
+              action="expense_scan_sheet_archive_action" sequence="15"/>
 
 </odoo>

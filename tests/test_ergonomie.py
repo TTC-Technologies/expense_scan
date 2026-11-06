@@ -179,7 +179,7 @@ class TestRoles(common.TransactionCase):
 
     def test_menus_say_what_they_open(self):
         sheet = self.env.ref('expense_scan.menu_expense_scan_sheets')
-        self.assertEqual(sheet.with_context(lang='en_US').name, "Expense Sheet")
+        self.assertEqual(sheet.with_context(lang='en_US').name, "Expense Sheets")
         templates = self.env.ref('expense_scan.menu_expense_scan_export_templates')
         self.assertEqual(templates.with_context(lang='en_US').name, "Excel Export Templates")
         team = self.env['hr.expense'].with_user(self.users['approver']).action_expense_scan_team()
@@ -359,7 +359,7 @@ class TestLanguages(common.TransactionCase):
     def test_the_new_texts_read_in_the_language_of_the_user(self):
         menu = self.env.ref('expense_scan.menu_expense_scan_sheets')
         done = {code: menu.with_context(lang=code).name for code in self.languages}
-        # "Expense Sheet" has a translation of its own in every language.
+        # "Expense Sheets" has a translation of its own in every language.
         for code, name in done.items():
             self.assertTrue(name, code)
         self.assertNotEqual(len(set(done.values())), 1)

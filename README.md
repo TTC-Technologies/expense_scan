@@ -250,7 +250,7 @@ and its own requirements.
   with tax by rate and numbered receipts, Excel export on a template
   (*Configuration → Excel Export Templates*), one sheet per employee, gathered in
   an archive when there are several. Every sheet generated is kept under
-  *My Expenses → Generated Sheets*, as it was handed over; *Send by e-mail*,
+  *My Expenses → Expense Sheets*, as it was handed over; *Send by e-mail*,
   in the dialog or on the sheet, writes the e-mail with the files attached,
   and the sheet's history keeps it.
 - **Business meals**: a category whose name says so ("Invitation", "Business

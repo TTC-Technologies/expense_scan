@@ -18,6 +18,7 @@ access_expense_scan_correction_manager,expense.scan.correction.manager,expense.s
 expense_scan_correction_company_rule,Scan corrections: multi-company,expense.scan.correction,,crud,"[('company_id', 'in', company_ids)]"
 access_expense_scan_sheet_archive_user,Generated expense sheets: one's own,expense.scan.sheet.archive,base.group_user,cru,"['|', ('user_id', '=', user.id), ('employee_ids.user_id', '=', user.id)]"
 access_expense_scan_sheet_archive_manager,Generated expense sheets: all,expense.scan.sheet.archive,hr_expense.group_hr_expense_manager,crud,
+access_expense_scan_sheet_archive_approver,Generated expense sheets: those of the people followed,expense.scan.sheet.archive,hr_expense.group_hr_expense_team_approver,r,"['|', ('employee_ids.expense_manager_id', '=', user.id), ('employee_ids.parent_id.user_id', '=', user.id)]"
 expense_scan_sheet_archive_company_rule,Generated expense sheets: multi-company,expense.scan.sheet.archive,,crud,"[('company_id', 'in', company_ids)]"
 access_expense_scan_place_user,Places: homes are private,expense.scan.place,base.group_user,cru,"['|', ('employee_id', '=', False), ('employee_id.user_id', '=', user.id)]"
 access_expense_scan_place_manager,Places: expense managers,expense.scan.place,hr_expense.group_hr_expense_manager,crud,"['|', ('employee_id', '=', False), ('employee_id.user_id', '=', user.id)]"

@@ -42,7 +42,7 @@ class ExpenseScanSheetArchive(models.Model):
     formats = fields.Char(string="Formats", compute='_compute_formats')
     has_missing_formats = fields.Boolean(compute='_compute_formats')
     # What the sheet was generated with, to build its other formats afterwards.
-    scope = fields.Selection([('all', "All expenses"), ('reinvoice', "Re-invoiced expenses only")],
+    scope = fields.Selection([('all', "Internal: All expenses"), ('reinvoice', "Client: Re-invoicable expenses only")],
                              string="Expenses", readonly=True)
     sheet_kind = fields.Selection(
         [('internal', "Internal (reimbursement)"), ('client', "Client (re-invoicing)")],

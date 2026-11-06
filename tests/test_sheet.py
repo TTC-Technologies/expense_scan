@@ -285,6 +285,28 @@ class TestExpenseSheet(common.TransactionCase):
         self.assertEqual(archive.expense_ids, both)
         self.assertTrue(archive.company_paid)
 
+    def test_each_one_finds_their_sheets_and_the_approver_those_of_the_people_followed(self):
+        Users = self.env["res.users"].with_context(no_reset_password=True)
+        group = self.env.ref
+        def user(login, *groups):
+            return Users.create({"name": login, "login": login, "group_ids": [(6, 0, [group(g).id for g in (
+                "base.group_user",) + groups])]})
+        boss, mine, other = user("sheet_boss", "hr_expense.group_hr_expense_team_approver"), user("sheet_mine"), user("sheet_other")
+        Employee = self.env["hr.employee"]
+        boss_employee = Employee.create({"name": "Boss", "user_id": boss.id})
+        mine_employee = Employee.create({"name": "Moi", "user_id": mine.id, "parent_id": boss_employee.id})
+        other_employee = Employee.create({"name": "Autre", "user_id": other.id})
+        Archive = self.env["expense.scan.sheet.archive"]
+        sheets = {}
+        for key, employee in (("mine", mine_employee), ("other", other_employee), ("boss", boss_employee)):
+            expense = self.expense(key, 1, employee_id=employee.id)
+            sheets[key] = Archive._expense_scan_keep(expense, [], key, date_from=date(2026, 8, 1),
+                                                     date_to=date(2026, 8, 31), is_month=True)
+        seen = lambda who: Archive.with_user(who).search([("id", "in", [s.id for s in sheets.values()])]).mapped("name")
+        self.assertEqual(sorted(seen(mine)), ["mine"])
+        self.assertEqual(sorted(seen(other)), ["other"])
+        self.assertEqual(sorted(seen(boss)), ["boss", "mine"])
+
     def test_the_internal_and_the_client_sheets_are_told_apart(self):
         Archive = self.env["expense.scan.sheet.archive"]
         expense = self.expense("Les deux", 1, reinvoice_mode="project", project_id=self.project.id)
