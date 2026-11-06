@@ -798,7 +798,7 @@ class ExpenseScanSheetWizard(models.TransientModel):
         'hr.employee', string="Employees",
         help="Empty: every employee whose expenses you can see.")
     scope = fields.Selection(
-        [('all', "All expenses"), ('reinvoice', "Re-invoiced expenses only")],
+        [('all', "Internal: All expenses"), ('reinvoice', "Client: Re-invoicable expenses only")],
         string="Expenses", default='all', required=True)
     project_ids = fields.Many2many(
         'project.project', string="Projects",

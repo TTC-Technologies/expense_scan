@@ -5729,3 +5729,23 @@ msgstr "Coche 6 CV"
 #: code:addons/expense_scan/models/hr_expense_scale.py:0
 msgid "Car 7 CV or more"
 msgstr "Coche 7 CV o más"
+
+#. module: expense_scan
+#: model:ir.ui.menu,name:expense_scan.menu_expense_scan_sheets
+msgid "Expense Sheets"
+msgstr "Hojas de gastos"
+
+#. module: expense_scan
+#: model:ir.ui.menu,name:expense_scan.menu_expense_scan_sheets
+msgid "New sheet"
+msgstr "Nueva hoja"
+
+#. module: expense_scan
+#: model:ir.ui.menu,name:expense_scan.menu_expense_scan_sheets
+msgid "Internal: All expenses"
+msgstr "Interna: Todos los gastos"
+
+#. module: expense_scan
+#: model:ir.ui.menu,name:expense_scan.menu_expense_scan_sheets
+msgid "Client: Re-invoicable expenses only"
+msgstr "Cliente: Solo gastos refacturables"

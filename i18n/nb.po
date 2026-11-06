@@ -5729,3 +5729,23 @@ msgstr "Bil 6 CV"
 #: code:addons/expense_scan/models/hr_expense_scale.py:0
 msgid "Car 7 CV or more"
 msgstr "Bil 7 CV eller mer"
+
+#. module: expense_scan
+#: model:ir.ui.menu,name:expense_scan.menu_expense_scan_sheets
+msgid "Expense Sheets"
+msgstr "Utgiftsark"
+
+#. module: expense_scan
+#: model:ir.ui.menu,name:expense_scan.menu_expense_scan_sheets
+msgid "New sheet"
+msgstr "Nytt ark"
+
+#. module: expense_scan
+#: model:ir.ui.menu,name:expense_scan.menu_expense_scan_sheets
+msgid "Internal: All expenses"
+msgstr "Intern: Alle utgifter"
+
+#. module: expense_scan
+#: model:ir.ui.menu,name:expense_scan.menu_expense_scan_sheets
+msgid "Client: Re-invoicable expenses only"
+msgstr "Kunde: Bare viderefakturerbare utgifter"
