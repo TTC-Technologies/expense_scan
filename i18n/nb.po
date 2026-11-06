@@ -40,7 +40,9 @@ msgstr "\"%(cell)s\": en kolonnebokstav (B) eller en celle (K4)."
 msgid ""
 "\"%(expense)s\" is a business meal for %(covers)s covers: write the names "
 "and companies of the guests in the notes before submitting it."
-msgstr "«%(expense)s» er et representasjonsmåltid for %(covers)s kuverter: skriv gjestenes navn og firmaer i notatene før du sender det inn."
+msgstr ""
+"«%(expense)s» er et representasjonsmåltid for %(covers)s kuverter: skriv "
+"gjestenes navn og firmaer i notatene før du sender det inn."
 
 #. module: expense_scan
 #. odoo-python
@@ -48,7 +50,9 @@ msgstr "«%(expense)s» er et representasjonsmåltid for %(covers)s kuverter: sk
 msgid ""
 "\"%(expense)s\" is in the \"%(category)s\" category, which requires the "
 "number of nights. Enter it before saving."
-msgstr "\"%(expense)s\" hører til kategorien \"%(category)s\", som krever antall netter. Fyll det inn før du lagrer."
+msgstr ""
+"\"%(expense)s\" hører til kategorien \"%(category)s\", som krever antall "
+"netter. Fyll det inn før du lagrer."
 
 #. module: expense_scan
 #. odoo-python
@@ -56,7 +60,9 @@ msgstr "\"%(expense)s\" hører til kategorien \"%(category)s\", som krever antal
 msgid ""
 "\"%(expense)s\": the date is not printed on the receipt, the expense has the"
 " date of the day. Enter the date, or confirm it, before submitting."
-msgstr "«%(expense)s»: datoen er ikke trykt på kvitteringen, utgiften har dagens dato. Skriv inn datoen, eller bekreft den, før du sender inn."
+msgstr ""
+"«%(expense)s»: datoen er ikke trykt på kvitteringen, utgiften har dagens "
+"dato. Skriv inn datoen, eller bekreft den, før du sender inn."
 
 #. module: expense_scan
 #. odoo-python
@@ -70,7 +76,9 @@ msgstr "\"%(value)s\" kan ikke stå i %(where)s (%(cell)s)."
 msgid ""
 "\"%s\" was not found on the map: write its address more fully (street, "
 "town), or pick a place in the list."
-msgstr "«%s» ble ikke funnet på kartet: skriv adressen mer fullstendig (gate, sted), eller velg et sted i listen."
+msgstr ""
+"«%s» ble ikke funnet på kartet: skriv adressen mer fullstendig (gate, sted),"
+" eller velg et sted i listen."
 
 #. module: expense_scan
 #. odoo-python
@@ -78,14 +86,17 @@ msgstr "«%s» ble ikke funnet på kartet: skriv adressen mer fullstendig (gate,
 msgid ""
 "\"%s\" was not found on the map: write its address more fully (street, "
 "town)."
-msgstr "«%s» ble ikke funnet på kartet: skriv adressen mer fullstendig (gate, sted)."
+msgstr ""
+"«%s» ble ikke funnet på kartet: skriv adressen mer fullstendig (gate, sted)."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid ""
 "\"My Expenses\" and \"Expenses to Process\" start with the \"Current month\""
 " filter."
-msgstr "\"Utleggene mine\" og \"Utgifter å behandle\" starter med filteret \"Inneværende måned\"."
+msgstr ""
+"\"Utleggene mine\" og \"Utgifter å behandle\" starter med filteret "
+"\"Inneværende måned\"."
 
 #. module: expense_scan
 #. odoo-python
@@ -99,7 +110,8 @@ msgstr "%(category)s %(date)s"
 msgid ""
 "%(count)d receipts with a different total or date were moved to their own "
 "expenses."
-msgstr "%(count)d kvitteringer med annen sum eller dato er flyttet til egne utlegg."
+msgstr ""
+"%(count)d kvitteringer med annen sum eller dato er flyttet til egne utlegg."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -113,7 +125,9 @@ msgstr "%(count)s utlegg latt være som de var"
 msgid ""
 "%(count)s expense(s) of this order's missions wait for the manager or for a "
 "decision. The expense line does not include them yet."
-msgstr "%(count)s utlegg i disse prosjektene venter på ansvarlig eller på en avgjørelse. Utleggslinjen inneholder dem ikke ennå."
+msgstr ""
+"%(count)s utlegg i disse prosjektene venter på ansvarlig eller på en "
+"avgjørelse. Utleggslinjen inneholder dem ikke ennå."
 
 #. module: expense_scan
 #. odoo-python
@@ -121,7 +135,9 @@ msgstr "%(count)s utlegg i disse prosjektene venter på ansvarlig eller på en a
 msgid ""
 "%(count)s expense(s) wait for the manager or for a decision. The expense "
 "line of this order does not move until they are settled."
-msgstr "%(count)s utlegg venter på ansvarlig eller på en avgjørelse. Utleggslinjen i denne ordren flytter seg ikke før de er avklart."
+msgstr ""
+"%(count)s utlegg venter på ansvarlig eller på en avgjørelse. Utleggslinjen i"
+" denne ordren flytter seg ikke før de er avklart."
 
 #. module: expense_scan
 #. odoo-python
@@ -159,7 +175,9 @@ msgstr "%(count)s hoppet over på grunn av manglende tilgang (%(names)s)."
 msgid ""
 "%(count)s skipped: their journal entry is posted (%(names)s). Cancel it in "
 "Accounting first."
-msgstr "%(count)s hoppet over: bilaget er bokført (%(names)s). Annuller det først i Regnskap."
+msgstr ""
+"%(count)s hoppet over: bilaget er bokført (%(names)s). Annuller det først i "
+"Regnskap."
 
 #. module: expense_scan
 #. odoo-python
@@ -167,7 +185,9 @@ msgstr "%(count)s hoppet over: bilaget er bokført (%(names)s). Annuller det fø
 msgid ""
 "%(count)s skipped: they are on a customer invoice (%(names)s). Cancel the "
 "invoice first."
-msgstr "%(count)s hoppet over: de ligger på en kundefaktura (%(names)s). Kanseller fakturaen først."
+msgstr ""
+"%(count)s hoppet over: de ligger på en kundefaktura (%(names)s). Kanseller "
+"fakturaen først."
 
 #. module: expense_scan
 #. odoo-python
@@ -175,7 +195,9 @@ msgstr "%(count)s hoppet over: de ligger på en kundefaktura (%(names)s). Kansel
 msgid ""
 "%(employee)s is not assigned to: %(projects)s. Ask a project manager to "
 "assign them first."
-msgstr "%(employee)s er ikke tilordnet: %(projects)s. Be først en prosjektleder tilordne vedkommende."
+msgstr ""
+"%(employee)s er ikke tilordnet: %(projects)s. Be først en prosjektleder "
+"tilordne vedkommende."
 
 #. module: expense_scan
 #. odoo-python
@@ -183,7 +205,9 @@ msgstr "%(employee)s er ikke tilordnet: %(projects)s. Be først en prosjektleder
 msgid ""
 "%(engine)s - loaded and tested in %(duration)s s.\n"
 "Text read: \"%(text)s\""
-msgstr "%(engine)s - lastet og testet på %(duration)s s.\nLest tekst: \"%(text)s\""
+msgstr ""
+"%(engine)s - lastet og testet på %(duration)s s.\n"
+"Lest tekst: \"%(text)s\""
 
 #. module: expense_scan
 #. odoo-python
@@ -191,14 +215,17 @@ msgstr "%(engine)s - lastet og testet på %(duration)s s.\nLest tekst: \"%(text)
 msgid ""
 "%(expense)s carries %(count)s taxes. Another amount needs exactly one: use "
 "\"Recoverable\" or \"Not recoverable\" instead."
-msgstr "%(expense)s har %(count)s avgifter. Et annet beløp krever nøyaktig én: bruk «Fradragsberettiget» eller «Ikke fradragsberettiget» i stedet."
+msgstr ""
+"%(expense)s har %(count)s avgifter. Et annet beløp krever nøyaktig én: bruk "
+"«Fradragsberettiget» eller «Ikke fradragsberettiget» i stedet."
 
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense_vat.py:0
 msgid ""
 "%(expense)s has a VAT correction (%(entry)s). Reverse the correction first."
-msgstr "%(expense)s har en mva-korreksjon (%(entry)s). Reverser korreksjonen først."
+msgstr ""
+"%(expense)s har en mva-korreksjon (%(entry)s). Reverser korreksjonen først."
 
 #. module: expense_scan
 #. odoo-python
@@ -206,7 +233,9 @@ msgstr "%(expense)s har en mva-korreksjon (%(entry)s). Reverser korreksjonen fø
 msgid ""
 "%(expense)s is on the invoice %(invoice)s. Cancel the invoice (or issue a "
 "credit note) first."
-msgstr "%(expense)s ligger på fakturaen %(invoice)s. Kanseller fakturaen først (eller utsted en kreditnota)."
+msgstr ""
+"%(expense)s ligger på fakturaen %(invoice)s. Kanseller fakturaen først "
+"(eller utsted en kreditnota)."
 
 #. module: expense_scan
 #. odoo-python
@@ -214,7 +243,9 @@ msgstr "%(expense)s ligger på fakturaen %(invoice)s. Kanseller fakturaen først
 msgid ""
 "%(expense)s is on the invoice %(invoice)s. Delete or cancel the invoice "
 "first, change the expenses, then invoice again."
-msgstr "%(expense)s ligger på fakturaen %(invoice)s. Slett eller kanseller fakturaen først, endre utleggene og fakturer deretter på nytt."
+msgstr ""
+"%(expense)s ligger på fakturaen %(invoice)s. Slett eller kanseller fakturaen"
+" først, endre utleggene og fakturer deretter på nytt."
 
 #. module: expense_scan
 #. odoo-python
@@ -318,7 +349,9 @@ msgstr "%s tilhører et annet firma."
 msgid ""
 "%s covers read: a business meal. Write the names and companies of the guests"
 " in the notes."
-msgstr "%s kuverter lest: et representasjonsmåltid. Skriv gjestenes navn og firmaer i notatene."
+msgstr ""
+"%s kuverter lest: et representasjonsmåltid. Skriv gjestenes navn og firmaer "
+"i notatene."
 
 #. module: expense_scan
 #. odoo-python
@@ -326,7 +359,9 @@ msgstr "%s kuverter lest: et representasjonsmåltid. Skriv gjestenes navn og fir
 msgid ""
 "%s covers read: for a business meal, choose its category and write the names"
 " and companies of the guests in the notes."
-msgstr "%s kuverter lest: for et representasjonsmåltid, velg kategorien og skriv gjestenes navn og firmaer i notatene."
+msgstr ""
+"%s kuverter lest: for et representasjonsmåltid, velg kategorien og skriv "
+"gjestenes navn og firmaer i notatene."
 
 #. module: expense_scan
 #. odoo-python
@@ -338,7 +373,8 @@ msgstr "%s utlegg satt tilbake til utkast."
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense.py:0
 msgid "%s is already approved or posted: a scan would rewrite its figures."
-msgstr "%s er allerede godkjent eller bokført: en skanning ville overskrive tallene."
+msgstr ""
+"%s er allerede godkjent eller bokført: en skanning ville overskrive tallene."
 
 #. module: expense_scan
 #. odoo-python
@@ -358,7 +394,9 @@ msgstr "%s forfaller ved betaling: korriger mva-en når utlegget er betalt."
 msgid ""
 "%s is not a purchase tax with a percentage: its VAT cannot be corrected "
 "here."
-msgstr "%s er ikke en innkjøpsavgift med prosentsats: mva-en kan ikke korrigeres her."
+msgstr ""
+"%s er ikke en innkjøpsavgift med prosentsats: mva-en kan ikke korrigeres "
+"her."
 
 #. module: expense_scan
 #. odoo-python
@@ -432,7 +470,9 @@ msgstr "<i class=\"fa fa-bug me-1\" aria-hidden=\"true\"/>Rapporter en feil"
 msgid ""
 "<i class=\"fa fa-building-o me-1\" aria-hidden=\"true\"/>Support T.T.C. SAS,"
 " the company behind the module"
-msgstr "<i class=\"fa fa-building-o me-1\" aria-hidden=\"true\"/>Støtt T.T.C. SAS, selskapet bak modulen"
+msgstr ""
+"<i class=\"fa fa-building-o me-1\" aria-hidden=\"true\"/>Støtt T.T.C. SAS, "
+"selskapet bak modulen"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
@@ -449,7 +489,9 @@ msgstr "<i class=\"fa fa-file-text-o me-2\" title=\"Valgte utlegg\"/>"
 msgid ""
 "<i class=\"fa fa-lightbulb-o me-1\" aria-hidden=\"true\"/>Suggest an "
 "improvement"
-msgstr "<i class=\"fa fa-lightbulb-o me-1\" aria-hidden=\"true\"/>Foreslå en forbedring"
+msgstr ""
+"<i class=\"fa fa-lightbulb-o me-1\" aria-hidden=\"true\"/>Foreslå en "
+"forbedring"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
@@ -461,7 +503,9 @@ msgstr "<i class=\"fa fa-search\" role=\"img\" aria-label=\"Skanning\"/>"
 msgid ""
 "<i class=\"fa fa-wrench me-1\" aria-hidden=\"true\"/>Ask for a custom "
 "adaptation"
-msgstr "<i class=\"fa fa-wrench me-1\" aria-hidden=\"true\"/>Be om en skreddersydd tilpasning"
+msgstr ""
+"<i class=\"fa fa-wrench me-1\" aria-hidden=\"true\"/>Be om en skreddersydd "
+"tilpasning"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
@@ -473,7 +517,9 @@ msgstr "<span class=\"d-none d-md-inline ms-1\">Slett</span>"
 msgid ""
 "<span class=\"o_expense_scan_coffee me-1\" aria-hidden=\"true\"/>Buy the "
 "author a coffee"
-msgstr "<span class=\"o_expense_scan_coffee me-1\" aria-hidden=\"true\"/>Spander en kaffe på utvikleren"
+msgstr ""
+"<span class=\"o_expense_scan_coffee me-1\" aria-hidden=\"true\"/>Spander en "
+"kaffe på utvikleren"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.project_project_view_form_expense_budget
@@ -496,7 +542,10 @@ msgstr "<strong>Utleggsregler</strong>"
 msgid ""
 "A column letter (\"B\"): each expense's value, row by row. A cell (\"K4\"): "
 "a header value, written once. For a merged cell, its top-left cell."
-msgstr "En kolonnebokstav (\"B\"): verdien for hvert utlegg, rad for rad. En celle (\"K4\"): en toppverdi, skrevet én gang. For en sammenslått celle, cellen øverst til venstre."
+msgstr ""
+"En kolonnebokstav (\"B\"): verdien for hvert utlegg, rad for rad. En celle "
+"(\"K4\"): en toppverdi, skrevet én gang. For en sammenslått celle, cellen "
+"øverst til venstre."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_max_age_days
@@ -504,12 +553,15 @@ msgstr "En kolonnebokstav (\"B\"): verdien for hvert utlegg, rad for rad. En cel
 msgid ""
 "A date older than this is ignored: it is almost always a warranty or loyalty"
 " card date."
-msgstr "En eldre dato ignoreres: det er nesten alltid en garanti- eller kundekortdato."
+msgstr ""
+"En eldre dato ignoreres: det er nesten alltid en garanti- eller "
+"kundekortdato."
 
 #. module: expense_scan
 #: model:ir.model.constraint,message:expense_scan.constraint_expense_scan_place_check_coordinates
 msgid "A latitude lies between -90 and 90, a longitude between -180 and 180."
-msgstr "En breddegrad ligger mellom -90 og 90, en lengdegrad mellom -180 og 180."
+msgstr ""
+"En breddegrad ligger mellom -90 og 90, en lengdegrad mellom -180 og 180."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
@@ -522,7 +574,8 @@ msgstr "En ny utgift for samme rute, med dagens dato"
 #: code:addons/expense_scan/models/hr_expense_multi.py:0
 msgid ""
 "A receipt with a different total or date was moved to its own expense: %s"
-msgstr "En kvittering med annen sum eller dato er flyttet til et eget utlegg: %s"
+msgstr ""
+"En kvittering med annen sum eller dato er flyttet til et eget utlegg: %s"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_policy_view_form
@@ -531,7 +584,10 @@ msgid ""
 "                        exceeded, ℹ︎ for a point to check. \"Save and close\" puts out\n"
 "                        the ℹ︎ signs, a justification the ⚠ signs. Without a\n"
 "                        family or a category, it applies to every expense."
-msgstr "En regel advarer uten å blokkere: ⚠ når en grense overskrides, ℹ︎ for et punkt som bør kontrolleres. «Lagre og lukk» slukker ℹ︎, en begrunnelse ⚠. Uten familie eller kategori gjelder den alle utlegg."
+msgstr ""
+"En regel advarer uten å blokkere: ⚠ når en grense overskrides, ℹ︎ for et "
+"punkt som bør kontrolleres. «Lagre og lukk» slukker ℹ︎, en begrunnelse ⚠. "
+"Uten familie eller kategori gjelder den alle utlegg."
 
 #. module: expense_scan
 #. odoo-python
@@ -540,7 +596,10 @@ msgid ""
 "A scanned expense can only carry one tax: the amount in the \"Receipt tax\" field prevails, and the rate only carries the tax tags.\n"
 "\n"
 "For a receipt mixing several rates, keep the highest and leave the amount read on the receipt."
-msgstr "Et skannet utlegg kan bare ha én avgift: beløpet i feltet \"Avgift på kvitteringen\" gjelder, og satsen bærer bare avgiftsmerkene.\n\nFor en kvittering med flere satser, behold den høyeste og la beløpet som er lest stå."
+msgstr ""
+"Et skannet utlegg kan bare ha én avgift: beløpet i feltet \"Avgift på kvitteringen\" gjelder, og satsen bærer bare avgiftsmerkene.\n"
+"\n"
+"For en kvittering med flere satser, behold den høyeste og la beløpet som er lest stå."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_export_template__single_project
@@ -601,7 +660,8 @@ msgstr "Legg til stedene teamet ditt reiser til"
 msgid ""
 "Added to the allowance of the year in the yearly formula method; ignored by "
 "the other."
-msgstr "Legges til årets godtgjørelse i årsformelen; ignoreres av den andre metoden."
+msgstr ""
+"Legges til årets godtgjørelse i årsformelen; ignoreres av den andre metoden."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__address
@@ -622,7 +682,10 @@ msgid ""
 "Adds a \"Re-invoice\" field to expenses and suggests the employee's project running on the receipt date. The expense is then booked on the project's analytic account. Once approved, it is added up with the project's other expenses on the expense line of its sales order, for the next invoice, and posted when that invoice is.\n"
 "\n"
 "Off by default: not every organisation works by project."
-msgstr "Legger til et felt «Viderefakturer» på utlegg og foreslår den ansattes prosjekt som gjelder på kvitteringsdatoen. Utlegget bokføres da på prosjektets analytiske konto. Når det er godkjent, legges det sammen med prosjektets andre utlegg på utleggslinjen i salgsordren, til neste faktura, og bokføres sammen med den fakturaen.\n\nAv som standard: ikke alle organisasjoner jobber per prosjekt."
+msgstr ""
+"Legger til et felt «Viderefakturer» på utlegg og foreslår den ansattes prosjekt som gjelder på kvitteringsdatoen. Utlegget bokføres da på prosjektets analytiske konto. Når det er godkjent, legges det sammen med prosjektets andre utlegg på utleggslinjen i salgsordren, til neste faktura, og bokføres sammen med den fakturaen.\n"
+"\n"
+"Av som standard: ikke alle organisasjoner jobber per prosjekt."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__outcome
@@ -644,7 +707,9 @@ msgstr "Flyplasser og stasjoner"
 msgid ""
 "Airports, stations, sites: the places offered as start or end.\n"
 "                            Homes and offices are added from the employees' addresses."
-msgstr "Flyplasser, stasjoner, arbeidssteder: stedene som tilbys som start eller mål. Boliger og kontorer kommer fra de ansattes adresser."
+msgstr ""
+"Flyplasser, stasjoner, arbeidssteder: stedene som tilbys som start eller "
+"mål. Boliger og kontorer kommer fra de ansattes adresser."
 
 #. module: expense_scan
 #: model_terms:ir.actions.act_window,help:expense_scan.expense_scan_place_action
@@ -653,7 +718,10 @@ msgid ""
 "               of a mileage expense. Homes and offices come from the employees'\n"
 "               addresses, customers from their contacts, and a place typed in an\n"
 "               expense is kept here."
-msgstr "Flyplasser, stasjoner, arbeidssteder: de tilbys som start eller mål for en kilometergodtgjørelse. Boliger og kontorer kommer fra de ansattes adresser, kunder fra kontaktene deres, og et sted skrevet i en utgift lagres her."
+msgstr ""
+"Flyplasser, stasjoner, arbeidssteder: de tilbys som start eller mål for en "
+"kilometergodtgjørelse. Boliger og kontorer kommer fra de ansattes adresser, "
+"kunder fra kontaktene deres, og et sted skrevet i en utgift lagres her."
 
 #. module: expense_scan
 #: model:expense.scan.policy.rule,name:expense_scan.policy_good_practice_alcohol
@@ -695,7 +763,9 @@ msgstr "Beløpet er vanskelig å lese på kvitteringen: kontroller det."
 msgid ""
 "Amount incl. tax of a re-invoiced expense; zero otherwise. Its total at the "
 "bottom of the list is what goes to the customers."
-msgstr "Beløp inkl. mva for et viderefakturert utlegg, ellers null. Summen nederst i listen er det som går til kundene."
+msgstr ""
+"Beløp inkl. mva for et viderefakturert utlegg, ellers null. Summen nederst i"
+" listen er det som går til kundene."
 
 #. module: expense_scan
 #. odoo-python
@@ -708,14 +778,18 @@ msgstr "Beløpet ble ikke funnet på kvitteringen: fyll det inn."
 msgid ""
 "An employee is offered the projects they manage, have a task on or are "
 "assigned to."
-msgstr "Den ansatte får tilbud om prosjektene vedkommende leder, har en oppgave på eller er tildelt."
+msgstr ""
+"Den ansatte får tilbud om prosjektene vedkommende leder, har en oppgave på "
+"eller er tildelt."
 
 #. module: expense_scan
 #: model_terms:ir.actions.act_window,help:expense_scan.expense_mileage_scale_action
 msgid ""
 "An employee with a vehicle is paid by the scale of the year, from the cumulated distance.\n"
 "               Rates, brackets and vehicles are yours to adjust for your country."
-msgstr "En ansatt med kjøretøy får godtgjørelse etter årets sats ut fra samlet distanse. Satser, trinn og kjøretøy tilpasser du selv for ditt land."
+msgstr ""
+"En ansatt med kjøretøy får godtgjørelse etter årets sats ut fra samlet "
+"distanse. Satser, trinn og kjøretøy tilpasser du selv for ditt land."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__reinvoice_mode
@@ -724,7 +798,11 @@ msgid ""
 " Choosing a project sets \"Yes\"; \"No\" then keeps the cost on the project "
 "without billing it. \"To decide\" holds an expense back: the manager cannot "
 "approve it until it is settled."
-msgstr "Et utlegg uten prosjekt viderefaktureres ikke: det er ingenting å avgjøre. Å velge et prosjekt setter «Ja»; «Nei» lar da kostnaden ligge på prosjektet uten å fakturere den. «Avgjøres senere» holder utlegget tilbake: lederen kan ikke godkjenne det før det er avgjort."
+msgstr ""
+"Et utlegg uten prosjekt viderefaktureres ikke: det er ingenting å avgjøre. Å"
+" velge et prosjekt setter «Ja»; «Nei» lar da kostnaden ligge på prosjektet "
+"uten å fakturere den. «Avgjøres senere» holder utlegget tilbake: lederen kan"
+" ikke godkjenne det før det er avgjort."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
@@ -746,7 +824,8 @@ msgstr "Godkjente utlegg"
 #: model:ir.model.fields,help:expense_scan.field_project_project__expense_scan_progress
 msgid ""
 "Approved expenses and expenses to approve, as a percentage of the budget."
-msgstr "Godkjente utlegg og utlegg som skal godkjennes, i prosent av budsjettet."
+msgstr ""
+"Godkjente utlegg og utlegg som skal godkjennes, i prosent av budsjettet."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_export_template_view_form
@@ -860,7 +939,9 @@ msgstr "Brukt budsjett"
 msgid ""
 "Business distance of the year driven with this vehicle before the first "
 "expense of Odoo (the year below)."
-msgstr "Årets tjenestekjøring med dette kjøretøyet før den første utgiften i Odoo (året under)."
+msgstr ""
+"Årets tjenestekjøring med dette kjøretøyet før den første utgiften i Odoo "
+"(året under)."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_merchant
@@ -868,7 +949,10 @@ msgid ""
 "Business that issued the receipt. Correct it if the scan misread it: on "
 "submission, the merchant and the category are used to file the next "
 "receipts, for the whole team."
-msgstr "Virksomheten som utstedte kvitteringen. Rett den hvis skanningen leste feil: ved innsending brukes brukerstedet og kategorien til å sortere hele teamets neste kvitteringer."
+msgstr ""
+"Virksomheten som utstedte kvitteringen. Rett den hvis skanningen leste feil:"
+" ved innsending brukes brukerstedet og kategorien til å sortere hele teamets"
+" neste kvitteringer."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -927,7 +1011,10 @@ msgid ""
 "Category given to expenses created by a scan.\n"
 "\n"
 "When empty, Odoo chooses: it looks for the internal reference \"EXP_GEN\" and otherwise takes the first category in alphabetical order. Renaming that reference is enough to send receipts anywhere, hence this setting, which does not depend on any reference."
-msgstr "Kategori for utlegg som opprettes av en skanning.\n\nHvis tom, velger Odoo: den søker etter den interne referansen \"EXP_GEN\" og tar ellers den første kategorien alfabetisk. Det holder å gi referansen nytt navn for å sende kvitteringer hvor som helst, derfor denne innstillingen, som ikke avhenger av noen referanse."
+msgstr ""
+"Kategori for utlegg som opprettes av en skanning.\n"
+"\n"
+"Hvis tom, velger Odoo: den søker etter den interne referansen \"EXP_GEN\" og tar ellers den første kategorien alfabetisk. Det holder å gi referansen nytt navn for å sende kvitteringer hvor som helst, derfor denne innstillingen, som ikke avhenger av noen referanse."
 
 #. module: expense_scan
 #. odoo-python
@@ -944,7 +1031,8 @@ msgstr "Gjenkjent kategori"
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid ""
 "Charge the expenses of a project to its customer, through its sales order"
-msgstr "Viderefakturer et prosjekts utlegg til kunden, via prosjektets salgsordre"
+msgstr ""
+"Viderefakturer et prosjekts utlegg til kunden, via prosjektets salgsordre"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy_rule__rule_type
@@ -962,7 +1050,9 @@ msgid ""
 "Checks every expense, with or without a project: the company's good practice"
 " rules. Otherwise, only the projects of the customers or the projects listed"
 " below are concerned."
-msgstr "Kontrollerer hvert utlegg, med eller uten prosjekt: firmaets gode praksis. Ellers gjelder det bare kundenes prosjekter eller prosjektene nedenfor."
+msgstr ""
+"Kontrollerer hvert utlegg, med eller uten prosjekt: firmaets gode praksis. "
+"Ellers gjelder det bare kundenes prosjekter eller prosjektene nedenfor."
 
 #. module: expense_scan
 #. odoo-python
@@ -987,7 +1077,9 @@ msgstr "Velg verdien som skal skrives i %s."
 msgid ""
 "Chosen from the fiscal power and the fuel; change it if the scale of your "
 "country has other categories."
-msgstr "Velges ut fra skatteytelse og drivstoff; endre den hvis landets sats har andre kategorier."
+msgstr ""
+"Velges ut fra skatteytelse og drivstoff; endre den hvis landets sats har "
+"andre kategorier."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy_rule__extra_cities
@@ -1008,7 +1100,9 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/expense_scan/static/src/js/action_helper_patch.js:0
 msgid "Click \"Upload\" to choose a receipt, or \"New\" to enter an expense by hand."
-msgstr "Klikk på «Last opp» for å velge en kvittering, eller på «Ny» for å registrere et utlegg manuelt."
+msgstr ""
+"Klikk på «Last opp» for å velge en kvittering, eller på «Ny» for å "
+"registrere et utlegg manuelt."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -1225,7 +1319,9 @@ msgstr "Kunde"
 msgid ""
 "Customer invoice that carries this expense, draft or posted. Cleared if the "
 "invoice is deleted, cancelled or goes back to draft."
-msgstr "Kundefaktura som inneholder dette utlegget, som kladd eller bokført. Fjernes hvis fakturaen slettes, kanselleres eller går tilbake til kladd."
+msgstr ""
+"Kundefaktura som inneholder dette utlegget, som kladd eller bokført. Fjernes"
+" hvis fakturaen slettes, kanselleres eller går tilbake til kladd."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy__partner_ids
@@ -1248,7 +1344,9 @@ msgstr "Advarsel om avsluttet syklus"
 msgid ""
 "Daily reference rates for the active currencies: a foreign receipt is "
 "converted at the rate of its day."
-msgstr "Daglige referansekurser for de aktive valutaene: en utenlandsk kvittering regnes om til kursen for sin dag."
+msgstr ""
+"Daglige referansekurser for de aktive valutaene: en utenlandsk kvittering "
+"regnes om til kursen for sin dag."
 
 #. module: expense_scan
 #. odoo-python
@@ -1272,7 +1370,9 @@ msgstr "Dato (%s på kvitteringen)"
 msgid ""
 "Date and time printed on the receipt. An expense date has no time: this "
 "field orders several receipts of the same day."
-msgstr "Dato og klokkeslett trykt på kvitteringen. Et utleggs dato har ikke klokkeslett: dette feltet ordner flere kvitteringer fra samme dag."
+msgstr ""
+"Dato og klokkeslett trykt på kvitteringen. Et utleggs dato har ikke "
+"klokkeslett: dette feltet ordner flere kvitteringer fra samme dag."
 
 #. module: expense_scan
 #: model:ir.model.fields.selection,name:expense_scan.selection__hr_expense__expense_scan_date_state__confirmed
@@ -1333,7 +1433,9 @@ msgstr "Datoer som må skrives inn"
 msgid ""
 "Decide whether to re-invoice these expenses before approving them (Yes or No, in the Re-invoice column of the list or in the expense):\n"
 "%s"
-msgstr "Avgjør om disse utleggene skal viderefaktureres før du godkjenner dem (Ja eller Nei, i kolonnen «Viderefakturer» i listen eller i utlegget):\n%s"
+msgstr ""
+"Avgjør om disse utleggene skal viderefaktureres før du godkjenner dem (Ja eller Nei, i kolonnen «Viderefakturer» i listen eller i utlegget):\n"
+"%s"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_res_company__expense_scan_product_id
@@ -1426,7 +1528,9 @@ msgstr "Allerede kjørt distanse i år"
 msgid ""
 "Domain of the \"Project\" field. It limits an employee to their own "
 "projects; a project manager or an administrator keeps the whole list."
-msgstr "Domene for feltet \"Prosjekt\". Det begrenser en ansatt til egne prosjekter; en prosjektleder eller administrator beholder hele listen."
+msgstr ""
+"Domene for feltet \"Prosjekt\". Det begrenser en ansatt til egne prosjekter;"
+" en prosjektleder eller administrator beholder hele listen."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__scan_duration
@@ -1471,7 +1575,9 @@ msgstr "Ansatte"
 msgid ""
 "Employees with a vehicle (set on their record) are paid by the scale of the year,\n"
 "                            from the cumulated distance."
-msgstr "Ansatte med kjøretøy (angitt på kortet) får godtgjørelse etter årets sats ut fra samlet distanse."
+msgstr ""
+"Ansatte med kjøretøy (angitt på kortet) får godtgjørelse etter årets sats ut"
+" fra samlet distanse."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_sheet_wizard__employee_ids
@@ -1539,14 +1645,20 @@ msgid ""
 "account) are added for the active currencies, over the last ninety days. "
 "Without them, Odoo Community converts a foreign receipt one for one. Only "
 "this public file is downloaded; nothing leaves the server."
-msgstr "Hver dag legges Den europeiske sentralbankens referansekurser (gratis, uten konto) til for de aktive valutaene, for de siste nitti dagene. Uten dem regner Odoo Community om en utenlandsk kvittering én til én. Bare denne offentlige filen lastes ned; ingenting forlater serveren."
+msgstr ""
+"Hver dag legges Den europeiske sentralbankens referansekurser (gratis, uten "
+"konto) til for de aktive valutaene, for de siste nitti dagene. Uten dem "
+"regner Odoo Community om en utenlandsk kvittering én til én. Bare denne "
+"offentlige filen lastes ned; ingenting forlater serveren."
 
 #. module: expense_scan
 #: model_terms:ir.actions.act_window,help:expense_scan.expense_scan_sheet_archive_action
 msgid ""
 "Every sheet generated is kept here with its files, as it was\n"
 "               handed over, and can be sent by e-mail from its page."
-msgstr "Hver utleggsrapport som lages, lagres her med filene sine, slik den ble levert, og kan sendes på e-post fra siden sin."
+msgstr ""
+"Hver utleggsrapport som lages, lagres her med filene sine, slik den ble "
+"levert, og kan sendes på e-post fra siden sin."
 
 #. module: expense_scan
 #: model:ir.actions.act_window,name:expense_scan.expense_scan_export_template_action
@@ -1585,7 +1697,10 @@ msgid ""
 "Excel model of the table of the re-invoiced expenses that goes with the "
 "e-mail of the customer invoices (for example the model the customer asks "
 "for). Empty: no Excel table."
-msgstr "Excel-mal for tabellen over viderefakturerte utlegg som legges ved e-posten med kundefakturaene (for eksempel malen kunden ber om). Tomt: ingen Excel-tabell."
+msgstr ""
+"Excel-mal for tabellen over viderefakturerte utlegg som legges ved e-posten "
+"med kundefakturaene (for eksempel malen kunden ber om). Tomt: ingen Excel-"
+"tabell."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_res_company__expense_scan_ecb_rates
@@ -1617,7 +1732,10 @@ msgid ""
 "Expense \"%(name)s\" carries a receipt tax of %(amount)s, but no tax with a "
 "usable rate. Select the matching tax on the expense (or on its category, for"
 " the next ones), or empty the \"Receipt tax\" field."
-msgstr "Utlegget \"%(name)s\" har en kvitteringsavgift på %(amount)s, men ingen avgift med brukbar sats. Velg riktig avgift på utlegget (eller på kategorien, for de neste) eller tøm feltet \"Avgift på kvitteringen\"."
+msgstr ""
+"Utlegget \"%(name)s\" har en kvitteringsavgift på %(amount)s, men ingen "
+"avgift med brukbar sats. Velg riktig avgift på utlegget (eller på "
+"kategorien, for de neste) eller tøm feltet \"Avgift på kvitteringen\"."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__expense_count
@@ -1728,7 +1846,10 @@ msgid ""
 "Expense category without recoverable VAT: flat allowances and official scales, but also lodging or passenger transport where VAT cannot be deducted. Expenses in this category hide the VAT fields and carry no VAT.\n"
 "\n"
 "No need to tick it for mileage: a category counted in kilometres or miles is handled this way automatically."
-msgstr "Utleggskategori uten fradragsberettiget mva: satser og offentlige takster, men også overnatting eller persontransport der mva ikke kan trekkes fra. Utlegg i denne kategorien skjuler mva-feltene og har ingen mva.\n\nIkke nødvendig for kjøregodtgjørelse: en kategori regnet i kilometer eller mil behandles slik automatisk."
+msgstr ""
+"Utleggskategori uten fradragsberettiget mva: satser og offentlige takster, men også overnatting eller persontransport der mva ikke kan trekkes fra. Utlegg i denne kategorien skjuler mva-feltene og har ingen mva.\n"
+"\n"
+"Ikke nødvendig for kjøregodtgjørelse: en kategori regnet i kilometer eller mil behandles slik automatisk."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__expense_count
@@ -1825,7 +1946,9 @@ msgstr "Utleggsrapporter"
 msgid ""
 "Expense whose recoverable VAT this entry corrects. A reversal of the entry "
 "keeps the link, so that the correction is cancelled."
-msgstr "Utlegg hvis fradragsberettigede mva dette bilaget korrigerer. En reversering av bilaget beholder koblingen, slik at korreksjonen opphører."
+msgstr ""
+"Utlegg hvis fradragsberettigede mva dette bilaget korrigerer. En reversering"
+" av bilaget beholder koblingen, slik at korreksjonen opphører."
 
 #. module: expense_scan
 #. odoo-python
@@ -1847,7 +1970,9 @@ msgstr "Utlegg"
 msgid ""
 "Expenses are not re-invoiced to customers yet. An administrator\n"
 "                                turns it on in Settings, under Expenses."
-msgstr "Utlegg viderefaktureres ikke til kundene ennå.\n                                En administrator slår det på i Innstillinger, under Utlegg."
+msgstr ""
+"Utlegg viderefaktureres ikke til kundene ennå.\n"
+"                                En administrator slår det på i Innstillinger, under Utlegg."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
@@ -1905,7 +2030,9 @@ msgstr "Utlegg som må avklares før fakturering"
 msgid ""
 "Expenses waiting for the manager, or whose re-invoicing is still to decide. "
 "While there are any, the expense line of the sales order does not move."
-msgstr "Utlegg som venter på ansvarlig, eller der viderefaktureringen ikke er avgjort. Så lenge det finnes noen, flytter ikke ordrens utleggslinje seg."
+msgstr ""
+"Utlegg som venter på ansvarlig, eller der viderefaktureringen ikke er "
+"avgjort. Så lenge det finnes noen, flytter ikke ordrens utleggslinje seg."
 
 #. module: expense_scan
 #: model:ir.model,name:expense_scan.model_expense_scan_export_column
@@ -1929,7 +2056,9 @@ msgstr ""
 msgid ""
 "False as soon as every point listed in \"Fields to check\" is resolved: the "
 "review banner relies on it to go away without waiting for a new scan."
-msgstr "Usann så snart hvert punkt i \"Felt som må kontrolleres\" er løst: kontrollmeldingen forsvinner da uten å vente på en ny skanning."
+msgstr ""
+"Usann så snart hvert punkt i \"Felt som må kontrolleres\" er løst: "
+"kontrollmeldingen forsvinner da uten å vente på en ny skanning."
 
 #. module: expense_scan
 #: model:ir.model.fields.selection,name:expense_scan.selection__res_company__expense_scan_model_size__tiny
@@ -1997,7 +2126,11 @@ msgid ""
 "amount then takes precedence over the one the rate would give, down to the "
 "journal entry, so that a receipt with several rates keeps its exact tax. The"
 " rate stays the one of the expense category."
-msgstr "Fyller feltet \"Avgift på kvitteringen\" med beløpet som er lest på kvitteringen. Det beløpet går da foran det satsen ville gitt, helt til bilaget, slik at en kvittering med flere satser beholder sin nøyaktige avgift. Satsen forblir utleggskategoriens."
+msgstr ""
+"Fyller feltet \"Avgift på kvitteringen\" med beløpet som er lest på "
+"kvitteringen. Det beløpet går da foran det satsen ville gitt, helt til "
+"bilaget, slik at en kvittering med flere satser beholder sin nøyaktige "
+"avgift. Satsen forblir utleggskategoriens."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_policy_seen
@@ -2015,7 +2148,8 @@ msgstr "Finner kantene på kvitteringen og retter perspektivet."
 msgid ""
 "Finds the edges of the receipt in the photo and corrects the perspective "
 "before reading."
-msgstr "Finner kvitteringens kanter på bildet og korrigerer perspektivet før lesing."
+msgstr ""
+"Finner kvitteringens kanter på bildet og korrigerer perspektivet før lesing."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -2087,7 +2221,9 @@ msgstr "Flat ut: rett opp linjene på en krøllete eller brettet kvittering"
 msgid ""
 "Follow the expenses of each project: budget, analytic account. To re-invoice"
 " them to the customer, install the Sales app."
-msgstr "Følg utgiftene til hvert prosjekt: budsjett, analytisk konto. Installer appen Salg for å viderefakturere dem til kunden."
+msgstr ""
+"Følg utgiftene til hvert prosjekt: budsjett, analytisk konto. Installer "
+"appen Salg for å viderefakturere dem til kunden."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_follower_ids
@@ -2110,7 +2246,10 @@ msgid ""
 "For each field the scan fills in, the share of submitted\n"
 "               expenses where a person had to change it: the receipts the\n"
 "               reading gets wrong, by category or by employee."
-msgstr "For hvert felt skanningen fyller ut, andelen innsendte utgifter der noen måtte endre det: kvitteringene lesingen forstår feil, per kategori eller ansatt."
+msgstr ""
+"For hvert felt skanningen fyller ut, andelen innsendte utgifter der noen "
+"måtte endre det: kvitteringene lesingen forstår feil, per kategori eller "
+"ansatt."
 
 #. module: expense_scan
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_policy_rule__rule_type__forbidden_words
@@ -2129,7 +2268,9 @@ msgstr "Utenlandsk avgift (%s), ikke trukket fra"
 msgid ""
 "Foreign tax (%s): it cannot be deducted on your tax return, leave it at "
 "zero."
-msgstr "Utenlandsk avgift (%s): den kan ikke trekkes fra i oppgaven din, la den stå på null."
+msgstr ""
+"Utenlandsk avgift (%s): den kan ikke trekkes fra i oppgaven din, la den stå "
+"på null."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
@@ -2330,7 +2471,10 @@ msgid ""
 "Impossible receipt tax: %(entered)s is above the maximum of %(ceiling)s, which is the rate of %(rate)s %% applied to the whole %(total)s of the receipt.\n"
 "\n"
 "Choose an expense category whose rate covers this tax, or empty the \"Receipt tax\" field if this expense gives no right to deduction."
-msgstr "Umulig kvitteringsavgift: %(entered)s overstiger maksimum på %(ceiling)s, altså satsen %(rate)s %% brukt på hele kvitteringens %(total)s.\n\nVelg en utleggskategori der satsen dekker avgiften, eller tøm feltet \"Avgift på kvitteringen\" hvis utlegget ikke gir rett til fradrag."
+msgstr ""
+"Umulig kvitteringsavgift: %(entered)s overstiger maksimum på %(ceiling)s, altså satsen %(rate)s %% brukt på hele kvitteringens %(total)s.\n"
+"\n"
+"Velg en utleggskategori der satsen dekker avgiften, eller tøm feltet \"Avgift på kvitteringen\" hvis utlegget ikke gir rett til fradrag."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
@@ -2384,7 +2528,9 @@ msgstr "Beholdt"
 msgid ""
 "Kept: the value read is the final one. Corrected: a person changed it. "
 "Filled in: nothing was read, a person entered it."
-msgstr "Beholdt: den leste verdien er den endelige. Rettet: noen endret den. Fylt inn: ingenting ble lest, noen fylte den inn."
+msgstr ""
+"Beholdt: den leste verdien er den endelige. Rettet: noen endret den. Fylt "
+"inn: ingenting ble lest, noen fylte den inn."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__kind
@@ -2402,7 +2548,9 @@ msgstr "Språkkoder satt sammen med «+», for eksempel eng+fra."
 msgid ""
 "Laptops, tablets and half-screen windows: from 768 px wide instead of 1400 "
 "px."
-msgstr "Bærbare datamaskiner, nettbrett og halvskjermvinduer: fra 768 px bredde i stedet for 1400 px."
+msgstr ""
+"Bærbare datamaskiner, nettbrett og halvskjermvinduer: fra 768 px bredde i "
+"stedet for 1400 px."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_employee_vehicle__write_uid
@@ -2483,7 +2631,9 @@ msgstr "Kobler kontakten med butikkens navn, når nøyaktig én passer."
 msgid ""
 "Links the contact whose name matches the merchant read on the receipt, only "
 "when exactly one contact matches."
-msgstr "Kobler kontakten der navnet samsvarer med brukerstedet som er lest på kvitteringen, bare hvis nøyaktig én kontakt passer."
+msgstr ""
+"Kobler kontakten der navnet samsvarer med brukerstedet som er lest på "
+"kvitteringen, bare hvis nøyaktig én kontakt passer."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__lock_notice
@@ -2538,7 +2688,13 @@ msgid ""
 "where there is no map (another country, a route between two countries): the "
 "route on a plain background, with the towns and the numbers of the roads "
 "followed. OpenStreetMap's own tiles may not be used this way."
-msgstr "Kart som tegnes under bildet av ruten. «auto»: landets eget kart for rutens land (Frankrike, Sveits, Spania og Tyskland: åpne data, uten nøkkel); eller en egen fliseserver, som https://.../{z}/{x}/{y}.png. Tom, eller der det ikke finnes kart (et annet land, en rute mellom to land): ruten på ensfarget bakgrunn, med byene og numrene på veiene som følges. OpenStreetMaps egne fliser kan ikke brukes slik."
+msgstr ""
+"Kart som tegnes under bildet av ruten. «auto»: landets eget kart for rutens "
+"land (Frankrike, Sveits, Spania og Tyskland: åpne data, uten nøkkel); eller "
+"en egen fliseserver, som https://.../{z}/{x}/{y}.png. Tom, eller der det "
+"ikke finnes kart (et annet land, en rute mellom to land): ruten på ensfarget"
+" bakgrunn, med byene og numrene på veiene som følges. OpenStreetMaps egne "
+"fliser kan ikke brukes slik."
 
 #. module: expense_scan
 #. odoo-python
@@ -2562,7 +2718,9 @@ msgstr "Tilordninger"
 msgid ""
 "Marks the expenses created by the mail gateway. They arrive with all their "
 "attachments at once, whereas the scan button creates one per photo."
-msgstr "Markerer utlegg som er opprettet via e-postporten. De kommer med alle vedlegg på én gang, mens skanneknappen oppretter ett per bilde."
+msgstr ""
+"Markerer utlegg som er opprettet via e-postporten. De kommer med alle "
+"vedlegg på én gang, mens skanneknappen oppretter ett per bilde."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_res_company__expense_scan_max_age_days
@@ -2592,7 +2750,10 @@ msgid ""
 "               requirements: each expense concerned shows a warning, and the\n"
 "               \"Rule breaches\" filter gathers them. Switch a set off to\n"
 "               suspend it."
-msgstr "Tak for måltider og hotell, utgifter å unngå, en kundes krav: hvert berørt utlegg viser en advarsel, og filteret \"Regelbrudd\" samler dem. Slå av et regelsett for å sette det på pause."
+msgstr ""
+"Tak for måltider og hotell, utgifter å unngå, en kundes krav: hvert berørt "
+"utlegg viser en advarsel, og filteret \"Regelbrudd\" samler dem. Slå av et "
+"regelsett for å sette det på pause."
 
 #. module: expense_scan
 #. odoo-python
@@ -2600,7 +2761,9 @@ msgstr "Tak for måltider og hotell, utgifter å unngå, en kundes krav: hvert b
 msgid ""
 "Meal of %(value)s without a readable time: above \"%(rule)s\" if it is that "
 "meal. Say which meal in the description."
-msgstr "Måltid på %(value)s uten lesbart klokkeslett: over \"%(rule)s\" hvis det er det måltidet. Oppgi måltidet i beskrivelsen."
+msgstr ""
+"Måltid på %(value)s uten lesbart klokkeslett: over \"%(rule)s\" hvis det er "
+"det måltidet. Oppgi måltidet i beskrivelsen."
 
 #. module: expense_scan
 #. odoo-python
@@ -2735,7 +2898,9 @@ msgstr "Krever bekreftelse"
 msgid ""
 "Neither amount nor date found: check that this image is a receipt, or enter "
 "the expense by hand."
-msgstr "Verken beløp eller dato ble funnet: sjekk at bildet er en kvittering, eller fyll inn utlegget for hånd."
+msgstr ""
+"Verken beløp eller dato ble funnet: sjekk at bildet er en kvittering, eller "
+"fyll inn utlegget for hånd."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
@@ -2770,7 +2935,9 @@ msgstr "Nei"
 msgid ""
 "No exchange rate for %s in Odoo: the amount counts one for one in the "
 "company currency until a rate is entered."
-msgstr "Ingen valutakurs for %s i Odoo: beløpet teller én til én i selskapets valuta til en kurs er registrert."
+msgstr ""
+"Ingen valutakurs for %s i Odoo: beløpet teller én til én i selskapets valuta"
+" til en kurs er registrert."
 
 #. module: expense_scan
 #. odoo-python
@@ -2841,7 +3008,9 @@ msgstr "Ingen fradragsberettiget mva"
 msgid ""
 "No route service answered: the distance is the straight line lengthened by a"
 " quarter. Check it."
-msgstr "Ingen rutetjeneste svarte: avstanden er luftlinjen forlenget med en fjerdedel. Kontroller den."
+msgstr ""
+"Ingen rutetjeneste svarte: avstanden er luftlinjen forlenget med en "
+"fjerdedel. Kontroller den."
 
 #. module: expense_scan
 #: model_terms:ir.actions.act_window,help:expense_scan.expense_scan_correction_action
@@ -2877,7 +3046,10 @@ msgstr "Nr. %s"
 msgid ""
 "Nominatim server that finds a typed address on the map, as Odoo itself does "
 "to place contacts. Empty: only the places already known can be picked."
-msgstr "Nominatim-server som finner en skrevet adresse på kartet, slik Odoo selv gjør for å plassere kontakter. Tom: bare steder som allerede er kjent kan velges."
+msgstr ""
+"Nominatim-server som finner en skrevet adresse på kartet, slik Odoo selv "
+"gjør for å plassere kontakter. Tom: bare steder som allerede er kjent kan "
+"velges."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_search_invoicing
@@ -2916,7 +3088,9 @@ msgstr "Notater om denne malen..."
 #. odoo-python
 #: code:addons/expense_scan/models/expense_vat_wizard.py:0
 msgid "Nothing to correct: the recoverable VAT is already the one asked."
-msgstr "Ingenting å korrigere: den fradragsberettigede mva-en er allerede den som er bedt om."
+msgstr ""
+"Ingenting å korrigere: den fradragsberettigede mva-en er allerede den som er"
+" bedt om."
 
 #. module: expense_scan
 #. odoo-python
@@ -2939,7 +3113,9 @@ msgstr "Antall mva-korreksjoner"
 msgid ""
 "Number of covers printed on the restaurant bill. Two or more make a business"
 " meal, whose guests are named in the notes."
-msgstr "Antall kuverter trykt på restaurantregningen. Fra to er det et representasjonsmåltid, der gjestene oppgis i notatene."
+msgstr ""
+"Antall kuverter trykt på restaurantregningen. Fra to er det et "
+"representasjonsmåltid, der gjestene oppgis i notatene."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_error_counter
@@ -2976,7 +3152,12 @@ msgid ""
 "threads: about 1.8 times faster than one, for twice the time): they overload"
 " the CPU when several scans arrive at once and increase the memory reserved "
 "by each worker."
-msgstr "Antall tråder hver Odoo-worker gir til OCR. 0 betyr 4. Flere tråder leser en kvittering litt raskere, men koster mer prosessortid totalt (4 tråder: omtrent 1,8 ganger raskere enn én, for dobbelt så mye tid): de overbelaster prosessoren når flere skanninger kommer samtidig og øker minnet hver worker reserverer."
+msgstr ""
+"Antall tråder hver Odoo-worker gir til OCR. 0 betyr 4. Flere tråder leser en"
+" kvittering litt raskere, men koster mer prosessortid totalt (4 tråder: "
+"omtrent 1,8 ganger raskere enn én, for dobbelt så mye tid): de overbelaster "
+"prosessoren når flere skanninger kommer samtidig og øker minnet hver worker "
+"reserverer."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_res_company__expense_scan_engine
@@ -3003,7 +3184,10 @@ msgid ""
 "OSRM server that gives the road distance of a mileage expense. The public "
 "one is meant for light use: a company with many routes runs its own. Empty: "
 "the straight line, lengthened by a quarter."
-msgstr "OSRM-server som gir veiavstanden for en kilometergodtgjørelse. Den offentlige er ment for lett bruk: et firma med mange ruter bruker sin egen. Tom: luftlinjen, forlenget med en fjerdedel."
+msgstr ""
+"OSRM-server som gir veiavstanden for en kilometergodtgjørelse. Den "
+"offentlige er ment for lett bruk: et firma med mange ruter bruker sin egen. "
+"Tom: luftlinjen, forlenget med en fjerdedel."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_wide_split
@@ -3012,7 +3196,10 @@ msgid ""
 "Odoo only shows the receipt next to the form from 1400 px wide. This option lowers the threshold for laptop screens, half-screen windows and tablets, in either orientation.\n"
 "\n"
 "Only the width counts: a window taller than it is wide is still wide enough for two columns. Below the threshold, the preview becomes a banner above the fields."
-msgstr "Odoo viser kvitteringen ved siden av skjemaet først fra 1400 px bredde. Dette valget senker terskelen for bærbare, vinduer på halv skjerm og nettbrett, i begge retninger.\n\nBare bredden teller: et vindu som er høyere enn det er bredt, er likevel bredt nok for to kolonner. Under terskelen blir forhåndsvisningen et felt over feltene."
+msgstr ""
+"Odoo viser kvitteringen ved siden av skjemaet først fra 1400 px bredde. Dette valget senker terskelen for bærbare, vinduer på halv skjerm og nettbrett, i begge retninger.\n"
+"\n"
+"Bare bredden teller: et vindu som er høyere enn det er bredt, er likevel bredt nok for to kolonner. Under terskelen blir forhåndsvisningen et felt over feltene."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
@@ -3027,14 +3214,18 @@ msgstr "Kontor"
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "Oldest date accepted, and how long the text read on a receipt is kept"
-msgstr "Eldste dato som godtas, og hvor lenge teksten som er lest på en kvittering, lagres"
+msgstr ""
+"Eldste dato som godtas, og hvor lenge teksten som er lest på en kvittering, "
+"lagres"
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_policy_rule__words
 msgid ""
 "One per line. Their presence on the receipt or in the description triggers "
 "the warning."
-msgstr "Ett per linje. Forekomst på kvitteringen eller i beskrivelsen utløser advarselen."
+msgstr ""
+"Ett per linje. Forekomst på kvitteringen eller i beskrivelsen utløser "
+"advarselen."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_km
@@ -3057,7 +3248,9 @@ msgstr "Ett ord per linje: hotell, nocleg, Ibis..."
 msgid ""
 "Only %(found)s free day(s) found from %(date)s for %(count)s: lower the "
 "quantity or move the date."
-msgstr "Fant bare %(found)s ledige dager fra %(date)s for %(count)s: reduser antallet eller flytt datoen."
+msgstr ""
+"Fant bare %(found)s ledige dager fra %(date)s for %(count)s: reduser "
+"antallet eller flytt datoen."
 
 #. module: expense_scan
 #. odoo-python
@@ -3089,7 +3282,9 @@ msgstr "Bare et utlegg i en satskategori kan fordeles på dager."
 msgid ""
 "Only approved or posted expenses can be paid:\n"
 "%s"
-msgstr "Bare godkjente eller bokførte utlegg kan betales:\n%s"
+msgstr ""
+"Bare godkjente eller bokførte utlegg kan betales:\n"
+"%s"
 
 #. module: expense_scan
 #. odoo-javascript
@@ -3112,7 +3307,9 @@ msgstr "Åpne innstillingene"
 msgid ""
 "Opens a page of GitHub, public, where you write to the authors. Nothing is "
 "sent from your server."
-msgstr "Åpner en offentlig GitHub-side der du skriver til utviklerne. Serveren din sender ingenting."
+msgstr ""
+"Åpner en offentlig GitHub-side der du skriver til utviklerne. Serveren din "
+"sender ingenting."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__scan_original_attachment_id
@@ -3238,7 +3435,9 @@ msgstr "Steder"
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_project_project__expense_scan_budget
 msgid "Planned expenses of the project, excl. tax. Leave empty for no budget."
-msgstr "Planlagte utlegg for prosjektet, eksl. mva. La stå tomt hvis det ikke er budsjett."
+msgstr ""
+"Planlagte utlegg for prosjektet, eksl. mva. La stå tomt hvis det ikke er "
+"budsjett."
 
 #. module: expense_scan
 #. odoo-python
@@ -3266,7 +3465,9 @@ msgstr "Regelsett"
 msgid ""
 "Position of the category in the expense dropdown. Can also be set by drag "
 "and drop in the list of categories."
-msgstr "Kategoriens plassering i utleggenes nedtrekksliste. Kan også stilles inn ved å dra og slippe i kategorilisten."
+msgstr ""
+"Kategoriens plassering i utleggenes nedtrekksliste. Kan også stilles inn ved"
+" å dra og slippe i kategorilisten."
 
 #. module: expense_scan
 #: model:ir.model.fields.selection,name:expense_scan.selection__res_company__expense_scan_model_size__small
@@ -3280,7 +3481,10 @@ msgid ""
 "Precise: the models that read best. Fast: smaller models, about three times "
 "faster, which misread a few more receipts (3 to 7 totals in 100 on the "
 "module's test receipts). For a slow server or large batches."
-msgstr "Presis: modellene som leser best. Rask: mindre modeller, omtrent tre ganger raskere, som leser noen flere kvitteringer feil (3 til 7 summer av 100 på modulens testkvitteringer). For en treg server eller store bunker."
+msgstr ""
+"Presis: modellene som leser best. Rask: mindre modeller, omtrent tre ganger "
+"raskere, som leser noen flere kvitteringer feil (3 til 7 summer av 100 på "
+"modulens testkvitteringer). For en treg server eller store bunker."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -3300,7 +3504,10 @@ msgid ""
 "Price per kilometre applied to this employee's distance expenses. When "
 "empty, the category cost applies. No decimal is lost: official scales often "
 "have three, an in-house rate may have more."
-msgstr "Pris per kilometer for denne ansattes reiseutlegg. Hvis tom, gjelder kategoriens kostnad. Ingen desimal går tapt: offentlige takster har ofte tre, en intern sats kan ha flere."
+msgstr ""
+"Pris per kilometer for denne ansattes reiseutlegg. Hvis tom, gjelder "
+"kategoriens kostnad. Ingen desimal går tapt: offentlige takster har ofte "
+"tre, en intern sats kan ha flere."
 
 #. module: expense_scan
 #: model:ir.model,name:expense_scan.model_product_template
@@ -3331,7 +3538,10 @@ msgid ""
 "Project this expense belongs to. Setting it books the expense on the "
 "project's analytic account and adds it to the sales order to re-invoice, so "
 "that it appears on the next project invoice."
-msgstr "Prosjektet utlegget hører til. Å angi det fører utlegget på prosjektets analysekonto og legger det til salgsordren som skal viderefaktureres, slik at det kommer med på neste prosjektfaktura."
+msgstr ""
+"Prosjektet utlegget hører til. Å angi det fører utlegget på prosjektets "
+"analysekonto og legger det til salgsordren som skal viderefaktureres, slik "
+"at det kommer med på neste prosjektfaktura."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_has_tasks
@@ -3349,7 +3559,9 @@ msgstr "Prosjekter"
 msgid ""
 "Projects subject to these rules when their customer, in Odoo, is not the end"
 " customer."
-msgstr "Prosjekter som omfattes av disse reglene når kunden deres i Odoo ikke er sluttkunden."
+msgstr ""
+"Prosjekter som omfattes av disse reglene når kunden deres i Odoo ikke er "
+"sluttkunden."
 
 #. module: expense_scan
 #: model:ir.model,name:expense_scan.model_hr_employee_public
@@ -3454,7 +3666,9 @@ msgstr "Viderefakturering avgjøres senere"
 msgid ""
 "Read photographed receipts on your own server, without credits or "
 "subscription"
-msgstr "Les fotograferte kvitteringer på din egen server, uten kreditter eller abonnement"
+msgstr ""
+"Les fotograferte kvitteringer på din egen server, uten kreditter eller "
+"abonnement"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__scan_score
@@ -3488,7 +3702,8 @@ msgstr "Leser teksten"
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid ""
 "Reads again after a quarter turn when the text runs vertically. Slower."
-msgstr "Leser på nytt etter en kvartomdreining når teksten går loddrett. Tregere."
+msgstr ""
+"Leser på nytt etter en kvartomdreining når teksten går loddrett. Tregere."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_auto_rotate
@@ -3496,7 +3711,9 @@ msgstr "Leser på nytt etter en kvartomdreining når teksten går loddrett. Treg
 msgid ""
 "Reads the receipt again after rotating it when the text seems to run "
 "vertically. Makes that scan slower."
-msgstr "Leser kvitteringen på nytt etter å ha rotert den når teksten ser ut til å gå loddrett. Gjør skanningen tregere."
+msgstr ""
+"Leser kvitteringen på nytt etter å ha rotert den når teksten ser ut til å gå"
+" loddrett. Gjør skanningen tregere."
 
 #. module: expense_scan
 #. odoo-python
@@ -3527,14 +3744,18 @@ msgstr "Kvittering slettet"
 msgid ""
 "Receipt in %s: activate this currency in Odoo, otherwise the amount counts "
 "in the company currency."
-msgstr "Kvittering i %s: aktiver denne valutaen i Odoo, ellers regnes beløpet i firmaets valuta."
+msgstr ""
+"Kvittering i %s: aktiver denne valutaen i Odoo, ellers regnes beløpet i "
+"firmaets valuta."
 
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/expense_policy.py:0
 msgid ""
 "Receipt in a currency not active in Odoo: the amount limits are not checked."
-msgstr "Kvittering i en valuta som ikke er aktiv i Odoo: beløpsgrensene kontrolleres ikke."
+msgstr ""
+"Kvittering i en valuta som ikke er aktiv i Odoo: beløpsgrensene kontrolleres"
+" ikke."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_items
@@ -3547,7 +3768,9 @@ msgstr "Kvitteringslinjer (lest)"
 msgid ""
 "Receipt moved here from %s: its total or date differ from the receipt of "
 "that expense."
-msgstr "Kvitteringen er flyttet hit fra %s: summen eller datoen avviker fra kvitteringen på det utlegget."
+msgstr ""
+"Kvitteringen er flyttet hit fra %s: summen eller datoen avviker fra "
+"kvitteringen på det utlegget."
 
 #. module: expense_scan
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_export_column__value__n
@@ -3741,7 +3964,9 @@ msgstr "Refundert"
 msgid ""
 "Removes the \"My Team\", \"Company\" and \"Employee\" shortcuts, and the "
 "months listed under the expense date."
-msgstr "Fjerner snarveiene \"Mitt Lag\", \"Firma\" og \"Ansatt\" og månedene som er listet under utleggsdatoen."
+msgstr ""
+"Fjerner snarveiene \"Mitt Lag\", \"Firma\" og \"Ansatt\" og månedene som er "
+"listet under utleggsdatoen."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_res_config_settings__expense_scan_tidy_menu
@@ -3766,7 +3991,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_export_template_view_form
 msgid ""
 "Replace the current workbook with a blank one, built from the mappings?"
-msgstr "Erstatte den gjeldende arbeidsboken med en tom, bygget ut fra tilordningene?"
+msgstr ""
+"Erstatte den gjeldende arbeidsboken med en tom, bygget ut fra tilordningene?"
 
 #. module: expense_scan
 #. odoo-javascript
@@ -3943,7 +4169,8 @@ msgstr "Satser"
 #. module: expense_scan
 #: model_terms:ir.actions.act_window,help:expense_scan.action_expense_scan_employee_expenses
 msgid "Scan a receipt or create an expense: it will be in their name."
-msgstr "Skann en kvittering eller opprett et utlegg: det føres i vedkommendes navn."
+msgstr ""
+"Skann en kvittering eller opprett et utlegg: det føres i vedkommendes navn."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
@@ -4077,7 +4304,8 @@ msgstr "Ark"
 msgid ""
 "Simplifications of Odoo's display, for every company. Off unless you choose "
 "them"
-msgstr "Forenklinger av hvordan Odoo vises, for alle firmaer. Av til du velger dem"
+msgstr ""
+"Forenklinger av hvordan Odoo vises, for alle firmaer. Av til du velger dem"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_res_config_settings__expense_scan_tidy_filters
@@ -4112,14 +4340,20 @@ msgid ""
 "               download its workbook, adapt it, upload it again. Give the rows\n"
 "               kept for the expenses, then which column receives which value;\n"
 "               the old data of the workbook is replaced at each export."
-msgstr "Start med \"Grunnmalen\" som følger med modulen: last ned arbeidsboken, tilpass den og last den opp igjen. Angi radene for utleggene og hvilken kolonne som får hvilken verdi; de gamle dataene i arbeidsboken erstattes ved hver eksport."
+msgstr ""
+"Start med \"Grunnmalen\" som følger med modulen: last ned arbeidsboken, "
+"tilpass den og last den opp igjen. Angi radene for utleggene og hvilken "
+"kolonne som får hvilken verdi; de gamle dataene i arbeidsboken erstattes ved"
+" hver eksport."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_route_from_id
 msgid ""
 "Start of the route: type a place, a customer or an address, or pick one in "
 "the list."
-msgstr "Rutens start: skriv et sted, en kunde eller en adresse, eller velg et i listen."
+msgstr ""
+"Rutens start: skriv et sted, en kunde eller en adresse, eller velg et i "
+"listen."
 
 #. module: expense_scan
 #. odoo-python
@@ -4195,7 +4429,9 @@ msgstr "Ta bilde av den første kvitteringen."
 #. odoo-javascript
 #: code:addons/expense_scan/static/src/js/action_helper_patch.js:0
 msgid "Tap \"Scan\" to photograph a receipt, or \"New\" to enter an expense by hand."
-msgstr "Trykk på «Scan» for å fotografere en kvittering, eller på «Ny» for å registrere et utlegg manuelt."
+msgstr ""
+"Trykk på «Scan» for å fotografere en kvittering, eller på «Ny» for å "
+"registrere et utlegg manuelt."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_task_id
@@ -4207,7 +4443,9 @@ msgstr "Oppgave"
 msgid ""
 "Task of the project, for follow-up. The cost goes into the project budget "
 "whether the expense is re-invoiced or not."
-msgstr "Prosjektets oppgave, for oppfølging. Kostnaden går inn i prosjektbudsjettet, enten utlegget viderefaktureres eller ikke."
+msgstr ""
+"Prosjektets oppgave, for oppfølging. Kostnaden går inn i prosjektbudsjettet,"
+" enten utlegget viderefaktureres eller ikke."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__tax_id
@@ -4247,7 +4485,12 @@ msgid ""
 "Empty: the tax follows the rate, as in standard Odoo. A receipt without deductible tax (card slip, tax not readable) has no tax selected.\n"
 "\n"
 "The rate only does two things: carry the tax tags of the entry, and cap this amount. A tax higher than the rate applied to the receipt total is necessarily an error, and choosing a lower rate trims the amount accordingly."
-msgstr "Avgiftsbeløp trykt på kvitteringen. Det gjelder: avgiften på utlegget og på bilaget får denne verdien, uansett satsen som vises ved siden av. Det gjør at en kvittering som blander 5,5 %, 10 % og 20 % gir nøyaktig sin avgift.\n\nTomt: avgiften følger satsen, som i standard Odoo. En kvittering uten fradragsberettiget avgift (kortkvittering, uleselig avgift) har ingen avgift valgt.\n\nSatsen brukes bare til to ting: bære bilagets avgiftsmerker og begrense dette beløpet. En avgift høyere enn satsen brukt på kvitteringens sum er nødvendigvis en feil, og å velge en lavere sats reduserer beløpet tilsvarende."
+msgstr ""
+"Avgiftsbeløp trykt på kvitteringen. Det gjelder: avgiften på utlegget og på bilaget får denne verdien, uansett satsen som vises ved siden av. Det gjør at en kvittering som blander 5,5 %, 10 % og 20 % gir nøyaktig sin avgift.\n"
+"\n"
+"Tomt: avgiften følger satsen, som i standard Odoo. En kvittering uten fradragsberettiget avgift (kortkvittering, uleselig avgift) har ingen avgift valgt.\n"
+"\n"
+"Satsen brukes bare til to ting: bære bilagets avgiftsmerker og begrense dette beløpet. En avgift høyere enn satsen brukt på kvitteringens sum er nødvendigvis en feil, og å velge en lavere sats reduserer beløpet tilsvarende."
 
 #. module: expense_scan
 #. odoo-python
@@ -4282,7 +4525,9 @@ msgstr "Mal"
 msgid ""
 "Template \"%(template)s\" expects a single project; the selection has "
 "%(count)s: %(names)s."
-msgstr "Malen \"%(template)s\" forventer ett enkelt prosjekt; utvalget har %(count)s: %(names)s."
+msgstr ""
+"Malen \"%(template)s\" forventer ett enkelt prosjekt; utvalget har "
+"%(count)s: %(names)s."
 
 #. module: expense_scan
 #. odoo-python
@@ -4290,7 +4535,9 @@ msgstr "Malen \"%(template)s\" forventer ett enkelt prosjekt; utvalget har %(cou
 msgid ""
 "Template \"%(template)s\" only accepts re-invoiced expenses. These are not: "
 "%(names)s."
-msgstr "Malen \"%(template)s\" godtar bare viderefakturerte utlegg. Disse er det ikke: %(names)s."
+msgstr ""
+"Malen \"%(template)s\" godtar bare viderefakturerte utlegg. Disse er det "
+"ikke: %(names)s."
 
 #. module: expense_scan
 #. odoo-python
@@ -4310,7 +4557,9 @@ msgstr "Tesseract-språk"
 msgid ""
 "Tesseract language codes, joined with \"+\" (\"eng+fra\"). Each language "
 "needs its tesseract-ocr package on the server."
-msgstr "Tesseract-språkkoder, satt sammen med \"+\" (\"eng+nor\"). Hvert språk krever sin tesseract-ocr-pakke på serveren."
+msgstr ""
+"Tesseract-språkkoder, satt sammen med \"+\" (\"eng+nor\"). Hvert språk "
+"krever sin tesseract-ocr-pakke på serveren."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
@@ -4333,7 +4582,9 @@ msgstr "Feltet \"Oppgave\" vises bare når det er et valg å ta."
 msgid ""
 "The PDF could not be converted. Install \"pdf2image\" and the \"poppler-"
 "utils\" system package to retouch PDFs."
-msgstr "PDF-en kunne ikke konverteres. Installer \"pdf2image\" og systempakken \"poppler-utils\" for å redigere PDF-er."
+msgstr ""
+"PDF-en kunne ikke konverteres. Installer \"pdf2image\" og systempakken "
+"\"poppler-utils\" for å redigere PDF-er."
 
 #. module: expense_scan
 #. odoo-python
@@ -4341,14 +4592,18 @@ msgstr "PDF-en kunne ikke konverteres. Installer \"pdf2image\" og systempakken \
 msgid ""
 "The PDF could not be converted. Install \"pdf2image\" and the \"poppler-"
 "utils\" system package to scan PDFs."
-msgstr "PDF-en kunne ikke konverteres. Installer \"pdf2image\" og systempakken \"poppler-utils\" for å skanne PDF-er."
+msgstr ""
+"PDF-en kunne ikke konverteres. Installer \"pdf2image\" og systempakken "
+"\"poppler-utils\" for å skanne PDF-er."
 
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense_vat.py:0
 msgid ""
 "The VAT generated for %s is not the one asked: the correction was not made."
-msgstr "Mva-en som ble generert for %s er ikke den som ble bedt om: korreksjonen ble ikke gjort."
+msgstr ""
+"Mva-en som ble generert for %s er ikke den som ble bedt om: korreksjonen ble"
+" ikke gjort."
 
 #. module: expense_scan
 #. odoo-python
@@ -4356,13 +4611,17 @@ msgstr "Mva-en som ble generert for %s er ikke den som ble bedt om: korreksjonen
 msgid ""
 "The VAT of %(expense)s is between 0 and %(ceiling)s, the VAT that the rate "
 "of %(rate)s %% gives on %(total)s."
-msgstr "Mva-en for %(expense)s ligger mellom 0 og %(ceiling)s, mva-en som satsen %(rate)s %% gir på %(total)s."
+msgstr ""
+"Mva-en for %(expense)s ligger mellom 0 og %(ceiling)s, mva-en som satsen "
+"%(rate)s %% gir på %(total)s."
 
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense.py:0
 msgid "The amount is often wrong on this merchant's receipts: check it."
-msgstr "Beløpet er ofte feil på kvitteringene fra denne forhandleren: kontroller det."
+msgstr ""
+"Beløpet er ofte feil på kvitteringene fra denne forhandleren: kontroller "
+"det."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -4375,7 +4634,9 @@ msgstr "Den automatiske redigeringen mislyktes."
 msgid ""
 "The bracket applies above this yearly distance, until the next bracket. 0 "
 "for the first."
-msgstr "Trinnet gjelder over denne årlige distansen, til neste trinn. 0 for det første."
+msgstr ""
+"Trinnet gjelder over denne årlige distansen, til neste trinn. 0 for det "
+"første."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_mileage_scale_view_form
@@ -4383,7 +4644,10 @@ msgid ""
 "The brackets apply above the distance of their first column, in the distance unit of the\n"
 "                        expenses (kilometres or miles). Adjust the rates when the scale of the country changes:\n"
 "                        copy the scale to next year, then edit the copy."
-msgstr "Trinnene gjelder over distansen i første kolonne, i utgiftenes distanseenhet (kilometer eller mil). Tilpass satsene når landets sats endres: kopier satsen til neste år og rediger kopien."
+msgstr ""
+"Trinnene gjelder over distansen i første kolonne, i utgiftenes distanseenhet"
+" (kilometer eller mil). Tilpass satsene når landets sats endres: kopier "
+"satsen til neste år og rediger kopien."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_mileage
@@ -4400,27 +4664,34 @@ msgstr "Kunden eller kontoret dette stedet står for."
 msgid ""
 "The date is not printed on the receipt: the expense has the date of the day."
 " Enter the date, or confirm this one, before submitting."
-msgstr "Datoen er ikke trykt på kvitteringen: utgiften har dagens dato. Skriv inn datoen, eller bekreft denne, før du sender inn."
+msgstr ""
+"Datoen er ikke trykt på kvitteringen: utgiften har dagens dato. Skriv inn "
+"datoen, eller bekreft denne, før du sender inn."
 
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense.py:0
 msgid "The date is often wrong on this merchant's receipts: check it."
-msgstr "Datoen er ofte feil på kvitteringene fra denne forhandleren: kontroller den."
+msgstr ""
+"Datoen er ofte feil på kvitteringene fra denne forhandleren: kontroller den."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid ""
 "The delivered \"Good practice\" rules are on: open the list to adjust them "
 "or to switch them off."
-msgstr "De medfølgende reglene «God praksis» er på: åpne listen for å justere eller slå dem av."
+msgstr ""
+"De medfølgende reglene «God praksis» er på: åpne listen for å justere eller "
+"slå dem av."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_keep_name
 msgid ""
 "The description comes from the email subject: the receipt scan does not "
 "replace it with the merchant name."
-msgstr "Beskrivelsen kommer fra e-postens emne: kvitteringsskanningen erstatter den ikke med navnet på brukerstedet."
+msgstr ""
+"Beskrivelsen kommer fra e-postens emne: kvitteringsskanningen erstatter den "
+"ikke med navnet på brukerstedet."
 
 #. module: expense_scan
 #. odoo-python
@@ -4438,14 +4709,17 @@ msgstr "Avstanden teller to ganger: dit og tilbake."
 msgid ""
 "The distance of a mileage expense from its start and its end, with the route"
 " picture as the receipt"
-msgstr "Avstanden for en kilometergodtgjørelse ut fra start og mål, med bildet av ruten som bilag"
+msgstr ""
+"Avstanden for en kilometergodtgjørelse ut fra start og mål, med bildet av "
+"ruten som bilag"
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_has_vehicles
 msgid ""
 "The employee has a personal vehicle: the form then asks which one drove the "
 "trip."
-msgstr "Den ansatte har et privat kjøretøy: skjemaet spør da hvilket som ble brukt."
+msgstr ""
+"Den ansatte har et privat kjøretøy: skjemaet spør da hvilket som ble brukt."
 
 #. module: expense_scan
 #. odoo-python
@@ -4453,21 +4727,27 @@ msgstr "Den ansatte har et privat kjøretøy: skjemaet spør da hvilket som ble 
 msgid ""
 "The employees whose expenses you approve, or who report to you, appear here."
 " Click one to see their expenses or to enter one in their name."
-msgstr "Her vises de ansatte hvis utlegg du godkjenner, eller som rapporterer til deg. Klikk på en for å se utleggene deres eller registrere et i deres navn."
+msgstr ""
+"Her vises de ansatte hvis utlegg du godkjenner, eller som rapporterer til "
+"deg. Klikk på en for å se utleggene deres eller registrere et i deres navn."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid ""
 "The engine and the photo processing have good defaults: see the advanced "
 "options below."
-msgstr "Motoren og bildebehandlingen har gode standardverdier: se de avanserte alternativene nedenfor."
+msgstr ""
+"Motoren og bildebehandlingen har gode standardverdier: se de avanserte "
+"alternativene nedenfor."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_policy_rule__family
 msgid ""
 "The expense categories of this family, as the module recognises them. "
 "Ignored when categories are chosen."
-msgstr "Utleggskategoriene i denne familien, slik modulen gjenkjenner dem. Ignoreres hvis kategorier er valgt."
+msgstr ""
+"Utleggskategoriene i denne familien, slik modulen gjenkjenner dem. Ignoreres"
+" hvis kategorier er valgt."
 
 #. module: expense_scan
 #. odoo-python
@@ -4480,21 +4760,26 @@ msgstr "Utleggsradene i malen \"%s\" er motstridende."
 msgid ""
 "The expense sheet is produced from the expense\n"
 "                            list: select the expenses, then \"Expense Sheet\"."
-msgstr "Utleggsrapporten lages fra utleggslisten: merk utleggene og deretter \"Utleggsrapport\"."
+msgstr ""
+"Utleggsrapporten lages fra utleggslisten: merk utleggene og deretter "
+"\"Utleggsrapport\"."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_export_template__last_row
 msgid ""
 "The exported table has exactly one row per expense: extra rows are deleted, "
 "missing ones added, and the totals below follow."
-msgstr "Den eksporterte tabellen har nøyaktig én rad per utlegg: overflødige rader slettes, manglende legges til, og summene under følger med."
+msgstr ""
+"Den eksporterte tabellen har nøyaktig én rad per utlegg: overflødige rader "
+"slettes, manglende legges til, og summene under følger med."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_policy_rule__extra_cities
 msgid ""
 "The extra is added to the limit when the receipt mentions one of these "
 "cities."
-msgstr "Tillegget legges til grensen når kvitteringen nevner en av disse byene."
+msgstr ""
+"Tillegget legges til grensen når kvitteringen nevner en av disse byene."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -4519,7 +4804,9 @@ msgstr "Gruppen som inneholder utleggslistene heter \"Utleggsoppfølging\"."
 msgid ""
 "The invoice %(invoice)s carries this expense, but it could not be posted: "
 "%(error)s"
-msgstr "Fakturaen %(invoice)s inneholder dette utlegget, men det kunne ikke bokføres: %(error)s"
+msgstr ""
+"Fakturaen %(invoice)s inneholder dette utlegget, men det kunne ikke "
+"bokføres: %(error)s"
 
 #. module: expense_scan
 #. odoo-python
@@ -4551,7 +4838,10 @@ msgid ""
 "The merchant as the OCR read it, before any correction. A logo reads badly, "
 "but the same way on every receipt: this is what lets it be recognised the "
 "next time."
-msgstr "Brukerstedet slik OCR leste det, før enhver retting. En logo leses dårlig, men likt på hver kvittering: det er det som gjør at den gjenkjennes neste gang."
+msgstr ""
+"Brukerstedet slik OCR leste det, før enhver retting. En logo leses dårlig, "
+"men likt på hver kvittering: det er det som gjør at den gjenkjennes neste "
+"gang."
 
 #. module: expense_scan
 #. odoo-python
@@ -4565,7 +4855,9 @@ msgstr "Biblioteket openpyxl mangler på serveren."
 msgid ""
 "The photo holds %(count)s different purchases: one expense each; this one "
 "keeps the first."
-msgstr "Bildet inneholder %(count)s ulike kjøp: én utgift hver; denne beholder det første."
+msgstr ""
+"Bildet inneholder %(count)s ulike kjøp: én utgift hver; denne beholder det "
+"første."
 
 #. module: expense_scan
 #. odoo-python
@@ -4602,7 +4894,8 @@ msgstr "Kvitteringen er for stor (%(size)d MB, grense %(max)d MB)."
 msgid ""
 "The receipt prints several tax rates: none of them holds for the whole "
 "expense."
-msgstr "Kvitteringen oppgir flere avgiftssatser: ingen av dem gjelder hele utlegget."
+msgstr ""
+"Kvitteringen oppgir flere avgiftssatser: ingen av dem gjelder hele utlegget."
 
 #. module: expense_scan
 #. odoo-python
@@ -4628,7 +4921,11 @@ msgid ""
 "The receipt tax (%(amount)s) cannot yet be carried on an expense paid by the"
 " company. Set the expense back to \"Employee (to reimburse)\", or empty the "
 "\"Receipt tax\" field to let Odoo compute it from the rate."
-msgstr "Kvitteringsavgiften (%(amount)s) kan ennå ikke føres over på et utlegg betalt av firmaet. Sett utlegget tilbake til \"Ansatt (skal refunderes)\", eller tøm feltet \"Avgift på kvitteringen\" så Odoo beregner den ut fra satsen."
+msgstr ""
+"Kvitteringsavgiften (%(amount)s) kan ennå ikke føres over på et utlegg "
+"betalt av firmaet. Sett utlegget tilbake til \"Ansatt (skal refunderes)\", "
+"eller tøm feltet \"Avgift på kvitteringen\" så Odoo beregner den ut fra "
+"satsen."
 
 #. module: expense_scan
 #. odoo-python
@@ -4663,7 +4960,9 @@ msgstr "Satsen gjelder fra dette året, til en nyere avløser den."
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense.py:0
 msgid "The scan of this receipt did not finish. Enter the expense by hand."
-msgstr "Skanningen av denne kvitteringen ble ikke fullført. Før utlegget inn for hånd."
+msgstr ""
+"Skanningen av denne kvitteringen ble ikke fullført. Før utlegget inn for "
+"hånd."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -4696,7 +4995,9 @@ msgstr "Avgiften %(tax)s kan ikke gi en mva på %(amount)s."
 msgid ""
 "The tax printed on the receipt goes to the journal entry, rather than the "
 "one the rate gives."
-msgstr "Avgiften som står på kvitteringen går til bilaget, i stedet for den satsen gir."
+msgstr ""
+"Avgiften som står på kvitteringen går til bilaget, i stedet for den satsen "
+"gir."
 
 #. module: expense_scan
 #. odoo-python
@@ -4704,7 +5005,9 @@ msgstr "Avgiften som står på kvitteringen går til bilaget, i stedet for den s
 msgid ""
 "The tax read does not match the rate: enter the amount printed on the "
 "receipt."
-msgstr "Avgiften som er lest stemmer ikke med satsen: fyll inn beløpet som er trykt på kvitteringen."
+msgstr ""
+"Avgiften som er lest stemmer ikke med satsen: fyll inn beløpet som er trykt "
+"på kvitteringen."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_text_retention_days
@@ -4716,7 +5019,13 @@ msgid ""
 "L123-22) and in several other countries; check the rule that applies to you."
 " The receipt image itself is never erased by the module. Zero: never erase "
 "the text either."
-msgstr "Teksten som er lest på en kvittering (navn, adresser, kortets siste sifre) slettes først etter denne fristen. Standardverdien, 10 år, er oppbevaringstiden for regnskapsbilag, kvitteringer medregnet, i Frankrike (handelsloven, art. L123-22) og i flere andre land; sjekk hvilken regel som gjelder for deg. Modulen sletter aldri bildet av kvitteringen. Null: slett aldri teksten heller."
+msgstr ""
+"Teksten som er lest på en kvittering (navn, adresser, kortets siste sifre) "
+"slettes først etter denne fristen. Standardverdien, 10 år, er "
+"oppbevaringstiden for regnskapsbilag, kvitteringer medregnet, i Frankrike "
+"(handelsloven, art. L123-22) og i flere andre land; sjekk hvilken regel som "
+"gjelder for deg. Modulen sletter aldri bildet av kvitteringen. Null: slett "
+"aldri teksten heller."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_policy_rule__name
@@ -4728,7 +5037,9 @@ msgstr "Teksten som vises for den ansatte når regelen brytes."
 msgid ""
 "The trip is made in a company vehicle: no allowance by the scale of the "
 "employee's own vehicle."
-msgstr "Turen gjøres i en firmabil: ingen godtgjørelse etter den ansattes eget kjøretøys sats."
+msgstr ""
+"Turen gjøres i en firmabil: ingen godtgjørelse etter den ansattes eget "
+"kjøretøys sats."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_keep_original
@@ -4736,14 +5047,17 @@ msgstr "Turen gjøres i en firmabil: ingen godtgjørelse etter den ansattes eget
 msgid ""
 "The untouched photo stays attached to the expense as the receipt; the "
 "cropped image is used for display."
-msgstr "Det uredigerte bildet blir liggende på utlegget som kvittering; det beskårede bildet brukes til visning."
+msgstr ""
+"Det uredigerte bildet blir liggende på utlegget som kvittering; det "
+"beskårede bildet brukes til visning."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid ""
 "The untouched photo stays reachable from the expense; the cropped image is "
 "shown."
-msgstr "Det uberørte bildet er tilgjengelig fra utlegget; det beskårne bildet vises."
+msgstr ""
+"Det uberørte bildet er tilgjengelig fra utlegget; det beskårne bildet vises."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_vehicle_id
@@ -4758,26 +5072,35 @@ msgid ""
 "certificate. A mileage expense in one of them is paid by the scale of its "
 "category, from the distance cumulated over the year. A trip in a company "
 "vehicle keeps the mileage rate below, or the category cost."
-msgstr "Den ansattes kjøretøy med skatteytelse og vognkort. En kilometerutgift i et av dem godtgjøres etter kategoriens sats ut fra årets samlede distanse. En tur i firmabil beholder kilometersatsen under, eller kategoriens kostnad."
+msgstr ""
+"Den ansattes kjøretøy med skatteytelse og vognkort. En kilometerutgift i et "
+"av dem godtgjøres etter kategoriens sats ut fra årets samlede distanse. En "
+"tur i firmabil beholder kilometersatsen under, eller kategoriens kostnad."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_mileage_vehicle__power_from
 msgid ""
 "The vehicles of the employees whose fiscal power is in this range take the "
 "category by themselves (the employee can still choose another one)."
-msgstr "Ansattes kjøretøy med skatteytelse i dette intervallet får kategorien automatisk (den ansatte kan velge en annen)."
+msgstr ""
+"Ansattes kjøretøy med skatteytelse i dette intervallet får kategorien "
+"automatisk (den ansatte kan velge en annen)."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_export_template__file
 msgid ""
 "The workbook as it is filled in by hand, data included: the expense lines "
 "are emptied before being filled."
-msgstr "Arbeidsboken slik den fylles ut for hånd, data medregnet: utleggslinjene tømmes før de fylles ut."
+msgstr ""
+"Arbeidsboken slik den fylles ut for hånd, data medregnet: utleggslinjene "
+"tømmes før de fylles ut."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "Then the text read is erased; the receipt image stays. 0: never."
-msgstr "Deretter slettes den leste teksten; kvitteringsbildet blir liggende. 0: aldri."
+msgstr ""
+"Deretter slettes den leste teksten; kvitteringsbildet blir liggende. 0: "
+"aldri."
 
 #. module: expense_scan
 #. odoo-python
@@ -4791,7 +5114,9 @@ msgstr "Disse utleggene er allerede betalt."
 msgid ""
 "These expenses are paid, and invoiced when they are re-invoiced: their VAT may already have been declared. Check with your accountant before correcting them.\n"
 "%(names)s"
-msgstr "Disse utleggene er betalt, og fakturert når de viderefaktureres: mva-en kan allerede være innrapportert. Sjekk med regnskapsføreren din før du korrigerer dem.\n%(names)s"
+msgstr ""
+"Disse utleggene er betalt, og fakturert når de viderefaktureres: mva-en kan allerede være innrapportert. Sjekk med regnskapsføreren din før du korrigerer dem.\n"
+"%(names)s"
 
 #. module: expense_scan
 #. odoo-python
@@ -4799,7 +5124,9 @@ msgstr "Disse utleggene er betalt, og fakturert når de viderefaktureres: mva-en
 msgid ""
 "This PDF has several pages: it stays the receipt as it is. Retouch applies "
 "to photos and single-page PDFs."
-msgstr "Denne PDF-en har flere sider: den forblir kvitteringen som den er. Redigering gjelder bilder og PDF-er med én side."
+msgstr ""
+"Denne PDF-en har flere sider: den forblir kvitteringen som den er. "
+"Redigering gjelder bilder og PDF-er med én side."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -4817,7 +5144,9 @@ msgstr "Denne kategorien finnes allerede i selskapet."
 #: code:addons/expense_scan/models/hr_expense.py:0
 msgid ""
 "This category has no tax: choose the rate so that the tax read is deducted."
-msgstr "Denne kategorien har ingen avgift: velg satsen slik at avgiften som er lest trekkes fra."
+msgstr ""
+"Denne kategorien har ingen avgift: velg satsen slik at avgiften som er lest "
+"trekkes fra."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
@@ -4826,7 +5155,11 @@ msgid ""
 "order. To re-invoice it, install the Sales app, create the customer's order,"
 " then select that order on the project (Invoicing tab). Until then the "
 "expense is only followed in the project budget."
-msgstr "Denne utgiften kan ikke viderefaktureres ennå: viderefakturering går via en salgsordre. Installer appen Salg, opprett kundens ordre og velg den på prosjektet (fanen Fakturering). Inntil da følges utgiften bare i prosjektbudsjettet."
+msgstr ""
+"Denne utgiften kan ikke viderefaktureres ennå: viderefakturering går via en "
+"salgsordre. Installer appen Salg, opprett kundens ordre og velg den på "
+"prosjektet (fanen Fakturering). Inntil da følges utgiften bare i "
+"prosjektbudsjettet."
 
 #. module: expense_scan
 #. odoo-python
@@ -4840,7 +5173,9 @@ msgstr "Utgiften har ingen rute: velg først start og mål."
 msgid ""
 "This expense is paid and invoiced: its VAT may already have been declared. "
 "Check with your accountant before correcting it."
-msgstr "Dette utlegget er betalt og fakturert: mva-en kan allerede være innrapportert. Sjekk med regnskapsføreren din før du korrigerer det."
+msgstr ""
+"Dette utlegget er betalt og fakturert: mva-en kan allerede være "
+"innrapportert. Sjekk med regnskapsføreren din før du korrigerer det."
 
 #. module: expense_scan
 #. odoo-python
@@ -4848,7 +5183,9 @@ msgstr "Dette utlegget er betalt og fakturert: mva-en kan allerede være innrapp
 msgid ""
 "This expense is paid: its VAT may already have been declared. Check with "
 "your accountant before correcting it."
-msgstr "Dette utlegget er betalt: mva-en kan allerede være innrapportert. Sjekk med regnskapsføreren din før du korrigerer det."
+msgstr ""
+"Dette utlegget er betalt: mva-en kan allerede være innrapportert. Sjekk med "
+"regnskapsføreren din før du korrigerer det."
 
 #. module: expense_scan
 #. odoo-python
@@ -4871,7 +5208,8 @@ msgstr "Tråder per worker"
 #. odoo-python
 #: code:addons/expense_scan/models/expense_vat_wizard.py:0
 msgid "Tick the box to confirm that you checked with your accountant."
-msgstr "Kryss av i boksen for å bekrefte at du har sjekket med regnskapsføreren din."
+msgstr ""
+"Kryss av i boksen for å bekrefte at du har sjekket med regnskapsføreren din."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__date_to
@@ -4928,7 +5266,9 @@ msgstr "Totalt viderefakturert"
 msgid ""
 "Totals are per row in a column, for the whole sheet in a header. Service, "
 "month, period and company only go in a header."
-msgstr "I en kolonne gjelder summene per rad, i en topptekst for hele arket. Tjeneste, måned, periode og firma hører bare hjemme i en topptekst."
+msgstr ""
+"I en kolonne gjelder summene per rad, i en topptekst for hele arket. "
+"Tjeneste, måned, periode og firma hører bare hjemme i en topptekst."
 
 #. module: expense_scan
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_policy_rule__family__train_air
@@ -4946,7 +5286,10 @@ msgid ""
 "True for an expense without recoverable VAT: mileage, or a category marked "
 "\"Flat rate without VAT\" (official scales, allowances). The form then hides"
 " its VAT fields."
-msgstr "Sann for et utlegg uten fradragsberettiget mva: kjøregodtgjørelse, eller en kategori merket \"Sats uten mva\" (offentlige takster, diett). Skjemaet skjuler da mva-feltene."
+msgstr ""
+"Sann for et utlegg uten fradragsberettiget mva: kjøregodtgjørelse, eller en "
+"kategori merket \"Sats uten mva\" (offentlige takster, diett). Skjemaet "
+"skjuler da mva-feltene."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_nights_required
@@ -4955,7 +5298,9 @@ msgstr "Sann for et utlegg uten fradragsberettiget mva: kjøregodtgjørelse, ell
 msgid ""
 "True for hotel categories, recognised by their name or reference: their "
 "expenses give the number of nights."
-msgstr "Sann for hotellkategorier, gjenkjent på navn eller referanse: utleggene deres oppgir antall netter."
+msgstr ""
+"Sann for hotellkategorier, gjenkjent på navn eller referanse: utleggene "
+"deres oppgir antall netter."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_one_payment_method
@@ -4963,7 +5308,10 @@ msgid ""
 "True when the company has only one possible payment method. The form then "
 "hides the field, which Odoo fills on its own: a choice with a single option "
 "is no choice."
-msgstr "Sann når firmaet bare har én mulig betalingsmåte. Skjemaet skjuler da feltet, som Odoo fyller ut selv: et valg med ett alternativ er ikke noe valg."
+msgstr ""
+"Sann når firmaet bare har én mulig betalingsmåte. Skjemaet skjuler da "
+"feltet, som Odoo fyller ut selv: et valg med ett alternativ er ikke noe "
+"valg."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_own
@@ -4971,7 +5319,10 @@ msgid ""
 "True when the expense belongs to the user viewing it. The form uses it to "
 "hide the \"Employee\" field, which only matters when a manager enters an "
 "expense for someone else."
-msgstr "Sann når utlegget tilhører brukeren som ser på det. Skjemaet bruker det til å skjule feltet \"Ansatt\", som bare betyr noe når en leder registrerer et utlegg for noen andre."
+msgstr ""
+"Sann når utlegget tilhører brukeren som ser på det. Skjemaet bruker det til "
+"å skjule feltet \"Ansatt\", som bare betyr noe når en leder registrerer et "
+"utlegg for noen andre."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_expense_manager
@@ -4979,7 +5330,10 @@ msgid ""
 "True when the user viewing the expense manages expenses. The account and the"
 " analytic distribution are only shown to them, on top of the accounting "
 "groups Odoo requires."
-msgstr "Sann når brukeren som ser utlegget håndterer utlegg. Kontoen og den analytiske fordelingen vises bare for denne, i tillegg til regnskapsgruppene Odoo krever."
+msgstr ""
+"Sann når brukeren som ser utlegget håndterer utlegg. Kontoen og den "
+"analytiske fordelingen vises bare for denne, i tillegg til regnskapsgruppene"
+" Odoo krever."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_res_company__expense_scan_auto_rotate
@@ -5109,7 +5463,9 @@ msgstr "Mva som bilaget for utlegget trekker fra, før eventuell korreksjon."
 msgid ""
 "VAT the accounting recovers on this expense: the purchase tax lines of its "
 "journal entry, plus its posted corrections."
-msgstr "Mva som regnskapet trekker fra på dette utlegget: innkjøpsavgiftslinjene i bilaget pluss de bokførte korreksjonene."
+msgstr ""
+"Mva som regnskapet trekker fra på dette utlegget: innkjøpsavgiftslinjene i "
+"bilaget pluss de bokførte korreksjonene."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_export_column__value
@@ -5151,7 +5507,9 @@ msgstr "Vis kartet"
 msgid ""
 "Warnings on expenses that go beyond your rules, and Excel templates for the "
 "expense sheet"
-msgstr "Advarsler om utlegg som går utover reglene dine, og Excel-maler for utleggsrapporten"
+msgstr ""
+"Advarsler om utlegg som går utover reglene dine, og Excel-maler for "
+"utleggsrapporten"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__website_message_ids
@@ -5179,7 +5537,9 @@ msgstr "Hvor gjenkjenningsmodellene lastes ned."
 msgid ""
 "Where the recognition models are downloaded. Leave empty to use a subfolder "
 "of the Odoo data directory, which the service can always write to."
-msgstr "Hvor gjenkjenningsmodellene lastes ned. La stå tom for å bruke en undermappe i Odoos datakatalog, som tjenesten alltid kan skrive til."
+msgstr ""
+"Hvor gjenkjenningsmodellene lastes ned. La stå tom for å bruke en undermappe"
+" i Odoos datakatalog, som tjenesten alltid kan skrive til."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_policy_view_form
@@ -5201,7 +5561,9 @@ msgstr "Hvorfor utlegget går utover reglene"
 msgid ""
 "Why this expense goes beyond the rules. The manager reads it when approving "
 "the expense."
-msgstr "Hvorfor utlegget går utover reglene. Lederen leser det når utlegget godkjennes."
+msgstr ""
+"Hvorfor utlegget går utover reglene. Lederen leser det når utlegget "
+"godkjennes."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_limit_projects
@@ -5210,7 +5572,11 @@ msgid ""
 "With re-invoicing, an employee is offered the projects they manage, have a "
 "task on or are assigned to, not the whole list, and cannot link another one."
 " A project manager and an administrator always see every project."
-msgstr "Ved viderefakturering får den ansatte tilbud om prosjektene vedkommende leder, har en oppgave på eller er tildelt, ikke hele listen, og kan ikke koble til et annet. En prosjektleder og en administrator ser alltid alle prosjekter."
+msgstr ""
+"Ved viderefakturering får den ansatte tilbud om prosjektene vedkommende "
+"leder, har en oppgave på eller er tildelt, ikke hele listen, og kan ikke "
+"koble til et annet. En prosjektleder og en administrator ser alltid alle "
+"prosjekter."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_no_vat
@@ -5230,7 +5596,11 @@ msgid ""
 "merchants, and almost never on the others. Updated every day; they point to "
 "this category like the receipt words above. A word entered above, here or on"
 " another category, is never learnt."
-msgstr "Ord som finnes på kvitteringer en person har sortert i denne kategorien, hos flere brukersteder, og nesten aldri på de andre. Oppdateres hver dag; de peker mot denne kategorien som kvitteringsordene ovenfor. Et ord som er skrevet inn ovenfor, her eller i en annen kategori, læres aldri."
+msgstr ""
+"Ord som finnes på kvitteringer en person har sortert i denne kategorien, hos"
+" flere brukersteder, og nesten aldri på de andre. Oppdateres hver dag; de "
+"peker mot denne kategorien som kvitteringsordene ovenfor. Et ord som er "
+"skrevet inn ovenfor, her eller i en annen kategori, læres aldri."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_product_product__expense_scan_learned_keywords
@@ -5245,7 +5615,10 @@ msgid ""
 "Words that, read on a receipt, point to this category: one per line, in every useful language, merchant names included (\"Ibis\", \"nocleg\", \"pedaggio\"...). Accents and case are ignored, and one misread letter is tolerated in words of five letters or more.\n"
 "\n"
 "Merchants already filed are learnt on their own when expenses are submitted: no need to enter them all here."
-msgstr "Ord som, lest på en kvittering, peker til denne kategorien: ett per linje, på alle nyttige språk, navn på brukersteder medregnet (\"Ibis\", \"nocleg\", \"pedaggio\"...). Aksenter og store bokstaver ignoreres, og én feillest bokstav tolereres i ord på fem bokstaver eller mer.\n\nBrukersteder som allerede er sortert, læres av seg selv når utlegg sendes inn: du trenger ikke fylle inn alle her."
+msgstr ""
+"Ord som, lest på en kvittering, peker til denne kategorien: ett per linje, på alle nyttige språk, navn på brukersteder medregnet (\"Ibis\", \"nocleg\", \"pedaggio\"...). Aksenter og store bokstaver ignoreres, og én feillest bokstav tolereres i ord på fem bokstaver eller mer.\n"
+"\n"
+"Brukersteder som allerede er sortert, læres av seg selv når utlegg sendes inn: du trenger ikke fylle inn alle her."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_export_template_view_form
@@ -5275,7 +5648,11 @@ msgid ""
 "the bracket of the yearly distance, plus its fixed part (French scale). Each"
 " kilometre at the rate of its bracket: the first kilometres at the first "
 "rate, the following ones at the next (United Kingdom)."
-msgstr "Årsformel: årets godtgjørelse er distansen ganger satsen for trinnet til årsdistansen pluss dets faste del (fransk sats). Hver kilometer til satsen for sitt trinn: de første kilometerne til første sats, de neste til neste (Storbritannia)."
+msgstr ""
+"Årsformel: årets godtgjørelse er distansen ganger satsen for trinnet til "
+"årsdistansen pluss dets faste del (fransk sats). Hver kilometer til satsen "
+"for sitt trinn: de første kilometerne til første sats, de neste til neste "
+"(Storbritannia)."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -5611,94 +5988,109 @@ msgid "Hotel: 110 a night, 140 in large cities"
 msgstr "Hotell: 110 per natt, 140 i storbyer"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__template_id
 msgid "Excel template"
 msgstr "Excel-mal"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+#: model:ir.model.fields.selection,name:expense_scan.selection__ir_attachment__expense_scan_kind__summary
 msgid "PDF summary"
 msgstr "PDF-oppsummering"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+#: model:ir.model.fields.selection,name:expense_scan.selection__ir_attachment__expense_scan_kind__excel
 msgid "Excel"
 msgstr "Excel"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+#: model:ir.model.fields,field_description:expense_scan.field_ir_attachment__expense_scan_kind
+#: model:ir.model.fields,field_description:expense_scan.field_product_document__expense_scan_kind
 msgid "Sheet format"
 msgstr "Arkets format"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__is_month
 msgid "Is Month"
 msgstr "Månedsark"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_form
 msgid "Create the missing formats"
 msgstr "Opprett manglende formater"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+#: model:ir.model.fields.selection,name:expense_scan.selection__ir_attachment__expense_scan_kind__receipts
 msgid "Receipts"
 msgstr "Bilag"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__formats
 msgid "Formats"
 msgstr "Formater"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__has_missing_formats
 msgid "Has Missing Formats"
 msgstr "Manglende formater"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.company_paid
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__company_paid
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__company_paid
 msgid "Include the expenses paid by the company"
 msgstr "Ta med utgifter betalt av selskapet"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.company_paid
-msgid "The sheet then lists every expense with its receipt, the total to reimburse to the employee apart: it can be kept as the record of the transfer."
-msgstr "Arket viser da alle utgifter med kvittering og beløpet som skal refunderes til den ansatte for seg: det kan oppbevares som dokumentasjon for overføringen."
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_sheet_wizard__company_paid
+msgid ""
+"The sheet then lists every expense with its receipt, the total to reimburse "
+"to the employee apart: it can be kept as the record of the transfer."
+msgstr ""
+"Arket viser da alle utgifter med kvittering og beløpet som skal refunderes "
+"til den ansatte for seg: det kan oppbevares som dokumentasjon for "
+"overføringen."
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.company_paid
+#: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
 msgid "To reimburse to the employee"
 msgstr "Skal refunderes til den ansatte"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_sheet_archive__sheet_kind__internal
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_search
 msgid "Internal (reimbursement)"
 msgstr "Intern (refusjon)"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_sheet_archive__sheet_kind__client
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_search
 msgid "Client (re-invoicing)"
 msgstr "Kunde (viderefakturering)"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__sheet_kind
 msgid "Sheet type"
 msgstr "Arktype"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+#. odoo-python
+#: code:addons/expense_scan/models/expense_sheet.py:0
 msgid "internal"
 msgstr "intern"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+#. odoo-python
+#: code:addons/expense_scan/models/expense_sheet.py:0
 msgid "client"
 msgstr "kunde"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_kind
-msgid "Internal: every expense and every receipt, the record of the reimbursement of the employee. Client: the re-invoiced expenses only."
-msgstr "Intern: alle utgifter og alle kvitteringer, dokumentasjon for refusjonen til den ansatte. Kunde: bare de viderefakturerte utgiftene."
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_sheet_archive__sheet_kind
+msgid ""
+"Internal: every expense and every receipt, the record of the reimbursement "
+"of the employee. Client: the re-invoiced expenses only."
+msgstr ""
+"Intern: alle utgifter og alle kvitteringer, dokumentasjon for refusjonen til"
+" den ansatte. Kunde: bare de viderefakturerte utgiftene."
 
 #. module: expense_scan
 #. odoo-python
@@ -5736,16 +6128,18 @@ msgid "Expense Sheets"
 msgstr "Utgiftsark"
 
 #. module: expense_scan
-#: model:ir.ui.menu,name:expense_scan.menu_expense_scan_sheets
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_list
 msgid "New sheet"
 msgstr "Nytt ark"
 
 #. module: expense_scan
-#: model:ir.ui.menu,name:expense_scan.menu_expense_scan_sheets
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_sheet_archive__scope__all
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_sheet_wizard__scope__all
 msgid "Internal: All expenses"
 msgstr "Intern: Alle utgifter"
 
 #. module: expense_scan
-#: model:ir.ui.menu,name:expense_scan.menu_expense_scan_sheets
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_sheet_archive__scope__reinvoice
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_sheet_wizard__scope__reinvoice
 msgid "Client: Re-invoicable expenses only"
 msgstr "Kunde: Bare viderefakturerbare utgifter"

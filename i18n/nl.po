@@ -40,7 +40,9 @@ msgstr "\"%(cell)s\": een kolomletter (B) of een cel (K4)."
 msgid ""
 "\"%(expense)s\" is a business meal for %(covers)s covers: write the names "
 "and companies of the guests in the notes before submitting it."
-msgstr "\"%(expense)s\" is een zakelijke maaltijd voor %(covers)s couverts: vermeld de namen en bedrijven van de gasten in de notities voordat u ze indient."
+msgstr ""
+"\"%(expense)s\" is een zakelijke maaltijd voor %(covers)s couverts: vermeld "
+"de namen en bedrijven van de gasten in de notities voordat u ze indient."
 
 #. module: expense_scan
 #. odoo-python
@@ -48,7 +50,9 @@ msgstr "\"%(expense)s\" is een zakelijke maaltijd voor %(covers)s couverts: verm
 msgid ""
 "\"%(expense)s\" is in the \"%(category)s\" category, which requires the "
 "number of nights. Enter it before saving."
-msgstr "\"%(expense)s\" valt in de categorie \"%(category)s\", die het aantal nachten vereist. Vul het in voor het opslaan."
+msgstr ""
+"\"%(expense)s\" valt in de categorie \"%(category)s\", die het aantal "
+"nachten vereist. Vul het in voor het opslaan."
 
 #. module: expense_scan
 #. odoo-python
@@ -56,7 +60,9 @@ msgstr "\"%(expense)s\" valt in de categorie \"%(category)s\", die het aantal na
 msgid ""
 "\"%(expense)s\": the date is not printed on the receipt, the expense has the"
 " date of the day. Enter the date, or confirm it, before submitting."
-msgstr "\"%(expense)s\": de datum staat niet op de bon, de uitgave heeft de datum van vandaag. Voer de datum in, of bevestig ze, voordat u indient."
+msgstr ""
+"\"%(expense)s\": de datum staat niet op de bon, de uitgave heeft de datum "
+"van vandaag. Voer de datum in, of bevestig ze, voordat u indient."
 
 #. module: expense_scan
 #. odoo-python
@@ -70,7 +76,9 @@ msgstr "\"%(value)s\" kan niet in %(where)s (%(cell)s)."
 msgid ""
 "\"%s\" was not found on the map: write its address more fully (street, "
 "town), or pick a place in the list."
-msgstr "\"%s\" is niet gevonden op de kaart: schrijf het adres vollediger (straat, plaats), of kies een plaats uit de lijst."
+msgstr ""
+"\"%s\" is niet gevonden op de kaart: schrijf het adres vollediger (straat, "
+"plaats), of kies een plaats uit de lijst."
 
 #. module: expense_scan
 #. odoo-python
@@ -78,14 +86,18 @@ msgstr "\"%s\" is niet gevonden op de kaart: schrijf het adres vollediger (straa
 msgid ""
 "\"%s\" was not found on the map: write its address more fully (street, "
 "town)."
-msgstr "\"%s\" is niet gevonden op de kaart: schrijf het adres vollediger (straat, plaats)."
+msgstr ""
+"\"%s\" is niet gevonden op de kaart: schrijf het adres vollediger (straat, "
+"plaats)."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid ""
 "\"My Expenses\" and \"Expenses to Process\" start with the \"Current month\""
 " filter."
-msgstr "\"Mijn onkosten\" en \"Onkosten om te verwerken\" starten met het filter \"Huidige maand\"."
+msgstr ""
+"\"Mijn onkosten\" en \"Onkosten om te verwerken\" starten met het filter "
+"\"Huidige maand\"."
 
 #. module: expense_scan
 #. odoo-python
@@ -99,7 +111,9 @@ msgstr "%(category)s van %(date)s"
 msgid ""
 "%(count)d receipts with a different total or date were moved to their own "
 "expenses."
-msgstr "%(count)d bonnen met een ander totaal of een andere datum zijn naar eigen declaraties verplaatst."
+msgstr ""
+"%(count)d bonnen met een ander totaal of een andere datum zijn naar eigen "
+"declaraties verplaatst."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -113,7 +127,9 @@ msgstr "%(count)s declaratie(s) ongewijzigd gelaten"
 msgid ""
 "%(count)s expense(s) of this order's missions wait for the manager or for a "
 "decision. The expense line does not include them yet."
-msgstr "%(count)s declaratie(s) van deze projecten wachten op de verantwoordelijke of op een beslissing. De declaratieregel bevat ze nog niet."
+msgstr ""
+"%(count)s declaratie(s) van deze projecten wachten op de verantwoordelijke "
+"of op een beslissing. De declaratieregel bevat ze nog niet."
 
 #. module: expense_scan
 #. odoo-python
@@ -121,13 +137,17 @@ msgstr "%(count)s declaratie(s) van deze projecten wachten op de verantwoordelij
 msgid ""
 "%(count)s expense(s) wait for the manager or for a decision. The expense "
 "line of this order does not move until they are settled."
-msgstr "%(count)s declaratie(s) wachten op de verantwoordelijke of op een beslissing. De declaratieregel van deze order beweegt niet totdat ze geregeld zijn."
+msgstr ""
+"%(count)s declaratie(s) wachten op de verantwoordelijke of op een "
+"beslissing. De declaratieregel van deze order beweegt niet totdat ze "
+"geregeld zijn."
 
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/expense_sheet.py:0
 msgid "%(count)s expense(s), %(employees)s employee(s), %(amount)s incl. tax"
-msgstr "%(count)s declaratie(s), %(employees)s werknemer(s), %(amount)s incl. btw"
+msgstr ""
+"%(count)s declaratie(s), %(employees)s werknemer(s), %(amount)s incl. btw"
 
 #. module: expense_scan
 #. odoo-javascript
@@ -151,7 +171,8 @@ msgstr "%(count)s bonnen gescand."
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense_batch.py:0
 msgid "%(count)s skipped for lack of access rights (%(names)s)."
-msgstr "%(count)s overgeslagen wegens ontbrekende toegangsrechten (%(names)s)."
+msgstr ""
+"%(count)s overgeslagen wegens ontbrekende toegangsrechten (%(names)s)."
 
 #. module: expense_scan
 #. odoo-python
@@ -159,7 +180,9 @@ msgstr "%(count)s overgeslagen wegens ontbrekende toegangsrechten (%(names)s)."
 msgid ""
 "%(count)s skipped: their journal entry is posted (%(names)s). Cancel it in "
 "Accounting first."
-msgstr "%(count)s overgeslagen: hun boeking is geboekt (%(names)s). Annuleer die eerst in Boekhouding."
+msgstr ""
+"%(count)s overgeslagen: hun boeking is geboekt (%(names)s). Annuleer die "
+"eerst in Boekhouding."
 
 #. module: expense_scan
 #. odoo-python
@@ -167,7 +190,9 @@ msgstr "%(count)s overgeslagen: hun boeking is geboekt (%(names)s). Annuleer die
 msgid ""
 "%(count)s skipped: they are on a customer invoice (%(names)s). Cancel the "
 "invoice first."
-msgstr "%(count)s overgeslagen: ze staan op een klantfactuur (%(names)s). Annuleer eerst de factuur."
+msgstr ""
+"%(count)s overgeslagen: ze staan op een klantfactuur (%(names)s). Annuleer "
+"eerst de factuur."
 
 #. module: expense_scan
 #. odoo-python
@@ -175,7 +200,9 @@ msgstr "%(count)s overgeslagen: ze staan op een klantfactuur (%(names)s). Annule
 msgid ""
 "%(employee)s is not assigned to: %(projects)s. Ask a project manager to "
 "assign them first."
-msgstr "%(employee)s is niet toegewezen aan: %(projects)s. Vraag eerst aan een projectmanager om de toewijzing te doen."
+msgstr ""
+"%(employee)s is niet toegewezen aan: %(projects)s. Vraag eerst aan een "
+"projectmanager om de toewijzing te doen."
 
 #. module: expense_scan
 #. odoo-python
@@ -183,7 +210,9 @@ msgstr "%(employee)s is niet toegewezen aan: %(projects)s. Vraag eerst aan een p
 msgid ""
 "%(engine)s - loaded and tested in %(duration)s s.\n"
 "Text read: \"%(text)s\""
-msgstr "%(engine)s - geladen en getest in %(duration)s s.\nGelezen tekst: \"%(text)s\""
+msgstr ""
+"%(engine)s - geladen en getest in %(duration)s s.\n"
+"Gelezen tekst: \"%(text)s\""
 
 #. module: expense_scan
 #. odoo-python
@@ -191,14 +220,19 @@ msgstr "%(engine)s - geladen en getest in %(duration)s s.\nGelezen tekst: \"%(te
 msgid ""
 "%(expense)s carries %(count)s taxes. Another amount needs exactly one: use "
 "\"Recoverable\" or \"Not recoverable\" instead."
-msgstr "%(expense)s heeft %(count)s belastingen. Een ander bedrag vereist precies één belasting: gebruik in plaats daarvan „Terugvorderbaar“ of „Niet terugvorderbaar“."
+msgstr ""
+"%(expense)s heeft %(count)s belastingen. Een ander bedrag vereist precies "
+"één belasting: gebruik in plaats daarvan „Terugvorderbaar“ of „Niet "
+"terugvorderbaar“."
 
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense_vat.py:0
 msgid ""
 "%(expense)s has a VAT correction (%(entry)s). Reverse the correction first."
-msgstr "%(expense)s heeft een btw-correctie (%(entry)s). Boek de correctie eerst terug."
+msgstr ""
+"%(expense)s heeft een btw-correctie (%(entry)s). Boek de correctie eerst "
+"terug."
 
 #. module: expense_scan
 #. odoo-python
@@ -206,7 +240,9 @@ msgstr "%(expense)s heeft een btw-correctie (%(entry)s). Boek de correctie eerst
 msgid ""
 "%(expense)s is on the invoice %(invoice)s. Cancel the invoice (or issue a "
 "credit note) first."
-msgstr "%(expense)s staat op de factuur %(invoice)s. Annuleer eerst de factuur (of maak een creditnota)."
+msgstr ""
+"%(expense)s staat op de factuur %(invoice)s. Annuleer eerst de factuur (of "
+"maak een creditnota)."
 
 #. module: expense_scan
 #. odoo-python
@@ -214,7 +250,9 @@ msgstr "%(expense)s staat op de factuur %(invoice)s. Annuleer eerst de factuur (
 msgid ""
 "%(expense)s is on the invoice %(invoice)s. Delete or cancel the invoice "
 "first, change the expenses, then invoice again."
-msgstr "%(expense)s staat op de factuur %(invoice)s. Verwijder of annuleer eerst de factuur, wijzig de declaraties en factureer dan opnieuw."
+msgstr ""
+"%(expense)s staat op de factuur %(invoice)s. Verwijder of annuleer eerst de "
+"factuur, wijzig de declaraties en factureer dan opnieuw."
 
 #. module: expense_scan
 #. odoo-python
@@ -318,7 +356,9 @@ msgstr "%s behoort tot een ander bedrijf."
 msgid ""
 "%s covers read: a business meal. Write the names and companies of the guests"
 " in the notes."
-msgstr "%s couverts gelezen: een zakelijke maaltijd. Vermeld de namen en bedrijven van de gasten in de notities."
+msgstr ""
+"%s couverts gelezen: een zakelijke maaltijd. Vermeld de namen en bedrijven "
+"van de gasten in de notities."
 
 #. module: expense_scan
 #. odoo-python
@@ -326,7 +366,9 @@ msgstr "%s couverts gelezen: een zakelijke maaltijd. Vermeld de namen en bedrijv
 msgid ""
 "%s covers read: for a business meal, choose its category and write the names"
 " and companies of the guests in the notes."
-msgstr "%s couverts gelezen: kies voor een zakelijke maaltijd de categorie en vermeld de namen en bedrijven van de gasten in de notities."
+msgstr ""
+"%s couverts gelezen: kies voor een zakelijke maaltijd de categorie en "
+"vermeld de namen en bedrijven van de gasten in de notities."
 
 #. module: expense_scan
 #. odoo-python
@@ -338,7 +380,8 @@ msgstr "%s declaratie(s) terug naar concept gezet."
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense.py:0
 msgid "%s is already approved or posted: a scan would rewrite its figures."
-msgstr "%s is al goedgekeurd of geboekt: een scan zou de bedragen overschrijven."
+msgstr ""
+"%s is al goedgekeurd of geboekt: een scan zou de bedragen overschrijven."
 
 #. module: expense_scan
 #. odoo-python
@@ -350,7 +393,9 @@ msgstr "%s is goedgekeurd: de doorbelasting moet bepaald blijven."
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense_vat.py:0
 msgid "%s is due on payment: correct the VAT once the expense is paid."
-msgstr "%s is verschuldigd bij betaling: corrigeer de btw zodra de declaratie betaald is."
+msgstr ""
+"%s is verschuldigd bij betaling: corrigeer de btw zodra de declaratie "
+"betaald is."
 
 #. module: expense_scan
 #. odoo-python
@@ -358,13 +403,16 @@ msgstr "%s is verschuldigd bij betaling: corrigeer de btw zodra de declaratie be
 msgid ""
 "%s is not a purchase tax with a percentage: its VAT cannot be corrected "
 "here."
-msgstr "%s is geen inkoopbelasting met een percentage: de btw ervan kan hier niet worden gecorrigeerd."
+msgstr ""
+"%s is geen inkoopbelasting met een percentage: de btw ervan kan hier niet "
+"worden gecorrigeerd."
 
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense_invoicing.py:0
 msgid "%s is not approved: only an approval can be taken back."
-msgstr "%s is niet goedgekeurd: alleen een goedkeuring kan worden ingetrokken."
+msgstr ""
+"%s is niet goedgekeurd: alleen een goedkeuring kan worden ingetrokken."
 
 #. module: expense_scan
 #. odoo-python
@@ -405,7 +453,8 @@ msgstr "(elektrisch)"
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "0 means 4. More threads read faster but use more processor time."
-msgstr "0 betekent 4. Meer threads lezen sneller maar gebruiken meer processortijd."
+msgstr ""
+"0 betekent 4. Meer threads lezen sneller maar gebruiken meer processortijd."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_mileage_vehicle__power_to
@@ -432,7 +481,9 @@ msgstr "<i class=\"fa fa-bug me-1\" aria-hidden=\"true\"/>Een fout melden"
 msgid ""
 "<i class=\"fa fa-building-o me-1\" aria-hidden=\"true\"/>Support T.T.C. SAS,"
 " the company behind the module"
-msgstr "<i class=\"fa fa-building-o me-1\" aria-hidden=\"true\"/>T.T.C. SAS steunen, het bedrijf achter de module"
+msgstr ""
+"<i class=\"fa fa-building-o me-1\" aria-hidden=\"true\"/>T.T.C. SAS steunen,"
+" het bedrijf achter de module"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
@@ -449,7 +500,9 @@ msgstr "<i class=\"fa fa-file-text-o me-2\" title=\"Geselecteerde declaraties\"/
 msgid ""
 "<i class=\"fa fa-lightbulb-o me-1\" aria-hidden=\"true\"/>Suggest an "
 "improvement"
-msgstr "<i class=\"fa fa-lightbulb-o me-1\" aria-hidden=\"true\"/>Een verbetering voorstellen"
+msgstr ""
+"<i class=\"fa fa-lightbulb-o me-1\" aria-hidden=\"true\"/>Een verbetering "
+"voorstellen"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
@@ -461,7 +514,9 @@ msgstr "<i class=\"fa fa-search\" role=\"img\" aria-label=\"Scan\"/>"
 msgid ""
 "<i class=\"fa fa-wrench me-1\" aria-hidden=\"true\"/>Ask for a custom "
 "adaptation"
-msgstr "<i class=\"fa fa-wrench me-1\" aria-hidden=\"true\"/>Een aanpassing op maat aanvragen"
+msgstr ""
+"<i class=\"fa fa-wrench me-1\" aria-hidden=\"true\"/>Een aanpassing op maat "
+"aanvragen"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
@@ -473,7 +528,9 @@ msgstr "<span class=\"d-none d-md-inline ms-1\">Verwijderen</span>"
 msgid ""
 "<span class=\"o_expense_scan_coffee me-1\" aria-hidden=\"true\"/>Buy the "
 "author a coffee"
-msgstr "<span class=\"o_expense_scan_coffee me-1\" aria-hidden=\"true\"/>Trakteer de auteur op een koffie"
+msgstr ""
+"<span class=\"o_expense_scan_coffee me-1\" aria-hidden=\"true\"/>Trakteer de"
+" auteur op een koffie"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.project_project_view_form_expense_budget
@@ -496,7 +553,10 @@ msgstr "<strong>Declaratieregels</strong>"
 msgid ""
 "A column letter (\"B\"): each expense's value, row by row. A cell (\"K4\"): "
 "a header value, written once. For a merged cell, its top-left cell."
-msgstr "Een kolomletter (\"B\"): de waarde van elke declaratie, rij per rij. Een cel (\"K4\"): een kopwaarde, één keer geschreven. Bij een samengevoegde cel de cel linksboven."
+msgstr ""
+"Een kolomletter (\"B\"): de waarde van elke declaratie, rij per rij. Een cel"
+" (\"K4\"): een kopwaarde, één keer geschreven. Bij een samengevoegde cel de "
+"cel linksboven."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_max_age_days
@@ -504,12 +564,15 @@ msgstr "Een kolomletter (\"B\"): de waarde van elke declaratie, rij per rij. Een
 msgid ""
 "A date older than this is ignored: it is almost always a warranty or loyalty"
 " card date."
-msgstr "Een oudere datum wordt genegeerd: het is bijna altijd een garantie- of klantenkaartdatum."
+msgstr ""
+"Een oudere datum wordt genegeerd: het is bijna altijd een garantie- of "
+"klantenkaartdatum."
 
 #. module: expense_scan
 #: model:ir.model.constraint,message:expense_scan.constraint_expense_scan_place_check_coordinates
 msgid "A latitude lies between -90 and 90, a longitude between -180 and 180."
-msgstr "Een breedtegraad ligt tussen -90 en 90, een lengtegraad tussen -180 en 180."
+msgstr ""
+"Een breedtegraad ligt tussen -90 en 90, een lengtegraad tussen -180 en 180."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
@@ -522,7 +585,9 @@ msgstr "Een nieuwe uitgave voor dezelfde route, met de datum van vandaag"
 #: code:addons/expense_scan/models/hr_expense_multi.py:0
 msgid ""
 "A receipt with a different total or date was moved to its own expense: %s"
-msgstr "Een bon met een ander totaal of een andere datum is naar een eigen declaratie verplaatst: %s"
+msgstr ""
+"Een bon met een ander totaal of een andere datum is naar een eigen "
+"declaratie verplaatst: %s"
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_policy_view_form
@@ -531,7 +596,11 @@ msgid ""
 "                        exceeded, ℹ︎ for a point to check. \"Save and close\" puts out\n"
 "                        the ℹ︎ signs, a justification the ⚠ signs. Without a\n"
 "                        family or a category, it applies to every expense."
-msgstr "Een regel waarschuwt zonder te blokkeren: ⚠ bij een overschrijding, ℹ︎ voor een te controleren punt. ‘Opslaan en sluiten’ dooft de ℹ︎, een verantwoording de ⚠. Zonder familie of categorie geldt hij voor alle declaraties."
+msgstr ""
+"Een regel waarschuwt zonder te blokkeren: ⚠ bij een overschrijding, ℹ︎ voor "
+"een te controleren punt. ‘Opslaan en sluiten’ dooft de ℹ︎, een "
+"verantwoording de ⚠. Zonder familie of categorie geldt hij voor alle "
+"declaraties."
 
 #. module: expense_scan
 #. odoo-python
@@ -540,7 +609,10 @@ msgid ""
 "A scanned expense can only carry one tax: the amount in the \"Receipt tax\" field prevails, and the rate only carries the tax tags.\n"
 "\n"
 "For a receipt mixing several rates, keep the highest and leave the amount read on the receipt."
-msgstr "Een gescande declaratie kan maar één belasting dragen: het bedrag in het veld \"Belasting op de bon\" is bepalend, en het tarief draagt alleen de belastinglabels.\n\nBij een bon met meerdere tarieven het hoogste houden en het gelezen bedrag laten staan."
+msgstr ""
+"Een gescande declaratie kan maar één belasting dragen: het bedrag in het veld \"Belasting op de bon\" is bepalend, en het tarief draagt alleen de belastinglabels.\n"
+"\n"
+"Bij een bon met meerdere tarieven het hoogste houden en het gelezen bedrag laten staan."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_export_template__single_project
@@ -601,7 +673,9 @@ msgstr "Voeg de plaatsen toe waar uw team naartoe reist"
 msgid ""
 "Added to the allowance of the year in the yearly formula method; ignored by "
 "the other."
-msgstr "Wordt bij de jaarformule bij de vergoeding van het jaar opgeteld; de andere methode negeert het."
+msgstr ""
+"Wordt bij de jaarformule bij de vergoeding van het jaar opgeteld; de andere "
+"methode negeert het."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__address
@@ -622,7 +696,10 @@ msgid ""
 "Adds a \"Re-invoice\" field to expenses and suggests the employee's project running on the receipt date. The expense is then booked on the project's analytic account. Once approved, it is added up with the project's other expenses on the expense line of its sales order, for the next invoice, and posted when that invoice is.\n"
 "\n"
 "Off by default: not every organisation works by project."
-msgstr "Voegt een veld „Doorbelasten“ toe aan declaraties en stelt het project van de medewerker voor dat loopt op de datum van de bon. De declaratie wordt dan geboekt op de analytische rekening van het project. Na goedkeuring wordt ze samen met de andere declaraties van het project opgeteld op de declaratieregel van de verkooporder, voor de volgende factuur, en samen met die factuur geboekt.\n\nStaat standaard uit: niet elke organisatie werkt per project."
+msgstr ""
+"Voegt een veld „Doorbelasten“ toe aan declaraties en stelt het project van de medewerker voor dat loopt op de datum van de bon. De declaratie wordt dan geboekt op de analytische rekening van het project. Na goedkeuring wordt ze samen met de andere declaraties van het project opgeteld op de declaratieregel van de verkooporder, voor de volgende factuur, en samen met die factuur geboekt.\n"
+"\n"
+"Staat standaard uit: niet elke organisatie werkt per project."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_correction__outcome
@@ -644,7 +721,10 @@ msgstr "Luchthavens en stations"
 msgid ""
 "Airports, stations, sites: the places offered as start or end.\n"
 "                            Homes and offices are added from the employees' addresses."
-msgstr "Luchthavens, stations, locaties: de plaatsen die als vertrek of aankomst worden aangeboden. Woningen en kantoren komen uit de adressen van de werknemers."
+msgstr ""
+"Luchthavens, stations, locaties: de plaatsen die als vertrek of aankomst "
+"worden aangeboden. Woningen en kantoren komen uit de adressen van de "
+"werknemers."
 
 #. module: expense_scan
 #: model_terms:ir.actions.act_window,help:expense_scan.expense_scan_place_action
@@ -653,7 +733,11 @@ msgid ""
 "               of a mileage expense. Homes and offices come from the employees'\n"
 "               addresses, customers from their contacts, and a place typed in an\n"
 "               expense is kept here."
-msgstr "Luchthavens, stations, locaties: ze worden aangeboden als vertrek of aankomst van een kilometeruitgave. Woningen en kantoren komen uit de adressen van de werknemers, klanten uit hun contacten, en een plaats die in een uitgave wordt getypt, wordt hier bewaard."
+msgstr ""
+"Luchthavens, stations, locaties: ze worden aangeboden als vertrek of "
+"aankomst van een kilometeruitgave. Woningen en kantoren komen uit de "
+"adressen van de werknemers, klanten uit hun contacten, en een plaats die in "
+"een uitgave wordt getypt, wordt hier bewaard."
 
 #. module: expense_scan
 #: model:expense.scan.policy.rule,name:expense_scan.policy_good_practice_alcohol
@@ -695,7 +779,9 @@ msgstr "Bedrag slecht leesbaar op de bon: controleer het."
 msgid ""
 "Amount incl. tax of a re-invoiced expense; zero otherwise. Its total at the "
 "bottom of the list is what goes to the customers."
-msgstr "Bedrag incl. btw van een doorbelaste declaratie; anders nul. Het totaal onderaan de lijst gaat naar de klanten."
+msgstr ""
+"Bedrag incl. btw van een doorbelaste declaratie; anders nul. Het totaal "
+"onderaan de lijst gaat naar de klanten."
 
 #. module: expense_scan
 #. odoo-python
@@ -708,14 +794,19 @@ msgstr "Bedrag niet gevonden op de bon: vul het in."
 msgid ""
 "An employee is offered the projects they manage, have a task on or are "
 "assigned to."
-msgstr "Aan de medewerker worden de projecten voorgesteld die hij beheert, waarop hij een taak heeft of waaraan hij is toegewezen."
+msgstr ""
+"Aan de medewerker worden de projecten voorgesteld die hij beheert, waarop "
+"hij een taak heeft of waaraan hij is toegewezen."
 
 #. module: expense_scan
 #: model_terms:ir.actions.act_window,help:expense_scan.expense_mileage_scale_action
 msgid ""
 "An employee with a vehicle is paid by the scale of the year, from the cumulated distance.\n"
 "               Rates, brackets and vehicles are yours to adjust for your country."
-msgstr "Een werknemer met een voertuig wordt vergoed volgens het tarief van het jaar, op basis van de opgetelde afstand. Tarieven, schijven en voertuigen past u zelf aan voor uw land."
+msgstr ""
+"Een werknemer met een voertuig wordt vergoed volgens het tarief van het "
+"jaar, op basis van de opgetelde afstand. Tarieven, schijven en voertuigen "
+"past u zelf aan voor uw land."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__reinvoice_mode
@@ -724,12 +815,18 @@ msgid ""
 " Choosing a project sets \"Yes\"; \"No\" then keeps the cost on the project "
 "without billing it. \"To decide\" holds an expense back: the manager cannot "
 "approve it until it is settled."
-msgstr "Een declaratie zonder project wordt niet doorbelast: er valt niets te beslissen. Een project kiezen zet ‘Ja’; ‘Nee’ houdt de kosten dan bij het project zonder ze te factureren. ‘Te bepalen’ houdt een declaratie tegen: de manager kan ze pas goedkeuren als het is beslist."
+msgstr ""
+"Een declaratie zonder project wordt niet doorbelast: er valt niets te "
+"beslissen. Een project kiezen zet ‘Ja’; ‘Nee’ houdt de kosten dan bij het "
+"project zonder ze te factureren. ‘Te bepalen’ houdt een declaratie tegen: de"
+" manager kan ze pas goedkeuren als het is beslist."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "An older date is ignored: usually a warranty or loyalty card date."
-msgstr "Een oudere datum wordt genegeerd: meestal die van een garantie of klantenkaart."
+msgstr ""
+"Een oudere datum wordt genegeerd: meestal die van een garantie of "
+"klantenkaart."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -746,7 +843,9 @@ msgstr "Goedgekeurde declaraties"
 #: model:ir.model.fields,help:expense_scan.field_project_project__expense_scan_progress
 msgid ""
 "Approved expenses and expenses to approve, as a percentage of the budget."
-msgstr "Goedgekeurde declaraties en declaraties ter goedkeuring, als percentage van het budget."
+msgstr ""
+"Goedgekeurde declaraties en declaraties ter goedkeuring, als percentage van "
+"het budget."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_export_template_view_form
@@ -860,7 +959,9 @@ msgstr "Gebruikt budget"
 msgid ""
 "Business distance of the year driven with this vehicle before the first "
 "expense of Odoo (the year below)."
-msgstr "Zakelijke afstand van het jaar met dit voertuig vóór de eerste uitgave in Odoo (het jaar hieronder)."
+msgstr ""
+"Zakelijke afstand van het jaar met dit voertuig vóór de eerste uitgave in "
+"Odoo (het jaar hieronder)."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_merchant
@@ -868,7 +969,10 @@ msgid ""
 "Business that issued the receipt. Correct it if the scan misread it: on "
 "submission, the merchant and the category are used to file the next "
 "receipts, for the whole team."
-msgstr "Zaak die de bon heeft uitgegeven. Corrigeer als de scan het verkeerd las: bij het indienen dienen handelaar en categorie om de volgende bonnen van het hele team in te delen."
+msgstr ""
+"Zaak die de bon heeft uitgegeven. Corrigeer als de scan het verkeerd las: "
+"bij het indienen dienen handelaar en categorie om de volgende bonnen van het"
+" hele team in te delen."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -927,7 +1031,10 @@ msgid ""
 "Category given to expenses created by a scan.\n"
 "\n"
 "When empty, Odoo chooses: it looks for the internal reference \"EXP_GEN\" and otherwise takes the first category in alphabetical order. Renaming that reference is enough to send receipts anywhere, hence this setting, which does not depend on any reference."
-msgstr "Categorie van de declaraties die door een scan worden aangemaakt.\n\nIndien leeg kiest Odoo: het zoekt de interne referentie \"EXP_GEN\" en neemt anders de eerste categorie in alfabetische volgorde. Die referentie hernoemen volstaat om bonnen overal heen te sturen, vandaar deze instelling, die van geen enkele referentie afhangt."
+msgstr ""
+"Categorie van de declaraties die door een scan worden aangemaakt.\n"
+"\n"
+"Indien leeg kiest Odoo: het zoekt de interne referentie \"EXP_GEN\" en neemt anders de eerste categorie in alfabetische volgorde. Die referentie hernoemen volstaat om bonnen overal heen te sturen, vandaar deze instelling, die van geen enkele referentie afhangt."
 
 #. module: expense_scan
 #. odoo-python
@@ -944,7 +1051,9 @@ msgstr "Herkende categorie"
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid ""
 "Charge the expenses of a project to its customer, through its sales order"
-msgstr "De declaraties van een project doorbelasten aan de klant, via de verkooporder van het project"
+msgstr ""
+"De declaraties van een project doorbelasten aan de klant, via de "
+"verkooporder van het project"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy_rule__rule_type
@@ -962,7 +1071,10 @@ msgid ""
 "Checks every expense, with or without a project: the company's good practice"
 " rules. Otherwise, only the projects of the customers or the projects listed"
 " below are concerned."
-msgstr "Controleert elke declaratie, met of zonder project: de goede praktijken van het bedrijf. Anders gaat het alleen om de projecten van de klanten of de hieronder vermelde projecten."
+msgstr ""
+"Controleert elke declaratie, met of zonder project: de goede praktijken van "
+"het bedrijf. Anders gaat het alleen om de projecten van de klanten of de "
+"hieronder vermelde projecten."
 
 #. module: expense_scan
 #. odoo-python
@@ -987,7 +1099,9 @@ msgstr "Kies de waarde die in %s komt."
 msgid ""
 "Chosen from the fiscal power and the fuel; change it if the scale of your "
 "country has other categories."
-msgstr "Gekozen op basis van het fiscaal vermogen en de brandstof; wijzig het als het tarief van uw land andere categorieën heeft."
+msgstr ""
+"Gekozen op basis van het fiscaal vermogen en de brandstof; wijzig het als "
+"het tarief van uw land andere categorieën heeft."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy_rule__extra_cities
@@ -1008,7 +1122,9 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/expense_scan/static/src/js/action_helper_patch.js:0
 msgid "Click \"Upload\" to choose a receipt, or \"New\" to enter an expense by hand."
-msgstr "Klik op ‘Upload’ om een bon te kiezen, of op ‘Nieuw’ om een declaratie met de hand in te voeren."
+msgstr ""
+"Klik op ‘Upload’ om een bon te kiezen, of op ‘Nieuw’ om een declaratie met "
+"de hand in te voeren."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -1225,7 +1341,9 @@ msgstr "Klant"
 msgid ""
 "Customer invoice that carries this expense, draft or posted. Cleared if the "
 "invoice is deleted, cancelled or goes back to draft."
-msgstr "Verkoopfactuur die deze declaratie bevat, concept of geboekt. Gewist als de factuur wordt verwijderd, geannuleerd of terug naar concept gaat."
+msgstr ""
+"Verkoopfactuur die deze declaratie bevat, concept of geboekt. Gewist als de "
+"factuur wordt verwijderd, geannuleerd of terug naar concept gaat."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_policy__partner_ids
@@ -1248,7 +1366,9 @@ msgstr "Waarschuwing afgerond verloop"
 msgid ""
 "Daily reference rates for the active currencies: a foreign receipt is "
 "converted at the rate of its day."
-msgstr "Dagelijkse referentiekoersen voor de actieve valuta's: een buitenlandse bon wordt omgerekend tegen de koers van zijn dag."
+msgstr ""
+"Dagelijkse referentiekoersen voor de actieve valuta's: een buitenlandse bon "
+"wordt omgerekend tegen de koers van zijn dag."
 
 #. module: expense_scan
 #. odoo-python
@@ -1272,7 +1392,9 @@ msgstr "Datum (%s op de bon)"
 msgid ""
 "Date and time printed on the receipt. An expense date has no time: this "
 "field orders several receipts of the same day."
-msgstr "Datum en tijd gedrukt op de bon. De datum van een declaratie heeft geen tijd: dit veld ordent meerdere bonnen van dezelfde dag."
+msgstr ""
+"Datum en tijd gedrukt op de bon. De datum van een declaratie heeft geen "
+"tijd: dit veld ordent meerdere bonnen van dezelfde dag."
 
 #. module: expense_scan
 #: model:ir.model.fields.selection,name:expense_scan.selection__hr_expense__expense_scan_date_state__confirmed
@@ -1333,7 +1455,9 @@ msgstr "In te voeren datums"
 msgid ""
 "Decide whether to re-invoice these expenses before approving them (Yes or No, in the Re-invoice column of the list or in the expense):\n"
 "%s"
-msgstr "Beslis of deze declaraties worden doorbelast voordat u ze goedkeurt (Ja of Nee, in de kolom ‘Doorbelasten’ van de lijst of in de declaratie):\n%s"
+msgstr ""
+"Beslis of deze declaraties worden doorbelast voordat u ze goedkeurt (Ja of Nee, in de kolom ‘Doorbelasten’ van de lijst of in de declaratie):\n"
+"%s"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_res_company__expense_scan_product_id
@@ -1426,7 +1550,9 @@ msgstr "Dit jaar reeds gereden afstand"
 msgid ""
 "Domain of the \"Project\" field. It limits an employee to their own "
 "projects; a project manager or an administrator keeps the whole list."
-msgstr "Domein van het veld \"Project\". Het beperkt een werknemer tot zijn eigen projecten; een projectleider of beheerder houdt de volledige lijst."
+msgstr ""
+"Domein van het veld \"Project\". Het beperkt een werknemer tot zijn eigen "
+"projecten; een projectleider of beheerder houdt de volledige lijst."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__scan_duration
@@ -1471,7 +1597,9 @@ msgstr "Werknemers"
 msgid ""
 "Employees with a vehicle (set on their record) are paid by the scale of the year,\n"
 "                            from the cumulated distance."
-msgstr "Werknemers met een voertuig (op hun kaart aangegeven) worden vergoed volgens het tarief van het jaar, op basis van de opgetelde afstand."
+msgstr ""
+"Werknemers met een voertuig (op hun kaart aangegeven) worden vergoed volgens"
+" het tarief van het jaar, op basis van de opgetelde afstand."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_sheet_wizard__employee_ids
@@ -1539,14 +1667,21 @@ msgid ""
 "account) are added for the active currencies, over the last ninety days. "
 "Without them, Odoo Community converts a foreign receipt one for one. Only "
 "this public file is downloaded; nothing leaves the server."
-msgstr "Elke dag worden de referentiekoersen van de Europese Centrale Bank (gratis, zonder account) toegevoegd voor de actieve valuta's, over de laatste negentig dagen. Zonder deze rekent Odoo Community een buitenlandse bon één op één om. Alleen dit openbare bestand wordt gedownload; niets verlaat de server."
+msgstr ""
+"Elke dag worden de referentiekoersen van de Europese Centrale Bank (gratis, "
+"zonder account) toegevoegd voor de actieve valuta's, over de laatste "
+"negentig dagen. Zonder deze rekent Odoo Community een buitenlandse bon één "
+"op één om. Alleen dit openbare bestand wordt gedownload; niets verlaat de "
+"server."
 
 #. module: expense_scan
 #: model_terms:ir.actions.act_window,help:expense_scan.expense_scan_sheet_archive_action
 msgid ""
 "Every sheet generated is kept here with its files, as it was\n"
 "               handed over, and can be sent by e-mail from its page."
-msgstr "Elk gemaakt overzicht wordt hier met zijn bestanden bewaard, zoals het is overhandigd, en kan vanaf zijn pagina per e-mail worden verzonden."
+msgstr ""
+"Elk gemaakt overzicht wordt hier met zijn bestanden bewaard, zoals het is "
+"overhandigd, en kan vanaf zijn pagina per e-mail worden verzonden."
 
 #. module: expense_scan
 #: model:ir.actions.act_window,name:expense_scan.expense_scan_export_template_action
@@ -1585,7 +1720,10 @@ msgid ""
 "Excel model of the table of the re-invoiced expenses that goes with the "
 "e-mail of the customer invoices (for example the model the customer asks "
 "for). Empty: no Excel table."
-msgstr "Excel-model van de tabel met doorbelaste declaraties die bij de e-mail van de klantfacturen hoort (bijvoorbeeld het model dat de klant vraagt). Leeg: geen Excel-tabel."
+msgstr ""
+"Excel-model van de tabel met doorbelaste declaraties die bij de e-mail van "
+"de klantfacturen hoort (bijvoorbeeld het model dat de klant vraagt). Leeg: "
+"geen Excel-tabel."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_res_company__expense_scan_ecb_rates
@@ -1617,7 +1755,11 @@ msgid ""
 "Expense \"%(name)s\" carries a receipt tax of %(amount)s, but no tax with a "
 "usable rate. Select the matching tax on the expense (or on its category, for"
 " the next ones), or empty the \"Receipt tax\" field."
-msgstr "De declaratie \"%(name)s\" draagt een bonbelasting van %(amount)s, maar geen belasting met een bruikbaar tarief. Kies de passende belasting op de declaratie (of op haar categorie, voor de volgende) of maak het veld \"Belasting op de bon\" leeg."
+msgstr ""
+"De declaratie \"%(name)s\" draagt een bonbelasting van %(amount)s, maar geen"
+" belasting met een bruikbaar tarief. Kies de passende belasting op de "
+"declaratie (of op haar categorie, voor de volgende) of maak het veld "
+"\"Belasting op de bon\" leeg."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__expense_count
@@ -1728,7 +1870,10 @@ msgid ""
 "Expense category without recoverable VAT: flat allowances and official scales, but also lodging or passenger transport where VAT cannot be deducted. Expenses in this category hide the VAT fields and carry no VAT.\n"
 "\n"
 "No need to tick it for mileage: a category counted in kilometres or miles is handled this way automatically."
-msgstr "Declaratiecategorie zonder terugvorderbare btw: forfaits en officiële tarieven, maar ook logies of personenvervoer waarop de btw niet aftrekbaar is. Declaraties in deze categorie verbergen de btw-velden en dragen geen btw.\n\nNiet nodig voor kilometervergoeding: een categorie in kilometers of mijlen wordt automatisch zo behandeld."
+msgstr ""
+"Declaratiecategorie zonder terugvorderbare btw: forfaits en officiële tarieven, maar ook logies of personenvervoer waarop de btw niet aftrekbaar is. Declaraties in deze categorie verbergen de btw-velden en dragen geen btw.\n"
+"\n"
+"Niet nodig voor kilometervergoeding: een categorie in kilometers of mijlen wordt automatisch zo behandeld."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__expense_count
@@ -1825,7 +1970,9 @@ msgstr "Declaratieoverzichten"
 msgid ""
 "Expense whose recoverable VAT this entry corrects. A reversal of the entry "
 "keeps the link, so that the correction is cancelled."
-msgstr "Declaratie waarvan deze boeking de terugvorderbare btw corrigeert. Een terugboeking behoudt de koppeling, zodat de correctie wordt opgeheven."
+msgstr ""
+"Declaratie waarvan deze boeking de terugvorderbare btw corrigeert. Een "
+"terugboeking behoudt de koppeling, zodat de correctie wordt opgeheven."
 
 #. module: expense_scan
 #. odoo-python
@@ -1847,7 +1994,9 @@ msgstr "Declaraties"
 msgid ""
 "Expenses are not re-invoiced to customers yet. An administrator\n"
 "                                turns it on in Settings, under Expenses."
-msgstr "Declaraties worden nog niet doorbelast aan klanten.\n                                Een beheerder schakelt dit in bij Instellingen, onder Declaraties."
+msgstr ""
+"Declaraties worden nog niet doorbelast aan klanten.\n"
+"                                Een beheerder schakelt dit in bij Instellingen, onder Declaraties."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
@@ -1875,12 +2024,16 @@ msgstr "Declaraties van %s"
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_project_project__expense_scan_spent
 msgid "Expenses of the project approved by the manager, excl. tax."
-msgstr "Door de verantwoordelijke goedgekeurde declaraties van het project, excl. belasting."
+msgstr ""
+"Door de verantwoordelijke goedgekeurde declaraties van het project, excl. "
+"belasting."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_project_project__expense_scan_waiting
 msgid "Expenses of the project waiting for the manager, excl. tax."
-msgstr "Declaraties van het project die op de verantwoordelijke wachten, excl. belasting."
+msgstr ""
+"Declaraties van het project die op de verantwoordelijke wachten, excl. "
+"belasting."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_project_project__expense_scan_waiting
@@ -1905,7 +2058,10 @@ msgstr "Declaraties te regelen vóór de facturatie"
 msgid ""
 "Expenses waiting for the manager, or whose re-invoicing is still to decide. "
 "While there are any, the expense line of the sales order does not move."
-msgstr "Declaraties die op de verantwoordelijke wachten, of waarvan de doorbelasting nog te bepalen is. Zolang er zijn, beweegt de declaratieregel van de order niet."
+msgstr ""
+"Declaraties die op de verantwoordelijke wachten, of waarvan de doorbelasting"
+" nog te bepalen is. Zolang er zijn, beweegt de declaratieregel van de order "
+"niet."
 
 #. module: expense_scan
 #: model:ir.model,name:expense_scan.model_expense_scan_export_column
@@ -1929,7 +2085,9 @@ msgstr ""
 msgid ""
 "False as soon as every point listed in \"Fields to check\" is resolved: the "
 "review banner relies on it to go away without waiting for a new scan."
-msgstr "Onwaar zodra elk punt uit \"Te controleren velden\" is opgelost: de controlemelding verdwijnt daardoor zonder op een nieuwe scan te wachten."
+msgstr ""
+"Onwaar zodra elk punt uit \"Te controleren velden\" is opgelost: de "
+"controlemelding verdwijnt daardoor zonder op een nieuwe scan te wachten."
 
 #. module: expense_scan
 #: model:ir.model.fields.selection,name:expense_scan.selection__res_company__expense_scan_model_size__tiny
@@ -1997,7 +2155,11 @@ msgid ""
 "amount then takes precedence over the one the rate would give, down to the "
 "journal entry, so that a receipt with several rates keeps its exact tax. The"
 " rate stays the one of the expense category."
-msgstr "Vult het veld \"Belasting op de bon\" met het bedrag dat op de bon is gelezen. Dat bedrag gaat dan tot in de boeking voor op het bedrag dat het tarief zou geven, zodat een bon met meerdere tarieven zijn exacte belasting houdt. Het tarief blijft dat van de declaratiecategorie."
+msgstr ""
+"Vult het veld \"Belasting op de bon\" met het bedrag dat op de bon is "
+"gelezen. Dat bedrag gaat dan tot in de boeking voor op het bedrag dat het "
+"tarief zou geven, zodat een bon met meerdere tarieven zijn exacte belasting "
+"houdt. Het tarief blijft dat van de declaratiecategorie."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_policy_seen
@@ -2015,7 +2177,9 @@ msgstr "Vindt de randen van de bon en corrigeert het perspectief."
 msgid ""
 "Finds the edges of the receipt in the photo and corrects the perspective "
 "before reading."
-msgstr "Vindt de randen van de bon op de foto en corrigeert het perspectief voor het lezen."
+msgstr ""
+"Vindt de randen van de bon op de foto en corrigeert het perspectief voor het"
+" lezen."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -2087,7 +2251,9 @@ msgstr "Vlakmaken: de regels van een gekrulde of gevouwen bon recht trekken"
 msgid ""
 "Follow the expenses of each project: budget, analytic account. To re-invoice"
 " them to the customer, install the Sales app."
-msgstr "De uitgaven van elk project volgen: budget, analytische rekening. Installeer de app Verkoop om ze door te rekenen aan de klant."
+msgstr ""
+"De uitgaven van elk project volgen: budget, analytische rekening. Installeer"
+" de app Verkoop om ze door te rekenen aan de klant."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_follower_ids
@@ -2110,7 +2276,10 @@ msgid ""
 "For each field the scan fills in, the share of submitted\n"
 "               expenses where a person had to change it: the receipts the\n"
 "               reading gets wrong, by category or by employee."
-msgstr "Voor elk veld dat de scan invult, het aandeel ingediende uitgaven waarbij iemand het moest wijzigen: de bonnen die het lezen verkeerd begrijpt, per categorie of per werknemer."
+msgstr ""
+"Voor elk veld dat de scan invult, het aandeel ingediende uitgaven waarbij "
+"iemand het moest wijzigen: de bonnen die het lezen verkeerd begrijpt, per "
+"categorie of per werknemer."
 
 #. module: expense_scan
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_policy_rule__rule_type__forbidden_words
@@ -2129,7 +2298,8 @@ msgstr "Buitenlandse belasting (%s), niet afgetrokken"
 msgid ""
 "Foreign tax (%s): it cannot be deducted on your tax return, leave it at "
 "zero."
-msgstr "Buitenlandse belasting (%s): niet aftrekbaar in uw aangifte, laat ze op nul."
+msgstr ""
+"Buitenlandse belasting (%s): niet aftrekbaar in uw aangifte, laat ze op nul."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
@@ -2205,7 +2375,8 @@ msgstr "Gemaakt op"
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "Given to scanned expenses whose receipt names no category."
-msgstr "Toegekend aan gescande declaraties waarvan de bon geen categorie aangeeft."
+msgstr ""
+"Toegekend aan gescande declaraties waarvan de bon geen categorie aangeeft."
 
 #. module: expense_scan
 #. odoo-python
@@ -2249,7 +2420,8 @@ msgstr "Woning"
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_place__employee_id
 msgid "Home of this employee: offered to them only, and read by HR."
-msgstr "Woning van deze werknemer: alleen aan hem aangeboden, en gelezen door HR."
+msgstr ""
+"Woning van deze werknemer: alleen aan hem aangeboden, en gelezen door HR."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
@@ -2330,7 +2502,10 @@ msgid ""
 "Impossible receipt tax: %(entered)s is above the maximum of %(ceiling)s, which is the rate of %(rate)s %% applied to the whole %(total)s of the receipt.\n"
 "\n"
 "Choose an expense category whose rate covers this tax, or empty the \"Receipt tax\" field if this expense gives no right to deduction."
-msgstr "Onmogelijke bonbelasting: %(entered)s is hoger dan het maximum van %(ceiling)s, het tarief van %(rate)s %% toegepast op het hele bedrag van %(total)s van de bon.\n\nKies een declaratiecategorie waarvan het tarief deze belasting dekt, of maak het veld \"Belasting op de bon\" leeg als deze declaratie geen recht op aftrek geeft."
+msgstr ""
+"Onmogelijke bonbelasting: %(entered)s is hoger dan het maximum van %(ceiling)s, het tarief van %(rate)s %% toegepast op het hele bedrag van %(total)s van de bon.\n"
+"\n"
+"Kies een declaratiecategorie waarvan het tarief deze belasting dekt, of maak het veld \"Belasting op de bon\" leeg als deze declaratie geen recht op aftrek geeft."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
@@ -2384,7 +2559,9 @@ msgstr "Behouden"
 msgid ""
 "Kept: the value read is the final one. Corrected: a person changed it. "
 "Filled in: nothing was read, a person entered it."
-msgstr "Behouden: de gelezen waarde is de definitieve. Gecorrigeerd: iemand heeft hem gewijzigd. Ingevuld: er werd niets gelezen, iemand heeft hem ingevuld."
+msgstr ""
+"Behouden: de gelezen waarde is de definitieve. Gecorrigeerd: iemand heeft "
+"hem gewijzigd. Ingevuld: er werd niets gelezen, iemand heeft hem ingevuld."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_place__kind
@@ -2402,7 +2579,9 @@ msgstr "Taalcodes samengevoegd met ‘+’, bijvoorbeeld eng+fra."
 msgid ""
 "Laptops, tablets and half-screen windows: from 768 px wide instead of 1400 "
 "px."
-msgstr "Laptops, tablets en vensters op een half scherm: vanaf 768 px breed in plaats van 1400 px."
+msgstr ""
+"Laptops, tablets en vensters op een half scherm: vanaf 768 px breed in "
+"plaats van 1400 px."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_employee_vehicle__write_uid
@@ -2475,7 +2654,9 @@ msgstr "Regels van de bon, gelezen: ze tellen op tot het totaal."
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "Links the contact named like the merchant, when exactly one matches."
-msgstr "Koppelt het contact met de naam van de winkel, als er precies één overeenkomt."
+msgstr ""
+"Koppelt het contact met de naam van de winkel, als er precies één "
+"overeenkomt."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_set_vendor
@@ -2483,7 +2664,9 @@ msgstr "Koppelt het contact met de naam van de winkel, als er precies één over
 msgid ""
 "Links the contact whose name matches the merchant read on the receipt, only "
 "when exactly one contact matches."
-msgstr "Koppelt het contact waarvan de naam overeenkomt met de gelezen handelaar, alleen als precies één contact overeenkomt."
+msgstr ""
+"Koppelt het contact waarvan de naam overeenkomt met de gelezen handelaar, "
+"alleen als precies één contact overeenkomt."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__lock_notice
@@ -2538,7 +2721,14 @@ msgid ""
 "where there is no map (another country, a route between two countries): the "
 "route on a plain background, with the towns and the numbers of the roads "
 "followed. OpenStreetMap's own tiles may not be used this way."
-msgstr "Kaart onder de afbeelding van de route. „auto”: de nationale kaart van het land van de route (Frankrijk, Zwitserland, Spanje en Duitsland: open data, zonder sleutel); of een eigen tegelserver, als https://.../{z}/{x}/{y}.png. Leeg, of waar er geen kaart is (een ander land, een route tussen twee landen): de route op een effen achtergrond, met de plaatsen en de nummers van de gevolgde wegen. De tegels van OpenStreetMap zelf mogen niet zo worden gebruikt."
+msgstr ""
+"Kaart onder de afbeelding van de route. „auto”: de nationale kaart van het "
+"land van de route (Frankrijk, Zwitserland, Spanje en Duitsland: open data, "
+"zonder sleutel); of een eigen tegelserver, als https://.../{z}/{x}/{y}.png. "
+"Leeg, of waar er geen kaart is (een ander land, een route tussen twee "
+"landen): de route op een effen achtergrond, met de plaatsen en de nummers "
+"van de gevolgde wegen. De tegels van OpenStreetMap zelf mogen niet zo worden"
+" gebruikt."
 
 #. module: expense_scan
 #. odoo-python
@@ -2562,7 +2752,9 @@ msgstr "Koppelingen"
 msgid ""
 "Marks the expenses created by the mail gateway. They arrive with all their "
 "attachments at once, whereas the scan button creates one per photo."
-msgstr "Markeert de declaraties die via de e-mailgateway zijn aangemaakt. Ze komen met al hun bijlagen tegelijk, terwijl de scanknop er één per foto aanmaakt."
+msgstr ""
+"Markeert de declaraties die via de e-mailgateway zijn aangemaakt. Ze komen "
+"met al hun bijlagen tegelijk, terwijl de scanknop er één per foto aanmaakt."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_res_company__expense_scan_max_age_days
@@ -2592,7 +2784,11 @@ msgid ""
 "               requirements: each expense concerned shows a warning, and the\n"
 "               \"Rule breaches\" filter gathers them. Switch a set off to\n"
 "               suspend it."
-msgstr "Plafonds voor maaltijden en hotel, te vermijden uitgaven, eisen van een klant: elke betrokken declaratie toont een waarschuwing, en de filter \"Regelovertredingen\" verzamelt ze. Zet een regelset uit om hem op te schorten."
+msgstr ""
+"Plafonds voor maaltijden en hotel, te vermijden uitgaven, eisen van een "
+"klant: elke betrokken declaratie toont een waarschuwing, en de filter "
+"\"Regelovertredingen\" verzamelt ze. Zet een regelset uit om hem op te "
+"schorten."
 
 #. module: expense_scan
 #. odoo-python
@@ -2600,7 +2796,9 @@ msgstr "Plafonds voor maaltijden en hotel, te vermijden uitgaven, eisen van een 
 msgid ""
 "Meal of %(value)s without a readable time: above \"%(rule)s\" if it is that "
 "meal. Say which meal in the description."
-msgstr "Maaltijd van %(value)s zonder leesbare tijd: boven \"%(rule)s\" als het om die maaltijd gaat. Vermeld de maaltijd in de omschrijving."
+msgstr ""
+"Maaltijd van %(value)s zonder leesbare tijd: boven \"%(rule)s\" als het om "
+"die maaltijd gaat. Vermeld de maaltijd in de omschrijving."
 
 #. module: expense_scan
 #. odoo-python
@@ -2735,7 +2933,9 @@ msgstr "Bevestiging vereist"
 msgid ""
 "Neither amount nor date found: check that this image is a receipt, or enter "
 "the expense by hand."
-msgstr "Geen bedrag of datum gevonden: controleer of deze afbeelding een bon is, of vul de declaratie handmatig in."
+msgstr ""
+"Geen bedrag of datum gevonden: controleer of deze afbeelding een bon is, of "
+"vul de declaratie handmatig in."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
@@ -2770,13 +2970,16 @@ msgstr "Nee"
 msgid ""
 "No exchange rate for %s in Odoo: the amount counts one for one in the "
 "company currency until a rate is entered."
-msgstr "Geen wisselkoers voor %s in Odoo: het bedrag telt één op één in de bedrijfsvaluta tot er een koers is ingevoerd."
+msgstr ""
+"Geen wisselkoers voor %s in Odoo: het bedrag telt één op één in de "
+"bedrijfsvaluta tot er een koers is ingevoerd."
 
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/expense_policy.py:0
 msgid "No exchange rate for %s: the amount limits are not checked."
-msgstr "Geen wisselkoers voor %s: de bedraglimieten worden niet gecontroleerd."
+msgstr ""
+"Geen wisselkoers voor %s: de bedraglimieten worden niet gecontroleerd."
 
 #. module: expense_scan
 #: model_terms:ir.actions.act_window,help:expense_scan.action_expense_scan_employee_expenses
@@ -2841,7 +3044,9 @@ msgstr "Geen terugvorderbare btw"
 msgid ""
 "No route service answered: the distance is the straight line lengthened by a"
 " quarter. Check it."
-msgstr "Geen routedienst heeft geantwoord: de afstand is de rechte lijn, verlengd met een kwart. Controleer hem."
+msgstr ""
+"Geen routedienst heeft geantwoord: de afstand is de rechte lijn, verlengd "
+"met een kwart. Controleer hem."
 
 #. module: expense_scan
 #: model_terms:ir.actions.act_window,help:expense_scan.expense_scan_correction_action
@@ -2877,7 +3082,10 @@ msgstr "Nr. %s"
 msgid ""
 "Nominatim server that finds a typed address on the map, as Odoo itself does "
 "to place contacts. Empty: only the places already known can be picked."
-msgstr "Nominatim-server die een getypt adres op de kaart vindt, zoals Odoo dat zelf doet om contacten te plaatsen. Leeg: alleen al bekende plaatsen kunnen worden gekozen."
+msgstr ""
+"Nominatim-server die een getypt adres op de kaart vindt, zoals Odoo dat zelf"
+" doet om contacten te plaatsen. Leeg: alleen al bekende plaatsen kunnen "
+"worden gekozen."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_search_invoicing
@@ -2939,7 +3147,9 @@ msgstr "Aantal btw-correcties"
 msgid ""
 "Number of covers printed on the restaurant bill. Two or more make a business"
 " meal, whose guests are named in the notes."
-msgstr "Aantal couverts op de restaurantrekening. Vanaf twee is het een zakelijke maaltijd, waarvan de gasten in de notities worden genoemd."
+msgstr ""
+"Aantal couverts op de restaurantrekening. Vanaf twee is het een zakelijke "
+"maaltijd, waarvan de gasten in de notities worden genoemd."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__message_has_error_counter
@@ -2976,7 +3186,12 @@ msgid ""
 "threads: about 1.8 times faster than one, for twice the time): they overload"
 " the CPU when several scans arrive at once and increase the memory reserved "
 "by each worker."
-msgstr "Aantal threads dat elke Odoo-worker aan OCR geeft. 0 betekent 4. Meer threads lezen een bon iets sneller maar kosten in totaal meer processortijd (4 threads: ongeveer 1,8 keer sneller dan één, voor twee keer de tijd): ze overbelasten de processor wanneer meerdere scans tegelijk binnenkomen en verhogen het geheugen dat elke worker reserveert."
+msgstr ""
+"Aantal threads dat elke Odoo-worker aan OCR geeft. 0 betekent 4. Meer "
+"threads lezen een bon iets sneller maar kosten in totaal meer processortijd "
+"(4 threads: ongeveer 1,8 keer sneller dan één, voor twee keer de tijd): ze "
+"overbelasten de processor wanneer meerdere scans tegelijk binnenkomen en "
+"verhogen het geheugen dat elke worker reserveert."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_res_company__expense_scan_engine
@@ -3003,7 +3218,10 @@ msgid ""
 "OSRM server that gives the road distance of a mileage expense. The public "
 "one is meant for light use: a company with many routes runs its own. Empty: "
 "the straight line, lengthened by a quarter."
-msgstr "OSRM-server die de wegafstand van een kilometeruitgave geeft. De openbare is bedoeld voor licht gebruik: een bedrijf met veel routes draait een eigen server. Leeg: de rechte lijn, verlengd met een kwart."
+msgstr ""
+"OSRM-server die de wegafstand van een kilometeruitgave geeft. De openbare is"
+" bedoeld voor licht gebruik: een bedrijf met veel routes draait een eigen "
+"server. Leeg: de rechte lijn, verlengd met een kwart."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_wide_split
@@ -3012,7 +3230,10 @@ msgid ""
 "Odoo only shows the receipt next to the form from 1400 px wide. This option lowers the threshold for laptop screens, half-screen windows and tablets, in either orientation.\n"
 "\n"
 "Only the width counts: a window taller than it is wide is still wide enough for two columns. Below the threshold, the preview becomes a banner above the fields."
-msgstr "Odoo toont de bon pas naast het formulier vanaf 1400 px breed. Deze optie verlaagt de drempel voor laptops, vensters op halve schermbreedte en tablets, in elke richting.\n\nAlleen de breedte telt: een venster dat hoger dan breed is, is nog breed genoeg voor twee kolommen. Onder de drempel wordt het voorbeeld een balk boven de velden."
+msgstr ""
+"Odoo toont de bon pas naast het formulier vanaf 1400 px breed. Deze optie verlaagt de drempel voor laptops, vensters op halve schermbreedte en tablets, in elke richting.\n"
+"\n"
+"Alleen de breedte telt: een venster dat hoger dan breed is, is nog breed genoeg voor twee kolommen. Onder de drempel wordt het voorbeeld een balk boven de velden."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
@@ -3027,14 +3248,18 @@ msgstr "Kantoor"
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "Oldest date accepted, and how long the text read on a receipt is kept"
-msgstr "Oudste datum die wordt aanvaard en hoe lang de op een bon gelezen tekst wordt bewaard"
+msgstr ""
+"Oudste datum die wordt aanvaard en hoe lang de op een bon gelezen tekst "
+"wordt bewaard"
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_policy_rule__words
 msgid ""
 "One per line. Their presence on the receipt or in the description triggers "
 "the warning."
-msgstr "Eén per regel. Hun aanwezigheid op de bon of in de omschrijving activeert de waarschuwing."
+msgstr ""
+"Eén per regel. Hun aanwezigheid op de bon of in de omschrijving activeert de"
+" waarschuwing."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_route_km
@@ -3057,7 +3282,9 @@ msgstr "Eén woord per regel: hotel, nocleg, Ibis..."
 msgid ""
 "Only %(found)s free day(s) found from %(date)s for %(count)s: lower the "
 "quantity or move the date."
-msgstr "Slechts %(found)s vrije dag(en) gevonden vanaf %(date)s voor %(count)s: verlaag de hoeveelheid of verschuif de datum."
+msgstr ""
+"Slechts %(found)s vrije dag(en) gevonden vanaf %(date)s voor %(count)s: "
+"verlaag de hoeveelheid of verschuif de datum."
 
 #. module: expense_scan
 #. odoo-python
@@ -3075,13 +3302,16 @@ msgstr "Alleen boekhouders kunnen de werknemers terugbetalen."
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense_vat.py:0
 msgid "Only accounting managers can correct the VAT of an expense."
-msgstr "Alleen boekhoudbeheerders kunnen de btw van een declaratie corrigeren."
+msgstr ""
+"Alleen boekhoudbeheerders kunnen de btw van een declaratie corrigeren."
 
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense_spread.py:0
 msgid "Only an expense of a flat-rate category can be spread over days."
-msgstr "Alleen een declaratie van een forfaitaire categorie kan over dagen worden verdeeld."
+msgstr ""
+"Alleen een declaratie van een forfaitaire categorie kan over dagen worden "
+"verdeeld."
 
 #. module: expense_scan
 #. odoo-python
@@ -3089,7 +3319,9 @@ msgstr "Alleen een declaratie van een forfaitaire categorie kan over dagen worde
 msgid ""
 "Only approved or posted expenses can be paid:\n"
 "%s"
-msgstr "Alleen goedgekeurde of geboekte declaraties kunnen worden betaald:\n%s"
+msgstr ""
+"Alleen goedgekeurde of geboekte declaraties kunnen worden betaald:\n"
+"%s"
 
 #. module: expense_scan
 #. odoo-javascript
@@ -3112,7 +3344,9 @@ msgstr "Instellingen openen"
 msgid ""
 "Opens a page of GitHub, public, where you write to the authors. Nothing is "
 "sent from your server."
-msgstr "Opent een openbare GitHub-pagina waar u de auteurs schrijft. Uw server verstuurt niets."
+msgstr ""
+"Opent een openbare GitHub-pagina waar u de auteurs schrijft. Uw server "
+"verstuurt niets."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__scan_original_attachment_id
@@ -3238,7 +3472,9 @@ msgstr "Plaatsen"
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_project_project__expense_scan_budget
 msgid "Planned expenses of the project, excl. tax. Leave empty for no budget."
-msgstr "Geplande declaraties van het project, excl. belasting. Leeg laten als er geen budget is."
+msgstr ""
+"Geplande declaraties van het project, excl. belasting. Leeg laten als er "
+"geen budget is."
 
 #. module: expense_scan
 #. odoo-python
@@ -3266,7 +3502,9 @@ msgstr "Regelset"
 msgid ""
 "Position of the category in the expense dropdown. Can also be set by drag "
 "and drop in the list of categories."
-msgstr "Positie van de categorie in de keuzelijst van declaraties. Ook in te stellen door slepen in de lijst van categorieën."
+msgstr ""
+"Positie van de categorie in de keuzelijst van declaraties. Ook in te stellen"
+" door slepen in de lijst van categorieën."
 
 #. module: expense_scan
 #: model:ir.model.fields.selection,name:expense_scan.selection__res_company__expense_scan_model_size__small
@@ -3280,7 +3518,11 @@ msgid ""
 "Precise: the models that read best. Fast: smaller models, about three times "
 "faster, which misread a few more receipts (3 to 7 totals in 100 on the "
 "module's test receipts). For a slow server or large batches."
-msgstr "Nauwkeurig: de modellen die het best lezen. Snel: kleinere modellen, ongeveer drie keer sneller, die een paar bonnen meer verkeerd lezen (3 tot 7 totalen op 100 bij de testbonnen van de module). Voor een trage server of grote batches."
+msgstr ""
+"Nauwkeurig: de modellen die het best lezen. Snel: kleinere modellen, "
+"ongeveer drie keer sneller, die een paar bonnen meer verkeerd lezen (3 tot 7"
+" totalen op 100 bij de testbonnen van de module). Voor een trage server of "
+"grote batches."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -3300,7 +3542,10 @@ msgid ""
 "Price per kilometre applied to this employee's distance expenses. When "
 "empty, the category cost applies. No decimal is lost: official scales often "
 "have three, an in-house rate may have more."
-msgstr "Prijs per kilometer voor de reiskosten van deze werknemer. Indien leeg geldt de kostprijs van de categorie. Er gaat geen decimaal verloren: officiële tarieven hebben er vaak drie, een intern tarief kan er meer hebben."
+msgstr ""
+"Prijs per kilometer voor de reiskosten van deze werknemer. Indien leeg geldt"
+" de kostprijs van de categorie. Er gaat geen decimaal verloren: officiële "
+"tarieven hebben er vaak drie, een intern tarief kan er meer hebben."
 
 #. module: expense_scan
 #: model:ir.model,name:expense_scan.model_product_template
@@ -3331,7 +3576,10 @@ msgid ""
 "Project this expense belongs to. Setting it books the expense on the "
 "project's analytic account and adds it to the sales order to re-invoice, so "
 "that it appears on the next project invoice."
-msgstr "Project waartoe deze declaratie behoort. Invullen boekt de declaratie op de kostenplaats van het project en voegt ze toe aan de door te belasten verkooporder, zodat ze op de volgende projectfactuur verschijnt."
+msgstr ""
+"Project waartoe deze declaratie behoort. Invullen boekt de declaratie op de "
+"kostenplaats van het project en voegt ze toe aan de door te belasten "
+"verkooporder, zodat ze op de volgende projectfactuur verschijnt."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_has_tasks
@@ -3349,7 +3597,9 @@ msgstr "Projecten"
 msgid ""
 "Projects subject to these rules when their customer, in Odoo, is not the end"
 " customer."
-msgstr "Projecten die onder deze regels vallen wanneer hun klant in Odoo niet de eindklant is."
+msgstr ""
+"Projecten die onder deze regels vallen wanneer hun klant in Odoo niet de "
+"eindklant is."
 
 #. module: expense_scan
 #: model:ir.model,name:expense_scan.model_hr_employee_public
@@ -3454,7 +3704,8 @@ msgstr "Doorbelasting te bepalen"
 msgid ""
 "Read photographed receipts on your own server, without credits or "
 "subscription"
-msgstr "Gefotografeerde bonnen lezen op uw eigen server, zonder tegoed of abonnement"
+msgstr ""
+"Gefotografeerde bonnen lezen op uw eigen server, zonder tegoed of abonnement"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__scan_score
@@ -3496,7 +3747,9 @@ msgstr "Leest opnieuw na een kwartslag als de tekst verticaal loopt. Trager."
 msgid ""
 "Reads the receipt again after rotating it when the text seems to run "
 "vertically. Makes that scan slower."
-msgstr "Leest de bon opnieuw na draaien als de tekst verticaal lijkt te lopen. Maakt die scan trager."
+msgstr ""
+"Leest de bon opnieuw na draaien als de tekst verticaal lijkt te lopen. Maakt"
+" die scan trager."
 
 #. module: expense_scan
 #. odoo-python
@@ -3527,14 +3780,18 @@ msgstr "Bon verwijderd"
 msgid ""
 "Receipt in %s: activate this currency in Odoo, otherwise the amount counts "
 "in the company currency."
-msgstr "Bon in %s: activeer deze valuta in Odoo, anders telt het bedrag in de bedrijfsvaluta."
+msgstr ""
+"Bon in %s: activeer deze valuta in Odoo, anders telt het bedrag in de "
+"bedrijfsvaluta."
 
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/expense_policy.py:0
 msgid ""
 "Receipt in a currency not active in Odoo: the amount limits are not checked."
-msgstr "Bon in een valuta die niet actief is in Odoo: de bedraglimieten worden niet gecontroleerd."
+msgstr ""
+"Bon in een valuta die niet actief is in Odoo: de bedraglimieten worden niet "
+"gecontroleerd."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_items
@@ -3547,7 +3804,9 @@ msgstr "Bonregels (gelezen)"
 msgid ""
 "Receipt moved here from %s: its total or date differ from the receipt of "
 "that expense."
-msgstr "Bon hierheen verplaatst vanuit %s: het totaal of de datum verschilt van de bon van die declaratie."
+msgstr ""
+"Bon hierheen verplaatst vanuit %s: het totaal of de datum verschilt van de "
+"bon van die declaratie."
 
 #. module: expense_scan
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_export_column__value__n
@@ -3701,7 +3960,9 @@ msgstr "Terugvorderbare belasting per tarief"
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_export_template__reinvoice_only
 msgid "Refuses the export if any expense is not marked \"Re-invoice: Yes\"."
-msgstr "Weigert de export als een declaratie niet gemarkeerd is als \"Doorbelasten: Ja\"."
+msgstr ""
+"Weigert de export als een declaratie niet gemarkeerd is als \"Doorbelasten: "
+"Ja\"."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_export_template__single_project
@@ -3741,7 +4002,9 @@ msgstr "Terugbetaald"
 msgid ""
 "Removes the \"My Team\", \"Company\" and \"Employee\" shortcuts, and the "
 "months listed under the expense date."
-msgstr "Verwijdert de snelkoppelingen \"Mijn team\", \"Bedrijf\" en \"Werknemer\" en de maanden onder de kostendatum."
+msgstr ""
+"Verwijdert de snelkoppelingen \"Mijn team\", \"Bedrijf\" en \"Werknemer\" en"
+" de maanden onder de kostendatum."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_res_config_settings__expense_scan_tidy_menu
@@ -3766,7 +4029,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_export_template_view_form
 msgid ""
 "Replace the current workbook with a blank one, built from the mappings?"
-msgstr "De huidige werkmap vervangen door een lege, opgebouwd uit de koppelingen?"
+msgstr ""
+"De huidige werkmap vervangen door een lege, opgebouwd uit de koppelingen?"
 
 #. module: expense_scan
 #. odoo-javascript
@@ -3890,7 +4154,8 @@ msgstr "Regels"
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_enabled
 #: model:ir.model.fields,help:expense_scan.field_res_config_settings__expense_scan_enabled
 msgid "Runs OCR on every receipt uploaded from the expense list."
-msgstr "Voert OCR uit op elke bon die vanuit de declaratielijst wordt geüpload."
+msgstr ""
+"Voert OCR uit op elke bon die vanuit de declaratielijst wordt geüpload."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sirene__siret
@@ -4065,7 +4330,9 @@ msgstr "Meerdere belastingtarieven"
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_correction__corrected_rate
 msgid "Share of the readings changed by a person, filled-in fields included."
-msgstr "Aandeel van de lezingen dat iemand heeft gewijzigd, ingevulde velden inbegrepen."
+msgstr ""
+"Aandeel van de lezingen dat iemand heeft gewijzigd, ingevulde velden "
+"inbegrepen."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_export_template__sheet_name
@@ -4077,7 +4344,9 @@ msgstr "Blad"
 msgid ""
 "Simplifications of Odoo's display, for every company. Off unless you choose "
 "them"
-msgstr "Vereenvoudigingen van de weergave van Odoo, voor alle bedrijven. Uit tot u ze kiest"
+msgstr ""
+"Vereenvoudigingen van de weergave van Odoo, voor alle bedrijven. Uit tot u "
+"ze kiest"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_res_config_settings__expense_scan_tidy_filters
@@ -4112,14 +4381,20 @@ msgid ""
 "               download its workbook, adapt it, upload it again. Give the rows\n"
 "               kept for the expenses, then which column receives which value;\n"
 "               the old data of the workbook is replaced at each export."
-msgstr "Vertrek van het met de module meegeleverde \"Basissjabloon\": download de werkmap, pas ze aan en upload ze opnieuw. Geef de rijen voor de declaraties op en welke kolom welke waarde krijgt; de oude gegevens van de werkmap worden bij elke export vervangen."
+msgstr ""
+"Vertrek van het met de module meegeleverde \"Basissjabloon\": download de "
+"werkmap, pas ze aan en upload ze opnieuw. Geef de rijen voor de declaraties "
+"op en welke kolom welke waarde krijgt; de oude gegevens van de werkmap "
+"worden bij elke export vervangen."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_route_from_id
 msgid ""
 "Start of the route: type a place, a customer or an address, or pick one in "
 "the list."
-msgstr "Vertrek van de route: typ een plaats, een klant of een adres, of kies er een uit de lijst."
+msgstr ""
+"Vertrek van de route: typ een plaats, een klant of een adres, of kies er een"
+" uit de lijst."
 
 #. module: expense_scan
 #. odoo-python
@@ -4172,7 +4447,8 @@ msgstr "Voorgestelde projecten"
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "Suggests the employee's project running on the receipt date."
-msgstr "Stelt het project van de werknemer voor dat loopt op de datum van de bon."
+msgstr ""
+"Stelt het project van de werknemer voor dat loopt op de datum van de bon."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
@@ -4195,7 +4471,9 @@ msgstr "Fotografeer de eerste bon."
 #. odoo-javascript
 #: code:addons/expense_scan/static/src/js/action_helper_patch.js:0
 msgid "Tap \"Scan\" to photograph a receipt, or \"New\" to enter an expense by hand."
-msgstr "Tik op ‘Scan’ om een bon te fotograferen, of op ‘Nieuw’ om een declaratie met de hand in te voeren."
+msgstr ""
+"Tik op ‘Scan’ om een bon te fotograferen, of op ‘Nieuw’ om een declaratie "
+"met de hand in te voeren."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_task_id
@@ -4207,7 +4485,9 @@ msgstr "Taak"
 msgid ""
 "Task of the project, for follow-up. The cost goes into the project budget "
 "whether the expense is re-invoiced or not."
-msgstr "Taak van het project, voor de opvolging. De kosten gaan in het projectbudget, of de declaratie nu wordt doorbelast of niet."
+msgstr ""
+"Taak van het project, voor de opvolging. De kosten gaan in het "
+"projectbudget, of de declaratie nu wordt doorbelast of niet."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_vat_wizard__tax_id
@@ -4247,7 +4527,12 @@ msgid ""
 "Empty: the tax follows the rate, as in standard Odoo. A receipt without deductible tax (card slip, tax not readable) has no tax selected.\n"
 "\n"
 "The rate only does two things: carry the tax tags of the entry, and cap this amount. A tax higher than the rate applied to the receipt total is necessarily an error, and choosing a lower rate trims the amount accordingly."
-msgstr "Belastingbedrag gedrukt op de bon. Het is bepalend: de belasting van de declaratie en die van de boeking nemen deze waarde over, ongeacht het tarief ernaast. Zo levert een bon met 5,5 %, 10 % en 20 % precies zijn belasting op.\n\nLeeg: de belasting volgt het tarief, zoals in standaard Odoo. Een bon zonder aftrekbare belasting (kaartbon, belasting onleesbaar) heeft geen belasting geselecteerd.\n\nHet tarief dient maar voor twee dingen: de belastinglabels van de boeking dragen en dit bedrag begrenzen. Een belasting hoger dan het tarief toegepast op het totaal van de bon is noodzakelijk een fout, en een lager tarief kiezen verlaagt het bedrag navenant."
+msgstr ""
+"Belastingbedrag gedrukt op de bon. Het is bepalend: de belasting van de declaratie en die van de boeking nemen deze waarde over, ongeacht het tarief ernaast. Zo levert een bon met 5,5 %, 10 % en 20 % precies zijn belasting op.\n"
+"\n"
+"Leeg: de belasting volgt het tarief, zoals in standaard Odoo. Een bon zonder aftrekbare belasting (kaartbon, belasting onleesbaar) heeft geen belasting geselecteerd.\n"
+"\n"
+"Het tarief dient maar voor twee dingen: de belastinglabels van de boeking dragen en dit bedrag begrenzen. Een belasting hoger dan het tarief toegepast op het totaal van de bon is noodzakelijk een fout, en een lager tarief kiezen verlaagt het bedrag navenant."
 
 #. module: expense_scan
 #. odoo-python
@@ -4282,7 +4567,9 @@ msgstr "Sjabloon"
 msgid ""
 "Template \"%(template)s\" expects a single project; the selection has "
 "%(count)s: %(names)s."
-msgstr "Het sjabloon \"%(template)s\" verwacht één project; de selectie heeft er %(count)s: %(names)s."
+msgstr ""
+"Het sjabloon \"%(template)s\" verwacht één project; de selectie heeft er "
+"%(count)s: %(names)s."
 
 #. module: expense_scan
 #. odoo-python
@@ -4290,7 +4577,9 @@ msgstr "Het sjabloon \"%(template)s\" verwacht één project; de selectie heeft 
 msgid ""
 "Template \"%(template)s\" only accepts re-invoiced expenses. These are not: "
 "%(names)s."
-msgstr "Het sjabloon \"%(template)s\" aanvaardt alleen doorbelaste declaraties. Deze zijn het niet: %(names)s."
+msgstr ""
+"Het sjabloon \"%(template)s\" aanvaardt alleen doorbelaste declaraties. Deze"
+" zijn het niet: %(names)s."
 
 #. module: expense_scan
 #. odoo-python
@@ -4310,7 +4599,9 @@ msgstr "Tesseract-taal"
 msgid ""
 "Tesseract language codes, joined with \"+\" (\"eng+fra\"). Each language "
 "needs its tesseract-ocr package on the server."
-msgstr "Tesseract-taalcodes, verbonden met \"+\" (\"eng+nld\"). Elke taal heeft haar tesseract-ocr-pakket op de server nodig."
+msgstr ""
+"Tesseract-taalcodes, verbonden met \"+\" (\"eng+nld\"). Elke taal heeft haar"
+" tesseract-ocr-pakket op de server nodig."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
@@ -4333,7 +4624,9 @@ msgstr "Het veld \"Taak\" verschijnt alleen als er een keuze te maken is."
 msgid ""
 "The PDF could not be converted. Install \"pdf2image\" and the \"poppler-"
 "utils\" system package to retouch PDFs."
-msgstr "De PDF kon niet worden omgezet. Installeer \"pdf2image\" en het systeempakket \"poppler-utils\" om PDF's te bewerken."
+msgstr ""
+"De PDF kon niet worden omgezet. Installeer \"pdf2image\" en het "
+"systeempakket \"poppler-utils\" om PDF's te bewerken."
 
 #. module: expense_scan
 #. odoo-python
@@ -4341,14 +4634,18 @@ msgstr "De PDF kon niet worden omgezet. Installeer \"pdf2image\" en het systeemp
 msgid ""
 "The PDF could not be converted. Install \"pdf2image\" and the \"poppler-"
 "utils\" system package to scan PDFs."
-msgstr "De PDF kon niet worden omgezet. Installeer \"pdf2image\" en het systeempakket \"poppler-utils\" om PDF's te scannen."
+msgstr ""
+"De PDF kon niet worden omgezet. Installeer \"pdf2image\" en het "
+"systeempakket \"poppler-utils\" om PDF's te scannen."
 
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense_vat.py:0
 msgid ""
 "The VAT generated for %s is not the one asked: the correction was not made."
-msgstr "De voor %s gegenereerde btw is niet de gevraagde: de correctie is niet uitgevoerd."
+msgstr ""
+"De voor %s gegenereerde btw is niet de gevraagde: de correctie is niet "
+"uitgevoerd."
 
 #. module: expense_scan
 #. odoo-python
@@ -4356,13 +4653,16 @@ msgstr "De voor %s gegenereerde btw is niet de gevraagde: de correctie is niet u
 msgid ""
 "The VAT of %(expense)s is between 0 and %(ceiling)s, the VAT that the rate "
 "of %(rate)s %% gives on %(total)s."
-msgstr "De btw van %(expense)s ligt tussen 0 en %(ceiling)s, de btw die het tarief van %(rate)s %% oplevert op %(total)s."
+msgstr ""
+"De btw van %(expense)s ligt tussen 0 en %(ceiling)s, de btw die het tarief "
+"van %(rate)s %% oplevert op %(total)s."
 
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense.py:0
 msgid "The amount is often wrong on this merchant's receipts: check it."
-msgstr "Het bedrag klopt vaak niet op de bonnen van deze handelaar: controleer het."
+msgstr ""
+"Het bedrag klopt vaak niet op de bonnen van deze handelaar: controleer het."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -4375,7 +4675,9 @@ msgstr "De automatische bewerking is mislukt."
 msgid ""
 "The bracket applies above this yearly distance, until the next bracket. 0 "
 "for the first."
-msgstr "De schijf geldt boven deze jaarafstand, tot de volgende schijf. 0 voor de eerste."
+msgstr ""
+"De schijf geldt boven deze jaarafstand, tot de volgende schijf. 0 voor de "
+"eerste."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_mileage_scale_view_form
@@ -4383,7 +4685,11 @@ msgid ""
 "The brackets apply above the distance of their first column, in the distance unit of the\n"
 "                        expenses (kilometres or miles). Adjust the rates when the scale of the country changes:\n"
 "                        copy the scale to next year, then edit the copy."
-msgstr "De schijven gelden boven de afstand van hun eerste kolom, in de afstandseenheid van de uitgaven (kilometer of mijlen). Pas de tarieven aan wanneer het tarief van het land verandert: kopieer het tarief naar volgend jaar en bewerk de kopie."
+msgstr ""
+"De schijven gelden boven de afstand van hun eerste kolom, in de "
+"afstandseenheid van de uitgaven (kilometer of mijlen). Pas de tarieven aan "
+"wanneer het tarief van het land verandert: kopieer het tarief naar volgend "
+"jaar en bewerk de kopie."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_mileage
@@ -4400,27 +4706,34 @@ msgstr "De klant of het kantoor waarvoor deze plaats staat."
 msgid ""
 "The date is not printed on the receipt: the expense has the date of the day."
 " Enter the date, or confirm this one, before submitting."
-msgstr "De datum staat niet op de bon: de uitgave heeft de datum van vandaag. Voer de datum in, of bevestig deze, voordat u indient."
+msgstr ""
+"De datum staat niet op de bon: de uitgave heeft de datum van vandaag. Voer "
+"de datum in, of bevestig deze, voordat u indient."
 
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense.py:0
 msgid "The date is often wrong on this merchant's receipts: check it."
-msgstr "De datum klopt vaak niet op de bonnen van deze handelaar: controleer ze."
+msgstr ""
+"De datum klopt vaak niet op de bonnen van deze handelaar: controleer ze."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid ""
 "The delivered \"Good practice\" rules are on: open the list to adjust them "
 "or to switch them off."
-msgstr "De meegeleverde regels ‘Goede praktijken’ staan aan: open de lijst om ze aan te passen of uit te zetten."
+msgstr ""
+"De meegeleverde regels ‘Goede praktijken’ staan aan: open de lijst om ze aan"
+" te passen of uit te zetten."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_keep_name
 msgid ""
 "The description comes from the email subject: the receipt scan does not "
 "replace it with the merchant name."
-msgstr "De omschrijving komt uit het onderwerp van de e-mail: de bonscan vervangt ze niet door de naam van de handelaar."
+msgstr ""
+"De omschrijving komt uit het onderwerp van de e-mail: de bonscan vervangt ze"
+" niet door de naam van de handelaar."
 
 #. module: expense_scan
 #. odoo-python
@@ -4438,14 +4751,18 @@ msgstr "De afstand telt dubbel: heen en terug."
 msgid ""
 "The distance of a mileage expense from its start and its end, with the route"
 " picture as the receipt"
-msgstr "De afstand van een kilometeruitgave uit vertrek en aankomst, met de afbeelding van de route als bewijsstuk"
+msgstr ""
+"De afstand van een kilometeruitgave uit vertrek en aankomst, met de "
+"afbeelding van de route als bewijsstuk"
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_has_vehicles
 msgid ""
 "The employee has a personal vehicle: the form then asks which one drove the "
 "trip."
-msgstr "De werknemer heeft een privévoertuig: het formulier vraagt dan welk voertuig is gebruikt."
+msgstr ""
+"De werknemer heeft een privévoertuig: het formulier vraagt dan welk voertuig"
+" is gebruikt."
 
 #. module: expense_scan
 #. odoo-python
@@ -4453,21 +4770,28 @@ msgstr "De werknemer heeft een privévoertuig: het formulier vraagt dan welk voe
 msgid ""
 "The employees whose expenses you approve, or who report to you, appear here."
 " Click one to see their expenses or to enter one in their name."
-msgstr "Hier staan de medewerkers van wie u de declaraties goedkeurt of die onder u vallen. Klik op een medewerker om diens declaraties te zien of er een op diens naam in te voeren."
+msgstr ""
+"Hier staan de medewerkers van wie u de declaraties goedkeurt of die onder u "
+"vallen. Klik op een medewerker om diens declaraties te zien of er een op "
+"diens naam in te voeren."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid ""
 "The engine and the photo processing have good defaults: see the advanced "
 "options below."
-msgstr "De engine en de fotoverwerking hebben goede standaardwaarden: zie de geavanceerde opties hieronder."
+msgstr ""
+"De engine en de fotoverwerking hebben goede standaardwaarden: zie de "
+"geavanceerde opties hieronder."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_policy_rule__family
 msgid ""
 "The expense categories of this family, as the module recognises them. "
 "Ignored when categories are chosen."
-msgstr "De declaratiecategorieën van deze familie, zoals de module ze herkent. Genegeerd als er categorieën zijn gekozen."
+msgstr ""
+"De declaratiecategorieën van deze familie, zoals de module ze herkent. "
+"Genegeerd als er categorieën zijn gekozen."
 
 #. module: expense_scan
 #. odoo-python
@@ -4480,21 +4804,27 @@ msgstr "De declaratierijen van het sjabloon \"%s\" zijn tegenstrijdig."
 msgid ""
 "The expense sheet is produced from the expense\n"
 "                            list: select the expenses, then \"Expense Sheet\"."
-msgstr "Het declaratieoverzicht wordt gemaakt vanuit de declaratielijst: selecteer de declaraties en daarna \"Declaratieoverzicht\"."
+msgstr ""
+"Het declaratieoverzicht wordt gemaakt vanuit de declaratielijst: selecteer "
+"de declaraties en daarna \"Declaratieoverzicht\"."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_export_template__last_row
 msgid ""
 "The exported table has exactly one row per expense: extra rows are deleted, "
 "missing ones added, and the totals below follow."
-msgstr "De geëxporteerde tabel heeft precies één rij per declaratie: overtollige rijen worden verwijderd, ontbrekende toegevoegd en de totalen eronder volgen."
+msgstr ""
+"De geëxporteerde tabel heeft precies één rij per declaratie: overtollige "
+"rijen worden verwijderd, ontbrekende toegevoegd en de totalen eronder "
+"volgen."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_policy_rule__extra_cities
 msgid ""
 "The extra is added to the limit when the receipt mentions one of these "
 "cities."
-msgstr "De toeslag komt bij de limiet als de bon een van deze steden vermeldt."
+msgstr ""
+"De toeslag komt bij de limiet als de bon een van deze steden vermeldt."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -4506,7 +4836,9 @@ msgstr "Het vlakmaken is mislukt."
 #. odoo-javascript
 #: code:addons/expense_scan/static/src/js/retouch_dialog.js:0
 msgid "The form cannot be saved as it is: correct it, then try again."
-msgstr "Het formulier kan zo niet worden opgeslagen: corrigeer het en probeer opnieuw."
+msgstr ""
+"Het formulier kan zo niet worden opgeslagen: corrigeer het en probeer "
+"opnieuw."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
@@ -4519,13 +4851,17 @@ msgstr "De groep met de onkostenlijsten heet \"Opvolging declaraties\"."
 msgid ""
 "The invoice %(invoice)s carries this expense, but it could not be posted: "
 "%(error)s"
-msgstr "De factuur %(invoice)s bevat deze declaratie, maar ze kon niet worden geboekt: %(error)s"
+msgstr ""
+"De factuur %(invoice)s bevat deze declaratie, maar ze kon niet worden "
+"geboekt: %(error)s"
 
 #. module: expense_scan
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense_invoicing.py:0
 msgid "The invoice of an expense is set by the invoicing, not by hand."
-msgstr "De factuur van een declaratie wordt door de facturatie ingesteld, niet met de hand."
+msgstr ""
+"De factuur van een declaratie wordt door de facturatie ingesteld, niet met "
+"de hand."
 
 #. module: expense_scan
 #. odoo-python
@@ -4537,7 +4873,9 @@ msgstr "De boeking van %s is niet geboekt."
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_policy_rule__per_night
 msgid ""
 "The limit is for one night: the amount is divided by the number of nights."
-msgstr "De limiet geldt voor één nacht: het bedrag wordt gedeeld door het aantal nachten."
+msgstr ""
+"De limiet geldt voor één nacht: het bedrag wordt gedeeld door het aantal "
+"nachten."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -4551,7 +4889,10 @@ msgid ""
 "The merchant as the OCR read it, before any correction. A logo reads badly, "
 "but the same way on every receipt: this is what lets it be recognised the "
 "next time."
-msgstr "De handelaar zoals de OCR hem las, voor elke correctie. Een logo leest slecht, maar op elke bon op dezelfde manier: zo wordt het de volgende keer herkend."
+msgstr ""
+"De handelaar zoals de OCR hem las, voor elke correctie. Een logo leest "
+"slecht, maar op elke bon op dezelfde manier: zo wordt het de volgende keer "
+"herkend."
 
 #. module: expense_scan
 #. odoo-python
@@ -4565,7 +4906,9 @@ msgstr "De bibliotheek openpyxl ontbreekt op de server."
 msgid ""
 "The photo holds %(count)s different purchases: one expense each; this one "
 "keeps the first."
-msgstr "De foto bevat %(count)s verschillende aankopen: een uitgave per aankoop; deze houdt de eerste."
+msgstr ""
+"De foto bevat %(count)s verschillende aankopen: een uitgave per aankoop; "
+"deze houdt de eerste."
 
 #. module: expense_scan
 #. odoo-python
@@ -4602,7 +4945,9 @@ msgstr "De bon is te groot (%(size)d MB, limiet %(max)d MB)."
 msgid ""
 "The receipt prints several tax rates: none of them holds for the whole "
 "expense."
-msgstr "De bon vermeldt meerdere belastingtarieven: geen enkel geldt voor de hele declaratie."
+msgstr ""
+"De bon vermeldt meerdere belastingtarieven: geen enkel geldt voor de hele "
+"declaratie."
 
 #. module: expense_scan
 #. odoo-python
@@ -4619,7 +4964,8 @@ msgstr "De scan van de bon is mislukt, voer de declaratie met de hand in."
 #. odoo-javascript
 #: code:addons/expense_scan/static/src/js/scan_progress.js:0
 msgid "The receipt scan failed: start it again from the form."
-msgstr "De scan van de bon is mislukt: start hem opnieuw vanuit het formulier."
+msgstr ""
+"De scan van de bon is mislukt: start hem opnieuw vanuit het formulier."
 
 #. module: expense_scan
 #. odoo-python
@@ -4628,7 +4974,11 @@ msgid ""
 "The receipt tax (%(amount)s) cannot yet be carried on an expense paid by the"
 " company. Set the expense back to \"Employee (to reimburse)\", or empty the "
 "\"Receipt tax\" field to let Odoo compute it from the rate."
-msgstr "De bonbelasting (%(amount)s) kan nog niet worden overgenomen op een door het bedrijf betaalde declaratie. Zet de declaratie terug op \"Werknemer (terug te betalen)\", of maak het veld \"Belasting op de bon\" leeg zodat Odoo ze uit het tarief berekent."
+msgstr ""
+"De bonbelasting (%(amount)s) kan nog niet worden overgenomen op een door het"
+" bedrijf betaalde declaratie. Zet de declaratie terug op \"Werknemer (terug "
+"te betalen)\", of maak het veld \"Belasting op de bon\" leeg zodat Odoo ze "
+"uit het tarief berekent."
 
 #. module: expense_scan
 #. odoo-python
@@ -4652,7 +5002,8 @@ msgstr "De bewerkte afbeelding is te groot (%(size)d MB, limiet %(max)d MB)."
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_policy__partner_ids
 msgid ""
 "The rules apply to the projects of these customers and of their branches."
-msgstr "De regels gelden voor de projecten van deze klanten en hun vestigingen."
+msgstr ""
+"De regels gelden voor de projecten van deze klanten en hun vestigingen."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_mileage_scale__year
@@ -4663,7 +5014,8 @@ msgstr "Het tarief geldt vanaf dit jaar, tot een recenter tarief."
 #. odoo-python
 #: code:addons/expense_scan/models/hr_expense.py:0
 msgid "The scan of this receipt did not finish. Enter the expense by hand."
-msgstr "De scan van deze bon is niet afgerond. Voer de declaratie met de hand in."
+msgstr ""
+"De scan van deze bon is niet afgerond. Voer de declaratie met de hand in."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -4671,7 +5023,9 @@ msgstr "De scan van deze bon is niet afgerond. Voer de declaratie met de hand in
 msgid ""
 "The selected expenses do not all have the same answer. Which one should they"
 " all take?"
-msgstr "De geselecteerde declaraties hebben niet allemaal hetzelfde antwoord. Welk moeten ze allemaal krijgen?"
+msgstr ""
+"De geselecteerde declaraties hebben niet allemaal hetzelfde antwoord. Welk "
+"moeten ze allemaal krijgen?"
 
 #. module: expense_scan
 #. odoo-python
@@ -4696,7 +5050,9 @@ msgstr "De belasting %(tax)s kan geen btw van %(amount)s opleveren."
 msgid ""
 "The tax printed on the receipt goes to the journal entry, rather than the "
 "one the rate gives."
-msgstr "De belasting op de bon gaat naar de boeking, in plaats van die volgens het tarief."
+msgstr ""
+"De belasting op de bon gaat naar de boeking, in plaats van die volgens het "
+"tarief."
 
 #. module: expense_scan
 #. odoo-python
@@ -4704,7 +5060,9 @@ msgstr "De belasting op de bon gaat naar de boeking, in plaats van die volgens h
 msgid ""
 "The tax read does not match the rate: enter the amount printed on the "
 "receipt."
-msgstr "De gelezen belasting past niet bij het tarief: vul het op de bon gedrukte bedrag in."
+msgstr ""
+"De gelezen belasting past niet bij het tarief: vul het op de bon gedrukte "
+"bedrag in."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_text_retention_days
@@ -4716,7 +5074,13 @@ msgid ""
 "L123-22) and in several other countries; check the rule that applies to you."
 " The receipt image itself is never erased by the module. Zero: never erase "
 "the text either."
-msgstr "De op een bon gelezen tekst (namen, adressen, laatste cijfers van een kaart) wordt pas na deze termijn gewist. De standaardwaarde, 10 jaar, is de bewaartermijn van boekhoudstukken, bonnen inbegrepen, in Frankrijk (Wetboek van koophandel, art. L123-22) en in meerdere andere landen; controleer de regel die voor u geldt. De afbeelding van de bon wordt nooit door de module gewist. Nul: ook de tekst nooit wissen."
+msgstr ""
+"De op een bon gelezen tekst (namen, adressen, laatste cijfers van een kaart)"
+" wordt pas na deze termijn gewist. De standaardwaarde, 10 jaar, is de "
+"bewaartermijn van boekhoudstukken, bonnen inbegrepen, in Frankrijk (Wetboek "
+"van koophandel, art. L123-22) en in meerdere andere landen; controleer de "
+"regel die voor u geldt. De afbeelding van de bon wordt nooit door de module "
+"gewist. Nul: ook de tekst nooit wissen."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_policy_rule__name
@@ -4728,7 +5092,9 @@ msgstr "De tekst die de werknemer ziet wanneer de regel wordt overtreden."
 msgid ""
 "The trip is made in a company vehicle: no allowance by the scale of the "
 "employee's own vehicle."
-msgstr "De rit wordt met een bedrijfsvoertuig gemaakt: geen vergoeding volgens het tarief van het eigen voertuig van de werknemer."
+msgstr ""
+"De rit wordt met een bedrijfsvoertuig gemaakt: geen vergoeding volgens het "
+"tarief van het eigen voertuig van de werknemer."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_keep_original
@@ -4736,20 +5102,26 @@ msgstr "De rit wordt met een bedrijfsvoertuig gemaakt: geen vergoeding volgens h
 msgid ""
 "The untouched photo stays attached to the expense as the receipt; the "
 "cropped image is used for display."
-msgstr "De onbewerkte foto blijft als bon aan de declaratie gekoppeld; de bijgesneden afbeelding dient voor de weergave."
+msgstr ""
+"De onbewerkte foto blijft als bon aan de declaratie gekoppeld; de "
+"bijgesneden afbeelding dient voor de weergave."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid ""
 "The untouched photo stays reachable from the expense; the cropped image is "
 "shown."
-msgstr "De onbewerkte foto blijft bereikbaar vanuit de declaratie; de bijgesneden afbeelding wordt getoond."
+msgstr ""
+"De onbewerkte foto blijft bereikbaar vanuit de declaratie; de bijgesneden "
+"afbeelding wordt getoond."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_vehicle_id
 msgid ""
 "The vehicle of the employee used for the trip: its scale pays the distance."
-msgstr "Het voertuig van de werknemer dat voor de rit is gebruikt: zijn tarief vergoedt de afstand."
+msgstr ""
+"Het voertuig van de werknemer dat voor de rit is gebruikt: zijn tarief "
+"vergoedt de afstand."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_employee__expense_vehicle_ids
@@ -4758,26 +5130,37 @@ msgid ""
 "certificate. A mileage expense in one of them is paid by the scale of its "
 "category, from the distance cumulated over the year. A trip in a company "
 "vehicle keeps the mileage rate below, or the category cost."
-msgstr "De voertuigen van de werknemer, met fiscaal vermogen en kentekenbewijs. Een kilometeruitgave in een ervan wordt vergoed volgens het tarief van zijn categorie, op basis van de over het jaar opgetelde afstand. Een rit met een bedrijfsvoertuig behoudt het kilometertarief hieronder of de kosten van de categorie."
+msgstr ""
+"De voertuigen van de werknemer, met fiscaal vermogen en kentekenbewijs. Een "
+"kilometeruitgave in een ervan wordt vergoed volgens het tarief van zijn "
+"categorie, op basis van de over het jaar opgetelde afstand. Een rit met een "
+"bedrijfsvoertuig behoudt het kilometertarief hieronder of de kosten van de "
+"categorie."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_mileage_vehicle__power_from
 msgid ""
 "The vehicles of the employees whose fiscal power is in this range take the "
 "category by themselves (the employee can still choose another one)."
-msgstr "De voertuigen van werknemers met een fiscaal vermogen in dit bereik krijgen de categorie vanzelf (de werknemer kan een andere kiezen)."
+msgstr ""
+"De voertuigen van werknemers met een fiscaal vermogen in dit bereik krijgen "
+"de categorie vanzelf (de werknemer kan een andere kiezen)."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_expense_scan_export_template__file
 msgid ""
 "The workbook as it is filled in by hand, data included: the expense lines "
 "are emptied before being filled."
-msgstr "De werkmap zoals ze met de hand wordt ingevuld, gegevens inbegrepen: de declaratieregels worden geleegd voor ze worden ingevuld."
+msgstr ""
+"De werkmap zoals ze met de hand wordt ingevuld, gegevens inbegrepen: de "
+"declaratieregels worden geleegd voor ze worden ingevuld."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.res_config_settings_view_form_scan
 msgid "Then the text read is erased; the receipt image stays. 0: never."
-msgstr "Daarna wordt de gelezen tekst gewist; de afbeelding van de bon blijft. 0: nooit."
+msgstr ""
+"Daarna wordt de gelezen tekst gewist; de afbeelding van de bon blijft. 0: "
+"nooit."
 
 #. module: expense_scan
 #. odoo-python
@@ -4791,7 +5174,9 @@ msgstr "Deze declaraties zijn al betaald."
 msgid ""
 "These expenses are paid, and invoiced when they are re-invoiced: their VAT may already have been declared. Check with your accountant before correcting them.\n"
 "%(names)s"
-msgstr "Deze declaraties zijn betaald, en gefactureerd wanneer ze worden doorbelast: hun btw is mogelijk al aangegeven. Overleg met uw boekhouder voordat u ze corrigeert.\n%(names)s"
+msgstr ""
+"Deze declaraties zijn betaald, en gefactureerd wanneer ze worden doorbelast: hun btw is mogelijk al aangegeven. Overleg met uw boekhouder voordat u ze corrigeert.\n"
+"%(names)s"
 
 #. module: expense_scan
 #. odoo-python
@@ -4799,7 +5184,9 @@ msgstr "Deze declaraties zijn betaald, en gefactureerd wanneer ze worden doorbel
 msgid ""
 "This PDF has several pages: it stays the receipt as it is. Retouch applies "
 "to photos and single-page PDFs."
-msgstr "Deze pdf heeft meerdere pagina's: hij blijft de bon zoals hij is. Bewerken geldt voor foto's en pdf's van één pagina."
+msgstr ""
+"Deze pdf heeft meerdere pagina's: hij blijft de bon zoals hij is. Bewerken "
+"geldt voor foto's en pdf's van één pagina."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -4817,7 +5204,9 @@ msgstr "Deze categorie bestaat al in het bedrijf."
 #: code:addons/expense_scan/models/hr_expense.py:0
 msgid ""
 "This category has no tax: choose the rate so that the tax read is deducted."
-msgstr "Deze categorie heeft geen belasting: kies het tarief zodat de gelezen belasting wordt afgetrokken."
+msgstr ""
+"Deze categorie heeft geen belasting: kies het tarief zodat de gelezen "
+"belasting wordt afgetrokken."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.hr_expense_view_form_scan
@@ -4826,7 +5215,11 @@ msgid ""
 "order. To re-invoice it, install the Sales app, create the customer's order,"
 " then select that order on the project (Invoicing tab). Until then the "
 "expense is only followed in the project budget."
-msgstr "Deze uitgave kan nog niet worden doorberekend: doorberekenen gaat via een verkooporder. Installeer de app Verkoop, maak de order van de klant aan en selecteer die op het project (tabblad Facturatie). Tot dan wordt de uitgave alleen gevolgd in het projectbudget."
+msgstr ""
+"Deze uitgave kan nog niet worden doorberekend: doorberekenen gaat via een "
+"verkooporder. Installeer de app Verkoop, maak de order van de klant aan en "
+"selecteer die op het project (tabblad Facturatie). Tot dan wordt de uitgave "
+"alleen gevolgd in het projectbudget."
 
 #. module: expense_scan
 #. odoo-python
@@ -4840,7 +5233,9 @@ msgstr "Deze uitgave heeft geen route: kies eerst vertrek en aankomst."
 msgid ""
 "This expense is paid and invoiced: its VAT may already have been declared. "
 "Check with your accountant before correcting it."
-msgstr "Deze declaratie is betaald en gefactureerd: de btw ervan is mogelijk al aangegeven. Overleg met uw boekhouder voordat u ze corrigeert."
+msgstr ""
+"Deze declaratie is betaald en gefactureerd: de btw ervan is mogelijk al "
+"aangegeven. Overleg met uw boekhouder voordat u ze corrigeert."
 
 #. module: expense_scan
 #. odoo-python
@@ -4848,7 +5243,9 @@ msgstr "Deze declaratie is betaald en gefactureerd: de btw ervan is mogelijk al 
 msgid ""
 "This expense is paid: its VAT may already have been declared. Check with "
 "your accountant before correcting it."
-msgstr "Deze declaratie is betaald: de btw ervan is mogelijk al aangegeven. Overleg met uw boekhouder voordat u ze corrigeert."
+msgstr ""
+"Deze declaratie is betaald: de btw ervan is mogelijk al aangegeven. Overleg "
+"met uw boekhouder voordat u ze corrigeert."
 
 #. module: expense_scan
 #. odoo-python
@@ -4871,7 +5268,9 @@ msgstr "Threads per workerproces"
 #. odoo-python
 #: code:addons/expense_scan/models/expense_vat_wizard.py:0
 msgid "Tick the box to confirm that you checked with your accountant."
-msgstr "Vink het vakje aan om te bevestigen dat u het bij uw boekhouder hebt nagevraagd."
+msgstr ""
+"Vink het vakje aan om te bevestigen dat u het bij uw boekhouder hebt "
+"nagevraagd."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__date_to
@@ -4928,7 +5327,9 @@ msgstr "Totaal doorbelast"
 msgid ""
 "Totals are per row in a column, for the whole sheet in a header. Service, "
 "month, period and company only go in a header."
-msgstr "In een kolom gelden de totalen per rij, in een kop voor het hele blad. Dienst, maand, periode en bedrijf gaan alleen in een kop."
+msgstr ""
+"In een kolom gelden de totalen per rij, in een kop voor het hele blad. "
+"Dienst, maand, periode en bedrijf gaan alleen in een kop."
 
 #. module: expense_scan
 #: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_policy_rule__family__train_air
@@ -4946,7 +5347,10 @@ msgid ""
 "True for an expense without recoverable VAT: mileage, or a category marked "
 "\"Flat rate without VAT\" (official scales, allowances). The form then hides"
 " its VAT fields."
-msgstr "Waar voor een declaratie zonder terugvorderbare btw: kilometers, of een categorie gemarkeerd als \"Forfait zonder btw\" (officiële tarieven, vergoedingen). Het formulier verbergt dan de btw-velden."
+msgstr ""
+"Waar voor een declaratie zonder terugvorderbare btw: kilometers, of een "
+"categorie gemarkeerd als \"Forfait zonder btw\" (officiële tarieven, "
+"vergoedingen). Het formulier verbergt dan de btw-velden."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_nights_required
@@ -4955,7 +5359,9 @@ msgstr "Waar voor een declaratie zonder terugvorderbare btw: kilometers, of een 
 msgid ""
 "True for hotel categories, recognised by their name or reference: their "
 "expenses give the number of nights."
-msgstr "Waar voor hotelcategorieën, herkend aan hun naam of referentie: hun declaraties vermelden het aantal nachten."
+msgstr ""
+"Waar voor hotelcategorieën, herkend aan hun naam of referentie: hun "
+"declaraties vermelden het aantal nachten."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_one_payment_method
@@ -4963,7 +5369,10 @@ msgid ""
 "True when the company has only one possible payment method. The form then "
 "hides the field, which Odoo fills on its own: a choice with a single option "
 "is no choice."
-msgstr "Waar als het bedrijf maar één mogelijke betaalmethode heeft. Het formulier verbergt dan het veld, dat Odoo zelf invult: een keuze met één optie is geen keuze."
+msgstr ""
+"Waar als het bedrijf maar één mogelijke betaalmethode heeft. Het formulier "
+"verbergt dan het veld, dat Odoo zelf invult: een keuze met één optie is geen"
+" keuze."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_own
@@ -4971,7 +5380,10 @@ msgid ""
 "True when the expense belongs to the user viewing it. The form uses it to "
 "hide the \"Employee\" field, which only matters when a manager enters an "
 "expense for someone else."
-msgstr "Waar als de declaratie van de gebruiker is die haar bekijkt. Het formulier verbergt daarmee het veld \"Werknemer\", dat alleen telt als een manager voor iemand anders invoert."
+msgstr ""
+"Waar als de declaratie van de gebruiker is die haar bekijkt. Het formulier "
+"verbergt daarmee het veld \"Werknemer\", dat alleen telt als een manager "
+"voor iemand anders invoert."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_expense_manager
@@ -4979,7 +5391,10 @@ msgid ""
 "True when the user viewing the expense manages expenses. The account and the"
 " analytic distribution are only shown to them, on top of the accounting "
 "groups Odoo requires."
-msgstr "Waar wanneer de gebruiker die de declaratie bekijkt declaraties beheert. De rekening en de analytische verdeling worden alleen aan hem getoond, bovenop de boekhoudgroepen die Odoo vereist."
+msgstr ""
+"Waar wanneer de gebruiker die de declaratie bekijkt declaraties beheert. De "
+"rekening en de analytische verdeling worden alleen aan hem getoond, bovenop "
+"de boekhoudgroepen die Odoo vereist."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_res_company__expense_scan_auto_rotate
@@ -5102,14 +5517,17 @@ msgstr "Btw-tarief"
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_original_vat
 msgid ""
 "VAT recovered by the journal entry of the expense, before any correction."
-msgstr "Btw die de boeking van de declaratie terugvordert, vóór elke correctie."
+msgstr ""
+"Btw die de boeking van de declaratie terugvordert, vóór elke correctie."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_hr_expense__expense_scan_recoverable_vat
 msgid ""
 "VAT the accounting recovers on this expense: the purchase tax lines of its "
 "journal entry, plus its posted corrections."
-msgstr "Btw die de boekhouding op deze declaratie terugvordert: de inkoopbelastingregels van de boeking plus de geboekte correcties."
+msgstr ""
+"Btw die de boekhouding op deze declaratie terugvordert: de "
+"inkoopbelastingregels van de boeking plus de geboekte correcties."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_export_column__value
@@ -5151,7 +5569,9 @@ msgstr "Kaart bekijken"
 msgid ""
 "Warnings on expenses that go beyond your rules, and Excel templates for the "
 "expense sheet"
-msgstr "Waarschuwingen bij declaraties die uw regels overschrijden, en Excel-sjablonen voor het declaratieoverzicht"
+msgstr ""
+"Waarschuwingen bij declaraties die uw regels overschrijden, en Excel-"
+"sjablonen voor het declaratieoverzicht"
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__website_message_ids
@@ -5179,7 +5599,9 @@ msgstr "Waar de herkenningsmodellen worden gedownload."
 msgid ""
 "Where the recognition models are downloaded. Leave empty to use a subfolder "
 "of the Odoo data directory, which the service can always write to."
-msgstr "Waar de herkenningsmodellen worden gedownload. Laat leeg om een submap van de Odoo-datamap te gebruiken, waarin de dienst altijd kan schrijven."
+msgstr ""
+"Waar de herkenningsmodellen worden gedownload. Laat leeg om een submap van "
+"de Odoo-datamap te gebruiken, waarin de dienst altijd kan schrijven."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_policy_view_form
@@ -5201,7 +5623,9 @@ msgstr "Waarom deze declaratie buiten de regels valt"
 msgid ""
 "Why this expense goes beyond the rules. The manager reads it when approving "
 "the expense."
-msgstr "Waarom deze declaratie buiten de regels valt. De manager leest dit bij het goedkeuren."
+msgstr ""
+"Waarom deze declaratie buiten de regels valt. De manager leest dit bij het "
+"goedkeuren."
 
 #. module: expense_scan
 #: model:ir.model.fields,help:expense_scan.field_res_company__expense_scan_limit_projects
@@ -5210,7 +5634,11 @@ msgid ""
 "With re-invoicing, an employee is offered the projects they manage, have a "
 "task on or are assigned to, not the whole list, and cannot link another one."
 " A project manager and an administrator always see every project."
-msgstr "Bij doorfactureren worden aan de medewerker de projecten voorgesteld die hij beheert, waarop hij een taak heeft of waaraan hij is toegewezen, niet de hele lijst, en hij kan geen ander project koppelen. Een projectmanager en een beheerder zien altijd alle projecten."
+msgstr ""
+"Bij doorfactureren worden aan de medewerker de projecten voorgesteld die hij"
+" beheert, waarop hij een taak heeft of waaraan hij is toegewezen, niet de "
+"hele lijst, en hij kan geen ander project koppelen. Een projectmanager en "
+"een beheerder zien altijd alle projecten."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_hr_expense__expense_scan_no_vat
@@ -5230,7 +5658,12 @@ msgid ""
 "merchants, and almost never on the others. Updated every day; they point to "
 "this category like the receipt words above. A word entered above, here or on"
 " another category, is never learnt."
-msgstr "Woorden op de bonnen die een persoon in deze categorie heeft ingedeeld, bij meerdere handelaars, en bijna nooit op de andere. Dagelijks bijgewerkt; ze wijzen net als de woorden op de bon hierboven naar deze categorie. Een woord dat hierboven is ingevoerd, hier of bij een andere categorie, wordt nooit geleerd."
+msgstr ""
+"Woorden op de bonnen die een persoon in deze categorie heeft ingedeeld, bij "
+"meerdere handelaars, en bijna nooit op de andere. Dagelijks bijgewerkt; ze "
+"wijzen net als de woorden op de bon hierboven naar deze categorie. Een woord"
+" dat hierboven is ingevoerd, hier of bij een andere categorie, wordt nooit "
+"geleerd."
 
 #. module: expense_scan
 #: model:ir.model.fields,field_description:expense_scan.field_product_product__expense_scan_learned_keywords
@@ -5245,7 +5678,10 @@ msgid ""
 "Words that, read on a receipt, point to this category: one per line, in every useful language, merchant names included (\"Ibis\", \"nocleg\", \"pedaggio\"...). Accents and case are ignored, and one misread letter is tolerated in words of five letters or more.\n"
 "\n"
 "Merchants already filed are learnt on their own when expenses are submitted: no need to enter them all here."
-msgstr "Woorden die, gelezen op een bon, naar deze categorie wijzen: één per regel, in alle nuttige talen, namen van handelaars inbegrepen (\"Ibis\", \"nocleg\", \"pedaggio\"...). Accenten en hoofdletters worden genegeerd, en één verkeerd gelezen letter wordt getolereerd in woorden van vijf letters of meer.\n\nReeds ingedeelde handelaars worden vanzelf geleerd bij het indienen van declaraties: u hoeft ze hier niet allemaal in te voeren."
+msgstr ""
+"Woorden die, gelezen op een bon, naar deze categorie wijzen: één per regel, in alle nuttige talen, namen van handelaars inbegrepen (\"Ibis\", \"nocleg\", \"pedaggio\"...). Accenten en hoofdletters worden genegeerd, en één verkeerd gelezen letter wordt getolereerd in woorden van vijf letters of meer.\n"
+"\n"
+"Reeds ingedeelde handelaars worden vanzelf geleerd bij het indienen van declaraties: u hoeft ze hier niet allemaal in te voeren."
 
 #. module: expense_scan
 #: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_export_template_view_form
@@ -5275,7 +5711,11 @@ msgid ""
 "the bracket of the yearly distance, plus its fixed part (French scale). Each"
 " kilometre at the rate of its bracket: the first kilometres at the first "
 "rate, the following ones at the next (United Kingdom)."
-msgstr "Jaarformule: de vergoeding van het jaar is de afstand maal het tarief van de schijf van de jaarafstand, plus het vaste deel (Frans tarief). Elke kilometer tegen het tarief van zijn schijf: de eerste kilometers tegen het eerste tarief, de volgende tegen het volgende (Verenigd Koninkrijk)."
+msgstr ""
+"Jaarformule: de vergoeding van het jaar is de afstand maal het tarief van de"
+" schijf van de jaarafstand, plus het vaste deel (Frans tarief). Elke "
+"kilometer tegen het tarief van zijn schijf: de eerste kilometers tegen het "
+"eerste tarief, de volgende tegen het volgende (Verenigd Koninkrijk)."
 
 #. module: expense_scan
 #. odoo-javascript
@@ -5612,94 +6052,109 @@ msgid "Hotel: 110 a night, 140 in large cities"
 msgstr "Hotel: 110 per nacht, 140 in grote steden"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__template_id
 msgid "Excel template"
 msgstr "Excel-sjabloon"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+#: model:ir.model.fields.selection,name:expense_scan.selection__ir_attachment__expense_scan_kind__summary
 msgid "PDF summary"
 msgstr "PDF-overzicht"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+#: model:ir.model.fields.selection,name:expense_scan.selection__ir_attachment__expense_scan_kind__excel
 msgid "Excel"
 msgstr "Excel"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+#: model:ir.model.fields,field_description:expense_scan.field_ir_attachment__expense_scan_kind
+#: model:ir.model.fields,field_description:expense_scan.field_product_document__expense_scan_kind
 msgid "Sheet format"
 msgstr "Formaat van het overzicht"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__is_month
 msgid "Is Month"
 msgstr "Overzicht van een maand"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_form
 msgid "Create the missing formats"
 msgstr "Ontbrekende formaten maken"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+#: model:ir.model.fields.selection,name:expense_scan.selection__ir_attachment__expense_scan_kind__receipts
 msgid "Receipts"
 msgstr "Bonnetjes"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__formats
 msgid "Formats"
 msgstr "Formaten"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_archive
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__has_missing_formats
 msgid "Has Missing Formats"
 msgstr "Ontbrekende formaten"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.company_paid
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__company_paid
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_wizard__company_paid
 msgid "Include the expenses paid by the company"
 msgstr "Door het bedrijf betaalde uitgaven opnemen"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.company_paid
-msgid "The sheet then lists every expense with its receipt, the total to reimburse to the employee apart: it can be kept as the record of the transfer."
-msgstr "Het overzicht toont dan elke uitgave met bonnetje en het aan de werknemer terug te betalen totaal apart: het kan worden bewaard als vastlegging van de overschrijving."
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_sheet_wizard__company_paid
+msgid ""
+"The sheet then lists every expense with its receipt, the total to reimburse "
+"to the employee apart: it can be kept as the record of the transfer."
+msgstr ""
+"Het overzicht toont dan elke uitgave met bonnetje en het aan de werknemer "
+"terug te betalen totaal apart: het kan worden bewaard als vastlegging van de"
+" overschrijving."
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.company_paid
+#: model_terms:ir.ui.view,arch_db:expense_scan.report_expense_sheet
 msgid "To reimburse to the employee"
 msgstr "Terug te betalen aan de werknemer"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_sheet_archive__sheet_kind__internal
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_search
 msgid "Internal (reimbursement)"
 msgstr "Intern (terugbetaling)"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_sheet_archive__sheet_kind__client
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_search
 msgid "Client (re-invoicing)"
 msgstr "Klant (doorfactureren)"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+#: model:ir.model.fields,field_description:expense_scan.field_expense_scan_sheet_archive__sheet_kind
 msgid "Sheet type"
 msgstr "Type overzicht"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+#. odoo-python
+#: code:addons/expense_scan/models/expense_sheet.py:0
 msgid "internal"
 msgstr "intern"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_kind
+#. odoo-python
+#: code:addons/expense_scan/models/expense_sheet.py:0
 msgid "client"
 msgstr "klant"
 
 #. module: expense_scan
-#: model:ir.model.fields,field_description:expense_scan.sheet_kind
-msgid "Internal: every expense and every receipt, the record of the reimbursement of the employee. Client: the re-invoiced expenses only."
-msgstr "Intern: elke uitgave en elk bonnetje, de vastlegging van de terugbetaling aan de werknemer. Klant: alleen de doorgefactureerde uitgaven."
+#: model:ir.model.fields,help:expense_scan.field_expense_scan_sheet_archive__sheet_kind
+msgid ""
+"Internal: every expense and every receipt, the record of the reimbursement "
+"of the employee. Client: the re-invoiced expenses only."
+msgstr ""
+"Intern: elke uitgave en elk bonnetje, de vastlegging van de terugbetaling "
+"aan de werknemer. Klant: alleen de doorgefactureerde uitgaven."
 
 #. module: expense_scan
 #. odoo-python
@@ -5737,16 +6192,18 @@ msgid "Expense Sheets"
 msgstr "Onkostenstaten"
 
 #. module: expense_scan
-#: model:ir.ui.menu,name:expense_scan.menu_expense_scan_sheets
+#: model_terms:ir.ui.view,arch_db:expense_scan.expense_scan_sheet_archive_view_list
 msgid "New sheet"
 msgstr "Nieuwe staat"
 
 #. module: expense_scan
-#: model:ir.ui.menu,name:expense_scan.menu_expense_scan_sheets
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_sheet_archive__scope__all
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_sheet_wizard__scope__all
 msgid "Internal: All expenses"
 msgstr "Intern: Alle uitgaven"
 
 #. module: expense_scan
-#: model:ir.ui.menu,name:expense_scan.menu_expense_scan_sheets
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_sheet_archive__scope__reinvoice
+#: model:ir.model.fields.selection,name:expense_scan.selection__expense_scan_sheet_wizard__scope__reinvoice
 msgid "Client: Re-invoicable expenses only"
 msgstr "Klant: Alleen doorfactureerbare uitgaven"
